@@ -1,0 +1,705 @@
+   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style type="text/css">
+    <!--
+    body {
+            font: 100%/1.4 Verdana, Arial, Helvetica, sans-serIf;
+            background: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            color: #000;
+         }
+    .container {
+            width: 100%;
+            margin: 0 auto;
+            }
+    h1 {
+            font-size: 18px;
+        }
+    h2 {
+            color: #FFF;
+            padding: 0px;
+            margin: 0px;
+            font-size: 14px;
+            background-color: #006400;
+        }
+    h3 {
+            color: #FFF;
+            padding: 0px;
+            margin: 0px;
+            font-size: 14px;
+            background-color: #191970;
+        }
+    h4 {
+            color: #348017;
+            padding: 0px;
+            margin: 0px;
+            font-size: 10px;
+            font-style: italic;
+        }
+    .header {
+            text-align: center;
+        }
+    .container table {
+            width: 100%;
+            font-family: Verdana, Geneva, sans-serIf;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: bold;
+            font-variant: normal;
+            text-align: center;
+            border: 0px solid black;
+            padding: 0px;
+            margin: 0px;
+        }
+    td {
+            font-weight: normal;
+            border: 1px solid grey;
+            width='25%'
+        }
+    th {
+            font-weight: bold;
+            border: 1px solid grey;
+            text-align: center;
+        }
+    -->
+    </style></head>
+    <body>
+    <div class="container">
+    <div class="content">	
+	<table width='100%'><tbody>
+	<tr bgcolor = '#425563'> <td align='center'> <b> 
+	<Font color = 'white'> LAB - ConfigMgr Daily Servers Health Check Reports - Tuesday, February 27, 2018 8:20:36 AM </Font>
+	</b> </td> </tr>
+	</table>
+        <table width='100%'><tbody>
+   	    <tr bgcolor=#01A982> <td> <b> <Font color = 'white'> Servers Availability Details Status </Font> </b> </td> </tr>
+        </table>
+        <table width='100%' border = 0 > <tbody>
+	    <tr bgcolor=#CCCCCC>
+        <td width='5%'>SNo</td>
+        <td width='20%'>ServerName</td>
+        <td width='10%'>IPAddress</td>
+        <td width='20%'>Operating System</td>
+	    <td width='20%'>Domain</td>
+	    <td width='5%'>Status</td>
+	    </tr>
+        </table>
+                            <table width='100%' border = 0 > <tbody>
+	                        <tr>
+                            <td width='5%' align='center' >1</td>
+                            <td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                            <td width='10%' align='center'>192.168.1.12</td>
+                            <td width='20%' align='center'>Microsoft Windows Server 2012 R2 Standard</td>
+	                        <td width='20%' align='center'>LAB.Com</td>
+	                        <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                        </tr>
+                            </table>
+                <table width='100%' border = 0 > <tbody>
+	            <tr>
+                <td width='5%' align='center' >2</td>
+				<td width='20%' align='left'>&nbspMP01.LAB.COM</td>
+                <td width='10%' align='center'></td>
+                <td width='20%' align='center'>NA</td>
+	            <td width='20%' align='center'>NA</td>
+	            <td width='5%' align='center' bgcolor='Red'> <Font color ='white'> DNS_Issue </Font> </td>
+	            </tr>
+                </table>
+        <table width='100%'><tbody>
+		<tr bgcolor=#01A982> <td> <b> <Font color = 'white'> Servers Disk Space Status </Font> </b> </td> </tr>
+        </table>
+        <table width='100%' border = 0 > <tbody>
+	    <tr bgcolor=#CCCCCC>
+        <td width='5%'>SNo</td>
+        <td width='20%'>ServerName</td> 
+        <td width='5%'>Drive</td> 
+        <td width='10%'>VolName</td>    
+        <td width='10%'>Total Capacity(GB)</td>
+	    <td width='10%'>Used Capacity(GB)</td>
+        <td width='10%'>Free Space(GB)</td>
+	    <td width='5%'>Free Space%</td>
+        <td width='5%'>Status</td>
+	    </tr>
+        </table>
+                                <table width='100%' border = 0 > <tbody>
+                                <tr align= 'center'>
+                                <td width='5%' align='center' >1</td> 
+								<td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                <td width='5%'>C:</td>    
+                                <td width='10%'>OS</td> 
+                                <td width='10%'>49.66</td>
+                                <td width='10%'>31.46</td>
+	                            <td width='10%'>18.2</td>
+                                <td width='5%'>36.65</td>
+	                            <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                            </tr>
+                                </table>
+                                <table width='100%' border = 0 > <tbody>
+                                <tr align= 'center'>
+                                <td width='5%' align='center' >2</td> 
+								<td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                <td width='5%'>D:</td>    
+                                <td width='10%'>CM</td> 
+                                <td width='10%'>50</td>
+                                <td width='10%'>19.14</td>
+	                            <td width='10%'>30.86</td>
+                                <td width='5%'>61.73</td>
+	                            <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                            </tr>
+                                </table>
+                                <table width='100%' border = 0 > <tbody>
+                                <tr align= 'center'>
+                                <td width='5%' align='center' >3</td> 
+								<td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                <td width='5%'>E:</td>    
+                                <td width='10%'>DP</td> 
+                                <td width='10%'>50</td>
+                                <td width='10%'>15.54</td>
+	                            <td width='10%'>34.46</td>
+                                <td width='5%'>68.92</td>
+	                            <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                            </tr>
+                                </table>
+                                <table width='100%' border = 0 > <tbody>
+                                <tr align= 'center'>
+                                <td width='5%' align='center' >4</td> 
+								<td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                <td width='5%'>F:</td>    
+                                <td width='10%'>Source</td> 
+                                <td width='10%'>50</td>
+                                <td width='10%'>31.89</td>
+	                            <td width='10%'>18.11</td>
+                                <td width='5%'>36.21</td>
+	                            <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                            </tr>
+                                </table>
+                <table width='100%' border = 0 > <tbody>
+                <tr align= 'center'>
+                <td width='5%' align='center' >5</td>
+                <td width='20%' align='left'>&nbspMP01.LAB.COM</td>  
+                <td width='5%'>NA</td>    
+                <td width='10%'>NA</td> 
+                <td width='10%'>NA</td>
+                <td width='10%'>NA</td>
+	            <td width='10%'>NA</td>
+                <td width='5%'>NA</td>
+	            <td width='5%' align='center' bgcolor='Red'> <Font color ='white'> DNS_Issue </Font> </td>
+	            </tr>
+                </table>
+        <table width='100%'><tbody>
+		<tr bgcolor=#01A982> <td> <b> <Font color = 'white'> Servers Management Point Status </Font> </b> </td> </tr>
+        </table>
+        <table width='100%' border = 0 > <tbody>
+	    <tr bgcolor=#CCCCCC>    
+        <td width='5%'>SNo</td>    
+        <td width='20%'>ServerName</td>
+        <td width='10%'>Site Code</td>
+        <td width='10%'>MPCert Status</td>
+	    <td width='10%'>MPCert Code</td>
+        <td width='10%'>MPList Status</td>
+        <td width='10%'>MPList Code</td>	   
+        <td width='5%'>Status</td>
+	    </tr>
+        </table>
+                <table width='100%' border = 0 > <tbody>
+    	        <tr align= 'center'>    
+                <td width='5%'>1</td>
+                <td width='20%' align='left'>&nbspCM01.LAB.COM</td>      
+                <td width='10%'>000</td>    
+                <td width='10%'>OK</td>
+    	        <td width='10%'>200</td>
+                <td width='10%'>OK</td>
+                <td width='10%'>200</td>
+    	        <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+    	        </tr>
+            </table>
+                <table width='100%' border = 0 > <tbody>
+    	        <tr align= 'center'>    
+                <td width='5%'>2</td>
+                <td width='20%' align='left'>&nbspMP01.LAB.COM</td>      
+                <td width='10%'>000</td>    
+                <td width='10%'></td>
+    	        <td width='10%'>0</td>
+                <td width='10%'>OK</td>
+                <td width='10%'>200</td>
+    	        <td width='5%' align='center' bgcolor='Red'> <Font color ='white'> Critical </Font> </td>
+    	        </tr>
+            </table>
+        <table width='100%'><tbody>
+		<tr bgcolor=#01A982> <td> <b> <Font color = 'white'> Servers Components Services Status </Font> </b> </td> </tr>
+        </table>
+        <table width='100%' border = 0 > <tbody>
+	    <tr bgcolor=#CCCCCC>
+        <td width='5%'>SNo</td>
+        <td width='20%'>ServerName</td>
+        <td width='30%'>Display Name</td>
+        <td width='15%'>Name</td>
+	    <td width='5%'>StartMode</td>
+	    <td width='5%'>Status</td>
+	    </tr>
+        </table>
+                                    <table width='100%' border = 0> <tbody>
+	                                <tr align='Left'>
+                                    <td width='5%' align='center'>1</td>
+                                    <td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                    <td width='30%'>IIS Admin Service</td>
+                                    <td width='15%'>IISADMIN</td>
+	                                <td width='5%'>Auto</td>
+	                                <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                                </tr>
+                                    </table>
+                                    <table width='100%' border = 0> <tbody>
+	                                <tr align='Left'>
+                                    <td width='5%' align='center'>2</td>
+                                    <td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                    <td width='30%'>World Wide Web Publishing Service</td>
+                                    <td width='15%'>W3SVC</td>
+	                                <td width='5%'>Auto</td>
+	                                <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                                </tr>
+                                    </table>
+                                    <table width='100%' border = 0> <tbody>
+	                                <tr align='Left'>
+                                    <td width='5%' align='center'>3</td>
+                                    <td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                    <td width='30%'>Windows Management Instrumentation</td>
+                                    <td width='15%'>Winmgmt</td>
+	                                <td width='5%'>Auto</td>
+	                                <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                                </tr>
+                                    </table>
+                                    <table width='100%' border = 0> <tbody>
+	                                <tr align='Left'>
+                                    <td width='5%' align='center'>4</td>
+                                    <td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                    <td width='30%'>SMS Agent Host</td>
+                                    <td width='15%'>CcmExec</td>
+	                                <td width='5%'>Auto</td>
+	                                <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                                </tr>
+                                    </table>
+                                    <table width='100%' border = 0> <tbody>
+	                                <tr align='Left'>
+                                    <td width='5%' align='center'>5</td>
+                                    <td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                    <td width='30%'>SMS_EXECUTIVE</td>
+                                    <td width='15%'>SMS_EXECUTIVE</td>
+	                                <td width='5%'>Auto</td>
+	                                <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                                </tr>
+                                    </table>
+                                    <table width='100%' border = 0> <tbody>
+	                                <tr align='Left'>
+                                    <td width='5%' align='center'>6</td>
+                                    <td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                    <td width='30%'>SMS_SITE_COMPONENT_MANAGER</td>
+                                    <td width='15%'>SMS_SITE_COMPONENT_MANAGER</td>
+	                                <td width='5%'>Auto</td>
+	                                <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                                </tr>
+                                    </table>
+                                    <table width='100%' border = 0> <tbody>
+	                                <tr align='Left'>
+                                    <td width='5%' align='center'>7</td>
+                                    <td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                    <td width='30%'>SMS_SITE_VSS_WRITER</td>
+                                    <td width='15%'>SMS_SITE_VSS_WRITER</td>
+	                                <td width='5%'>Auto</td>
+	                                <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                                </tr>
+                                    </table>
+                <table width='100%' border = 0 > <tbody>
+	            <tr align= 'Left'>
+                <td width='5%' align='center' >8</td>
+                <td width='20%' align='left'>&nbspMP01.LAB.COM</td>
+                <td width='30%'>NA</td>
+                <td width='15%'>NA</td>
+                <td width='5%'>NA</td>
+	            <td width='5%' align='center' bgcolor='Red'> <Font color ='white'> DNS_Issue </Font> </td>
+	            </tr>
+                </table>
+        <table width='100%'><tbody>
+		<tr bgcolor=#01A982> <td> <b> <Font color = 'white'> SQL Server Services Status </Font> </b> </td> </tr>
+        </table>
+        <table width='100%' border = 0 > <tbody>
+	    <tr bgcolor=#CCCCCC>
+        <td width='5%'>SNo</td>
+        <td width='20%'>ServerName</td> 
+        <td width='30%'>Display Name</td>
+        <td width='15%'>Name</td>
+	    <td width='5%'>StartMode</td>
+	    <td width='5%'>Status</td>
+	    </tr>
+        </table>
+                                    <table width='100%' border = 0 > <tbody>
+	                                <tr align= 'Left'>
+                                    <td width='5%' align='center' >1</td>
+                                    <td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                    <td width='30%'>Windows Management Instrumentation</td>
+                                    <td width='15%'>Winmgmt</td>
+	                                <td width='5%'>Auto</td>
+	                                <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                                </tr>
+                                    </table>
+                                    <table width='100%' border = 0 > <tbody>
+	                                <tr align= 'Left'>
+                                    <td width='5%' align='center' >2</td>
+                                    <td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                    <td width='30%'>SMS Agent Host</td>
+                                    <td width='15%'>CcmExec</td>
+	                                <td width='5%'>Auto</td>
+	                                <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                                </tr>
+                                    </table>
+                                    <table width='100%' border = 0 > <tbody>
+	                                <tr align= 'Left'>
+                                    <td width='5%' align='center' >3</td>
+                                    <td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                    <td width='30%'>SMS_EXECUTIVE</td>
+                                    <td width='15%'>SMS_EXECUTIVE</td>
+	                                <td width='5%'>Auto</td>
+	                                <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                                </tr>
+                                    </table>
+                                    <table width='100%' border = 0 > <tbody>
+	                                <tr align= 'Left'>
+                                    <td width='5%' align='center' >4</td>
+                                    <td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                    <td width='30%'>SQL Server Reporting Services (MSSQLSERVER)</td>
+                                    <td width='15%'>ReportServer</td>
+	                                <td width='5%'>Auto</td>
+	                                <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                                </tr>
+                                    </table>
+                                    <table width='100%' border = 0 > <tbody>
+	                                <tr align= 'Left'>
+                                    <td width='5%' align='center' >5</td>
+                                    <td width='20%' align='left'>&nbspCM01.LAB.COM</td>
+                                    <td width='30%'>SQL Server (MSSQLSERVER)</td>
+                                    <td width='15%'>MSSQLSERVER</td>
+	                                <td width='5%'>Auto</td>
+	                                <td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+	                                </tr>
+                                    </table>
+    <table width='100%'><tbody>
+	<tr bgcolor=#01A982> <td> <b> <Font color = 'white'> Backup Status </Font> </b> </td> </tr>
+    </table>
+    <table width='100%' border = 0 > <tbody>
+	<tr bgcolor=#CCCCCC >
+    <td width='5%'>SNo</td>
+    <td width='20%'>ServerName</td>
+    <td width='40%'>Backup Checking Time</td>
+    <td width='5%'>SiteBKP</td>
+    <td width='5%'>DBBKP</td>	
+	<td width='5%'>Status</td>
+	</tr>
+    </table>
+        <table width='100%' border = 0> <tbody>
+    	<tr align='Center'>
+        <td width='5%' align='center'>1</td>
+        <td width='20%' align='left'>&nbsp&nbspCM01.LAB.COM</td>
+        <td width='40%'>02/26/2018 21:00:00 and 02/27/2018 06:00:00</td>
+        <td width='5%'>Failed</td>
+        <td width='5%'>NA</td>	
+    	<td width='5%' align='center' bgcolor='Red'> <Font color ='white'> Critical </Font> </td>
+    	</tr>
+        </table>
+		<table width='100%' border = 0 > <tbody>
+    	<tr align='Center'>
+        <td width='5%' align='center'>2</td>
+        <td width='20%' align='left'>&nbsp&nbspCM01.LAB.COM</td>
+        <td width='40%'>02/26/2018 21:00:00 and 02/27/2018 06:00:00</td>
+        <td width='5%'>NA</td>
+        <td width='5%'>Failed</td>	
+    	<td width='5%' align='center' bgcolor='Red'> <Font color ='white'> Critical </Font> </td>
+    	</tr>
+		</table>
+    <table width='100%'><tbody>
+	<tr bgcolor=#01A982> <td> <b> <Font color = 'white'> Inbox Detail Status </Font> </b> </td> </tr>
+    </table>
+    <table width='100%' border = 0 > <tbody>
+	<tr bgcolor=#CCCCCC>
+    <td width='5%'>SNo</td>
+    <td width='20%'>Folder Name</td>
+    <td width='40%'>Folder Path</td>
+    <td width='5%'>File Count</td>
+	<td width='5%'>Folder Size</td>
+	<td width='5%'>Status</td>
+	</tr>
+    </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >1</td>
+            <td width='20%' align='left' >&nbspinboxes</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.09 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >2</td>
+            <td width='20%' align='left' >&nbspccr.box</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\ccr.box</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >3</td>
+            <td width='20%' align='left' >&nbspccrretry.box</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\ccrretry.box</td>
+            <td width='5%'>3</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >4</td>
+            <td width='20%' align='left' >&nbspauth</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\auth</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.06 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >5</td>
+            <td width='20%' align='left' >&nbspddm.box</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\auth\ddm.box</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >6</td>
+            <td width='20%' align='left' >&nbspBAD_DDRS</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\auth\ddm.box\BAD_DDRS</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >7</td>
+            <td width='20%' align='left' >&nbspincoming</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\auth\statesys.box\incoming</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >8</td>
+            <td width='20%' align='left' >&nbspsinv.box</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\auth\sinv.box</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >9</td>
+            <td width='20%' align='left' >&nbspstatesys.box</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\Inboxes\auth\statesys.box</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >10</td>
+            <td width='20%' align='left' >&nbspretry</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\auth\dataldr.box\retry</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >11</td>
+            <td width='20%' align='left' >&nbspdataldr.box</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\Inboxes\auth\dataldr.box</td>
+            <td width='5%'>1</td>
+        	<td width='5%'>0.06 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >12</td>
+            <td width='20%' align='left' >&nbspprocess</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\auth\dataldr.box\process</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >13</td>
+            <td width='20%' align='left' >&nbspBADMIFS</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\auth\dataldr.box\BADMIFS</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >14</td>
+            <td width='20%' align='left' >&nbspschedule.box</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\schedule.box</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >15</td>
+            <td width='20%' align='left' >&nbsptosend</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\schedule.box\tosend</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >16</td>
+            <td width='20%' align='left' >&nbspReplmgr.box</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\Replmgr.box</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >17</td>
+            <td width='20%' align='left' >&nbsphigh</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\Replmgr.box\Outbound\high</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >18</td>
+            <td width='20%' align='left' >&nbsplow</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\Replmgr.box\Outbound\low</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >19</td>
+            <td width='20%' align='left' >&nbspnormal</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\inboxes\Replmgr.box\Outbound\normal</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >20</td>
+            <td width='20%' align='left' >&nbspIncoming</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\Inboxes\Replmgr.box\Incoming</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >21</td>
+            <td width='20%' align='left' >&nbspOutbound</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\Inboxes\Replmgr.box\Outbound</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >22</td>
+            <td width='20%' align='left' >&nbspoffermgr.box</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\Inboxes\offermgr.box</td>
+            <td width='5%'>10</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >23</td>
+            <td width='20%' align='left' >&nbspcompsumm.box</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\Inboxes\compsumm.box</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >24</td>
+            <td width='20%' align='left' >&nbspDespoolr.box</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\Inboxes\Despoolr.box</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+            <table width='100%' border = 0 > <tbody>
+        	<tr align='center'>
+            <td width='5%' >25</td>
+            <td width='20%' align='left' >&nbspReceive</td>
+            <td width='40%' align='left' >&nbsp\\CM01.LAB.COM\SMS_000\Inboxes\Despoolr.box\Receive</td>
+            <td width='5%'>0</td>
+        	<td width='5%'>0.00 MB</td>
+        	<td width='5%' align='center' bgcolor='Green'> <Font color ='white'> Ok </Font> </td>
+        	</tr>
+            </table>
+
+    <table width='30%'>
+    <tr bgcolor='White'> 
+	<td width='10%' align='center' bgcolor='Green'> <Font color = 'white'> <b> Normal </b> </Font> </td>  
+	<td width='10%' align='center' bgcolor='Orange'> <Font color = 'white'> <b> Warning below 15 % </b> </Font> </td>  
+	<td width='10%' align='center' bgcolor='Red'> <Font color = 'white'> <b> Critical below 10 % </b> </Font> </td>  
+    </tr>
+    </table>
+    
+
+    <table width='30%'>
+    <tr bgcolor='White'>
+    <td width='10%' align='center' bgcolor='Green'> <Font color = 'white'> <b> Normal </b> </Font> </td>  
+	<td width='10%' align='center' bgcolor='Orange'> <Font color = 'white'> <b> Warning </b> </Font> </td>  
+	<td width='10%' align='center' bgcolor='Red'> <Font color = 'white'> <b> Critical </b> </Font> </td> 
+	</tr>
+    </table>
+    
+    <table width='100%' bgcolor = '#425563'><tbody>
+   	<tr> <td align='center'> <b> <Font color = 'white'> Tool Developed By : Karthikeyan Anbarasu ( karthikeyan.anbarasu@lab.com ) - Tuesday, February 27, 2018 8:22:11 AM </Font> </b> </td> </tr>
+	<tr> <td align='center'> <b> <Font color = 'white'> LAB Restricted - Copyright 2018 </Font> </b> </td> </tr>
+    </table>
+</div></div></body></html>

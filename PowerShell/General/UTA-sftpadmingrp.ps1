@@ -1,0 +1,1 @@
+﻿Get-ADGroupMember "sftpadmingrp" -Recursive|Where-Object {$_.Name -Like "ar*"}|%{$group=$_;get-aduser $_ -Properties Name|Select @{n="Group";e={$group}},Name,SurName,GivenName,ObjectClass}|Out-File 'E:\Results-sftpadmingrp.log'

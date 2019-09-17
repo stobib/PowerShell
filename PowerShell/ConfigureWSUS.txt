@@ -1,0 +1,1 @@
+wsusUtil.exe postinstall content_dir=e:\wsus sql_instance_name=%computername%\sccm
