@@ -36,14 +36,12 @@ Function SetCredentials{[CmdletBinding()]Param([String][Parameter(Mandatory=$tru
                     $SecureKey=ConvertTo-SecureString -String $KeyName -AsPlainText -Force
                     $PrivateKey=Get-Content -Path $EncryptionKeyFile|ConvertTo-SecureString -SecureKey $SecureKey
                     $BSTR=[System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($PrivateKey)
-                    $UnEncrypted=[System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
                 }
             }
         }
     }Else{
         $SecureString=Read-Host -Prompt "Enter your [$SecureUser] credentials" -AsSecureString
         $BSTR=[System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($SecureString)
-        $Encrypted=[System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
         Set-Variable -Name "EncryptionKeyFile" -Value ""
         Set-Variable -Name "Characters" -Value ""
         Set-Variable -Name "PrivateKey" -Value ""
@@ -66,7 +64,6 @@ Function SetCredentials{[CmdletBinding()]Param([String][Parameter(Mandatory=$tru
                         $SecureKey=ConvertTo-SecureString -String $Key -AsPlainText -Force
                         $PrivateKey=Get-Content -Path $EncryptionKeyFile|ConvertTo-SecureString -SecureKey $SecureKey
                         $BSTR=[System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($PrivateKey)
-                        $UnEncrypted=[System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
                         Break
                     }
                 }
@@ -150,12 +147,12 @@ Function SetCredentials{[CmdletBinding()]Param([String][Parameter(Mandatory=$tru
             If($EncryptedString-ceq$Validate){}
         }Catch [Exception]{
             $Message="Error: [Validation]: $($_.Exception.Message)";Write-Host $Message -ForegroundColor Yellow -BackgroundColor DarkRed
-            $EncryptedString=$null;$BSTR=$null
+            $EncryptedString=$null;$BSTR=$null;$Validate=$null
         }
     }
-    $EncryptedString=$null;$BSTR=$null
+    $EncryptedString=$null;$BSTR=$null;$Validate=$null
     $Script:SecureCredentials=New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $SecureUser,$SecureString
-    Return $Validate
+    Return $SecureCredentials
 }
 Function Unprotect-String{[CmdletBinding()]param([String][Parameter(Mandatory=$true)]$String,[String][Parameter(Mandatory=$true)]$Key)
     Begin{}
@@ -171,3 +168,4 @@ Function Unprotect-String{[CmdletBinding()]param([String][Parameter(Mandatory=$t
     }
     End{}
 }
+Export-ModuleMember -Function SetCredentials
