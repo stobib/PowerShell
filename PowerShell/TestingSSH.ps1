@@ -1,10 +1,10 @@
-Import-Module .\Modules\ProcessCredentials.psm1
-Import-Module .\Modules\Posh-SSH.psm1
 Clear-Host;Clear-History
 $Global:Separator="________________________________________________________________________________________________________________________"
-$Global:ResetHost=@()
-$Global:SiteCode=("B")
+$Global:ResetHost=@();$ResetHost=""
+$Global:SiteCode=@("A","B")
 $Global:DateTime=(Get-Date)
+$Global:FailedToConnect=@();$FailedToConnect=""
+$Global:PortNotListening=@();$PortNotListening=""
 $Global:ExcludedFolders=@(
     "Retired",
     "Templates",
@@ -12,7 +12,6 @@ $Global:ExcludedFolders=@(
 )
 $Global:Domain=("utshare.local")
 $Global:DomainUser=(($env:USERNAME+"@"+$Domain).ToLower())
-$Global:Power6Path=($env:ProgramFiles+"\PowerShell\6")
 $ScriptPath=$MyInvocation.MyCommand.Definition
 $ScriptName=$MyInvocation.MyCommand.Name
 $ErrorActionPreference='SilentlyContinue'
@@ -27,16 +26,19 @@ Set-Variable -Name ExcludedName -Value ("ExcludedSystems.log")
 Set-Variable -Name ExcludedFile -Value ($env:USERPROFILE+"\Desktop\"+$ExcludedName)
 Set-Variable -Name PoweredOffName -Value ("PoweredOff.log")
 Set-Variable -Name PoweredOffFile -Value ($env:USERPROFILE+"\Desktop\"+$PoweredOffName)
+Set-Variable -Name PortIssueName -Value ("PortIssue.log")
+Set-Variable -Name PortIssueFile -Value ($env:USERPROFILE+"\Desktop\"+$PortIssueName)
+Set-Variable -Name F2CName -Value ("FailedToConnect.log")
+Set-Variable -Name F2CFile -Value ($env:USERPROFILE+"\Desktop\"+$F2CName)
 Set-Variable -Name MailServer -Value ("mail.utshare.utsystem.edu")
-#Set-Variable -Name SendTo -Value ("GRP-SIS_SysAdmin@utsystem.edu")
-Set-Variable -Name SendTo -Value ("bstobie@utsystem.edu")
+Set-Variable -Name SendTo -Value ("GRP-SIS_SysAdmin@utsystem.edu")
+#Set-Variable -Name SendTo -Value ("bstobie@utsystem.edu")
 Set-Variable -Name EndTime -Value $null
 Set-Variable -Name Sender -Value $null
 Function LoadModules(){
    ReportStartOfActivity "Searching for $ProductShortName module components..."
    $Loaded=Get-Module -Name $ModuleList -ErrorAction Ignore|ForEach-Object {$_.Name}
    $Registered=Get-Module -Name $ModuleList -ListAvailable -ErrorAction Ignore|ForEach-Object {$_.Name}
-#   $NotLoaded=$Registered|Where-Object {$Loaded -notcontains $_}
    ReportFinishedActivity
    Foreach($Module In $Registered){
       If($Loaded -notcontains $Module){
@@ -99,6 +101,7 @@ Switch($DomainUser){
     {($_-like"sy10*")-or($_-like"sy60*")}{Break}
     Default{$DomainUser=(("sy1000829946@"+$Domain).ToLower());Break}
 }
+Import-Module .\Modules\ProcessCredentials.psm1
 $SecureCredentials=SetCredentials -SecureUser $DomainUser -Domain ($Domain).Split(".")[0]
 If(!($SecureCredentials)){$SecureCredentials=get-credential}
 #Load PowerCli Context
@@ -129,9 +132,12 @@ $Script:ServerList="ServerList.txt"
 $Script:WorkingPath=($env:USERPROFILE+"\Desktop")
 $Script:ProcessList=($WorkingPath+"\"+$ServerList)
 $Script:totalActivities=$ModuleList.Count+1
+$Script:PortNotListening=@();$PortNotListening=""
+$Script:FailedToConnect=@();$FailedToConnect=""
 LoadModules
 $PowerCliFriendlyVersion=[VMware.VimAutomation.Sdk.Util10.ProductInfo]::PowerCliFriendlyVersion
 $Host.ui.RawUI.WindowTitle=$PowerCliFriendlyVersion
+Import-Module .\Modules\Posh-SSH.psm1
 Try{
 	$configuration=Get-PowerCliConfiguration -Scope Session
 	If($PromptForCEIP-and!($configuration.ParticipateInCEIP)-and[VMware.VimAutomation.Sdk.Util10Ps.CommonUtil]::InInteractiveMode($Host.UI)){
@@ -172,6 +178,8 @@ If($Validate){
     }
     If(Test-Path -Path $ExcludedFile){Remove-Item $ExcludedFile -ErrorAction $ErrorActionPreference}
     If(Test-Path -Path $PoweredOffFile){Remove-Item $PoweredOffFile -ErrorAction $ErrorActionPreference}
+    If(Test-Path -Path $PortIssueFile){Remove-Item $PortIssueFile -ErrorAction $ErrorActionPreference}
+    If(Test-Path -Path $F2CFile){Remove-Item $F2CFile -ErrorAction $ErrorActionPreference}
     If(Test-Path -Path $LogFile){Remove-Item $LogFile -ErrorAction $ErrorActionPreference}
     $Reason=("["+$SecureCredentials.UserName+"] was successfully connected to: ["+$vSphere+"}")
     ("Beginning to process script because "+$Reason+".")|Out-File $ExcludedFile -Append
@@ -183,6 +191,9 @@ If($Validate){
         (Get-VM).Name|Sort-Object|Out-File ($ProcessList)
     }
     #Health Check
+    $F2C=0
+    $PNL=0
+    $POF=0
     $VM=$null
     $Script:EXCount=0
     $Script:POCount=0
@@ -192,12 +203,13 @@ If($Validate){
         $VMLabel=Get-View -Filter @{"Name"="^$VMGuest$"} -ViewType VirtualMachine -Property Name, Summary.QuickStats.UptimeSeconds|Select-Object Name,$LastBootProp
         ForEach($VM In $VMLabel){
             $FQDN=""
-#            $LineCount=0
             $ByPass=$False
             $VMTools=$null
             $VMStatus=$null
             $IPAddress=$null
             $DnsError=$False
+            $TraceRoute=$null
+            $RemoteTest=$null
             $SystemDetails=$null
             [System.Net.IPAddress]$IPAddress=@()
             If(Test-Path -Path $TempFile){Remove-Item $TempFile}
@@ -281,33 +293,40 @@ If($Validate){
                     If($OSState-eq"Running"){
                         $TestPort=$null
                         $PortCheck=$null
-                        $TraceRoute=$null
-                        $RemoteTest=$null
                         $PingResults=$null
                         $TestReturn=Test-NetConnection -ComputerName $FQDN -TraceRoute
                         If($TestReturn){
+                            $IPCount=0
                             $PingResults=$TestReturn.PingSucceeded
                             $TraceRoute=@($TestReturn.TraceRoute)
                             Switch($OSFullName){
                                 {($_-like"Microsoft*")}{$PortCheck=3389;Break}
                                 Default{$PortCheck=22;Break}
                             }
+                            ForEach($IP In $TraceRoute){
+                                $IPCount++
+                            }
                             If($PingResults){
-                                ("`t"+$FQDN+" successfully returned a ping with a TTL of "+$TestReturn.PingReplyDetails.RoundtripTime+" ms.")|Out-File $LogFile -Append
+                                ("`t"+$FQDN+" successfully returned a ping with a TTL of "+$TestReturn.PingReplyDetails.RoundtripTime+" ms with ["+$IPCount+"] hops.")|Out-File $LogFile -Append
                                 $TestPort=Test-OpenPort -Target $FQDN -Port $PortCheck
                             }
                         }
                         If($TestPort.Status-eq$True){
                             ("`tSuccessfully connected to ["+$TestPort.Target+"] on port ["+$TestPort.Port+"].")|Out-File $LogFile -Append
+                            ("`tAttempting to remotely connect to "+$FQDN+".")|Out-File $LogFile -Append
+                            $Results=$null
+                            $RemoteTest=$null
                             Switch($OSFullName){
                                 {($_-like"Microsoft*")}{
                                     Write-Host("`tConnecting to "+$FQDN+".")
-                                    ("`tAttempting to remotely connect to "+$FQDN+".")|Out-File $LogFile -Append
                                     Try{
-                                        Test-WSMan -ComputerName $FQDN -Credential $SecureCredentials -Authentication Default
+                                        $Results=Test-WSMan -ComputerName $FQDN -Credential $SecureCredentials -Authentication Default
+                                        If($Results.ProductVersion){
+                                            ("`tSuccessfully connected to "+$FQDN+" using [Test-WSMan].")|Out-File $LogFile -Append
+                                        }
                                         $RemoteTest=$True
                                     }Catch{
-                                        Write-Host $_.Exception.Message
+                                        $_.Exception.Message|Out-File $LogFile -Append
                                         $RemoteTest=$False
                                         $Error.Clear()
                                     }
@@ -315,16 +334,38 @@ If($Validate){
                                 }
                                 Default{
                                     $Command=("ls -al /home/"+($DomainUser).Split("@")[0])
-                                    $SessionID=New-SSHSession -ComputerName $FQDN -Credential $SecureCredentials
-                                    Invoke-SSHCommand -Index $SessionID.sessionid -Command $Command
-                                    Break
+                                    Try{
+                                        $SessionID=New-SSHSession -ComputerName $FQDN -Credential $SecureCredentials
+                                        $Results=Invoke-SSHCommand -Index $SessionID.sessionid -Command $Command
+                                        If($Results.ExitStatus-eq0){
+                                            ("`tSuccessfully connected to "+$FQDN+" using [Posh-SSH].")|Out-File $LogFile -Append
+                                        }
+                                        $RemoteTest=$True
+                                        Break
+                                    }Catch{
+                                        $_.Exception.Message|Out-File $LogFile -Append
+                                        $RemoteTest=$False
+                                        $Error.Clear()
+                                    }
                                 }
+                            }
+                            If($RemoteTest-eq$false){
+                                ("`tFailed to connect to "+$FQDN+".  Adding system to reset queue.")|Out-File $LogFile -Append
+                                ($FQDN)|Out-File $F2CFile -Append
+                                $FailedToConnect+=($FQDN)
+                                $F2C++
                             }
                         }Else{
                             ("`tFailed to connected to ["+$TestPort.Target+"] on port ["+$TestPort.Port+"].")|Out-File $LogFile -Append
-                            $ResetHost+=($FQDN)
+                            ($FQDN)|Out-File $PortIssueFile -Append
+                            $PortNotListening+=($FQDN)
+                            $PNL++
                         }
-                    }Else{}
+                    }Else{
+                        ("`tCan't connected to ["+$FQDN+"] because the operating system isn't running.")|Out-File $LogFile -Append
+                        $PoweredOff+=($FQDN)
+                        $POF++
+                    }
                 }
             }
         }
@@ -333,8 +374,8 @@ If($Validate){
     $AttachmentList=$null
     $VMProcessed=([int]$VMCount-([int]$EXcount+[int]$POCount))
     $Sender=($vSphere.Split(".")[0]+"@"+$Domain)
-    $SendTo=("Bob Stobie <$($SendTo)>")
-#    $SendTo=("GRP-SIS_SysAdmin <$($SendTo)>")
+#    $SendTo=("Bob Stobie <$($SendTo)>")
+    $SendTo=("GRP-SIS_SysAdmin <$($SendTo)>")
     $Message=("Start Time: "+$StartTime+"`n`n")
     $Message+=("The attachment: ["+$ServerList+"] is a list of ["+$VMCount+"] systems that were processed for being reset.  ")
     $Message+=("The second attachment are the results from each VM of the ["+$VMProcessed+"] VMs processed from the ["+$LogName+"] file.  ")
@@ -351,8 +392,21 @@ If($Validate){
     }Else{
         $Message+=("The attachment ["+$PoweredOffName+"] was not included because there were ["+$POcount+"] systems that were powered off.")
     }
+    $Message+=("`n`nThere were ["+$F2C+"] systems that failed to connect and will be reset.  A separate email will be processed for each of those systems.  ")
+    $Message+=("There were also ["+$PNL+"] systems that appear not to be listening on the ports for SSH or RDP for their specific operating system.  ")
+    $Message+=("For those system(s) an administrator will need to intervene to verify the problem.  A separate email will be sent for them.")
     $Message+=("`n`nEnd Time: "+(Get-Date))
     Send-MailMessage -From "<$($Sender)>" -To $SendTo -Subject ("Summary of VMWare systems from Site-"+$SiteCode+"") -Body $Message -Attachments $AttachmentList -SmtpServer $MailServer
+    If($FailedToConnect){
+        $AttachmentList=$F2CFile
+        $Message="System(s) being 'RESET' due to failing to connect remotely."
+        Send-MailMessage -From "<$($Sender)>" -To $SendTo -Subject ("System(s) being 'RESET'!") -Body $Message -Attachments $AttachmentList -SmtpServer $MailServer
+    }
+    If($PortNotListening){
+        $AttachmentList=$PortIssueFile
+        $Message="The attached list of server(s) ["+$PortIssueName+"] could't be accessed remotely on port 22 or 3389 and needs manual investigation to determine the root cause."
+        Send-MailMessage -From "<$($Sender)>" -To $SendTo -Subject ("Systems that requires admin investigation.") -Body $Message -Attachments $AttachmentList -SmtpServer $MailServer
+    }
 }Else{
     $Reason=("["+$SecureCredentials.UserName+"] was unable to connect to: ["+$vSphere+"}")
     ("Failed to beginning process script because "+$Reason+".")|Out-File $LogFile -Append
