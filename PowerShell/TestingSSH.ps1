@@ -1,4 +1,5 @@
 Clear-Host;Clear-History
+Import-Module ProcessCredentials
 $Global:Separator="________________________________________________________________________________________________________________________"
 $Global:ResetHost=@();$ResetHost=""
 $Global:SiteCodes=@("A","B")
