@@ -414,8 +414,8 @@ ForEach($Site In $SiteCodes){
         ("Failed to beginning process script because "+$Reason+".")|Out-File $LogFile -Append
         Write-Host ("Failed to beginning process script because "+$Reason+".") -ForegroundColor Yellow -BackgroundColor DarkRed
     }
+    $Message=$null;$Reason=$null;$VMProcessed=0;$VMCount=0;$EXcount=0;$POCount=0
+    Rename-Item -Path ($ProcessList) -NewName "ProcessedList.txt" -Force
 }
-$Message=$null;$Reason=$null;$VMProcessed=0;$VMCount=0;$EXcount=0;$POCount=0
-Rename-Item -Path ($ProcessList) -NewName "ProcessedList.txt" -Force
 Disconnect-VIServer -Server $global:DefaultVIServers -Force
 Set-Location ($env:SystemRoot+"\System32")
