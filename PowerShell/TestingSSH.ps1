@@ -190,7 +190,7 @@ ForEach($Site In $SiteCodes){
         ("<<<"+$Separator+">>>")|Out-File $LogFile -Append
         Write-Host ("Beginning to process script because "+$Reason+".") -ForegroundColor Cyan -BackgroundColor DarkBlue
         If(!(Test-Path -Path ($ProcessList))){
-            (Get-VM).Name|Sort-Object|Out-File ($ProcessList)
+            (Get-VM -Server $vSphere).Name|Sort-Object|Out-File ($ProcessList)
         }
         #Health Check
         $F2C=0
