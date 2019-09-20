@@ -28,4 +28,5 @@ Foreach($FQDN In $ServerList){
     }Else{
         Write-Host $Results
     }
+    $SessionID.Disconnect()
 }

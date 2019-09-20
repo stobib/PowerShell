@@ -347,6 +347,7 @@ ForEach($Site In $SiteCodes){
                                                 $Results|Out-File $LogFile -Append
                                             }
                                             $RemoteTest=$True
+                                            $SessionID.Disconnect()
                                             Break
                                         }Catch{
                                             $_.Exception.Message|Out-File $LogFile -Append
