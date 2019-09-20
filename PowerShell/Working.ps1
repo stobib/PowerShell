@@ -22,7 +22,8 @@ Foreach($FQDN In $ServerList){
         $stream = $SessionID.Session.CreateShellStream("PS-SSH", 0, 0, 0, 0, 100)
         $SSHusersName = ($DomainUser).Split("@")[0].Trim()
         $Command=("chown "+$SSHusersName+" /home/"+$SSHusersName+"/ -R")
-        $results = Invoke-SSHStreamExpectSecureAction -ShellStream $stream -Command ("sudo su - "+$Command) -ExpectString "[sudo] password for $($SSHusersName):" -SecureAction $secpas
+        $results = Invoke-SSHStreamExpectSecureAction -ShellStream $stream -Command ("sudo su -") -ExpectString "[sudo] password for $($SSHusersName):" -SecureAction $secpas
+        $Results=Invoke-SSHCommandStream -SSHSession $SessionID -Command $Command
         Write-Host $Results
     }Else{
         Write-Host $Results
