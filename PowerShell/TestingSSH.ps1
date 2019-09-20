@@ -17,26 +17,28 @@ $Global:Domain=("utshare.local")
 $Global:DomainUser=(($env:USERNAME+"@"+$Domain).ToLower())
 $ScriptPath=$MyInvocation.MyCommand.Definition
 $ScriptName=$MyInvocation.MyCommand.Name
+$Global:WorkingPath=($env:USERPROFILE+"\Desktop\"+($ScriptName.Split(".")[0]))
+If(!(Test-Path -Path $WorkingPath)){New-Item -Path $WorkingPath -ItemType Directory}
 $ErrorActionPreference='SilentlyContinue'
 Set-Location ($ScriptPath.Replace($ScriptName,""))
 Set-Variable -Name DateTime -Value (Get-Date)
 Set-Variable -Name SecureCredentials -Value $null
 Set-Variable -Name LogName -Value ($ScriptName.Replace("ps1","log"))
-Set-Variable -Name LogFile -Value ($env:USERPROFILE+"\Desktop\"+$LogName)
+Set-Variable -Name LogFile -Value ($WorkingPath+"\"+$LogName)
 Set-Variable -Name TempFile -Value ($env:TEMP+"\"+$LogName)
 Set-Variable -Name ExcludedName -Value ("ExcludedSystems.log")
-Set-Variable -Name ExcludedFile -Value ($env:USERPROFILE+"\Desktop\"+$ExcludedName)
+Set-Variable -Name ExcludedFile -Value ($WorkingPath+"\"+$ExcludedName)
 Set-Variable -Name PoweredOffName -Value ("PoweredOff.log")
-Set-Variable -Name PoweredOffFile -Value ($env:USERPROFILE+"\Desktop\"+$PoweredOffName)
+Set-Variable -Name PoweredOffFile -Value ($WorkingPath+"\"+$PoweredOffName)
 Set-Variable -Name PortIssueName -Value ("PortIssue.log")
-Set-Variable -Name PortIssueFile -Value ($env:USERPROFILE+"\Desktop\"+$PortIssueName)
+Set-Variable -Name PortIssueFile -Value ($WorkingPath+"\"+$PortIssueName)
 Set-Variable -Name F2CName -Value ("FailedToConnect.log")
-Set-Variable -Name F2CFile -Value ($env:USERPROFILE+"\Desktop\"+$F2CName)
+Set-Variable -Name F2CFile -Value ($WorkingPath+"\"+$F2CName)
 Set-Variable -Name MailServer -Value ("mail.utshare.utsystem.edu")
-#Set-Variable -Name SendTo -Value ("GRP-SIS_SysAdmin@utsystem.edu")
-Set-Variable -Name SendTo -Value ("bstobie@utsystem.edu")
 Set-Variable -Name EndTime -Value $null
 Set-Variable -Name vSphere -Value $null
+Set-Variable -Name EmailTo -Value $null
+Set-Variable -Name SendTo -Value $null
 Set-Variable -Name Sender -Value $null
 Function LoadModules(){
    ReportStartOfActivity "Searching for $ProductShortName module components..."
@@ -131,7 +133,6 @@ $Script:PercentComplete=0
 $Script:Validate=$null
 $Script:CurrentActivity=""
 $Script:ServerList="ServerList.txt"
-$Script:WorkingPath=($env:USERPROFILE+"\Desktop")
 $Script:ProcessList=($WorkingPath+"\"+$ServerList)
 $Script:totalActivities=$ModuleList.Count+1
 $Script:PortNotListening=@();$PortNotListening=""
@@ -381,8 +382,8 @@ ForEach($Site In $SiteCodes){
         $AttachmentList=$null
         $VMProcessed=([int]$VMCount-([int]$EXcount+[int]$POCount))
         $Sender=($vSphere.Split(".")[0]+"@"+$Domain)
-        $SendTo=("Bob Stobie <$($SendTo)>")
-#        $SendTo=("GRP-SIS_SysAdmin <$($SendTo)>")
+        $EmailTo=("GRP-SIS_SysAdmin@utsystem.edu")
+        $SendTo=("GRP-SIS_SysAdmin <$($EmailTo)>")
         $Message=("Start Time: "+$StartTime+"`n`n")
         $Message+=("The attachment: ["+$ServerList+"] is a list of ["+$VMCount+"] systems that were processed for being reset.  ")
         $Message+=("The second attachment are the results from each VM of the ["+$VMProcessed+"] VMs processed from the ["+$LogName+"] file.  ")
