@@ -21,7 +21,6 @@ $Global:WorkingPath=($env:USERPROFILE+"\Desktop\"+($ScriptName.Split(".")[0]))
 If(!(Test-Path -Path $WorkingPath)){New-Item -Path $WorkingPath -ItemType Directory}
 $ErrorActionPreference='SilentlyContinue'
 Set-Location ($ScriptPath.Replace($ScriptName,""))
-Set-Variable -Name DateTime -Value (Get-Date)
 Set-Variable -Name SecureCredentials -Value $null
 Set-Variable -Name LogName -Value ($ScriptName.Replace("ps1","log"))
 Set-Variable -Name LogFile -Value ($WorkingPath+"\"+$LogName)
@@ -170,7 +169,7 @@ Try{
 Write-Progress -Activity $LoadingActivity -Completed
 #Connect vSphere
 ForEach($Site In $SiteCodes){
-    $Script:StartTime=$DateTime
+    $Script:StartTime=(Get-Date)
     $vSphere=("vcmgr01"+$Site+".inf."+$Domain).ToLower()
     $Validate=Connect-VIServer -Server $vSphere -credential $SecureCredentials
     $LastBootProp=@{Name='LastBootTime';Expression={(Get-Date)-(New-TimeSpan -Seconds $_.Summary.QuickStats.UptimeSeconds)}}
@@ -335,6 +334,11 @@ ForEach($Site In $SiteCodes){
                                             $RemoteTest=$False
                                             $Error.Clear()
                                         }
+                                        Break
+                                    }
+                                    {($_-like"CentOS*")}{
+                                        ("`tBypassing ["+$FQDN+"] because it's running ["+$OSFullName+"].")|Out-File $LogFile -Append
+                                        $RemoteTest=$True
                                         Break
                                     }
                                     Default{
