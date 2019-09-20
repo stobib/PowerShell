@@ -185,7 +185,7 @@ ForEach($Site In $SiteCodes){
         If(Test-Path -Path $PortIssueFile){Remove-Item $PortIssueFile -ErrorAction $ErrorActionPreference}
         If(Test-Path -Path $F2CFile){Remove-Item $F2CFile -ErrorAction $ErrorActionPreference}
         If(Test-Path -Path $LogFile){Remove-Item $LogFile -ErrorAction $ErrorActionPreference}
-        $Reason=("["+$SecureCredentials.UserName+"] was successfully connected to: ["+$vSphere+"}")
+        $Reason=("["+$SecureCredentials.UserName+"] was successfully connected to: ["+$vSphere+"]")
         ("Beginning to process script because "+$Reason+".")|Out-File $ExcludedFile -Append
         ("Beginning to process script because "+$Reason+".")|Out-File $PoweredOffFile -Append
         ("Beginning to process script because "+$Reason+".")|Out-File $LogFile -Append
@@ -416,7 +416,7 @@ ForEach($Site In $SiteCodes){
             Send-MailMessage -From "<$($Sender)>" -To $SendTo -Subject ("Systems that requires admin investigation.") -Body $Message -Attachments $AttachmentList -SmtpServer $MailServer
         }
     }Else{
-        $Reason=("["+$SecureCredentials.UserName+"] was unable to connect to: ["+$vSphere+"}")
+        $Reason=("["+$SecureCredentials.UserName+"] was unable to connect to: ["+$vSphere+"]")
         ("Failed to beginning process script because "+$Reason+".")|Out-File $LogFile -Append
         Write-Host ("Failed to beginning process script because "+$Reason+".") -ForegroundColor Yellow -BackgroundColor DarkRed
     }
