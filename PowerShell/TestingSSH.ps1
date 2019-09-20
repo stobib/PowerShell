@@ -1,5 +1,6 @@
 Clear-Host;Clear-History
 Import-Module ProcessCredentials
+Import-Module Posh-SSH
 $Global:Separator="________________________________________________________________________________________________________________________"
 $Global:ResetHost=@();$ResetHost=""
 $Global:SiteCodes=@("A","B")
@@ -7,6 +8,7 @@ $Global:DateTime=(Get-Date)
 $Global:FailedToConnect=@();$FailedToConnect=""
 $Global:PortNotListening=@();$PortNotListening=""
 $Global:ExcludedFolders=@(
+    "Excluded",
     "Retired",
     "Templates",
     "UTD IaaS (Root)"
@@ -102,7 +104,6 @@ Switch($DomainUser){
     {($_-like"sy10*")-or($_-like"sy60*")}{Break}
     Default{$DomainUser=(("sy1000829946@"+$Domain).ToLower());Break}
 }
-Import-Module .\Modules\ProcessCredentials.psm1
 $SecureCredentials=SetCredentials -SecureUser $DomainUser -Domain ($Domain).Split(".")[0]
 If(!($SecureCredentials)){$SecureCredentials=get-credential}
 #Load PowerCli Context
@@ -138,7 +139,6 @@ $Script:FailedToConnect=@();$FailedToConnect=""
 LoadModules
 $PowerCliFriendlyVersion=[VMware.VimAutomation.Sdk.Util10.ProductInfo]::PowerCliFriendlyVersion
 $Host.ui.RawUI.WindowTitle=$PowerCliFriendlyVersion
-Import-Module .\Modules\Posh-SSH.psm1
 Try{
 	$configuration=Get-PowerCliConfiguration -Scope Session
 	If($PromptForCEIP-and!($configuration.ParticipateInCEIP)-and[VMware.VimAutomation.Sdk.Util10Ps.CommonUtil]::InInteractiveMode($Host.UI)){
@@ -196,7 +196,6 @@ ForEach($Site In $SiteCodes){
         #Health Check
         $F2C=0
         $PNL=0
-        $POF=0
         $VM=$null
         $Script:EXCount=0
         $Script:POCount=0
@@ -326,6 +325,8 @@ ForEach($Site In $SiteCodes){
                                             $Results=Test-WSMan -ComputerName $FQDN -Credential $SecureCredentials -Authentication Default
                                             If($Results.ProductVersion){
                                                 ("`tSuccessfully connected to "+$FQDN+" using [Test-WSMan].")|Out-File $LogFile -Append
+                                            }Else{
+                                                $Results|Out-File $LogFile -Append
                                             }
                                             $RemoteTest=$True
                                         }Catch{
@@ -342,6 +343,8 @@ ForEach($Site In $SiteCodes){
                                             $Results=Invoke-SSHCommand -Index $SessionID.sessionid -Command $Command
                                             If($Results.ExitStatus-eq0){
                                                 ("`tSuccessfully connected to "+$FQDN+" using [Posh-SSH].")|Out-File $LogFile -Append
+                                            }Else{
+                                                $Results|Out-File $LogFile -Append
                                             }
                                             $RemoteTest=$True
                                             Break
@@ -367,7 +370,7 @@ ForEach($Site In $SiteCodes){
                         }Else{
                             ("`tCan't connected to ["+$FQDN+"] because the operating system isn't running.")|Out-File $LogFile -Append
                             $PoweredOff+=($FQDN)
-                            $POF++
+                            $POCount++
                         }
                     }
                 }
