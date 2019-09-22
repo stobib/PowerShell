@@ -4,7 +4,6 @@ Import-Module Posh-SSH
 $Global:Separator="________________________________________________________________________________________________________________________"
 $Global:ResetHost=@();$ResetHost=""
 $Global:SiteCodes=@("A","B")
-$Global:DateTime=(Get-Date)
 $Global:FailedToConnect=@();$FailedToConnect=""
 $Global:PortNotListening=@();$PortNotListening=""
 $Global:ExcludedFolders=@(
