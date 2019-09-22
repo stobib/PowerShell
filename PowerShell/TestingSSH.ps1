@@ -1,6 +1,6 @@
 Clear-Host;Clear-History
-Import-Module ProcessCredentials
 Import-Module Posh-SSH
+Import-Module ProcessCredentials
 $Global:Separator="________________________________________________________________________________________________________________________"
 $Global:ResetHost=@();$ResetHost=""
 $Global:SiteCodes=@("A","B")
@@ -321,9 +321,11 @@ ForEach($Site In $SiteCodes){
                                     {($_-like"Microsoft*")}{
                                         Write-Host("`tConnecting to "+$FQDN+".")
                                         Try{
-                                            $Results=Test-WSMan -ComputerName $FQDN -Credential $SecureCredentials -Authentication Default
-                                            If($Results.ProductVersion){
-                                                ("`tSuccessfully connected to "+$FQDN+" using [Test-WSMan].")|Out-File $LogFile -Append
+#                                            $User=$SecureCredentials.UserName
+#                                            $Pswd=$SecureCredentials.Password
+#                                            $Results=Connect-Mstsc -ComputerName $FQDN -Credential $SecureCredentials
+                                            If($Results.Connected){
+                                                ("`tSuccessfully connected to "+$FQDN+" using [TCPClient].")|Out-File $LogFile -Append
                                             }Else{
                                                 $Results|Out-File $LogFile -Append
                                             }
