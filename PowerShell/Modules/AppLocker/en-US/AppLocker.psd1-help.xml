@@ -1,0 +1,2139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems xmlns="http://msh" schema="maml">
+  <!-- Updatable Help Version 4.0.2.0 -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-AppLockerFileInformation</command:name>
+      <maml:description>
+        <maml:para>Gets the file information necessary to create AppLocker rules from a list of files or an event log.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>AppLockerFileInformation</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-AppLockerFileInformation cmdlet gets the AppLocker file information from a list of files or an event log. File information includes the publisher information, file hash, and file path.</maml:para>
+      <maml:para>The file information from an event log may not contain all of the publisher information, file hash, and file path fields. Files that are not signed will not have any publisher information.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-AppLockerFileInformation</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specifies a list of paths to the files from which the file information is retrieved. Supports regular expressions.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">List&lt;String&gt;</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">SilentlyContinue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Stop</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Continue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Inquire</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Ignore</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Suspend</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+          <maml:name>InformationVariable</maml:name>
+          <maml:description>
+            <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-AppLockerFileInformation</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>FileType</maml:name>
+          <maml:description>
+            <maml:para>Specifies the generic file type for which to search. All files having the appropriate file name extension will be included. 
+The acceptable values for this parameter are: EXE, Script, MSI, and DLL. </maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">Exe</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Dll</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">WindowsInstaller</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Script</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Appx</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">SilentlyContinue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Stop</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Continue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Inquire</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Ignore</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Suspend</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+          <maml:name>InformationVariable</maml:name>
+          <maml:description>
+            <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Recurse</maml:name>
+          <maml:description>
+            <maml:para>Specifies that all files and folders in the specified directory will be searched.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Directory</maml:name>
+          <maml:description>
+            <maml:para>Specifies the directory that contains the files for which to get the file information. If all subfolders and files in the specified directory are to be searched, then include the Recurse parameter</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-AppLockerFileInformation</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>EventType</maml:name>
+          <maml:description>
+            <maml:para>Specifies the event type by which to filter the events. The acceptable values for this parameter are: Allowed, Denied, or Audited. The event types correspond to the Informational, Error, and Warning level events in the AppLocker event logs.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">List&lt;AppLockerEventType&gt;</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">SilentlyContinue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Stop</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Continue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Inquire</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Ignore</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Suspend</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+          <maml:name>InformationVariable</maml:name>
+          <maml:description>
+            <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>LogPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the log name or file path of the event log where the AppLocker events are located. By default, if this parameter is not specified, the local Microsoft-Windows-AppLocker/EXE and DLL channel is used.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Statistics</maml:name>
+          <maml:description>
+            <maml:para>Specifies the statistics to retrieve on the files included in the event log. Calculates a simple sum of the number of times a file is included in the event log based on specified parameters.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>EventLog</maml:name>
+          <maml:description>
+            <maml:para>Specifies that the file information is retrieved from the event log.</maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-AppLockerFileInformation</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1" aliases="none">
+          <maml:name>Packages</maml:name>
+          <maml:description>
+            <maml:para>Specifies a list of installed packaged applications, from which the file information is retrieved.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">List&lt;AppxPackage&gt;</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">SilentlyContinue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Stop</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Continue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Inquire</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Ignore</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Suspend</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+          <maml:name>InformationVariable</maml:name>
+          <maml:description>
+            <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Directory</maml:name>
+        <maml:description>
+          <maml:para>Specifies the directory that contains the files for which to get the file information. If all subfolders and files in the specified directory are to be searched, then include the Recurse parameter</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>EventLog</maml:name>
+        <maml:description>
+          <maml:para>Specifies that the file information is retrieved from the event log.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>EventType</maml:name>
+        <maml:description>
+          <maml:para>Specifies the event type by which to filter the events. The acceptable values for this parameter are: Allowed, Denied, or Audited. The event types correspond to the Informational, Error, and Warning level events in the AppLocker event logs.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">List&lt;AppLockerEventType&gt;</command:parameterValue>
+        <dev:type>
+          <maml:name>List&lt;AppLockerEventType&gt;</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>FileType</maml:name>
+        <maml:description>
+          <maml:para>Specifies the generic file type for which to search. All files having the appropriate file name extension will be included. 
+The acceptable values for this parameter are: EXE, Script, MSI, and DLL. </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">List&lt;AppLockerFileType&gt;</command:parameterValue>
+        <dev:type>
+          <maml:name>List&lt;AppLockerFileType&gt;</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+        <maml:name>InformationAction</maml:name>
+        <maml:description>
+          <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">System.Management.Automation.ActionPreference</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.ActionPreference</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+        <maml:name>InformationVariable</maml:name>
+        <maml:description>
+          <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>LogPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the log name or file path of the event log where the AppLocker events are located. By default, if this parameter is not specified, the local Microsoft-Windows-AppLocker/EXE and DLL channel is used.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1" aliases="none">
+        <maml:name>Packages</maml:name>
+        <maml:description>
+          <maml:para>Specifies a list of installed packaged applications, from which the file information is retrieved.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">List&lt;AppxPackage&gt;</command:parameterValue>
+        <dev:type>
+          <maml:name>List&lt;AppxPackage&gt;</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specifies a list of paths to the files from which the file information is retrieved. Supports regular expressions.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">List&lt;String&gt;</command:parameterValue>
+        <dev:type>
+          <maml:name>List&lt;String&gt;</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Recurse</maml:name>
+        <maml:description>
+          <maml:para>Specifies that all files and folders in the specified directory will be searched.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Statistics</maml:name>
+        <maml:description>
+          <maml:para>Specifies the statistics to retrieve on the files included in the event log. Calculates a simple sum of the number of times a file is included in the event log based on specified parameters.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Microsoft.Security.ApplicationId.PolicyManagement.PolicyModel.FileInformation</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>EXAMPLE 1</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-AppLockerFileInformation -Directory C:\Windows\system32\ -Recurse -FileType exe, script
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example gets the file information for all the .exe files and scripts under %windir%\system32.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 2</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>
+PS C:\&gt;Get-AppLockerFileInformation -Path "C:\Program Files (x86)\Internet Explorer\iexplore.exe" | Format-List
+Path      : %PROGRAMFILES%\INTERNET EXPLORER\IEXPLORE.EXE 
+Publisher : CN=WINDOWS MAIN BUILD LAB ACCOUNT\WINDOWS® INTERNET EXPLORER\IEXPLORE.EXE,10.0.8421.0 
+Hash      : SHA256 0x5F374C2DD91A6F9E9E96F149EE221EC0454649F50E1AF6D3DAEFB849FB7C551C 
+AppX      : False 
+
+
+PS C:\&gt;Get-AppLockerFileInformation -Path "C:\Program Files\Internet Explorer\iexplore.exe" | Format-List
+Path      : %PROGRAMFILES%\INTERNET EXPLORER\IEXPLORE.EXE 
+Publisher : CN=WINDOWS MAIN BUILD LAB ACCOUNT\WINDOWS® INTERNET EXPLORER\IEXPLORE.EXE,10.0.8421.0 
+Hash      : SHA256 0x5F374C2DD91A6F9E9E96F149EE221EC0454649F50E1AF6D3DAEFB849FB7C551C 
+AppX      : False 
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example gets the file information for the file specified by the path.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 3</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-AppXPackage –AllUsers | Get-AppLockerFileInformation
+Path      : windows.immersivecontrolpanel_6.2.0.0_neutral_neutral_cw5n1h2txyewy.appx 
+Publisher : CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, 
+            C=US\windows.immersivecontrolpanel\APPX,6.2.0.0 
+Hash      : 
+AppX      : True 
+
+Path      : windows.RemoteDesktop_1.0.0.0_neutral_neutral_cw5n1h2txyewy.appx 
+Publisher : CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, 
+            C=US\windows.RemoteDesktop\APPX,1.0.0.0 
+Hash      : 
+AppX      : True 
+
+Path      : WinStore_1.0.0.0_neutral_neutral_cw5n1h2txyewy.appx 
+Publisher : CN=Microsoft Windows, O=Microsoft Corporation, L=Redmond, S=Washington, C=US\WinStore\APPX,1.0.0.0 
+Hash      : 
+AppX      : True 
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example outputs the file information for all the packaged applications installed on this machine for all users.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 4</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-AppLockerFileInformation -EventLog -EventType Audited
+
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example outputs the file information for all the Audited events in the local event log. Audited events correspond to the Warning event in the AppLocker audit log.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 5</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-AppLockerFileInformation -EventLog -EventType Allow -Statistics
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example displays statistics for all the Allowed events in the local event log. For each file in the event log, the cmdlet will sum the number of times the event type occurred.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 6</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-AppLockerFileInformation -EventLog -EventType Audited | New-AppLockerPolicy -RuleType Publisher, Hash, Path -User Everyone -Optimize | Set-AppLockerPolicy -LDAP LDAP://TestGPO
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example creates a new AppLocker policy from the warning events in the local event log and sets the policy of a test Group Policy Object (GPO).</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>http://go.microsoft.com/fwlink/?linkid=287248</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>New-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Test-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-AppxPackage</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-AppLockerPolicy</command:name>
+      <maml:description>
+        <maml:para>Gets the local, the effective, or a domain AppLocker policy.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>AppLockerPolicy</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-AppLockerPolicy cmdlet retrieves the AppLocker policy from the local Group Policy Object (GPO), a specified Group Policy Object (GPO), or the effective policy on the computer.</maml:para>
+      <maml:para>By default, the output is an AppLockerPolicy object. If the Xml parameter is used, then the output will be the AppLocker policy as an XML-formatted string.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-AppLockerPolicy</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">SilentlyContinue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Stop</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Continue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Inquire</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Ignore</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Suspend</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+          <maml:name>InformationVariable</maml:name>
+          <maml:description>
+            <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Xml</maml:name>
+          <maml:description>
+            <maml:para>Specifies that the AppLocker policy be output as an XML-formatted string.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Local</maml:name>
+          <maml:description>
+            <maml:para> Gets the AppLocker policy from the local GPO.</maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-AppLockerPolicy</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">SilentlyContinue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Stop</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Continue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Inquire</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Ignore</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Suspend</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+          <maml:name>InformationVariable</maml:name>
+          <maml:description>
+            <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Xml</maml:name>
+          <maml:description>
+            <maml:para>Specifies that the AppLocker policy be output as an XML-formatted string.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Domain</maml:name>
+          <maml:description>
+            <maml:para>Gets the AppLocker policy from the GPO specified by the path given in the Ldap parameter.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Ldap</maml:name>
+          <maml:description>
+            <maml:para>Specifies the LDAP path of the GPO and must specify a unique GPO.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-AppLockerPolicy</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">SilentlyContinue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Stop</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Continue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Inquire</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Ignore</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Suspend</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+          <maml:name>InformationVariable</maml:name>
+          <maml:description>
+            <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Xml</maml:name>
+          <maml:description>
+            <maml:para>Specifies that the AppLocker policy be output as an XML-formatted string.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Effective</maml:name>
+          <maml:description>
+            <maml:para>Gets the effective AppLocker policy on the local computer. The effective policy is the merge of the local AppLocker policy and any applied AppLocker domain policies on the local computer.</maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Domain</maml:name>
+        <maml:description>
+          <maml:para>Gets the AppLocker policy from the GPO specified by the path given in the Ldap parameter.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Effective</maml:name>
+        <maml:description>
+          <maml:para>Gets the effective AppLocker policy on the local computer. The effective policy is the merge of the local AppLocker policy and any applied AppLocker domain policies on the local computer.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+        <maml:name>InformationAction</maml:name>
+        <maml:description>
+          <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">System.Management.Automation.ActionPreference</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.ActionPreference</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+        <maml:name>InformationVariable</maml:name>
+        <maml:description>
+          <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Ldap</maml:name>
+        <maml:description>
+          <maml:para>Specifies the LDAP path of the GPO and must specify a unique GPO.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Local</maml:name>
+        <maml:description>
+          <maml:para> Gets the AppLocker policy from the local GPO.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Xml</maml:name>
+        <maml:description>
+          <maml:para>Specifies that the AppLocker policy be output as an XML-formatted string.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Microsoft.Security.ApplicationId.PolicyManagement.PolicyModel.AppLockerPolicy</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>AppLockerPolicy</maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>EXAMPLE 1</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-AppLockerPolicy -Local
+                                Version RuleCollections                         RuleCollectionTypes 
+                                ------- ---------------                         ------------------- 
+                                      1 {}                                      {} 
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example gets the local AppLocker policy as an AppLockerPolicy object.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 2</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-AppLockerPolicy -Domain -LDAP "LDAP:// DC13.Contoso.com/CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=Contoso,DC=com"
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example gets the AppLocker policy of the unique GPO specified by the LDAP path as an AppLockerPolicy object.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 3</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-AppLockerPolicy -Effective -Xml | Set-Content ('c:\temp\curr.xml')
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example gets the effective policy on the computer, and then sends it in XML-format to the specified file on an existing path.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 4</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-AppLockerPolicy -Local | Test-AppLockerPolicy -Path C:\Windows\System32\*.exe -User Everyone
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example gets the local AppLocker policy on the computer, and then tests the policy using the Test-AppLockerPolicy cmdlet to test whether the .exe files in C:\Windows\System32 will be allowed to run by the Everyone group.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>http://go.microsoft.com/fwlink/?linkid=287249</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-AppLockerFileInformation</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>New-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Test-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-AppLockerPolicy</command:name>
+      <maml:description>
+        <maml:para>Creates a new AppLocker policy from a list of file information and other rule creation options.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>New</command:verb>
+      <command:noun>AppLockerPolicy</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The New-AppLockerPolicy cmdlet uses a list of file information to automatically generate a list of rules for a given user or group. Rules can be generated based on publisher, hash, or path information.</maml:para>
+      <maml:para>Run the Get-AppLockerFileInformation cmdlet to create the list of file information.</maml:para>
+      <maml:para>By default, the output is an AppLockerPolicy object. If the Xml parameter is specified, the output will be the AppLocker policy as an XML-formatted string.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-AppLockerPolicy</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1" aliases="none">
+          <maml:name>FileInformation</maml:name>
+          <maml:description>
+            <maml:para>Specifies a file that can contain publisher, path, and hash information. Some information may be missing, such as publisher information for an unsigned file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">List&lt;FileInformation&gt;</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>IgnoreMissingFileInformation</maml:name>
+          <maml:description>
+            <maml:para>Specifies that, if a rule cannot be created for a file because of missing file information, then evaluation of the remaining file information will continue and a warning log of the files skipped will be generated.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">SilentlyContinue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Stop</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Continue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Inquire</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Ignore</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Suspend</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+          <maml:name>InformationVariable</maml:name>
+          <maml:description>
+            <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Optimize</maml:name>
+          <maml:description>
+            <maml:para>Specifies that similar rules will be grouped together.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>RuleNamePrefix</maml:name>
+          <maml:description>
+            <maml:para>Specifies a name to add as the prefix for each rule that is created.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>RuleType</maml:name>
+          <maml:description>
+            <maml:para>Specifies the type of rules to create from the file information. Publisher, path, or hash rules can be created from the file information. Multiple rule types may be specified. Therefore, that there are backup rule types if the necessary file information is not available. 
+
+For example, if Publisher, Hash is specified for this parameter, then the hash rules are applied when publisher information is not available.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">List&lt;RuleType&gt;</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ServiceEnforcement</maml:name>
+          <maml:description>
+            <maml:para>Specifies whether the AppLocker policy for EXE and DLL rule collections applies to non-interactive processes. The acceptable values for this parameter are:
+
+-- NotConfigured
+-- Enabled
+-- ServicesOnly</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:description>
+            <maml:para>Specifies the user or group to which the rules are applied. The acceptable values for this parameter are:
+
+ -- DNS user name (domain\username) 
+ -- User Principal Name (username@domain.com) 
+ -- SAM user name (username) 
+ -- Security identifier (S-1-5-21-3165297888-301567370-576410423-1103)</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Xml</maml:name>
+          <maml:description>
+            <maml:para>Specifies that the output of the AppLocker policy be as an XML-formatted string.</maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1" aliases="none">
+        <maml:name>FileInformation</maml:name>
+        <maml:description>
+          <maml:para>Specifies a file that can contain publisher, path, and hash information. Some information may be missing, such as publisher information for an unsigned file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">List&lt;FileInformation&gt;</command:parameterValue>
+        <dev:type>
+          <maml:name>List&lt;FileInformation&gt;</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>IgnoreMissingFileInformation</maml:name>
+        <maml:description>
+          <maml:para>Specifies that, if a rule cannot be created for a file because of missing file information, then evaluation of the remaining file information will continue and a warning log of the files skipped will be generated.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+        <maml:name>InformationAction</maml:name>
+        <maml:description>
+          <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">System.Management.Automation.ActionPreference</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.ActionPreference</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+        <maml:name>InformationVariable</maml:name>
+        <maml:description>
+          <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Optimize</maml:name>
+        <maml:description>
+          <maml:para>Specifies that similar rules will be grouped together.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>RuleNamePrefix</maml:name>
+        <maml:description>
+          <maml:para>Specifies a name to add as the prefix for each rule that is created.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>RuleType</maml:name>
+        <maml:description>
+          <maml:para>Specifies the type of rules to create from the file information. Publisher, path, or hash rules can be created from the file information. Multiple rule types may be specified. Therefore, that there are backup rule types if the necessary file information is not available. 
+
+For example, if Publisher, Hash is specified for this parameter, then the hash rules are applied when publisher information is not available.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">List&lt;RuleType&gt;</command:parameterValue>
+        <dev:type>
+          <maml:name>List&lt;RuleType&gt;</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ServiceEnforcement</maml:name>
+        <maml:description>
+          <maml:para>Specifies whether the AppLocker policy for EXE and DLL rule collections applies to non-interactive processes. The acceptable values for this parameter are:
+
+-- NotConfigured
+-- Enabled
+-- ServicesOnly</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>User</maml:name>
+        <maml:description>
+          <maml:para>Specifies the user or group to which the rules are applied. The acceptable values for this parameter are:
+
+ -- DNS user name (domain\username) 
+ -- User Principal Name (username@domain.com) 
+ -- SAM user name (username) 
+ -- Security identifier (S-1-5-21-3165297888-301567370-576410423-1103)</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Xml</maml:name>
+        <maml:description>
+          <maml:para>Specifies that the output of the AppLocker policy be as an XML-formatted string.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>Microsoft.Security.ApplicationId.PolicyManagement.PolicyModel.FileInformation</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Microsoft.Security.ApplicationId.PolicyManagement.PolicyModel.AppLockerPolicy</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>AppLockerPolicy</maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>EXAMPLE 1</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>C:\PS&gt;Get-ChildItem C:\Windows\System32\*.exe | Get-AppLockerFileInformation | New-AppLockerPolicy -RuleType Publisher, Hash -User Everyone -RuleNamePrefix System32
+                                Version RuleCollections                         RuleCollectionTypes 
+                                ------- ---------------                         ------------------- 
+                                      1 {Microsoft.Security.ApplicationId.Po... {Exe} 
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example creates an AppLocker policy that contains allow rules for all of the executable files in C:\Windows\System32. The policy contains publisher rules for those files with publisher information and hash rules for those that do not. The rules are prefixed with System32: and the rules apply to the Everyone group.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 2</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>C:\PS&gt;Get-ChildItem C:\Windows\System32\*.exe | Get-AppLockerFileInformation | New-AppLockerPolicy -RuleType Path -User Everyone -Optimize -XML
+&lt;AppLockerPolicy Version="1"&gt;&lt;RuleCollection Type="Exe" EnforcementMode="NotConfigured"&gt;&lt;FilePathRule Id="31B2F340-016D 
+-11D2-945F-00C04FB984F9" Name="%SYSTEM32%\*" Description="" 10 UserOrGroupSid="S-1-5-21-3165297888-301567370-576410423- 
+13" Action="cAllow"&gt;&lt;Conditions&gt;&lt;FilePathCondition Path="%SYSTEM32%\*" /&gt;&lt;/Conditions&gt;&lt;/FilePathRule&gt;&lt;/RuleCollection&gt; 
+&lt;/AppLockerPolicy&gt; 
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example creates an XML-formatted AppLocker policy for all of the executable files in C:\Windows\System32. The policy contains only path rules, the rules are applied to the Everyone group, and the Optimize parameter indicates that similar rules are grouped together where possible.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 3</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>C:\PS&gt;Get-AppLockerFileInformation -EventLog -LogPath "Microsoft-Windows-AppLocker/EXE and DLL" -EventType Audited | New-AppLockerPolicy -RuleType Publisher,Hash -User domain\FinanceGroup -IgnoreMissingFileInformation | Set-AppLockerPolicy -LDAP "LDAP://DC13.TailspinToys.com/CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=WingTipToys,DC=com"
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example creates a new AppLocker policy from the audited events in the local Microsoft-Windows-AppLocker/EXE and DLL event log. All of the rules will be applied to the domain\FinanceGroup group. Publisher rules are created when the publisher information is available, and hash rules are created if the publisher information is not available. If only path information is available for a file, then the file is skipped because the IgnoreMissingFileInformation parameter is specified, and the file is included in the warning log. If the IgnoreMissingFileInformation parameter is not specified when file information is missing, then the cmdlet exits because it cannot create the specified rule type. After the new AppLocker policy is created, the AppLocker policy of the specified Group Policy Object (GPO) is set. The existing AppLocker policy in the specified GPO will be overwritten.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>http://go.microsoft.com/fwlink/?linkid=287250</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-AppLockerFileInformation</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Test-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Set-AppLockerPolicy</command:name>
+      <maml:description>
+        <maml:para>Sets the AppLocker policy for the specified GPO.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Set</command:verb>
+      <command:noun>AppLockerPolicy</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Set-AppLockerPolicy cmdlet sets the specified GPO to contain the specified AppLocker policy. If no Lightweight Directory Access Protocol (LDAP) is specified, then the default is the local GPO.</maml:para>
+      <maml:para>The input values for the AppLocker policy can be an AppLockerPolicy object or an XML-formatted file that contains the AppLocker policy.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-AppLockerPolicy</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>XmlPolicy</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path where the XML-formatted file that contains the AppLocker policy is saved.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">SilentlyContinue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Stop</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Continue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Inquire</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Ignore</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Suspend</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationVariable</maml:name>
+          <maml:description>
+            <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Ldap</maml:name>
+          <maml:description>
+            <maml:para>Specifies the LDAP path of the GPO. It must specify a unique GPO. If this parameter is not specified, then the local AppLocker policy is set.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Merge</maml:name>
+          <maml:description>
+            <maml:para>Merges the rules in the specified AppLocker policy with the AppLocker rules in the target GPO specified in the LDAP path. The merging of policies will remove rules with duplicate rule IDs, and the enforcement setting specified by the AppLocker policy in the target GPO will be preserved. If the Merge parameter is not specified, then the new policy will overwrite the existing policy.</maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-AppLockerPolicy</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1" aliases="none">
+          <maml:name>PolicyObject</maml:name>
+          <maml:description>
+            <maml:para>Specifies the AppLockerPolicy object that contains the AppLocker policy. Can be obtained from the Get-AppLockerPolicy and the New-AppLockerPolicy cmdlets.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">AppLockerPolicy</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">SilentlyContinue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Stop</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Continue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Inquire</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Ignore</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Suspend</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationVariable</maml:name>
+          <maml:description>
+            <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Ldap</maml:name>
+          <maml:description>
+            <maml:para>Specifies the LDAP path of the GPO. It must specify a unique GPO. If this parameter is not specified, then the local AppLocker policy is set.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Merge</maml:name>
+          <maml:description>
+            <maml:para>Merges the rules in the specified AppLocker policy with the AppLocker rules in the target GPO specified in the LDAP path. The merging of policies will remove rules with duplicate rule IDs, and the enforcement setting specified by the AppLocker policy in the target GPO will be preserved. If the Merge parameter is not specified, then the new policy will overwrite the existing policy.</maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+        <maml:name>InformationAction</maml:name>
+        <maml:description>
+          <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">System.Management.Automation.ActionPreference</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.ActionPreference</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+        <maml:name>InformationVariable</maml:name>
+        <maml:description>
+          <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Ldap</maml:name>
+        <maml:description>
+          <maml:para>Specifies the LDAP path of the GPO. It must specify a unique GPO. If this parameter is not specified, then the local AppLocker policy is set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Merge</maml:name>
+        <maml:description>
+          <maml:para>Merges the rules in the specified AppLocker policy with the AppLocker rules in the target GPO specified in the LDAP path. The merging of policies will remove rules with duplicate rule IDs, and the enforcement setting specified by the AppLocker policy in the target GPO will be preserved. If the Merge parameter is not specified, then the new policy will overwrite the existing policy.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1" aliases="none">
+        <maml:name>PolicyObject</maml:name>
+        <maml:description>
+          <maml:para>Specifies the AppLockerPolicy object that contains the AppLocker policy. Can be obtained from the Get-AppLockerPolicy and the New-AppLockerPolicy cmdlets.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">AppLockerPolicy</command:parameterValue>
+        <dev:type>
+          <maml:name>AppLockerPolicy</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>XmlPolicy</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path where the XML-formatted file that contains the AppLocker policy is saved.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>Microsoft.Security.ApplicationId.PolicyManagement.PolicyModel.AppLockerPolicy</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>AppLockerPolicy</maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>None</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>EXAMPLE 1</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Set-AppLockerPolicy -XMLPolicy C:\Policy.xml
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example sets the local AppLocker policy to the policy specified in C:\Policy.xml.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 2</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Set-AppLockerPolicy -XMLPolicy C:\Policy.xml -LDAP "LDAP://DC13.Contoso.com/CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=Contoso,DC=com"
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example sets the GPO specified in the LDAP path to contain the AppLocker policy that is specified in C:\Policy.xml.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 3</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Get-AppLockerPolicy -Local | Set-AppLockerPolicy -LDAP "LDAP://DC13.Contoso.com/CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=Contoso,DC=com" -Merge
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example gets the local AppLocker policy, and then merges the policy with the existing AppLocker policy in the GPO specified in the LDAP path. For more information on how two policies are merged, see the Merge parameter description. </maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>http://go.microsoft.com/fwlink/?linkid=287251</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-AppLockerFileInformation</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>New-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Test-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Test-AppLockerPolicy</command:name>
+      <maml:description>
+        <maml:para>Specifies the AppLocker policy to determine whether the input files will be allowed to run for a given user.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Test</command:verb>
+      <command:noun>AppLockerPolicy</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Test-AppLockerPolicy cmdlet specifies the AppLocker policy to determine whether a list of files is allowed to run on the local computer for a specified user.</maml:para>
+      <maml:para>To test AppLocker rules for a nested group, a representative member of the nested group should be specified for the User parameter. For example, a rule that allows the Everyone group to run calc.exe may not appear to apply correctly when the nested Finance group for the User parameter is specified. Instead, a representative member of the Finance group should be specified for the User parameter.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Test-AppLockerPolicy</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>XmlPolicy</maml:name>
+          <maml:description>
+            <maml:para>Specifies the file path and name of the XML-formatted file that contains the AppLocker policy.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Filter</maml:name>
+          <maml:description>
+            <maml:para>Specifies the policy decision by which to filter the output for each input file. The acceptable values for this parameter are: Allowed, Denied, DeniedByDefault, or AllowedByDefault.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">List&lt;PolicyDecision&gt;</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">SilentlyContinue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Stop</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Continue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Inquire</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Ignore</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Suspend</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+          <maml:name>InformationVariable</maml:name>
+          <maml:description>
+            <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:description>
+            <maml:para>Defines the user or group to be used for testing the rules in a specified AppLocker policy. The acceptable values for this parameter are:
+
+-- DNS user name (domain\username) 
+-- User Principal Name (username@domain.com) 
+-- SAM user name (username) 
+-- Security identifier (S-1-5-21-3165297888-301567370-576410423-1103) </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specifies the list of the file paths to test. Regular expressions are supported.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">List&lt;String&gt;</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Test-AppLockerPolicy</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>XmlPolicy</maml:name>
+          <maml:description>
+            <maml:para>Specifies the file path and name of the XML-formatted file that contains the AppLocker policy.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Filter</maml:name>
+          <maml:description>
+            <maml:para>Specifies the policy decision by which to filter the output for each input file. The acceptable values for this parameter are: Allowed, Denied, DeniedByDefault, or AllowedByDefault.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">List&lt;PolicyDecision&gt;</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">SilentlyContinue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Stop</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Continue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Inquire</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Ignore</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Suspend</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+          <maml:name>InformationVariable</maml:name>
+          <maml:description>
+            <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:description>
+            <maml:para>Defines the user or group to be used for testing the rules in a specified AppLocker policy. The acceptable values for this parameter are:
+
+-- DNS user name (domain\username) 
+-- User Principal Name (username@domain.com) 
+-- SAM user name (username) 
+-- Security identifier (S-1-5-21-3165297888-301567370-576410423-1103) </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="named" aliases="none">
+          <maml:name>Packages</maml:name>
+          <maml:description>
+            <maml:para>Specifies a list of installed packaged applications, from which the file information is retrieved.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">List&lt;AppxPackage&gt;</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Test-AppLockerPolicy</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1" aliases="none">
+          <maml:name>PolicyObject</maml:name>
+          <maml:description>
+            <maml:para>Specifies the Applocker policy. Can be obtained from the Get-AppLockerPolicy or the New-AppLockerPolicy cmdlet.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">AppLockerPolicy</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Filter</maml:name>
+          <maml:description>
+            <maml:para>Specifies the policy decision by which to filter the output for each input file. The acceptable values for this parameter are: Allowed, Denied, DeniedByDefault, or AllowedByDefault.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">List&lt;PolicyDecision&gt;</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+          <maml:name>InformationAction</maml:name>
+          <maml:description>
+            <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">SilentlyContinue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Stop</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Continue</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Inquire</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Ignore</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Suspend</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+          <maml:name>InformationVariable</maml:name>
+          <maml:description>
+            <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:description>
+            <maml:para>Defines the user or group to be used for testing the rules in a specified AppLocker policy. The acceptable values for this parameter are:
+
+-- DNS user name (domain\username) 
+-- User Principal Name (username@domain.com) 
+-- SAM user name (username) 
+-- Security identifier (S-1-5-21-3165297888-301567370-576410423-1103) </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="named" aliases="none">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Specifies the list of the file paths to test. Regular expressions are supported.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">List&lt;String&gt;</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Filter</maml:name>
+        <maml:description>
+          <maml:para>Specifies the policy decision by which to filter the output for each input file. The acceptable values for this parameter are: Allowed, Denied, DeniedByDefault, or AllowedByDefault.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">List&lt;PolicyDecision&gt;</command:parameterValue>
+        <dev:type>
+          <maml:name>List&lt;PolicyDecision&gt;</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="infa">
+        <maml:name>InformationAction</maml:name>
+        <maml:description>
+          <maml:para>Specifies how this cmdlet responds to an information event. The acceptable values for this parameter are:
+
+-- SilentlyContinue
+-- Stop
+-- Continue
+-- Inquire
+-- Ignore
+-- Suspend</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">System.Management.Automation.ActionPreference</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.ActionPreference</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="iv">
+        <maml:name>InformationVariable</maml:name>
+        <maml:description>
+          <maml:para>Specifies a variable in which to store an information event message.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">System.String</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="named" aliases="none">
+        <maml:name>Packages</maml:name>
+        <maml:description>
+          <maml:para>Specifies a list of installed packaged applications, from which the file information is retrieved.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">List&lt;AppxPackage&gt;</command:parameterValue>
+        <dev:type>
+          <maml:name>List&lt;AppxPackage&gt;</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="named" aliases="none">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Specifies the list of the file paths to test. Regular expressions are supported.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">List&lt;String&gt;</command:parameterValue>
+        <dev:type>
+          <maml:name>List&lt;String&gt;</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue, ByPropertyName)" position="1" aliases="none">
+        <maml:name>PolicyObject</maml:name>
+        <maml:description>
+          <maml:para>Specifies the Applocker policy. Can be obtained from the Get-AppLockerPolicy or the New-AppLockerPolicy cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">AppLockerPolicy</command:parameterValue>
+        <dev:type>
+          <maml:name>AppLockerPolicy</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>User</maml:name>
+        <maml:description>
+          <maml:para>Defines the user or group to be used for testing the rules in a specified AppLocker policy. The acceptable values for this parameter are:
+
+-- DNS user name (domain\username) 
+-- User Principal Name (username@domain.com) 
+-- SAM user name (username) 
+-- Security identifier (S-1-5-21-3165297888-301567370-576410423-1103) </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>XmlPolicy</maml:name>
+        <maml:description>
+          <maml:para>Specifies the file path and name of the XML-formatted file that contains the AppLocker policy.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>Microsoft.Security.ApplicationId.PolicyManagement.PolicyModel.AppLockerPolicy</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>AppLockerPolicy</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Microsoft.Security.ApplicationId.PolicyManagement.AppLockerPolicyDecision</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>EXAMPLE 1</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Test-AppLockerPolicy -XMLPath C:\Policy.xml -Path c:\windows\system32\calc.exe, C:\windows\system32\notepad.exe -User Everyone
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example reports if calc.exe and notepad.exe will be allowed to run for Everyone under the policy specified by C:\Policy.xml.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 2</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-ChildItem C:\windows\system32\*.exe | Test-AppLockerPolicy c:\Policy.xml -Filter DeniedByDefault
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example lists the executables under C:\Windows\System32 that everyone will be denied by the policy specified by C:\Policy.xml because there is no explicit rule for the file.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 3</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-AppLockerPolicy -Local | Test-AppLockerPolicy -Path C:\Windows\System32\*.exe -User contoso\saradavis -Filter Denied | Format-List -Property | Set-Content (ꞌC:\temp\DeniedFiles.txtꞌ)
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example gets the local AppLocker policy, uses the policy to determine which executables in C:\Windows\System32 that contoso\saradavis is explicitly denied access to run, and then redirects the list to a text file.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>EXAMPLE 4</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-AppxPackage –AllUsers | Test-AppLockerPolicy –XmlPolicy .\SamplePolicy.xml
+
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example lists all the packages installed on this computer, for all the users, and tests them against a saved policy.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>http://go.microsoft.com/fwlink/?linkid=287252</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-AppLockerFileInformation</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>New-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Set-AppLockerPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-AppxPackage</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+</helpItems>

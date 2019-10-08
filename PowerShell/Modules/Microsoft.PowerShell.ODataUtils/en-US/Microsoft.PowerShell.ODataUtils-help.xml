@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml">
+
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>Export-ODataEndpointProxy</command:name>
+<command:verb>Export</command:verb>
+<command:noun>ODataEndpointProxy</command:noun>
+<maml:description><maml:para>Generates a module that contains cmdlets to manage an OData endpoint.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The Export-ODataEndpointProxy cmdlet uses the metadata of an OData endpoint to generate a module that contains cmdlets you can use to manage that OData endpoint. The module is based on CDXML. After this cmdlet generates the module, it saves that module to the path and file name specified by the OutputModule parameter. Export-ODataEndpointProxy generates cmdlets for create, read, update, and delete (CRUD) operations, non-CRUD actions, and association manipulation. Export-ODataEndpointProxy generates one CDXML file per endpoint resource. You can edit these CDXML files after the module is generated. For example, if you want to change the noun or verb names of the cmdlets to align with Windows PowerShell cmdlet naming guidelines, you can modify the file.
+</maml:para>
+<maml:para>Every cmdlet in a generated module must include a ConnectionURI parameter in order to connect to the endpoint that the module manages.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>Export-ODataEndpointProxy</maml:name>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none"><maml:name>Uri</maml:name>
+<maml:Description><maml:para>Specifies the URI of the endpoint.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none"><maml:name>OutputModule</maml:name>
+<maml:Description><maml:para>Specifies the path and module name to which this cmdlet saves the generated module of proxy commands.
+</maml:para>
+<maml:para>This cmdlet copies a binary module, module manifest, and formatting file, if applicable, to the specified folder. If you specify only the name of the module, Export-ODataEndpointProxy saves the module in the `$home\Documents\WindowsPowerShell\Modules` folder. If you specify a path, the cmdlet creates the module folder in that path.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="10" aliases="none"><maml:name>AllowClobber</maml:name>
+<maml:Description><maml:para>Indicates that this cmdlet replaces an existing module.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="11" aliases="none"><maml:name>AllowUnsecureConnection</maml:name>
+<maml:Description><maml:para>Indicates that this module can connect to URIs that are not SSL-secured. The module can manage HTTP sites in addition to HTTPS sites.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="12" aliases="none"><maml:name>Headers</maml:name>
+<maml:Description><maml:para>@{Text=}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+<dev:type><maml:name>Hashtable</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none"><maml:name>MetadataUri</maml:name>
+<maml:Description><maml:para>Specifies the URI of the metadata of the endpoint.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="3" aliases="none"><maml:name>Credential</maml:name>
+<maml:Description><maml:para>Specifies a user account that has access to the OData endpoint. The default value is the current user. If a remote computer runs Windows Vista or a later release of the Windows operating system, the cmdlet prompts you for credentials.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+<dev:type><maml:name>PSCredential</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="4" aliases="none"><maml:name>CreateRequestMethod</maml:name>
+<maml:Description><maml:para>Specifies the request method. The acceptable values for this parameter are: PUT, POST, and PATCH.
+</maml:para>
+</maml:Description>
+<command:parameterValueGroup><command:parameterValue required="false" variableLength="false">Put</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">Post</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">Patch</command:parameterValue>
+</command:parameterValueGroup>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="5" aliases="none"><maml:name>UpdateRequestMethod</maml:name>
+<maml:Description><maml:para>Specifies the update request method. The acceptable values for this parameter are: PUT, POST, and PATCH.
+</maml:para>
+</maml:Description>
+<command:parameterValueGroup><command:parameterValue required="false" variableLength="false">Put</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">Post</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">Patch</command:parameterValue>
+</command:parameterValueGroup>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="6" aliases="none"><maml:name>CmdletAdapter</maml:name>
+<maml:Description><maml:para>Specifies the cmdlet adapter. The acceptable values for this parameter are: ODataAdapter and NetworkControllerAdapter.
+</maml:para>
+</maml:Description>
+<command:parameterValueGroup><command:parameterValue required="false" variableLength="false">ODataAdapter</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">NetworkControllerAdapter</command:parameterValue>
+<command:parameterValue required="false" variableLength="false">ODataV4Adapter</command:parameterValue>
+</command:parameterValueGroup>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="7" aliases="none"><maml:name>ResourceNameMapping</maml:name>
+<maml:Description><maml:para>Specifies a hashtable that contains mappings that let you customize the generated cmdlets. In this hashtable, the resource collection name is the key. The desired cmdlet noun is the value.
+</maml:para>
+<maml:para>For example, in the hash table @{Products = 'Merchandise'}, Products is the resource collection name that serves as the key. Merchandise is the resulting cmdlet noun. The generated cmdlet names might not align to Windows PowerShellcmdlet naming guidelines. You can modify the resource CDXML file to change the cmdlet names after this cmdlet creates the module. For more information, see Strongly Encouraged Development Guidelineshttp://msdn.microsoft.com/library/dd878270(v=vs.85).aspx (http://msdn.microsoft.com/library/dd878270(v=vs.85).aspx) in the Microsoft Developer Network library.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+<dev:type><maml:name>Hashtable</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="8" aliases="none"><maml:name>Force</maml:name>
+<maml:Description><maml:para>Indicates that this cmdlet overwrites an existing generated module of the same name in an existing `Modules` folder.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="9" aliases="none"><maml:name>CustomData</maml:name>
+<maml:Description><maml:para>Specifies a hash table of custom data.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+<dev:type><maml:name>Hashtable</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>Prompts you for confirmation before running the cmdlet.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="10" aliases="none"><maml:name>AllowClobber</maml:name>
+<maml:Description><maml:para>Indicates that this cmdlet replaces an existing module.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="11" aliases="none"><maml:name>AllowUnsecureConnection</maml:name>
+<maml:Description><maml:para>Indicates that this module can connect to URIs that are not SSL-secured. The module can manage HTTP sites in addition to HTTPS sites.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="6" aliases="none"><maml:name>CmdletAdapter</maml:name>
+<maml:Description><maml:para>Specifies the cmdlet adapter. The acceptable values for this parameter are: ODataAdapter and NetworkControllerAdapter.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf"><maml:name>Confirm</maml:name>
+<maml:Description><maml:para>Prompts you for confirmation before running the cmdlet.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="4" aliases="none"><maml:name>CreateRequestMethod</maml:name>
+<maml:Description><maml:para>Specifies the request method. The acceptable values for this parameter are: PUT, POST, and PATCH.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="3" aliases="none"><maml:name>Credential</maml:name>
+<maml:Description><maml:para>Specifies a user account that has access to the OData endpoint. The default value is the current user. If a remote computer runs Windows Vista or a later release of the Windows operating system, the cmdlet prompts you for credentials.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">PSCredential</command:parameterValue>
+<dev:type><maml:name>PSCredential</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="9" aliases="none"><maml:name>CustomData</maml:name>
+<maml:Description><maml:para>Specifies a hash table of custom data.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+<dev:type><maml:name>Hashtable</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="8" aliases="none"><maml:name>Force</maml:name>
+<maml:Description><maml:para>Indicates that this cmdlet overwrites an existing generated module of the same name in an existing `Modules` folder.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="12" aliases="none"><maml:name>Headers</maml:name>
+<maml:Description><maml:para>@{Text=}
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+<dev:type><maml:name>Hashtable</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="2" aliases="none"><maml:name>MetadataUri</maml:name>
+<maml:Description><maml:para>Specifies the URI of the metadata of the endpoint.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="1" aliases="none"><maml:name>OutputModule</maml:name>
+<maml:Description><maml:para>Specifies the path and module name to which this cmdlet saves the generated module of proxy commands.
+</maml:para>
+<maml:para>This cmdlet copies a binary module, module manifest, and formatting file, if applicable, to the specified folder. If you specify only the name of the module, Export-ODataEndpointProxy saves the module in the `$home\Documents\WindowsPowerShell\Modules` folder. If you specify a path, the cmdlet creates the module folder in that path.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="7" aliases="none"><maml:name>ResourceNameMapping</maml:name>
+<maml:Description><maml:para>Specifies a hashtable that contains mappings that let you customize the generated cmdlets. In this hashtable, the resource collection name is the key. The desired cmdlet noun is the value.
+</maml:para>
+<maml:para>For example, in the hash table @{Products = 'Merchandise'}, Products is the resource collection name that serves as the key. Merchandise is the resulting cmdlet noun. The generated cmdlet names might not align to Windows PowerShellcmdlet naming guidelines. You can modify the resource CDXML file to change the cmdlet names after this cmdlet creates the module. For more information, see Strongly Encouraged Development Guidelineshttp://msdn.microsoft.com/library/dd878270(v=vs.85).aspx (http://msdn.microsoft.com/library/dd878270(v=vs.85).aspx) in the Microsoft Developer Network library.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Hashtable</command:parameterValue>
+<dev:type><maml:name>Hashtable</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName)" position="5" aliases="none"><maml:name>UpdateRequestMethod</maml:name>
+<maml:Description><maml:para>Specifies the update request method. The acceptable values for this parameter are: PUT, POST, and PATCH.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByPropertyName, ByValue)" position="0" aliases="none"><maml:name>Uri</maml:name>
+<maml:Description><maml:para>Specifies the URI of the endpoint.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="wi"><maml:name>WhatIf</maml:name>
+<maml:Description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes></command:inputTypes>
+<command:returnValues></command:returnValues>
+<maml:alertSet><maml:alert><maml:para>
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1: Generate a module to manage a retail web service endpoint</maml:title>
+<dev:code>PS C:\&gt;Export-ODataEndpointProxy -Uri 'http://services.odata.org/v3/(S(snyobsk1hhutkb2yulwldgf1))/odata/odata.svc' -MetadataUri 'http://services.odata.org/v3/(S(snyobsk1hhutkb2yulwldgf1))/odata/odata.svc/$metadata' -AllowUnsecureConnection -OutputModule 'C:\Users\user\GeneratedScript.psm1' -ResourceNameMapping @{Products = 'Merchandise'}</dev:code>
+<dev:remarks><maml:para>This command generates a module to manage a retail service endpoint. The command specifies the URI of the endpoint and the URI of the endpoint metadata. The command also provides an output path and script module name as the value of the OutputModule parameter. For the value of the ResourceNameMapping parameter, the command provides a hashtable that maps the resource collection name to the desired noun for the cmdlet set. In this example, Products is the resource collection name and Merchandise is the noun. To allow connections to non-SSL sites, HTTP, as opposed to HTTPS, add the AllowUnsecureConnection parameter.
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>Online Version:</maml:linkText>
+<maml:uri>http://go.microsoft.com/fwlink/?LinkID=510069</maml:uri>
+</maml:navigationLink>
+<maml:navigationLink><maml:linkText>OData Library</maml:linkText>
+<maml:uri>http://technet.microsoft.com/windowsserver/hh525392(v=vs.85).aspx</maml:uri>
+</maml:navigationLink>
+<maml:navigationLink><maml:linkText>What is the OData Protocol?</maml:linkText>
+<maml:uri>http://www.odata.org/</maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+</helpItems>

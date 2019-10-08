@@ -1,0 +1,1307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems xmlns="http://msh" schema="maml">
+  <!-- Updatable Help Version 5.0.0.0 -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Disable-ServerManagerStandardUserRemoting</command:name>
+      <maml:description>
+        <maml:para>Disables access for specified standard users to event, service, performance counter, and role and feature inventory data that is collected by Server Manager for a server. </maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Disable</command:verb>
+      <command:noun>ServerManagerStandardUserRemoting</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Disable-ServerManagerStandardUserRemoting cmdlet disables access for one or more standard, non-Administrator users to event, service, performance counter, and role and feature inventory data for a server that you are managing by using Server Manager. This cmdlet performs the opposite action, for specified users, of the Enable-ServerManagerStandardUserRemoting cmdlet. </maml:para>
+      <maml:para>The cmdlet restores the default, administrator-only access to this data, and must be run locally on the server that is being managed by using Server Manager. The cmdlet works by performing the following actions: 
+
+-- Deletes access rights for specified standard users to the root\cimv2 namespace on the local server (for access to role and feature inventory information). 
+-- Removes specified standard users from user groups (Remote Management Users, Event Log Readers, and Performance Log Readers) that allow remote access to event and performance counter logs on the local server. 
+-- Removes access rights in the Service Control Manager for specified standard users who have access to the status of services on the local server.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Disable-ServerManagerStandardUserRemoting</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of user account names of standard users who runs Server Manager, and no longer requires access to event, performance counter, service, and role and feature inventory data for a server that is being managed by using either a local or remote Server Manager console.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:description>
+            <maml:para>Forces the command to run without asking for user confirmation.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>WhatIf</maml:name>
+          <maml:description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:description>
+          <maml:para>Forces the command to run without asking for user confirmation.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>User</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of user account names of standard users who runs Server Manager, and no longer requires access to event, performance counter, service, and role and feature inventory data for a server that is being managed by using either a local or remote Server Manager console.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>false</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>false</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Disable access to event, performance counter, service status and role and feature inventory data for a user</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Disable-ServerManagerStandardUserRemoting -User "PattiFul"
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command disables access to event, performance counter, service status, and role and feature inventory data for a server that is being managed by using either a local or remote Server Manager console, and for which there is a standard user named PattiFul.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2: Simulate the outcome of disabling access to event, performance counter, service status and role and feature inventory data for a user</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Disable-ServerManagerStandardUserRemoting –User "EvanNar" -WhatIf
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command views the outcome of running a command to deny a standard user named EvanNar access to event, performance counter, service status, and role and feature inventory data for a server that is being managed by using the Server Manager console running on either the local or a remote computer. Because the WhatIf parameter is used, the command actions are not carried out.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 3: Disable access to event, performance counter, service status and role and feature inventory data for a user</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Disable-ServerManagerStandardUserRemoting –User "PattiFul" -Confirm
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command denies a standard user named PattiFul access to event, performance counter, service status, and role and feature inventory data for a server that is being managed by using the Server Manager console running on either the local or a remote computer. Because the Confirm parameter is used, the command prompts for confirmation before performing the action.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>
+        </maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-WindowsFeature</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Install-WindowsFeature</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Uninstall-WindowsFeature</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Enable-ServerManagerStandardUserRemoting</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Enable-ServerManagerStandardUserRemoting</command:name>
+      <maml:description>
+        <maml:para>Provides one or more standard, non-Administrator users access to event, service, performance counter, and role and feature inventory data for a server that you are managing by using Server Manager.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Enable</command:verb>
+      <command:noun>ServerManagerStandardUserRemoting</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Enable-ServerManagerStandardUserRemoting cmdlet provides one or more standard, non-Administrator users access to event, service, performance counter, and role and feature inventory data for a server that you are managing, either locally or remotely, by using Server Manager. The cmdlet must be run locally on the server that you are managing by using Server Manager. The cmdlet works by performing the following actions: 
+
+-- Adds access rights for specified standard users to the root\cimv2 namespace on the local server (for access to role and feature inventory information). 
+-- Adds specified standard users to required user groups (Remote Management Users, Event Log Readers, and Performance Log Readers) that allow remote access to event and performance counter logs on the managed server. 
+-- Changes access rights in the Service Control Manager to allow specified standard users remote access to the status of services on the managed server.This cmdlet does not provide standard users access to bpa (BPA) results, or allow standard users to run BPA scans. Aside from the preceding list of changes, this cmdlet provides no additional access that a standard user does not already have, by default, on managed servers.</maml:para>
+      <maml:para>Running this cmdlet has security implications for your network environment, because it grants specified non-Administrator users access rights to information that, by default, is restricted to members of the Administrators group on the local computer. The cmdlet provides access to other WMI providers in the root\cimv2 namespace, but only those providers that can be used by standard users. We recommend that you run this cmdlet only when you must add a specific standard user to the users who require access to remote server data by using Server Manager. Additionally, you should promptly run Disable-ServerManagerStandardUserRemoting to deny this access to users as soon as they no longer require it.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Enable-ServerManagerStandardUserRemoting</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of user account names of a standard user who runs Server Manager, and requires access to event, performance counter, service, and role and feature inventory data for remote servers that are managed by using the local Server Manager console.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Force</maml:name>
+          <maml:description>
+            <maml:para>Forces the command to run without asking for user confirmation.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>WhatIf</maml:name>
+          <maml:description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Force</maml:name>
+        <maml:description>
+          <maml:para>Forces the command to run without asking for user confirmation.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>User</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of user account names of a standard user who runs Server Manager, and requires access to event, performance counter, service, and role and feature inventory data for remote servers that are managed by using the local Server Manager console.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>false</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>false</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Enable access to event, performance counter, service status, and role and feature inventory data to a user</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Enable-ServerManagerStandardUserRemoting -User "PattiFul"
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command gives a standard user named PattiFul access to event, performance counter, service status, and role and feature inventory data on a server that is being managed, either locally or remotely, by using Server Manager.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2: Enable access to event, performance counter, service status, and role and feature inventory data to a user with confirmation</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Enable-ServerManagerStandardUserRemoting -User "PattiFul" -Confirm
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command gives a standard user named PattiFul access to event, performance counter, service status, and role and feature inventory data on a server that is being managed, either locally or remotely, by using Server Manager. Because the Confirm parameter is used, the command prompts for confirmation before performing the action.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>
+        </maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-WindowsFeature</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Install-WindowsFeature</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Uninstall-WindowsFeature</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Disable-ServerManagerStandardUserRemoting</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-WindowsFeature</command:name>
+      <maml:description>
+        <maml:para>Gets information about Windows Server roles, role services, and features that are available for installation and installed on a specified server.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>WindowsFeature</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-WindowsFeature cmdlet gets information about rrsandf_plural that are both available for installation and already installed on a computer that is running Windows Server 2012 R2 or an offline virtual hard disk (VHD) that is running Windows Server 2012 R2.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-WindowsFeature</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of command IDs of roles, role services, or features from which this cmdlet returns information.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="Cn">
+          <maml:name>ComputerName</maml:name>
+          <maml:description>
+            <maml:para>Specifies a list of available rrsandf_plural from the specified remote computer that is running Windows Server 2012 R2. The parameter accepts only one computer name. If this parameter is not added, or no computer name is specified, the default target is the local computer. Valid values for the parameter include a NetBIOS name, an IP address, or a fully qualified domain name (FQDN) of a remote computer.</maml:para>
+            <maml:para>To use a remote computer’s IP address as the value of this parameter, your command must include the Credential parameter. The computer must either be configured for HTTPS transport, or the IP address of the remote computer must be included in the WinRM TrustedHosts list on the local computer. For information about adding a computer name to the WinRM TrustedHosts list, see How to Add a Computer to the Trusted Host List in <maml:navigationLink><maml:linkText>about_Remote_Troubleshooting</maml:linkText><maml:uri></maml:uri></maml:navigationLink> (http://go.microsoft.com/fwlink/p/?LinkID=135188).</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>Specifies a user account that has access rights to perform this action. If the parameter is not added, or no value is specified, the default value of this parameter is the current user. Enter a user name in one of the following formats. Quotation marks are optional.</maml:para>
+            <maml:para> -- "UserName" </maml:para>
+            <maml:para> -- "Domain\User" </maml:para>
+            <maml:para> -- "User@Domain.com" </maml:para>
+            <maml:para> -- A Credential object returned by the <maml:navigationLink><maml:linkText>Get-Credential</maml:linkText><maml:uri></maml:uri></maml:navigationLink> cmdlet.</maml:para>
+            <maml:para>If a user name is entered, then a prompt for a password is displayed.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">PSCredential</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>LogPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a name and path to a log file. Use this parameter if the results of this cmdlet must be stored in a log.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Vhd</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to an offline virtual hard drive (VHD). The path can either point to a VHD file, or to a location on which the VHD is already mounted by using Deployment Image Servicing and Management (DISM) tools.</maml:para>
+            <maml:para>The VHD can be on a local disk on the target computer, or on a network shared folder. If the VHD is in a network shared folder, then the value of this parameter is a UNC path to the VHD. In this case, the computer account of the computer that you are using to mount the VHD must have read and write permissions (Read/Write permissions in the File Sharing dialog box, or Full Control on the Security tab of the folder Properties dialog box) on the shared folder, or the VHD will not be accessible. Local loopback UNC paths are not supported. Use either of the following formats for the computer account: DOMAIN\SERVERNAME$ or SERVERNAME$.</maml:para>
+            <maml:para>Add the ComputerName parameter to specify the target computer you want to use to mount the VHD. If the ComputerName parameter is not specified, then the local computer is used. The computer that you are using to mount the VHD must be running Windows Server 2012 R2. Any local path, such as D:\myFolder, that is specified by using this parameter is always relative to the target computer.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="Cn">
+        <maml:name>ComputerName</maml:name>
+        <maml:description>
+          <maml:para>Specifies a list of available rrsandf_plural from the specified remote computer that is running Windows Server 2012 R2. The parameter accepts only one computer name. If this parameter is not added, or no computer name is specified, the default target is the local computer. Valid values for the parameter include a NetBIOS name, an IP address, or a fully qualified domain name (FQDN) of a remote computer.</maml:para>
+          <maml:para>To use a remote computer’s IP address as the value of this parameter, your command must include the Credential parameter. The computer must either be configured for HTTPS transport, or the IP address of the remote computer must be included in the WinRM TrustedHosts list on the local computer. For information about adding a computer name to the WinRM TrustedHosts list, see How to Add a Computer to the Trusted Host List in <maml:navigationLink><maml:linkText>about_Remote_Troubleshooting</maml:linkText><maml:uri></maml:uri></maml:navigationLink> (http://go.microsoft.com/fwlink/p/?LinkID=135188).</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Credential</maml:name>
+        <maml:description>
+          <maml:para>Specifies a user account that has access rights to perform this action. If the parameter is not added, or no value is specified, the default value of this parameter is the current user. Enter a user name in one of the following formats. Quotation marks are optional.</maml:para>
+          <maml:para> -- "UserName" </maml:para>
+          <maml:para> -- "Domain\User" </maml:para>
+          <maml:para> -- "User@Domain.com" </maml:para>
+          <maml:para> -- A Credential object returned by the <maml:navigationLink><maml:linkText>Get-Credential</maml:linkText><maml:uri></maml:uri></maml:navigationLink> cmdlet.</maml:para>
+          <maml:para>If a user name is entered, then a prompt for a password is displayed.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">PSCredential</command:parameterValue>
+        <dev:type>
+          <maml:name>PSCredential</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>LogPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a name and path to a log file. Use this parameter if the results of this cmdlet must be stored in a log.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of command IDs of roles, role services, or features from which this cmdlet returns information.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Vhd</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path to an offline virtual hard drive (VHD). The path can either point to a VHD file, or to a location on which the VHD is already mounted by using Deployment Image Servicing and Management (DISM) tools.</maml:para>
+          <maml:para>The VHD can be on a local disk on the target computer, or on a network shared folder. If the VHD is in a network shared folder, then the value of this parameter is a UNC path to the VHD. In this case, the computer account of the computer that you are using to mount the VHD must have read and write permissions (Read/Write permissions in the File Sharing dialog box, or Full Control on the Security tab of the folder Properties dialog box) on the shared folder, or the VHD will not be accessible. Local loopback UNC paths are not supported. Use either of the following formats for the computer account: DOMAIN\SERVERNAME$ or SERVERNAME$.</maml:para>
+          <maml:para>Add the ComputerName parameter to specify the target computer you want to use to mount the VHD. If the ComputerName parameter is not specified, then the local computer is used. The computer that you are using to mount the VHD must be running Windows Server 2012 R2. Any local path, such as D:\myFolder, that is specified by using this parameter is always relative to the target computer.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Microsoft.Windows.ServerManager.Commands.Feature[]</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Get a list of features that are available and installed on the specified computer</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Get-WindowsFeature -ComputerName "Server1" -Credential "contoso.com\user1"
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets a list of features that are available and installed on the target computer named Server1. The credentials for user user1 in the Contoso.com domain, a user who has Administrator rights on Server1, are provided.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2: Get a list of features that is available and installed on the specified offline VHD</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Get-WindowsFeature -Vhd "D:\ps-test\vhd1.vhd"
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets a list of features that is available and installed on the specified offline VHD located at D:\ps-test\vhd1.vhd.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 3: Get a list of available and installed features by command ID</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Get-WindowsFeature -Name "AD*, Web*"
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets a list of available and installed features that have a command ID starting with AD or Web.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 4: Get a list of features that is installed on a specific server</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Get-WindowsFeature –ComputerName "Server01" | Where Installed
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets a list of features that is installed on the server named Server01.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 5: Get a list of features on a server that have installation files that are removed</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Get-WindowsFeature –ComputerName "Server01" | Where InstallState -Eq Removed
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command gets a list of features on the server named Server01 that have installation files removed from the local side-by-side store, and require an external file source for installation.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>
+        </maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Install-WindowsFeature</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Uninstall-WindowsFeature</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Enable-ServerManagerStandardUserRemoting</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Disable-ServerManagerStandardUserRemoting</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Install-WindowsFeature</command:name>
+      <maml:description>
+        <maml:para>Installs one or more roles, role services, or features on either the local or a specified remote server that is running Windows Server 2012 R2. </maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Install</command:verb>
+      <command:noun>WindowsFeature</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Install-WindowsFeature cmdlet installs the specified rrsandf_plural on a computer that is running Windows Server 2012 R2, or on an offline virtual hard disk (VHD) on which Windows Server 2012 R2 is installed. This cmdlet is equivalent to and replaces the Add-WindowsFeature cmdlet, the cmdlet that was used to install roles, role services, and features in Windows Server 2008 R2.This cmdlet works similarly to the arfw in Server Manager, with an important exception:  the cmdlet does not install management tools for rrsandf_plural by default. To install management tools such as snap-ins on a target server, you must add the IncludeManagementTools parameter to your command.</maml:para>
+      <maml:para>This cmdlet requires elevation; you must be running a Windows PowerShell session as an administrator to use this cmdlet.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Install-WindowsFeature</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>Specifies a list of features to install. This parameter does not support wildcard characters. If this parameter is specified, then the ConfigurationFilePath parameter cannot be used.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">Feature[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="Cn">
+          <maml:name>ComputerName</maml:name>
+          <maml:description>
+            <maml:para>Specifies a remote computer for which this cmdlet installs one or more available rrsandf_plural. This parameter accepts only one computer name. If this parameter is not added, or no computer name is specified, the default target is the local computer.</maml:para>
+            <maml:para>Valid values for the parameter include a NetBIOS name, an IP address, or a fully qualified domain name of a remote computer that is running Windows Server</maml:para>
+            <maml:para>To use an IP address of a remote computer as the value of this parameter, your command must include the Credential parameter. The computer must either be configured for HTTPS transport, or the IP address of the remote computer must be included in the WinRM TrustedHosts list on the local computer. For information about adding a computer name to the WinRM TrustedHosts list, see How to Add a Computer to the Trusted Host List in <maml:navigationLink><maml:linkText>about_Remote_Troubleshooting</maml:linkText><maml:uri></maml:uri></maml:navigationLink> (http://go.microsoft.com/fwlink/p/?LinkID=135188).</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>Specifies a user account that has access rights to perform this action. If the parameter is not added, or no value is specified, the default value of this parameter is the current user. Enter a user name in one of the following formats. Quotation marks are optional.</maml:para>
+            <maml:para>-- UserName </maml:para>
+            <maml:para>-- Domain\User</maml:para>
+            <maml:para>-- User@Domain.com </maml:para>
+            <maml:para>-- A Credential object returned by the Get-Credential cmdlet.</maml:para>
+            <maml:para>If a user name is entered, then a prompt for a password is displayed.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">PSCredential</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>IncludeAllSubFeature</maml:name>
+          <maml:description>
+            <maml:para>Indicates that the cmdlet installs all subordinate role services, and all subfeatures of parent roles, role services, or features specified by the Name parameter.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>IncludeManagementTools</maml:name>
+          <maml:description>
+            <maml:para>Indicates that the cmdlet installs all applicable management tools of the roles, role services, or features specified by the Name parameter. Although management tools are installed by default when you are installing features by using the arfw, management tools are not installed by default when you install features by using the Install-WindowsFeature cmdlet; this parameter must be added to install management tools.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>LogPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a name and path to a log file. Add this parameter if the results of your command must be stored in a log.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Restart</maml:name>
+          <maml:description>
+            <maml:para>Indicates that cmdlet automatically restarts the target computer if a restart is required by the installation process for the specified roles or features. This parameter cannot be used with the Vhd parameter.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Source</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to feature files, if the files are not available in the local feature store of the target computer or VHD. Valid values for this parameter are either a network path or the path to a Windows image file (WIM). If you are installing roles or features on an offline VHD, you must use a mounted WIM. It is not necessary to mount the WIM file for installing on a running physical computer, because a WIM is mounted internally for deployments to a physical computer. Specify the path by using a local relative path, or by using built-in environment variables that are prefixed with the $env tag as shown in the following examples.</maml:para>
+            <maml:para>The path specified in this parameter is only used if the command cannot find feature files in the local side-by-side store of the specified target computer or VHD. The command searches for feature files in the following order:</maml:para>
+            <maml:para>-- On the target computer or offline VHD. </maml:para>
+            <maml:para>-- Path specified as the value of this parameter. If you add a Universal Naming Convention (UNC) path, verify that the computer account of the target server has Read permissions on the share. The computer account should be in one of the following formats: DOMAIN\SERVERNAME$ or SERVER$</maml:para>
+            <maml:para>-- Repository path specified by the Group Policy Object (GPO), Specify settings for optional component installation and component repair, located in Computer Configuration/Administrative Templates/System in Local Group Policy Editor. This Group Policy setting controls the following Windows Registry setting: HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Servicing\LocalSourcePath. </maml:para>
+            <maml:para>-- Windows Update.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>WhatIf</maml:name>
+          <maml:description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Install-WindowsFeature</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="Cn">
+          <maml:name>ComputerName</maml:name>
+          <maml:description>
+            <maml:para>Specifies a remote computer for which this cmdlet installs one or more available rrsandf_plural. This parameter accepts only one computer name. If this parameter is not added, or no computer name is specified, the default target is the local computer.</maml:para>
+            <maml:para>Valid values for the parameter include a NetBIOS name, an IP address, or a fully qualified domain name of a remote computer that is running Windows Server</maml:para>
+            <maml:para>To use an IP address of a remote computer as the value of this parameter, your command must include the Credential parameter. The computer must either be configured for HTTPS transport, or the IP address of the remote computer must be included in the WinRM TrustedHosts list on the local computer. For information about adding a computer name to the WinRM TrustedHosts list, see How to Add a Computer to the Trusted Host List in <maml:navigationLink><maml:linkText>about_Remote_Troubleshooting</maml:linkText><maml:uri></maml:uri></maml:navigationLink> (http://go.microsoft.com/fwlink/p/?LinkID=135188).</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>Specifies a user account that has access rights to perform this action. If the parameter is not added, or no value is specified, the default value of this parameter is the current user. Enter a user name in one of the following formats. Quotation marks are optional.</maml:para>
+            <maml:para>-- UserName </maml:para>
+            <maml:para>-- Domain\User</maml:para>
+            <maml:para>-- User@Domain.com </maml:para>
+            <maml:para>-- A Credential object returned by the Get-Credential cmdlet.</maml:para>
+            <maml:para>If a user name is entered, then a prompt for a password is displayed.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">PSCredential</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>LogPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a name and path to a log file. Add this parameter if the results of your command must be stored in a log.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Restart</maml:name>
+          <maml:description>
+            <maml:para>Indicates that cmdlet automatically restarts the target computer if a restart is required by the installation process for the specified roles or features. This parameter cannot be used with the Vhd parameter.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Source</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to feature files, if the files are not available in the local feature store of the target computer or VHD. Valid values for this parameter are either a network path or the path to a Windows image file (WIM). If you are installing roles or features on an offline VHD, you must use a mounted WIM. It is not necessary to mount the WIM file for installing on a running physical computer, because a WIM is mounted internally for deployments to a physical computer. Specify the path by using a local relative path, or by using built-in environment variables that are prefixed with the $env tag as shown in the following examples.</maml:para>
+            <maml:para>The path specified in this parameter is only used if the command cannot find feature files in the local side-by-side store of the specified target computer or VHD. The command searches for feature files in the following order:</maml:para>
+            <maml:para>-- On the target computer or offline VHD. </maml:para>
+            <maml:para>-- Path specified as the value of this parameter. If you add a Universal Naming Convention (UNC) path, verify that the computer account of the target server has Read permissions on the share. The computer account should be in one of the following formats: DOMAIN\SERVERNAME$ or SERVER$</maml:para>
+            <maml:para>-- Repository path specified by the Group Policy Object (GPO), Specify settings for optional component installation and component repair, located in Computer Configuration/Administrative Templates/System in Local Group Policy Editor. This Group Policy setting controls the following Windows Registry setting: HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Servicing\LocalSourcePath. </maml:para>
+            <maml:para>-- Windows Update.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Vhd</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to an offline VHD. The path can either point to a VHD file, or to a location on which the VHD is already mounted by using Deployment Image Servicing and Management (DISM) tools.</maml:para>
+            <maml:para>The VHD can be on a local disk on the target computer, or on a network shared folder. If the VHD is in a network shared folder, then the value of this parameter is a UNC path to the VHD. In this case, the computer account of the computer that you are using to mount the VHD must have read and write permissions (Read/Write permissions in the File Sharing dialog box, or Full Control on the Security tab of the folder Properties dialog box) on the shared folder, or the VHD will not be accessible. Local loopback UNC paths are not supported. Use either of the following formats for the computer account:  DOMAIN\SERVERNAME$ or SERVERNAME$.</maml:para>
+            <maml:para>Add the ComputerName parameter to specify the target computer you want to use to mount the VHD. If the ComputerName parameter is not specified, then the local computer is used. The computer that you are using to mount the VHD must be running Windows Server 2012 R2. Any local path, such as D:\myFolder, that is specified by using this parameter is always relative to the target computer.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>ConfigurationFilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a single path to a configuration file which specifies roles and features to be installed, and any configuration parameters needed. The path can be specified by using a local relative path or by using built-in environment variables prefixed with the $env tag (such as $env:systemdrive\filename). A configuration file can be generated by running the arfw in Server Manager.</maml:para>
+            <maml:para>If this parameter is specified, then the Name parameter cannot be used.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>WhatIf</maml:name>
+          <maml:description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Install-WindowsFeature</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>Specifies a list of features to install. This parameter does not support wildcard characters. If this parameter is specified, then the ConfigurationFilePath parameter cannot be used.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">Feature[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="Cn">
+          <maml:name>ComputerName</maml:name>
+          <maml:description>
+            <maml:para>Specifies a remote computer for which this cmdlet installs one or more available rrsandf_plural. This parameter accepts only one computer name. If this parameter is not added, or no computer name is specified, the default target is the local computer.</maml:para>
+            <maml:para>Valid values for the parameter include a NetBIOS name, an IP address, or a fully qualified domain name of a remote computer that is running Windows Server</maml:para>
+            <maml:para>To use an IP address of a remote computer as the value of this parameter, your command must include the Credential parameter. The computer must either be configured for HTTPS transport, or the IP address of the remote computer must be included in the WinRM TrustedHosts list on the local computer. For information about adding a computer name to the WinRM TrustedHosts list, see How to Add a Computer to the Trusted Host List in <maml:navigationLink><maml:linkText>about_Remote_Troubleshooting</maml:linkText><maml:uri></maml:uri></maml:navigationLink> (http://go.microsoft.com/fwlink/p/?LinkID=135188).</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Credential</maml:name>
+          <maml:description>
+            <maml:para>Specifies a user account that has access rights to perform this action. If the parameter is not added, or no value is specified, the default value of this parameter is the current user. Enter a user name in one of the following formats. Quotation marks are optional.</maml:para>
+            <maml:para>-- UserName </maml:para>
+            <maml:para>-- Domain\User</maml:para>
+            <maml:para>-- User@Domain.com </maml:para>
+            <maml:para>-- A Credential object returned by the Get-Credential cmdlet.</maml:para>
+            <maml:para>If a user name is entered, then a prompt for a password is displayed.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">PSCredential</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>IncludeAllSubFeature</maml:name>
+          <maml:description>
+            <maml:para>Indicates that the cmdlet installs all subordinate role services, and all subfeatures of parent roles, role services, or features specified by the Name parameter.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>IncludeManagementTools</maml:name>
+          <maml:description>
+            <maml:para>Indicates that the cmdlet installs all applicable management tools of the roles, role services, or features specified by the Name parameter. Although management tools are installed by default when you are installing features by using the arfw, management tools are not installed by default when you install features by using the Install-WindowsFeature cmdlet; this parameter must be added to install management tools.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>LogPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies a name and path to a log file. Add this parameter if the results of your command must be stored in a log.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Source</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to feature files, if the files are not available in the local feature store of the target computer or VHD. Valid values for this parameter are either a network path or the path to a Windows image file (WIM). If you are installing roles or features on an offline VHD, you must use a mounted WIM. It is not necessary to mount the WIM file for installing on a running physical computer, because a WIM is mounted internally for deployments to a physical computer. Specify the path by using a local relative path, or by using built-in environment variables that are prefixed with the $env tag as shown in the following examples.</maml:para>
+            <maml:para>The path specified in this parameter is only used if the command cannot find feature files in the local side-by-side store of the specified target computer or VHD. The command searches for feature files in the following order:</maml:para>
+            <maml:para>-- On the target computer or offline VHD. </maml:para>
+            <maml:para>-- Path specified as the value of this parameter. If you add a Universal Naming Convention (UNC) path, verify that the computer account of the target server has Read permissions on the share. The computer account should be in one of the following formats: DOMAIN\SERVERNAME$ or SERVER$</maml:para>
+            <maml:para>-- Repository path specified by the Group Policy Object (GPO), Specify settings for optional component installation and component repair, located in Computer Configuration/Administrative Templates/System in Local Group Policy Editor. This Group Policy setting controls the following Windows Registry setting: HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Servicing\LocalSourcePath. </maml:para>
+            <maml:para>-- Windows Update.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Vhd</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path to an offline VHD. The path can either point to a VHD file, or to a location on which the VHD is already mounted by using Deployment Image Servicing and Management (DISM) tools.</maml:para>
+            <maml:para>The VHD can be on a local disk on the target computer, or on a network shared folder. If the VHD is in a network shared folder, then the value of this parameter is a UNC path to the VHD. In this case, the computer account of the computer that you are using to mount the VHD must have read and write permissions (Read/Write permissions in the File Sharing dialog box, or Full Control on the Security tab of the folder Properties dialog box) on the shared folder, or the VHD will not be accessible. Local loopback UNC paths are not supported. Use either of the following formats for the computer account:  DOMAIN\SERVERNAME$ or SERVERNAME$.</maml:para>
+            <maml:para>Add the ComputerName parameter to specify the target computer you want to use to mount the VHD. If the ComputerName parameter is not specified, then the local computer is used. The computer that you are using to mount the VHD must be running Windows Server 2012 R2. Any local path, such as D:\myFolder, that is specified by using this parameter is always relative to the target computer.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>Confirm</maml:name>
+          <maml:description>
+            <maml:para>Prompts you for confirmation before running the cmdlet.Prompts you for confirmation before running the cmdlet.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+          <maml:name>WhatIf</maml:name>
+          <maml:description>
+            <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="Cn">
+        <maml:name>ComputerName</maml:name>
+        <maml:description>
+          <maml:para>Specifies a remote computer for which this cmdlet installs one or more available rrsandf_plural. This parameter accepts only one computer name. If this parameter is not added, or no computer name is specified, the default target is the local computer.</maml:para>
+          <maml:para>Valid values for the parameter include a NetBIOS name, an IP address, or a fully qualified domain name of a remote computer that is running Windows Server</maml:para>
+          <maml:para>To use an IP address of a remote computer as the value of this parameter, your command must include the Credential parameter. The computer must either be configured for HTTPS transport, or the IP address of the remote computer must be included in the WinRM TrustedHosts list on the local computer. For information about adding a computer name to the WinRM TrustedHosts list, see How to Add a Computer to the Trusted Host List in <maml:navigationLink><maml:linkText>about_Remote_Troubleshooting</maml:linkText><maml:uri></maml:uri></maml:navigationLink> (http://go.microsoft.com/fwlink/p/?LinkID=135188).</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>ConfigurationFilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a single path to a configuration file which specifies roles and features to be installed, and any configuration parameters needed. The path can be specified by using a local relative path or by using built-in environment variables prefixed with the $env tag (such as $env:systemdrive\filename). A configuration file can be generated by running the arfw in Server Manager.</maml:para>
+          <maml:para>If this parameter is specified, then the Name parameter cannot be used.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Credential</maml:name>
+        <maml:description>
+          <maml:para>Specifies a user account that has access rights to perform this action. If the parameter is not added, or no value is specified, the default value of this parameter is the current user. Enter a user name in one of the following formats. Quotation marks are optional.</maml:para>
+          <maml:para>-- UserName </maml:para>
+          <maml:para>-- Domain\User</maml:para>
+          <maml:para>-- User@Domain.com </maml:para>
+          <maml:para>-- A Credential object returned by the Get-Credential cmdlet.</maml:para>
+          <maml:para>If a user name is entered, then a prompt for a password is displayed.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">PSCredential</command:parameterValue>
+        <dev:type>
+          <maml:name>PSCredential</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>IncludeAllSubFeature</maml:name>
+        <maml:description>
+          <maml:para>Indicates that the cmdlet installs all subordinate role services, and all subfeatures of parent roles, role services, or features specified by the Name parameter.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>IncludeManagementTools</maml:name>
+        <maml:description>
+          <maml:para>Indicates that the cmdlet installs all applicable management tools of the roles, role services, or features specified by the Name parameter. Although management tools are installed by default when you are installing features by using the arfw, management tools are not installed by default when you install features by using the Install-WindowsFeature cmdlet; this parameter must be added to install management tools.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>LogPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies a name and path to a log file. Add this parameter if the results of your command must be stored in a log.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>Specifies a list of features to install. This parameter does not support wildcard characters. If this parameter is specified, then the ConfigurationFilePath parameter cannot be used.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">Feature[]</command:parameterValue>
+        <dev:type>
+          <maml:name>Feature[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Restart</maml:name>
+        <maml:description>
+          <maml:para>Indicates that cmdlet automatically restarts the target computer if a restart is required by the installation process for the specified roles or features. This parameter cannot be used with the Vhd parameter.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Source</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path to feature files, if the files are not available in the local feature store of the target computer or VHD. Valid values for this parameter are either a network path or the path to a Windows image file (WIM). If you are installing roles or features on an offline VHD, you must use a mounted WIM. It is not necessary to mount the WIM file for installing on a running physical computer, because a WIM is mounted internally for deployments to a physical computer. Specify the path by using a local relative path, or by using built-in environment variables that are prefixed with the $env tag as shown in the following examples.</maml:para>
+          <maml:para>The path specified in this parameter is only used if the command cannot find feature files in the local side-by-side store of the specified target computer or VHD. The command searches for feature files in the following order:</maml:para>
+          <maml:para>-- On the target computer or offline VHD. </maml:para>
+          <maml:para>-- Path specified as the value of this parameter. If you add a Universal Naming Convention (UNC) path, verify that the computer account of the target server has Read permissions on the share. The computer account should be in one of the following formats: DOMAIN\SERVERNAME$ or SERVER$</maml:para>
+          <maml:para>-- Repository path specified by the Group Policy Object (GPO), Specify settings for optional component installation and component repair, located in Computer Configuration/Administrative Templates/System in Local Group Policy Editor. This Group Policy setting controls the following Windows Registry setting: HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Servicing\LocalSourcePath. </maml:para>
+          <maml:para>-- Windows Update.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Vhd</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path to an offline VHD. The path can either point to a VHD file, or to a location on which the VHD is already mounted by using Deployment Image Servicing and Management (DISM) tools.</maml:para>
+          <maml:para>The VHD can be on a local disk on the target computer, or on a network shared folder. If the VHD is in a network shared folder, then the value of this parameter is a UNC path to the VHD. In this case, the computer account of the computer that you are using to mount the VHD must have read and write permissions (Read/Write permissions in the File Sharing dialog box, or Full Control on the Security tab of the folder Properties dialog box) on the shared folder, or the VHD will not be accessible. Local loopback UNC paths are not supported. Use either of the following formats for the computer account:  DOMAIN\SERVERNAME$ or SERVERNAME$.</maml:para>
+          <maml:para>Add the ComputerName parameter to specify the target computer you want to use to mount the VHD. If the ComputerName parameter is not specified, then the local computer is used. The computer that you are using to mount the VHD must be running Windows Server 2012 R2. Any local path, such as D:\myFolder, that is specified by using this parameter is always relative to the target computer.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts you for confirmation before running the cmdlet.Prompts you for confirmation before running the cmdlet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>false</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>false</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+      <command:inputType>
+        <dev:type>
+          <maml:name>Microsoft.Windows.ServerManager.Commands.Feature[]</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Microsoft.Windows.ServerManager.Commands.FeatureOperationResult</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Install IIS, including all role services and applicable management tools on the specified computer</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Install-WindowsFeature -Name "Web-Server" -IncludeAllSubFeature -IncludeManagementTools -ComputerName "Server1" -Credential "contoso.com\PattiFul"
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command installs Web Server (IIS), including all role services and applicable management tools, on a computer named Server1, by using the credentials of a user account named contoso.com\PattiFul.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2: Install all role services and applicable management tools from a configuration file to the default computer</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Install-WindowsFeature -ConfigurationFilePath "d:\ConfigurationFiles\ADCSConfigFile.xml"
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command installs all roles, role services and features that are specified in a configuration file named ADCSConfigFile.xml. The configuration file was created by clicking Export configuration settings on the Confirm installation selections page of the arfw in Server Manager.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 3: Install AD CS, as specified, from a configuration file to a list of computers</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; $Servers = ('server1', 'server2')
+PS C:\&gt; foreach ($Server in $Servers) {Install-WindowsFeature -ConfigurationFilePath D:\ConfigurationFiles\ADCSConfigFile.xml -ComputerName $Server}
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command installs Active Directory Certificate Services (AD CS) as specified in a configuration file named ADCSConfigFile.xml. AD CS is installed on a list of computers that is contained in the variable $Servers. The configuration file was created by clicking Export configuration settings on the Confirm installation selections page of the arfw in Server Manager. On the first line, the value of the $Servers variable is set; on the second line, the installation instructions in the ADCSConfigFile.xml configuration file are applied to each of the servers that has been named in $Servers.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 4: Get a list of Windows features using a search string then pipe the results to Install-WindowsFeatures</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Get-WindowsFeature –Name "Web-*" | Install-WindowsFeature
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command retrieves a list of all Windows features beginning with the characters Web, and then pipes the resulting list to Install-WindowsFeature. The result of this cmdlet is all features that start with Web are installed on the local computer.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 5: Install IIS to the local computer specifying a folder that contains the feature files</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt; Install-WindowsFeature -Name "Web-Server" -Source "\\server2\winsxs"
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command installs Web Server (IIS) on the local computer, specifying that the source of feature files for the installation is a folder, winsxs, on a computer named Server2. The computer account of the local computer must have Read permissions on the specified share.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>
+        </maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-WindowsFeature</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Uninstall-WindowsFeature</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Enable-ServerManagerStandardUserRemoting</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Disable-ServerManagerStandardUserRemoting</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Windows PowerShell® is a task-based command-line shell and scripting language designed especially for system administration. This reference content for the information technology (IT) professional provides help for running Windows PowerShell cmdlets to script and automate tasks.</maml:para>
+  <maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">To download the most current Windows PowerShell console help for this cmdlet module, run Update-Help -Module ServerManager in an elevated (Run as Administrator) Windows PowerShell session.</maml:para>
+  <maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">All cmdlets in this module require elevation.</maml:para>Server Manager role and feature deployment<maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">This reference provides cmdlet descriptions and syntax for all Server Manager role and feature deployment cmdlets, and for the cmdlets that control standard user access to data in Server Manager. It lists the cmdlets in alphabetical order, based on the verb at the beginning of the cmdlet.</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Cmdlet</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Description</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Enable-ServerManagerStandardUserRemoting</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Provides one or more standard, non-Administrator users access to event, service, performance counter, and role and feature inventory data for a remote server that you are managing by using Server Manager.</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Disable-ServerManagerStandardUserRemoting</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Disables access for specified standard users to event, service, performance counter, and role and feature inventory data that is collected by Server Manager for a remote server. This cmdlet performs the opposite action, for specified users, of the Enable-ServerManagerStandardUserRemoting cmdlet.</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Get-WindowsFeature</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Gets information about Windows Server rrsandf_plural that are available for installation and installed on a specified server.</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Install-WindowsFeature</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Installs one or more Windows Server rrsandf_plural on either the local or a specified remote server that is running Windows Server 2012 R2. </maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Uninstall-WindowsFeature</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Uninstalls specified Windows Server rrsandf_plural from a computer. By adding the Remove parameter, also deletes feature files, or payload, from a computer. </maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">To list all cmdlets that are available in this module, run Get-Command –Module ServerManager.</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">For more information about or for the syntax of any cmdlet, run Get-Help &lt;cmdlet name&gt;, where &lt;cmdlet name&gt; represents the name of the cmdlet about which you want more information. For more detailed information, run any of the following cmdlets, after running Update-Help.</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Get-Help &lt;cmdlet name&gt; -Detailed</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Get-Help &lt;cmdlet name&gt; -Examples</maml:para><maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">Get-Help &lt;cmdlet name&gt; -Full</maml:para>More information<maml:para xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">For more information about using the Server Manager deployment cmdlets, see <maml:navigationLink><maml:linkText>Install or Uninstall Roles, Role Services, or Features</maml:linkText><maml:uri></maml:uri></maml:navigationLink>.  For more information about managing standard users, see <maml:navigationLink><maml:linkText>Managing Standard User Access to Data in Server Manager</maml:linkText><maml:uri></maml:uri></maml:navigationLink>.</maml:para><command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp"><command:details><command:name>Uninstall-WindowsFeature</command:name><maml:description><maml:para>Uninstalls specified Windows Server roles, role services, and features from a computer that is running Windows Server 2012 R2. </maml:para></maml:description><maml:copyright><maml:para /></maml:copyright><command:verb>Uninstall</command:verb><command:noun>WindowsFeature</command:noun><dev:version /></command:details><maml:description><maml:para>The Uninstall-WindowsFeature cmdlet uninstalls and optionally removes specified roles, role services, and features from a computer that is running Windows Server 2012 R2, or from an offline virtual hard disk (VHD) on which Windows Server 2012 R2 is installed. By adding the Remove parameter, the cmdlet also uninstalls feature files, or payload, from a computer. This cmdlet replaces the Remove-WindowsFeature cmdlet that was used to uninstall roles, role services, and features in Windows Server 2008 R2.This cmdlet works similarly to the rrfw in Server Manager, with an important exception: by default, management tools are not uninstalled when you run the Uninstall-WindowsFeature cmdlet; you must add the IncludeManagementTools parameter to uninstall associated management tools.</maml:para><maml:para>This cmdlet requires elevation; you must be running a Windows PowerShell session as an administrator to use this cmdlet.</maml:para></maml:description><command:syntax><command:syntaxItem><maml:name>Uninstall-WindowsFeature</maml:name><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none"><maml:name>Name</maml:name><maml:description><maml:para>Specifies a list of features that this cmdlet uninstalls. This parameter does not support wildcard characters.</maml:para></maml:description><command:parameterValue required="true" variableLength="true">Feature[]</command:parameterValue></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="Cn"><maml:name>ComputerName</maml:name><maml:description><maml:para>Specifies the remote computer for which this cmdlet uninstalls and optionally removes one or more rrsandf_plural. This parameter accepts only one computer name. If this parameter is not added, or no computer name is specified, the default target is the local computer. </maml:para><maml:para>Valid values for the parameter include a NetBIOS name, an IP address, or a fully qualified domain name of a remote computer that is running Windows Server.</maml:para><maml:para>To use an IP address of a remote computer as the value of this parameter, your command must include the Credential parameter. The computer must either be configured for HTTPS transport, or the IP address of the remote computer must be included in the WinRM TrustedHosts list on the local computer. For information about adding a computer name to the WinRM TrustedHosts list, see How to Add a Computer to the Trusted Host List in <maml:navigationLink><maml:linkText>about_Remote_Troubleshooting</maml:linkText><maml:uri></maml:uri></maml:navigationLink> (http://go.microsoft.com/fwlink/p/?LinkId=135188).</maml:para></maml:description><command:parameterValue required="false" variableLength="false">String</command:parameterValue></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>Credential</maml:name><maml:description><maml:para>Specifies a user account that has access rights to perform this action. If the parameter is not added, or no value is specified, the default value of this parameter is the current user. Enter a user name in one of the following formats:</maml:para><maml:para> -- UserName </maml:para><maml:para> -- Domain\User </maml:para><maml:para> -- User@Domain.com </maml:para><maml:para> -- A Credential object returned by the Get-Credential cmdlet.</maml:para><maml:para>If a user name is entered, then a prompt for a password is displayed.</maml:para></maml:description><command:parameterValue required="false" variableLength="false">PSCredential</command:parameterValue></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>IncludeManagementTools</maml:name><maml:description><maml:para>Indicates that the cmdlet uninstalls all applicable management tools along with the roles, role services, or features that are specified in the Name parameter. By default, management tools are not uninstalled when you run the Uninstall-WindowsFeature cmdlet; you must add this parameter to uninstall associated management tools.</maml:para></maml:description></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>LogPath</maml:name><maml:description><maml:para>Specifies a name and path to a log file. Add this parameter if the results of this cmdlet must be stored in a log.</maml:para></maml:description><command:parameterValue required="false" variableLength="false">String</command:parameterValue></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>Remove</maml:name><maml:description><maml:para>Indicates that the cmdlet deletes feature files for the specified rrsandf_plural from the side-by-side store, located at %SystemDrive%:\Windows\WinSxS. If the feature is not yet uninstalled, the command uninstalls the feature.</maml:para><maml:para>When you delete feature files, features that depend upon the files you remove are also deleted. When you delete feature files for a subfeature, and no other subfeatures for the parent feature are installed, then files for the entire parent role or feature are deleted.</maml:para></maml:description></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>Restart</maml:name><maml:description><maml:para>Indicates that this cmdlet automatically restarts the target computer, if a restart is required by the uninstallation process for the specified roles or features. This parameter cannot be used with the Vhd parameter.</maml:para></maml:description></command:parameter><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named"><maml:name>Confirm</maml:name><maml:description><maml:para>Prompts you for confirmation before running the cmdlet.Prompts you for confirmation before running the cmdlet.</maml:para></maml:description></command:parameter><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named"><maml:name>WhatIf</maml:name><maml:description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para></maml:description></command:parameter></command:syntaxItem><command:syntaxItem><maml:name>Uninstall-WindowsFeature</maml:name><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none"><maml:name>Name</maml:name><maml:description><maml:para>Specifies a list of features that this cmdlet uninstalls. This parameter does not support wildcard characters.</maml:para></maml:description><command:parameterValue required="true" variableLength="true">Feature[]</command:parameterValue></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="Cn"><maml:name>ComputerName</maml:name><maml:description><maml:para>Specifies the remote computer for which this cmdlet uninstalls and optionally removes one or more rrsandf_plural. This parameter accepts only one computer name. If this parameter is not added, or no computer name is specified, the default target is the local computer. </maml:para><maml:para>Valid values for the parameter include a NetBIOS name, an IP address, or a fully qualified domain name of a remote computer that is running Windows Server.</maml:para><maml:para>To use an IP address of a remote computer as the value of this parameter, your command must include the Credential parameter. The computer must either be configured for HTTPS transport, or the IP address of the remote computer must be included in the WinRM TrustedHosts list on the local computer. For information about adding a computer name to the WinRM TrustedHosts list, see How to Add a Computer to the Trusted Host List in <maml:navigationLink><maml:linkText>about_Remote_Troubleshooting</maml:linkText><maml:uri></maml:uri></maml:navigationLink> (http://go.microsoft.com/fwlink/p/?LinkId=135188).</maml:para></maml:description><command:parameterValue required="false" variableLength="false">String</command:parameterValue></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>Credential</maml:name><maml:description><maml:para>Specifies a user account that has access rights to perform this action. If the parameter is not added, or no value is specified, the default value of this parameter is the current user. Enter a user name in one of the following formats:</maml:para><maml:para> -- UserName </maml:para><maml:para> -- Domain\User </maml:para><maml:para> -- User@Domain.com </maml:para><maml:para> -- A Credential object returned by the Get-Credential cmdlet.</maml:para><maml:para>If a user name is entered, then a prompt for a password is displayed.</maml:para></maml:description><command:parameterValue required="false" variableLength="false">PSCredential</command:parameterValue></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>IncludeManagementTools</maml:name><maml:description><maml:para>Indicates that the cmdlet uninstalls all applicable management tools along with the roles, role services, or features that are specified in the Name parameter. By default, management tools are not uninstalled when you run the Uninstall-WindowsFeature cmdlet; you must add this parameter to uninstall associated management tools.</maml:para></maml:description></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>LogPath</maml:name><maml:description><maml:para>Specifies a name and path to a log file. Add this parameter if the results of this cmdlet must be stored in a log.</maml:para></maml:description><command:parameterValue required="false" variableLength="false">String</command:parameterValue></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>Remove</maml:name><maml:description><maml:para>Indicates that the cmdlet deletes feature files for the specified rrsandf_plural from the side-by-side store, located at %SystemDrive%:\Windows\WinSxS. If the feature is not yet uninstalled, the command uninstalls the feature.</maml:para><maml:para>When you delete feature files, features that depend upon the files you remove are also deleted. When you delete feature files for a subfeature, and no other subfeatures for the parent feature are installed, then files for the entire parent role or feature are deleted.</maml:para></maml:description></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>Vhd</maml:name><maml:description><maml:para>Specifies the path to an offline VHD. The path can either point to a VHD file, or to a location on which the VHD is already mounted by using Deployment Image Servicing and Management (DISM) tools.</maml:para><maml:para>The VHD can be on a local disk on the target computer, or on a network shared folder. If the VHD is in a network shared folder, then the value of this parameter is a UNC path to the VHD. In this case, the computer account of the computer that you are using to mount the VHD must have read and write permissions (Read/Write permissions in the File Sharing dialog box, or Full Control on the Security tab of the folder Properties dialog box) on the shared folder, or the VHD will not be accessible. Local loopback Universal Naming Convention (UNC) paths are not supported. Use either of the following formats for the computer account:  DOMAIN\SERVERNAME$ or SERVERNAME$.</maml:para><maml:para>Use the ComputerName parameter to specify the target computer you want to use to mount the VHD. If the ComputerName parameter is not specified, then the local computer is used. The computer that you are using to mount the VHD must be running Windows Server 2012 R2. Any local path, such as D:\myFolder, that is specified by using this parameter is always relative to the target computer.</maml:para></maml:description><command:parameterValue required="false" variableLength="false">String</command:parameterValue></command:parameter><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named"><maml:name>Confirm</maml:name><maml:description><maml:para>Prompts you for confirmation before running the cmdlet.Prompts you for confirmation before running the cmdlet.</maml:para></maml:description></command:parameter><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named"><maml:name>WhatIf</maml:name><maml:description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para></maml:description></command:parameter></command:syntaxItem></command:syntax><command:parameters><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="Cn"><maml:name>ComputerName</maml:name><maml:description><maml:para>Specifies the remote computer for which this cmdlet uninstalls and optionally removes one or more rrsandf_plural. This parameter accepts only one computer name. If this parameter is not added, or no computer name is specified, the default target is the local computer. </maml:para><maml:para>Valid values for the parameter include a NetBIOS name, an IP address, or a fully qualified domain name of a remote computer that is running Windows Server.</maml:para><maml:para>To use an IP address of a remote computer as the value of this parameter, your command must include the Credential parameter. The computer must either be configured for HTTPS transport, or the IP address of the remote computer must be included in the WinRM TrustedHosts list on the local computer. For information about adding a computer name to the WinRM TrustedHosts list, see How to Add a Computer to the Trusted Host List in <maml:navigationLink><maml:linkText>about_Remote_Troubleshooting</maml:linkText><maml:uri></maml:uri></maml:navigationLink> (http://go.microsoft.com/fwlink/p/?LinkId=135188).</maml:para></maml:description><command:parameterValue required="false" variableLength="false">String</command:parameterValue><dev:type><maml:name>String</maml:name><maml:uri /></dev:type><dev:defaultValue>none</dev:defaultValue></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>Credential</maml:name><maml:description><maml:para>Specifies a user account that has access rights to perform this action. If the parameter is not added, or no value is specified, the default value of this parameter is the current user. Enter a user name in one of the following formats:</maml:para><maml:para> -- UserName </maml:para><maml:para> -- Domain\User </maml:para><maml:para> -- User@Domain.com </maml:para><maml:para> -- A Credential object returned by the Get-Credential cmdlet.</maml:para><maml:para>If a user name is entered, then a prompt for a password is displayed.</maml:para></maml:description><command:parameterValue required="false" variableLength="false">PSCredential</command:parameterValue><dev:type><maml:name>PSCredential</maml:name><maml:uri /></dev:type><dev:defaultValue>none</dev:defaultValue></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>IncludeManagementTools</maml:name><maml:description><maml:para>Indicates that the cmdlet uninstalls all applicable management tools along with the roles, role services, or features that are specified in the Name parameter. By default, management tools are not uninstalled when you run the Uninstall-WindowsFeature cmdlet; you must add this parameter to uninstall associated management tools.</maml:para></maml:description><command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name><maml:uri /></dev:type><dev:defaultValue>none</dev:defaultValue></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>LogPath</maml:name><maml:description><maml:para>Specifies a name and path to a log file. Add this parameter if the results of this cmdlet must be stored in a log.</maml:para></maml:description><command:parameterValue required="false" variableLength="false">String</command:parameterValue><dev:type><maml:name>String</maml:name><maml:uri /></dev:type><dev:defaultValue>none</dev:defaultValue></command:parameter><command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="1" aliases="none"><maml:name>Name</maml:name><maml:description><maml:para>Specifies a list of features that this cmdlet uninstalls. This parameter does not support wildcard characters.</maml:para></maml:description><command:parameterValue required="true" variableLength="true">Feature[]</command:parameterValue><dev:type><maml:name>Feature[]</maml:name><maml:uri /></dev:type><dev:defaultValue>none</dev:defaultValue></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>Remove</maml:name><maml:description><maml:para>Indicates that the cmdlet deletes feature files for the specified rrsandf_plural from the side-by-side store, located at %SystemDrive%:\Windows\WinSxS. If the feature is not yet uninstalled, the command uninstalls the feature.</maml:para><maml:para>When you delete feature files, features that depend upon the files you remove are also deleted. When you delete feature files for a subfeature, and no other subfeatures for the parent feature are installed, then files for the entire parent role or feature are deleted.</maml:para></maml:description><command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name><maml:uri /></dev:type><dev:defaultValue>none</dev:defaultValue></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>Restart</maml:name><maml:description><maml:para>Indicates that this cmdlet automatically restarts the target computer, if a restart is required by the uninstallation process for the specified roles or features. This parameter cannot be used with the Vhd parameter.</maml:para></maml:description><command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name><maml:uri /></dev:type><dev:defaultValue>none</dev:defaultValue></command:parameter><command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none"><maml:name>Vhd</maml:name><maml:description><maml:para>Specifies the path to an offline VHD. The path can either point to a VHD file, or to a location on which the VHD is already mounted by using Deployment Image Servicing and Management (DISM) tools.</maml:para><maml:para>The VHD can be on a local disk on the target computer, or on a network shared folder. If the VHD is in a network shared folder, then the value of this parameter is a UNC path to the VHD. In this case, the computer account of the computer that you are using to mount the VHD must have read and write permissions (Read/Write permissions in the File Sharing dialog box, or Full Control on the Security tab of the folder Properties dialog box) on the shared folder, or the VHD will not be accessible. Local loopback Universal Naming Convention (UNC) paths are not supported. Use either of the following formats for the computer account:  DOMAIN\SERVERNAME$ or SERVERNAME$.</maml:para><maml:para>Use the ComputerName parameter to specify the target computer you want to use to mount the VHD. If the ComputerName parameter is not specified, then the local computer is used. The computer that you are using to mount the VHD must be running Windows Server 2012 R2. Any local path, such as D:\myFolder, that is specified by using this parameter is always relative to the target computer.</maml:para></maml:description><command:parameterValue required="false" variableLength="false">String</command:parameterValue><dev:type><maml:name>String</maml:name><maml:uri /></dev:type><dev:defaultValue>none</dev:defaultValue></command:parameter><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named"><maml:name>Confirm</maml:name><maml:description><maml:para>Prompts you for confirmation before running the cmdlet.Prompts you for confirmation before running the cmdlet.</maml:para></maml:description><command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name><maml:uri /></dev:type><dev:defaultValue>false</dev:defaultValue></command:parameter><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named"><maml:name>WhatIf</maml:name><maml:description><maml:para>Shows what would happen if the cmdlet runs. The cmdlet is not run.Shows what would happen if the cmdlet runs. The cmdlet is not run.</maml:para></maml:description><command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name><maml:uri /></dev:type><dev:defaultValue>false</dev:defaultValue></command:parameter></command:parameters><command:inputTypes><command:inputType><dev:type><maml:name>System.String[]</maml:name><maml:uri></maml:uri><maml:description><maml:para /></maml:description></dev:type><maml:description><maml:para></maml:para></maml:description></command:inputType><command:inputType><dev:type><maml:name>Microsoft.Windows.ServerManager.Commands.Feature[]</maml:name><maml:uri></maml:uri><maml:description><maml:para /></maml:description></dev:type><maml:description><maml:para></maml:para></maml:description></command:inputType></command:inputTypes><command:returnValues><command:returnValue><dev:type><maml:name>Microsoft.Windows.ServerManager.Commands.FeatureOperationResult</maml:name><maml:uri></maml:uri><maml:description><maml:para /></maml:description></dev:type><maml:description><maml:para></maml:para></maml:description></command:returnValue></command:returnValues><command:terminatingErrors /><command:nonTerminatingErrors /><command:examples><command:example><maml:title>Example 1: Uninstall various roles and features installed on the target server</maml:title><maml:introduction><maml:para></maml:para></maml:introduction><dev:code>PS C:\&gt; Get-WindowsFeature | Where-Object -FilterScript { $_.Installed -Eq $TRUE } | Uninstall-WindowsFeature
+</dev:code><dev:remarks><maml:para>This command uninstalls any roles or features that are currently installed on the target server.</maml:para><maml:para /><maml:para /></dev:remarks><command:commandLines><command:commandLine><command:commandText /></command:commandLine></command:commandLines></command:example><command:example><maml:title>Example 2: Remove all role services from the specified server</maml:title><maml:introduction><maml:para></maml:para></maml:introduction><dev:code>PS C:\&gt; Uninstall-WindowsFeature -Name "Web-Server" -ComputerName "Server1" -Credential "contoso\user1"
+</dev:code><dev:remarks><maml:para>This command removes Web Server (IIS) from Server1, including all role services. The user account specified to perform the operation is contoso\user1.</maml:para><maml:para /><maml:para /></dev:remarks><command:commandLines><command:commandLine><command:commandText /></command:commandLine></command:commandLines></command:example><command:example><maml:title>Example 3: Remove feature files for any roles or features currently not installed on the local server</maml:title><maml:introduction><maml:para></maml:para></maml:introduction><dev:code>PS C:\&gt; Get-WindowsFeature | Where-Object -FilterScript { $_.Installed -Eq $FALSE } | Uninstall-WindowsFeature –Remove
+</dev:code><dev:remarks><maml:para>This command removes the feature files for any roles or features that currently are not installed on the local server.</maml:para><maml:para /><maml:para /></dev:remarks><command:commandLines><command:commandLine><command:commandText /></command:commandLine></command:commandLines></command:example></command:examples><maml:relatedLinks><maml:navigationLink><maml:linkText>Online Version:</maml:linkText><maml:uri></maml:uri></maml:navigationLink><maml:navigationLink><maml:linkText>Get-WindowsFeature</maml:linkText><maml:uri /></maml:navigationLink><maml:navigationLink><maml:linkText>Install-WindowsFeature</maml:linkText><maml:uri /></maml:navigationLink><maml:navigationLink><maml:linkText>Enable-ServerManagerStandardUserRemoting</maml:linkText><maml:uri /></maml:navigationLink><maml:navigationLink><maml:linkText>Disable-ServerManagerStandardUserRemoting</maml:linkText><maml:uri /></maml:navigationLink></maml:relatedLinks></command:command>
+</helpItems>

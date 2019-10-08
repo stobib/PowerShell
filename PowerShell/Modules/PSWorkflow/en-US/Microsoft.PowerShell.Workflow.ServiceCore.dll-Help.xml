@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml">
+
+<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+<command:details><command:name>New-PSWorkflowExecutionOption</command:name>
+<command:verb>New</command:verb>
+<command:noun>PSWorkflowExecutionOption</command:noun>
+<maml:description><maml:para>Creates an object that contains session configuration options for workflow sessions.
+</maml:para>
+</maml:description>
+</command:details>
+<maml:description><maml:para>The New-PSWorkflowExecutionOption cmdlet creates an object that contains advanced options for workflow session configurations, that is session configurations designed to run Windows PowerShell Workflow workflows.
+</maml:para>
+<maml:para>You can use the PSWorkflowExecutionOption object that New-PSWorkflowExecutionOption generates as the value of the SessionTypeOption parameter of cmdlets that create or change a session configuration, such as the Register-PSSessionConfiguration and Set-PSSessionConfiguration cmdlets.
+</maml:para>
+<maml:para>Each parameter of the New-PSWorkflowExecutionOption cmdlet represents a property of the workflow session configuration option object that the cmdlet returns. If you do not specify a parameter, the cmdlet creates the object that has a default value for the property.
+</maml:para>
+<maml:para>The New-PSWorkflowExecutionOption cmdlet is part of the Windows PowerShell Workflow feature.
+</maml:para>
+<maml:para>You can also add workflow common parameters to this command. For more information about workflow common parameters, see about_WorkflowCommonParameters.
+</maml:para>
+<maml:para>This cmdlet was introduced in Windows PowerShell 3.0.
+</maml:para>
+</maml:description>
+<command:syntax><command:syntaxItem><maml:name>New-PSWorkflowExecutionOption</maml:name>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ActivityProcessIdleTimeoutSec</maml:name>
+<maml:Description><maml:para>Specifies how long each activity host process is maintained after the process becomes idle. When the interval expires, the process closes.
+</maml:para>
+<maml:para>Enter a value in seconds. The default value is 60.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>AllowedActivity</maml:name>
+<maml:Description><maml:para>Specifies the activities that are permitted to run in the session.
+</maml:para>
+<maml:para>Enter namespace-qualified activity names, such as `Microsoft.Powershell.HyperV.Activities.*`. Wildcard characters are supported. The default value, PSDefaultActivities , includes the built-in Windows Workflow Foundation activities and the activities that represent the Windows PowerShell Core cmdlets.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+<dev:type><maml:name>String[]</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>EnableValidation</maml:name>
+<maml:Description><maml:para>Indicates that this cmdlet verifies that all workflow activities in the session are included in the allowed activities list.
+</maml:para>
+<maml:para>To disable validation, use the following command format: `-EnableValidation:$False`.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>MaxActivityProcesses</maml:name>
+<maml:Description><maml:para>Specifies the maximum number of processes that can be created in the session to support workflow activities. The default value is 5.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>MaxConnectedSessions</maml:name>
+<maml:Description><maml:para>Specifies the maximum number of remote sessions that are in an operational state. This quota is applied to sessions connected to all remote nodes, or target computers. The default value is 100.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>MaxDisconnectedSessions</maml:name>
+<maml:Description><maml:para>Specifies the maximum number of remote sessions that are in a disconnected state. This quota is applied to sessions connected to all remote nodes, or target computers. The default value is 1000.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>MaxPersistenceStoreSizeGB</maml:name>
+<maml:Description><maml:para>Specifies the maximum size, in gigabytes, of the persistence store allocated to workflows that run in the session. When the size is exceeded, the persistence store is expanded to save all persisted data, but a warning is displayed and a message is written to the workflow event log. The default value is 10.
+</maml:para>
+<maml:para>The persistence store contains data for all workflow jobs. The ability to store data allows for the jobs to resume without losing state.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+<dev:type><maml:name>Int64</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>MaxRunningWorkflows</maml:name>
+<maml:Description><maml:para>Specifies that maximum number of workflows that can run in the session at the same time. The default value is 30.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>MaxSessionsPerRemoteNode</maml:name>
+<maml:Description><maml:para>Specifies the maximum number of sessions that can be connected to each remote node, or target computer. The default value is 5
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>MaxSessionsPerWorkflow</maml:name>
+<maml:Description><maml:para>Specifies the maximum number of session that can be created to support each workflow. The default value is 5.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>OutOfProcessActivity</maml:name>
+<maml:Description><maml:para>Determines which allowed activities specified by the AllowedActivities parameter run out-of-process. The default value is InlineScript .
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+<dev:type><maml:name>String[]</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>PersistWithEncryption</maml:name>
+<maml:Description><maml:para>Indicates that the workflow encrypts the data in the persistence store. Consider using this feature when storing persistence data in a network share.
+</maml:para>
+</maml:Description>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>PersistencePath</maml:name>
+<maml:Description><maml:para>Specifies the location on disk where workflow state and data are stored. Storing the workflow state and data allows for workflows to be suspended and resumed, and to recover from interruptions and network failures.
+</maml:para>
+<maml:para>The default value is $env:LocalAppData\Microsoft\Windows\PowerShell\WF\PS
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>RemoteNodeSessionIdleTimeoutSec</maml:name>
+<maml:Description><maml:para>Specifies how long a session that is connected to a remote node, or target computer, is maintained if it is idle.
+</maml:para>
+<maml:para>Enter a value in seconds. The default value is 60.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SessionThrottleLimit</maml:name>
+<maml:Description><maml:para>Specifies how many operations are created to support all workflows started in the session. The default value is 100.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>WorkflowShutdownTimeoutMSec</maml:name>
+<maml:Description><maml:para>Specifies how long the session is maintained after all workflows in the session are forcibly suspended. When the time-out expires, Windows PowerShell closes the session, even if all workflows are not yet suspended.
+</maml:para>
+<maml:para>Enter a value in milliseconds. The default value is 500.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:syntaxItem>
+</command:syntax>
+<command:parameters><command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>ActivityProcessIdleTimeoutSec</maml:name>
+<maml:Description><maml:para>Specifies how long each activity host process is maintained after the process becomes idle. When the interval expires, the process closes.
+</maml:para>
+<maml:para>Enter a value in seconds. The default value is 60.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>AllowedActivity</maml:name>
+<maml:Description><maml:para>Specifies the activities that are permitted to run in the session.
+</maml:para>
+<maml:para>Enter namespace-qualified activity names, such as `Microsoft.Powershell.HyperV.Activities.*`. Wildcard characters are supported. The default value, PSDefaultActivities , includes the built-in Windows Workflow Foundation activities and the activities that represent the Windows PowerShell Core cmdlets.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+<dev:type><maml:name>String[]</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>EnableValidation</maml:name>
+<maml:Description><maml:para>Indicates that this cmdlet verifies that all workflow activities in the session are included in the allowed activities list.
+</maml:para>
+<maml:para>To disable validation, use the following command format: `-EnableValidation:$False`.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>MaxActivityProcesses</maml:name>
+<maml:Description><maml:para>Specifies the maximum number of processes that can be created in the session to support workflow activities. The default value is 5.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>MaxConnectedSessions</maml:name>
+<maml:Description><maml:para>Specifies the maximum number of remote sessions that are in an operational state. This quota is applied to sessions connected to all remote nodes, or target computers. The default value is 100.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>MaxDisconnectedSessions</maml:name>
+<maml:Description><maml:para>Specifies the maximum number of remote sessions that are in a disconnected state. This quota is applied to sessions connected to all remote nodes, or target computers. The default value is 1000.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>MaxPersistenceStoreSizeGB</maml:name>
+<maml:Description><maml:para>Specifies the maximum size, in gigabytes, of the persistence store allocated to workflows that run in the session. When the size is exceeded, the persistence store is expanded to save all persisted data, but a warning is displayed and a message is written to the workflow event log. The default value is 10.
+</maml:para>
+<maml:para>The persistence store contains data for all workflow jobs. The ability to store data allows for the jobs to resume without losing state.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int64</command:parameterValue>
+<dev:type><maml:name>Int64</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>MaxRunningWorkflows</maml:name>
+<maml:Description><maml:para>Specifies that maximum number of workflows that can run in the session at the same time. The default value is 30.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>MaxSessionsPerRemoteNode</maml:name>
+<maml:Description><maml:para>Specifies the maximum number of sessions that can be connected to each remote node, or target computer. The default value is 5
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>MaxSessionsPerWorkflow</maml:name>
+<maml:Description><maml:para>Specifies the maximum number of session that can be created to support each workflow. The default value is 5.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>OutOfProcessActivity</maml:name>
+<maml:Description><maml:para>Determines which allowed activities specified by the AllowedActivities parameter run out-of-process. The default value is InlineScript .
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String[]</command:parameterValue>
+<dev:type><maml:name>String[]</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>PersistWithEncryption</maml:name>
+<maml:Description><maml:para>Indicates that the workflow encrypts the data in the persistence store. Consider using this feature when storing persistence data in a network share.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+<dev:type><maml:name>SwitchParameter</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>False</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>PersistencePath</maml:name>
+<maml:Description><maml:para>Specifies the location on disk where workflow state and data are stored. Storing the workflow state and data allows for workflows to be suspended and resumed, and to recover from interruptions and network failures.
+</maml:para>
+<maml:para>The default value is $env:LocalAppData\Microsoft\Windows\PowerShell\WF\PS
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+<dev:type><maml:name>String</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>RemoteNodeSessionIdleTimeoutSec</maml:name>
+<maml:Description><maml:para>Specifies how long a session that is connected to a remote node, or target computer, is maintained if it is idle.
+</maml:para>
+<maml:para>Enter a value in seconds. The default value is 60.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>SessionThrottleLimit</maml:name>
+<maml:Description><maml:para>Specifies how many operations are created to support all workflows started in the session. The default value is 100.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+<command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none"><maml:name>WorkflowShutdownTimeoutMSec</maml:name>
+<maml:Description><maml:para>Specifies how long the session is maintained after all workflows in the session are forcibly suspended. When the time-out expires, Windows PowerShell closes the session, even if all workflows are not yet suspended.
+</maml:para>
+<maml:para>Enter a value in milliseconds. The default value is 500.
+</maml:para>
+</maml:Description>
+<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+<dev:type><maml:name>Int32</maml:name>
+<maml:uri /></dev:type>
+<dev:defaultValue>None</dev:defaultValue>
+</command:parameter>
+</command:parameters>
+<command:inputTypes><command:inputType><dev:type><maml:name>None</maml:name>
+</dev:type>
+<maml:description><maml:para>You cannot pipe input to this cmdlet.
+</maml:para>
+</maml:description>
+</command:inputType>
+</command:inputTypes>
+<command:returnValues><command:returnValue><dev:type><maml:name>Microsoft.PowerShell.Commands.PSWorkflowExecutionOption</maml:name>
+</dev:type>
+<maml:description><maml:para>
+</maml:para>
+</maml:description>
+</command:returnValue>
+</command:returnValues>
+<maml:alertSet><maml:alert><maml:para>When the maximum value set by an option is exceeded, the command to create another instance in the session fails, unless noted in the parameter description. For example, if the value of MaxConnectedSessions* is 100. The command to create the 101st session to a remote node, or target computer, fails. * The properties of a session configuration object vary with the options set for the session configuration and the values of those options. Also, session configurations that use a session configuration file have additional properties.
+</maml:para>
+<maml:para>  In particular, the properties of session configurations that include a PSWorkflowExecutionOptions object vary based on the workflow option values. For example, if the session configuration includes a PSWorkflowExecutionOptions object that sets a non-default value for the SessionThrottleLimit property, the session configuration has a SessionThrottleLimit property. Otherwise, it does not.
+</maml:para>
+</maml:alert>
+</maml:alertSet>
+<command:examples><command:example><maml:title>Example 1: Create a workflow options object</maml:title>
+<dev:code>PS C:\&gt;New-PSWorkflowExecutionOption -MaxSessionsPerWorkflow 10 -MaxDisconnectedSessions 200
+SessionThrottleLimit                       : 100
+PersistencePath                            : C:\Users\User01\AppData\Local\Microsoft\Windows\PowerShell\WF\PS
+MaxPersistenceStoreSizeGB                  : 10
+PersistWithEncryption                      : False
+MaxRunningWorkflows                        : 30
+AllowedActivity                            : {PSDefaultActivities}
+OutOfProcessActivity                       : {InlineScript}
+EnableValidation                           : True
+MaxDisconnectedSessions                    : 200
+MaxConnectedSessions                       : 100
+MaxSessionsPerWorkflow                     : 10
+MaxSessionsPerRemoteNode                   : 5
+MaxActivityProcesses                       : 5
+ActivityProcessIdleTimeoutSec              : 60
+RemoteNodeSessionIdleTimeoutSec            : 60
+WorkflowShutdownTimeoutMSec                : 500</dev:code>
+<dev:remarks><maml:para>This command uses the New-PSWorkflowExecutionOption cmdlet to increase the MaxSessionsPerWorkflow value to 10 and decrease the MaxDisconnectedSessions value to 200.
+</maml:para>
+<maml:para>The output shows the object that the cmdlet returns.
+</maml:para>
+</dev:remarks>
+</command:example>
+<command:example><maml:title>Example 2: Using a workflow options object</maml:title>
+<dev:code>The first command uses the **New-PSWorkflowExecutionOption** cmdlet to create a workflow options object. The command saves the object in the $wo variable.
+PS C:\&gt;$wo = New-PSWorkflowExecutionOption -MaxSessionsPerWorkflow 10 -MaxDisconnectedSessions 200
+
+
+The second command uses the Register-PSSessionConfiguration cmdlet to create the ITWorkflows session configuration. To set the workflow options in the session configuration, the command uses the *SessionTypeOption* parameter. The value of the *SessionTypeOption* parameter is the workflow options object in the $wo variable. The command also uses the *Force* parameter to suppress confirmations prompts.
+PS C:\&gt;Register-PSSessionConfiguration -Name ITWorkflows -SessionTypeOption $wo -Force
+    WSManConfig: Microsoft.WSMan.Management\WSMan::localhost\Plugin
+
+Type            Keys                                Name
+----            ----                                ----
+Container       {Name=ITWorkflows}                  ITWorkflows
+
+The third command shows the workflow options in the session configuration. The command uses the Get-PSSessionConfiguration cmdlet to the get the ITWorkflows session configuration and the Format-List cmdlet to display all properties of the session configuration in a list.The output shows that the workflow options in the session configuration. Specifically, the session configuration has a **MaxSessionsPerWorkflow** property that has a value of 10 and a **MaxDisconnectedSessions** property that has a value of 200.
+PS C:\&gt;Get-PSSessionConfiguration ITWorkflows | Format-List -Property *
+Architecture                  : 64
+Filename                      : %windir%\system32\pwrshplugin.dll
+ResourceUri                   : http://schemas.microsoft.com/powershell/ITWorkflows
+MaxConcurrentCommandsPerShell : 1000
+allowedactivity               : PSDefaultActivities
+UseSharedProcess              : false
+ProcessIdleTimeoutSec         : 0
+xmlns                         : http://schemas.microsoft.com/wbem/wsman/1/config/PluginConfiguration
+MaxConcurrentUsers            : 5
+maxsessionsperworkflow        : 10
+lang                          : en-US
+sessionconfigurationdata      : &lt;SessionConfigurationData&gt;&lt;Param Name='PrivateData'&gt;&lt;PrivateData&gt;&lt;Param                                Name='enablevalidation' Value='True' /&gt;&lt;Param Name='allowedactivity'                                Value='PSDefaultActivities' /&gt;&lt;Param Name='outofprocessactivity' Value='InlineScript'                                /&gt;&lt;Param Name='maxdisconnectedsessions' Value='200' /&gt;&lt;Param                                Name='maxsessionsperworkflow' Value='10'                                /&gt;&lt;/PrivateData&gt;&lt;/Param&gt;&lt;/SessionConfigurationData&gt;
+SupportsOptions               : true
+ExactMatch                    : true
+RunAsUser                     :
+IdleTimeoutms                 : 7200000
+PSVersion                     : 3.0
+OutputBufferingMode           : Block
+AutoRestart                   : false
+MaxShells                     : 25
+MaxMemoryPerShellMB           : 1024
+MaxIdleTimeoutms              : 43200000
+outofprocessactivity          : InlineScript
+SDKVersion                    : 2
+Name                          : ITWorkflows
+XmlRenderingType              : text
+Capability                    : {Shell}
+RunAsPassword                 :
+MaxProcessesPerShell          : 15
+enablevalidation              : True
+Enabled                       : True
+maxdisconnectedsessions       : 200
+MaxShellsPerUser              : 25
+Permission                    :</dev:code>
+<dev:remarks><maml:para>This example shows how to use a workflow options object to establish or change the workflow options in a session configuration.
+</maml:para>
+</dev:remarks>
+</command:example>
+</command:examples>
+<command:relatedLinks><maml:navigationLink><maml:linkText>Online Version:</maml:linkText>
+<maml:uri>http://go.microsoft.com/fwlink/?LinkId=821721</maml:uri>
+</maml:navigationLink>
+<maml:navigationLink><maml:linkText>New-PSWorkflowSession</maml:linkText>
+<maml:uri></maml:uri>
+</maml:navigationLink>
+</command:relatedLinks>
+</command:command>
+</helpItems>

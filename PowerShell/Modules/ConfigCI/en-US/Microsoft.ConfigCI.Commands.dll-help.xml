@@ -1,0 +1,3484 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems xmlns="http://msh" schema="maml">
+  <!-- Updatable Help Version 5.0.2.0 -->
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Add-SignerRule</command:name>
+      <maml:description>
+        <maml:para>Creates a signer rule and adds it to a policy. </maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Add</command:verb>
+      <command:noun>SignerRule</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Add-SignerRule cmdlet creates a signer rule based on a certificate, and then adds the rule to a Code Integrity policy. By default, this cmdlet creates allow rules. Specify at least one scenario for the rule in the policy from the following scenarios: 
+
+-- User 
+-- Kernel 
+-- Update</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Add-SignerRule</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Deny</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet creates a deny rule instead of the default allow rule.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Kernel</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet adds the rule as a Kernel mode rule. You can add a rule as more than one scenario.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Update</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet adds the rule as an Update policy signers rule. You can add a rule as more than one scenario. </maml:para>
+            <maml:para>Update policy signers rules to determine which signers can sign a policy in signed policy scenario.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>User</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet adds the rule as a User mode rule. You can add a rule as more than one scenario.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="c">
+          <maml:name>CertificatePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of a certificate (.cer) file that this cmdlet uses for the rule.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="f">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of the policy .xml file to which this cmdlet adds the rule. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="c">
+        <maml:name>CertificatePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of a certificate (.cer) file that this cmdlet uses for the rule.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Deny</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet creates a deny rule instead of the default allow rule.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="f">
+        <maml:name>FilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of the policy .xml file to which this cmdlet adds the rule. </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Kernel</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet adds the rule as a Kernel mode rule. You can add a rule as more than one scenario.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Update</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet adds the rule as an Update policy signers rule. You can add a rule as more than one scenario. </maml:para>
+          <maml:para>Update policy signers rules to determine which signers can sign a policy in signed policy scenario.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>User</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet adds the rule as a User mode rule. You can add a rule as more than one scenario.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Create and add a signer rule for User mode</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Add-SignerRule -FilePath '.\Policy.xml' -CertificatePath '.\certificate07.cer' -User 
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command generates a signer rule for the certificate in certificate07.cer. The command adds the rule to policy.xml for the User mode scenario.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>New-CIPolicyRule</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>ConvertFrom-CIPolicy</command:name>
+      <maml:description>
+        <maml:para>Converts an .xml file that contains a Code Integrity policy into binary format. </maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>ConvertFrom</command:verb>
+      <command:noun>CIPolicy</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The ConvertFrom-CIPolicy cmdlet converts an .xml file that contains a Code Integrity policy into binary format. You can install the binary version of a policy on a computer. </maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>ConvertFrom-CIPolicy</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="xml">
+          <maml:name>XmlFilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of the .xml policy file that this cmdlet converts. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="bin">
+          <maml:name>BinaryFilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path for the output converted policy binary file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="3" aliases="bin">
+        <maml:name>BinaryFilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path for the output converted policy binary file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="xml">
+        <maml:name>XmlFilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of the .xml policy file that this cmdlet converts. </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Converts a policy</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;ConvertFrom-CIPolicy -XmlFilePath ".\Policy03.xml" - BinaryFilePath "Policy03.bin" 
+C:\Policies\Policy03.bin
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command converts the policy in Policy03.xml into a binary named Policy03.bin. The console displays the full path of the binary file. </maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-CIPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Merge-CIPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>New-CIPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Edit-CIPolicyRule</command:name>
+      <maml:description>
+        <maml:para>This cmdlet is not supported.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Edit</command:verb>
+      <command:noun>CIPolicyRule</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Edit-CIPolicyRule cmdlet is not supported. Do not use this cmdlet.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Edit-CIPolicyRule</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>AddEkus</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>AddExceptions</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Issuer</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="n">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>OemId</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Publisher</maml:name>
+          <maml:description>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>RemoveEkus</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>RemoveExceptions</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Root</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="t">
+          <maml:name>RType</maml:name>
+          <maml:description>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">Allow</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Deny</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">a</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">d</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="f">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Edit-CIPolicyRule</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>FileName</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="h">
+          <maml:name>HashPath</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="n">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="t">
+          <maml:name>RType</maml:name>
+          <maml:description>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="false" variableLength="false">Allow</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">Deny</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">a</command:parameterValue>
+            <command:parameterValue required="false" variableLength="false">d</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="v">
+          <maml:name>Version</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="f">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>AddEkus</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>AddExceptions</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>FileName</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="f">
+        <maml:name>FilePath</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="h">
+        <maml:name>HashPath</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Issuer</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="n">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>OemId</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Publisher</maml:name>
+        <maml:description>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>RemoveEkus</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>RemoveExceptions</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Root</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="t">
+        <maml:name>RType</maml:name>
+        <maml:description>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="v">
+        <maml:name>Version</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title> 1: </maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:remarks>
+          <maml:para>
+          </maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-CIPolicyIdInfo</command:name>
+      <maml:description>
+        <maml:para>Displays Code Integrity policy information.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>CIPolicyIdInfo</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-CIPolicyIdInfo cmdlet displays Code Integrity policy information. Specify the .xml file of the policy to modify. </maml:para>
+      <maml:para>This cmdlet returns human readable content. It is not intended for use with other cmdlets. </maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-CIPolicyIdInfo</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="f">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of a Code Integrity policy .xml file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="f">
+        <maml:name>FilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of a Code Integrity policy .xml file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>CIPolicyIdInfo</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Display Code Integrity policy information </maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-CIPolicyIdInfo -FilePath ".\Policy03.xml"
+Provider  : ConfigCIPolicy
+Key       : PolicyInfo
+ValueName : Name
+ValueType : String
+Value     : CIPolicy03
+
+Provider  : ConfigCIPolicy
+Key       : PolicyInfo
+ValueName : PolicyId
+ValueType : String
+Value     : CIP077 
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command displays the Code Integrity policy information for the policy in the stored in the Policy03.xml file. This policy has values for both name and ID. </maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Set-CIPolicyIdInfo</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-CIPolicyInfo</command:name>
+      <maml:description>
+        <maml:para>This cmdlet is not supported.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>CIPolicyInfo</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-CIPolicyInfo cmdlet is not supported. Do not use this cmdlet.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-CIPolicyInfo</maml:name>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title> 1: </maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:remarks>
+          <maml:para>
+          </maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-CIPolicy</command:name>
+      <maml:description>
+        <maml:para>Gets the rules in a Code Integrity policy.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>CIPolicy</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-CIPolicy cmdlet returns the rules in a Code Integrity policy. Specify a policy .xml file. This cmdlet does not currently support policies in Public-Key Cryptography Standards #7 format (.p7b files). </maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-CIPolicy</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="f">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of the policy .xml file for which this cmdlet gets rules.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="f">
+        <maml:name>FilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of the policy .xml file for which this cmdlet gets rules.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Rule</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>This cmdlet returns rules from the policy.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Get rules from a policy</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-CIPolicy -FilePath '.\Policy.xml'
+Name           : MSIT Test CodeSign CA 3
+Id             : ID_SIGNER_S_17
+TypeId         : Allow
+Root           : FA6B9A2230CE08BCA81D096B28CF495672401D3A43A0D285CF352464A6C9C7FD
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : False
+
+Name           : VeriSign Class 3 Code Signing 2010 CA
+Id             : ID_SIGNER_S_1D
+TypeId         : Allow
+Root           : 4843A82ED3B1F2BFBEE9671960E1940C942F688D
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : False
+
+Name           : Microsoft Windows Third Party Component CA 2012
+Id             : ID_SIGNER_S_1E
+TypeId         : Allow
+Root           : CEC1AFD0E310C55C1DCC601AB8E172917706AA32FB5EAF826813547FDF02DD46
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : False
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command returns the rule objects from Policy.xml. For this example, we present only the first few rules.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Merge-CIPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>New-CIPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-SystemDriver</command:name>
+      <maml:description>
+        <maml:para>Scans for drivers on the system.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>SystemDriver</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-SystemDriver cmdlet performs a full system scan for drivers. This cmdlet returns a DriverFile object that contains information for the New-CIPolicyRule and New-CIPolicy cmdlets. Those cmdlets create rules based on the scanned files. By default, this cmdlet recursively scans C:\ and includes only kernel mode files.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-SystemDriver</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="a">
+          <maml:name>Audit</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet searches the Code Integrity Audit log for drivers. It does not perform a full system scan.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>NoScript</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet does not scan script files. It searches portable executable files (PE files) only.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>NoShadowCopy</maml:name>
+          <maml:description>
+            <maml:para>Indicates that the Volume Snapshot Service (VSS) does not make a shadow copy of the disk while the scan runs. This parameter could cause an incomplete scan for a system that is running. </maml:para>
+            <maml:para>If a scan fails due to VSS errors caused by low disk space on the target drive, this cmdlet prompts you to specify this parameter.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="o">
+          <maml:name>OmitPaths</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of paths that this cmdlet omits from the scan. We recommend that you omit C:\Windows.old.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="c">
+          <maml:name>PathToCatroot</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of the CatRoot folder. Specify this parameter to scan a remote or mounted drive.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="s">
+          <maml:name>ScanPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path for this cmdlet to scan. You can specify a local or remote path. If you specify a remote or mounted drive, also specify the PathToCatroot parameter.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="u">
+          <maml:name>UserPEs</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet includes user mode files in the scan.</maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="a">
+        <maml:name>Audit</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet searches the Code Integrity Audit log for drivers. It does not perform a full system scan.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>NoScript</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet does not scan script files. It searches portable executable files (PE files) only.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>NoShadowCopy</maml:name>
+        <maml:description>
+          <maml:para>Indicates that the Volume Snapshot Service (VSS) does not make a shadow copy of the disk while the scan runs. This parameter could cause an incomplete scan for a system that is running. </maml:para>
+          <maml:para>If a scan fails due to VSS errors caused by low disk space on the target drive, this cmdlet prompts you to specify this parameter.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="o">
+        <maml:name>OmitPaths</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of paths that this cmdlet omits from the scan. We recommend that you omit C:\Windows.old.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="c">
+        <maml:name>PathToCatroot</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of the CatRoot folder. Specify this parameter to scan a remote or mounted drive.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="s">
+        <maml:name>ScanPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path for this cmdlet to scan. You can specify a local or remote path. If you specify a remote or mounted drive, also specify the PathToCatroot parameter.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="u">
+        <maml:name>UserPEs</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet includes user mode files in the scan.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>DriverFile</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>This cmdlet returns a DriverFile object that contains all properties and certificates of a driver that you must have in order to generate a Code Integrity policy rule.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Scan a folder for drivers</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-SystemDriver -ScanPath '.\temp' -UserPEs
+FilePath     : \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy9\cmdlets\temp\ConfigCI.psd1
+FriendlyName : \\?\E:\cmdlets\temp\ConfigCI.psd1
+FileName     : 
+Loaded       : False
+FileVersion  : 
+Hash         : 1844B4531711EC9170A9D33277CE1D4FF7626C54
+Hash256      : 60311157F6685727F42CC04717FEF6F905EC2A317C3B8381CDD9A79D0B184483
+PageHash     : 
+PageHash256  : 
+UserMode     : True
+OpusInfos    : {}
+Signers      : {}
+
+FilePath     : \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy9\cmdlets\temp\Microsoft.ConfigCI.Commands.dll
+FriendlyName : \\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll
+FileName     : Microsoft.ConfigCI.Commands.dll
+Loaded       : False
+FileVersion  : 10.0.10543.1000
+Hash         : BE0777F5AF88628D4555A875036648DF1AD19BBE
+Hash256      : 6FA5AF724499C338A77FEEAD90F55DDF5F23D081C6DCE8E9DF486E95C6A9B310
+PageHash     : D41570F2E6E7E6245CF342131D4706C944562B1E
+PageHash256  : F714D9784E15B88F56180C8EE2B40C769CC83428954585A1DCF9A260FE967CDD
+UserMode     : False
+OpusInfos    : {}
+Signers      : {}
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command scans the specified folder. The command returns the DriverFile object that is used to make rules. </maml:para>
+          <maml:para>Provide this object to New-CIPolicyRule to create a rule.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2: Scan only PE files and exclude a folder</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Get-SystemDriver -ScanPath '.\temp\' -UserPEs -OmitPaths '.\temp\ConfigCITestBinaries' -NoScript
+FilePath     : \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10\cmdlets\temp\Microsoft.ConfigCI.Commands.dll
+FriendlyName : \\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll
+FileName     : Microsoft.ConfigCI.Commands.dll
+Loaded       : False
+FileVersion  : 10.0.10543.1000
+Hash         : BE0777F5AF88628D4555A875036648DF1AD19BBE
+Hash256      : 6FA5AF724499C338A77FEEAD90F55DDF5F23D081C6DCE8E9DF486E95C6A9B310
+PageHash     : D41570F2E6E7E6245CF342131D4706C944562B1E
+PageHash256  : F714D9784E15B88F56180C8EE2B40C769CC83428954585A1DCF9A260FE967CDD
+UserMode     : False
+OpusInfos    : {}
+Signers      : {}
+
+FilePath     : \\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy10\cmdlets\temp\Microsoft.ConfigCI.Commands.dll
+FriendlyName : \\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll
+FileName     : Microsoft.ConfigCI.Commands.dll
+Loaded       : False
+FileVersion  : 10.0.10543.1000
+Hash         : BE0777F5AF88628D4555A875036648DF1AD19BBE
+Hash256      : 6FA5AF724499C338A77FEEAD90F55DDF5F23D081C6DCE8E9DF486E95C6A9B310
+PageHash     : D41570F2E6E7E6245CF342131D4706C944562B1E
+PageHash256  : F714D9784E15B88F56180C8EE2B40C769CC83428954585A1DCF9A260FE967CDD
+UserMode     : True
+OpusInfos    : {}
+Signers      : {}
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command scans the specified folder, just like the previous example. This command specifies the OmitPaths parameter to exclude files in the temp\ConfigCITestBinaries folder. The command specifies the NoScript parameterso that it gets information for only PE files. </maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>New-CIPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>New-CIPolicyRule</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Merge-CIPolicy</command:name>
+      <maml:description>
+        <maml:para>Combines the rules in several Code Integrity policy files.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Merge</command:verb>
+      <command:noun>CIPolicy</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Merge-CIPolicy cmdlet combines the rules in several Code Integrity policy files. This cmdlet creates a single policy .xml file. You can specify rules to add to the merged list. This cmdlet does not save redundant rules. The cmdlet appends a digit to the IDs of the rules to make the IDs of the rules unique.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Merge-CIPolicy</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="o">
+          <maml:name>OutputFilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of the merged .xml policy file. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="2" aliases="p">
+          <maml:name>PolicyPaths</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of paths of the policy .xml files that this cmdlet merges.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByValue)" position="named" aliases="r">
+          <maml:name>Rules</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of Rule objects that this cmdlet adds to the merged policy. To obtain a rule object, use the Get-CIPolicy or New-CIPolicyRule cmdlets. </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Rule[]</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="o">
+        <maml:name>OutputFilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of the merged .xml policy file. </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="false" position="2" aliases="p">
+        <maml:name>PolicyPaths</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of paths of the policy .xml files that this cmdlet merges.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true (ByValue)" position="named" aliases="r">
+        <maml:name>Rules</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of Rule objects that this cmdlet adds to the merged policy. To obtain a rule object, use the Get-CIPolicy or New-CIPolicyRule cmdlets. </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Rule[]</command:parameterValue>
+        <dev:type>
+          <maml:name>Rule[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Rule</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>This cmdlet returns the rules in the policy that it creates. </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Merge policies</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Merge-CIPolicy -PolicyPaths '.\Policy.xml','.\Policy02.xml' -OutputFilePath '.\MergedPolicy.xml'
+Name           : MSIT Test CodeSign CA 3
+Id             : ID_SIGNER_S_17_0
+TypeId         : Allow
+Root           : FA6B9A2230CE08BCA81D096B28CF495672401D3A43A0D285CF352464A6C9C7FD
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : False
+
+Name           : VeriSign Class 3 Code Signing 2010 CA
+Id             : ID_SIGNER_S_1D_0
+TypeId         : Allow
+Root           : 4843A82ED3B1F2BFBEE9671960E1940C942F688D
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : False
+
+Name           : Microsoft Windows Third Party Component CA 2012
+Id             : ID_SIGNER_S_1E_0
+TypeId         : Allow
+Root           : CEC1AFD0E310C55C1DCC601AB8E172917706AA32FB5EAF826813547FDF02DD46
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : False
+
+Name           : \\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll Hash Sha1
+Id             : ID_ALLOW_A_49_1
+TypeId         : Allow
+Root           : 
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : False
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command merges policies defined in the two .xml files into a third file, MergedPolicy.xml. The cmdlet appends _0 to ID of the rules from the first policy, such as ID_SIGNER_S_17_0. It appends _1 to rules from the second policy, such as ID_ALLOW_A_49_1. The command does not include duplicates. For this example, we present only the first few rules.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-CIPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>New-CIPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-CIPolicyRule</command:name>
+      <maml:description>
+        <maml:para>Generates Code Integrity policy rules for drivers.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>New</command:verb>
+      <command:noun>CIPolicyRule</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The New-CIPolicyRule cmdlet generates Code Integrity policy rules for drivers. Specify a rule level and an array of DriverFile objects or the path of a driver. </maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-CIPolicyRule</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="d">
+          <maml:name>Deny</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet creates deny rules instead of the default allow rules.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true(ByValue)" position="named" aliases="df">
+          <maml:name>DriverFiles</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of DriverFile objects on which this cmdlet bases rules. To obtain a driver file, use the Get-SystemDriver cmdlet. </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">DriverFile[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Fallback</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of levels of detail for generated rules. If this cmdlet cannot generate a rule at the specified level, this cmdlet attempts to generate it at a fallback level. The acceptable values for this parameter are the same as for the Level parameter. If you specify multiple fallback levels, this cmdlet tries them in order. </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">RuleLevel[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="l">
+          <maml:name>Level</maml:name>
+          <maml:description>
+            <maml:para>Specifies the primary level of detail for generated rules. The acceptable values for this parameter are:
+
+-- None 
+-- Hash 
+-- FileName 
+-- SignedVersion 
+-- Publisher 
+-- FilePublisher 
+-- LeafCertificate 
+-- PcaCertificate 
+-- RootCertificate 
+-- WHQL 
+-- WHQLPublisher 
+-- WHQLFilePublisher</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="true" variableLength="false">None</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">Hash</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">FileName</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">SignedVersion</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">Publisher</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">FilePublisher</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">LeafCertificate</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">PcaCertificate</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">RootCertificate</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">WHQL</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">WHQLPublisher</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">WHQLFilePublisher</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>New-CIPolicyRule</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="d">
+          <maml:name>Deny</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet creates deny rules instead of the default allow rules.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Fallback</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of levels of detail for generated rules. If this cmdlet cannot generate a rule at the specified level, this cmdlet attempts to generate it at a fallback level. The acceptable values for this parameter are the same as for the Level parameter. If you specify multiple fallback levels, this cmdlet tries them in order. </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">RuleLevel[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>DriverFilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of a driver on which this cmdlet bases a rule. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="l">
+          <maml:name>Level</maml:name>
+          <maml:description>
+            <maml:para>Specifies the primary level of detail for generated rules. The acceptable values for this parameter are:
+
+-- None 
+-- Hash 
+-- FileName 
+-- SignedVersion 
+-- Publisher 
+-- FilePublisher 
+-- LeafCertificate 
+-- PcaCertificate 
+-- RootCertificate 
+-- WHQL 
+-- WHQLPublisher 
+-- WHQLFilePublisher</maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="true" variableLength="false">None</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">Hash</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">FileName</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">SignedVersion</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">Publisher</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">FilePublisher</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">LeafCertificate</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">PcaCertificate</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">RootCertificate</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">WHQL</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">WHQLPublisher</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">WHQLFilePublisher</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="d">
+        <maml:name>Deny</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet creates deny rules instead of the default allow rules.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>DriverFilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of a driver on which this cmdlet bases a rule. </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true(ByValue)" position="named" aliases="df">
+        <maml:name>DriverFiles</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of DriverFile objects on which this cmdlet bases rules. To obtain a driver file, use the Get-SystemDriver cmdlet. </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">DriverFile[]</command:parameterValue>
+        <dev:type>
+          <maml:name>DriverFile[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Fallback</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of levels of detail for generated rules. If this cmdlet cannot generate a rule at the specified level, this cmdlet attempts to generate it at a fallback level. The acceptable values for this parameter are the same as for the Level parameter. If you specify multiple fallback levels, this cmdlet tries them in order. </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">RuleLevel[]</command:parameterValue>
+        <dev:type>
+          <maml:name>RuleLevel[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="l">
+        <maml:name>Level</maml:name>
+        <maml:description>
+          <maml:para>Specifies the primary level of detail for generated rules. The acceptable values for this parameter are:
+
+-- None 
+-- Hash 
+-- FileName 
+-- SignedVersion 
+-- Publisher 
+-- FilePublisher 
+-- LeafCertificate 
+-- PcaCertificate 
+-- RootCertificate 
+-- WHQL 
+-- WHQLPublisher 
+-- WHQLFilePublisher</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">RuleLevel</command:parameterValue>
+        <dev:type>
+          <maml:name>RuleLevel</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Rule</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>This cmdlet returns the rules that it creates.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Create policy rules for drivers</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;$DriverFiles = Get-SystemDriver -ScanPath '.\temp\' -UserPEs -OmitPaths '.\temp\ConfigCITestBinaries' -NoScript
+PS C:\&gt; New-CIPolicyRule -Level FileName -DriverFiles $DriverFiles
+Scan completed successfully
+
+
+Name           : \\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll FileRule
+Id             : ID_ALLOW_A_1
+TypeId         : Allow
+Root           : 
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : False
+
+Name           : \\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.Tests.dll FileRule
+Id             : ID_ALLOW_A_3
+TypeId         : Allow
+Root           : 
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : False
+
+Name           : \\?\E:\cmdlets\temp\Microsoft.PackageInspector.Tests.dll FileRule
+Id             : ID_ALLOW_A_5
+TypeId         : Allow
+Root           : 
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : False
+</dev:code>
+        <dev:remarks>
+          <maml:para>The first command gets drivers by using the Get-SystemDriver cmdlet, and then stores them in the $DriverFiles variable.</maml:para>
+          <maml:para>The second command creates policy rules at the file name level for the drivers in $DriverList. For this example, we present only the first few rules.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2: Create policy rules for drivers and include a fallback value</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;New-CIPolicyRule -Level Publisher -Fallback Hash -DriverFiles $DriverFiles
+"Scan completed successfully"
+
+
+Name           : \\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll Hash Sha1
+Id             : ID_ALLOW_A_F
+TypeId         : Allow
+Root           : 
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : False
+
+Name           : \\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll Hash Sha256
+Id             : ID_ALLOW_A_10
+TypeId         : Allow
+Root           : 
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : False
+
+Name           : \\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll Hash Page Sha1
+Id             : ID_ALLOW_A_11
+TypeId         : Allow
+Root           : 
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : False
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command generates rule at the Publisher level for the same drivers from the previous example. For files that are unsigned, the cmdlet creates Hash rules, as a fallback. For this example, we present only the first few rules.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 3: Specify a policy rule for a kernel component </maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;New-CIPolicyRule -DriverFilePath '.\temp\ConfigCITestBinaries\ci.dll' -Level Publisher
+Scan completed successfully
+
+
+Name           : MSIT Test CodeSign CA 3
+Id             : ID_SIGNER_S_B
+TypeId         : Allow
+Root           : FA6B9A2230CE08BCA81D096B28CF495672401D3A43A0D285CF352464A6C9C7FD
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : False
+
+Name           : MSIT Test CodeSign CA 3
+Id             : ID_SIGNER_S_C
+TypeId         : Allow
+Root           : FA6B9A2230CE08BCA81D096B28CF495672401D3A43A0D285CF352464A6C9C7FD
+FileVersionRef : 
+Wellknown      : False
+Ekus           : 
+Exceptions     : 
+FileAttributes : 
+FileException  : False
+UserMode       : True
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command generates a publisher rule for the specific file named ci.dll. The file ci.dll is a kernel component. Therefore, the cmdlet generates both a kernel rule and a user mode rule.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-SystemDriver</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>New-CIPolicy</command:name>
+      <maml:description>
+        <maml:para>Creates a Code Integrity policy as an .xml file.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>New</command:verb>
+      <command:noun>CIPolicy</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The New-CIPolicy cmdlet creates a Code Integrity policy as an .xml file. </maml:para>
+      <maml:para>If you specify DriverFile objects, this cmdlet generates rules based on the Level parameter. This cmdlet creates a policy based on those rules for the specified drive files. </maml:para>
+      <maml:para>If you specify Rule objects, this cmdlet creates a policy based on those objects. Because the rules that you specify are created at a specific level, do not specify a level. </maml:para>
+      <maml:para>If you do not supply either driver files or rules, this cmdlet performs a system scan similar to the Get-SystemDriver cmdlet. The cmdlet generates rules based on Level. If you specify the Audit parameter, this cmdlet scans the Code Integrity Audit log instead. </maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>New-CIPolicy</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="f">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path for the Code Integrity policy .xml file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="a">
+          <maml:name>Audit</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet searches the Code Integrity Audit log for drivers. It does not perform a full system scan. Specify this parameter only if you do not provide driver files or rules.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="d">
+          <maml:name>Deny</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet creates deny rules instead of the default allow rules.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true(ByValue)" position="named" aliases="df">
+          <maml:name>DriverFiles</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of DriverFile objects on which this cmdlet bases rules. To obtain a driver file, use the Get-SystemDriver cmdlet. </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">DriverFile[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Fallback</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of levels of detail for generated rules. If this cmdlet cannot generate a rule at the specified level, this cmdlet attempts to generate it at a fallback level. The acceptable values for this parameter are the same as for Level. If you specify multiple fallback levels, this cmdlet tries them in order. </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">RuleLevel[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>NoScript</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet does not search script files. It searches portable executable files (PE files) only. Specify this parameter only if you do not provide driver files or rules.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>NoShadowCopy</maml:name>
+          <maml:description>
+            <maml:para>Indicates that the Volume Snapshot Service (VSS) does not make a shadow copy of the disk while the scan runs. This parameter could cause an incomplete scan for a system that is running. </maml:para>
+            <maml:para>If a scan fails due to VSS errors caused by low disk space on the target drive, this cmdlet prompts you to specify this parameter.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="o">
+          <maml:name>OmitPaths</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of paths that this cmdlet omits from the search. Specify this parameter only if you do not provide driver files or rules. We recommend that you omit C:\Windows.old. </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="c">
+          <maml:name>PathToCatroot</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of the CatRoot folder. Specify this parameter to scan a remote or mounted drive. Specify this parameter only if you do not provide driver files or rules.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="s">
+          <maml:name>ScanPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path for this cmdlet to scan. You can specify a local or remote path. Specify this parameter only if you do not provide driver files or rules. If you specify a remote or mounted drive, also specify the PathToCatroot parameter. </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="u">
+          <maml:name>UserPEs</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet includes user mode files in the scan. Specify this parameter only if you do not provide driver files or rules.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="l">
+          <maml:name>Level</maml:name>
+          <maml:description>
+            <maml:para>Specifies the primary level of detail for generated rules. The acceptable values for this parameter are:
+
+-- None 
+-- Hash 
+-- FileName 
+-- SignedVersion 
+-- Publisher 
+-- FilePublisher 
+-- LeafCertificate 
+-- PcaCertificate 
+-- RootCertificate 
+-- WHQL 
+-- WHQLPublisher 
+-- WHQLFilePublisher </maml:para>
+          </maml:description>
+          <command:parameterValueGroup>
+            <command:parameterValue required="true" variableLength="false">None</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">Hash</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">FileName</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">SignedVersion</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">Publisher</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">FilePublisher</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">LeafCertificate</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">PcaCertificate</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">RootCertificate</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">WHQL</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">WHQLPublisher</command:parameterValue>
+            <command:parameterValue required="true" variableLength="false">WHQLFilePublisher</command:parameterValue>
+          </command:parameterValueGroup>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>New-CIPolicy</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="f">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path for the Code Integrity policy .xml file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="a">
+          <maml:name>Audit</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet searches the Code Integrity Audit log for drivers. It does not perform a full system scan. Specify this parameter only if you do not provide driver files or rules.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="d">
+          <maml:name>Deny</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet creates deny rules instead of the default allow rules.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>NoScript</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet does not search script files. It searches portable executable files (PE files) only. Specify this parameter only if you do not provide driver files or rules.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>NoShadowCopy</maml:name>
+          <maml:description>
+            <maml:para>Indicates that the Volume Snapshot Service (VSS) does not make a shadow copy of the disk while the scan runs. This parameter could cause an incomplete scan for a system that is running. </maml:para>
+            <maml:para>If a scan fails due to VSS errors caused by low disk space on the target drive, this cmdlet prompts you to specify this parameter.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="o">
+          <maml:name>OmitPaths</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of paths that this cmdlet omits from the search. Specify this parameter only if you do not provide driver files or rules. We recommend that you omit C:\Windows.old. </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="c">
+          <maml:name>PathToCatroot</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of the CatRoot folder. Specify this parameter to scan a remote or mounted drive. Specify this parameter only if you do not provide driver files or rules.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="s">
+          <maml:name>ScanPath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path for this cmdlet to scan. You can specify a local or remote path. Specify this parameter only if you do not provide driver files or rules. If you specify a remote or mounted drive, also specify the PathToCatroot parameter. </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="u">
+          <maml:name>UserPEs</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet includes user mode files in the scan. Specify this parameter only if you do not provide driver files or rules.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true(ByValue)" position="named" aliases="r">
+          <maml:name>Rules</maml:name>
+          <maml:description>
+            <maml:para>Specifies an array of Rule objects that this cmdlet includes in the policy. To obtain a rule object, use the Get-CIPolicy or New-CIPolicyRule cmdlets. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">Rule[]</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="a">
+        <maml:name>Audit</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet searches the Code Integrity Audit log for drivers. It does not perform a full system scan. Specify this parameter only if you do not provide driver files or rules.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="d">
+        <maml:name>Deny</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet creates deny rules instead of the default allow rules.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="true(ByValue)" position="named" aliases="df">
+        <maml:name>DriverFiles</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of DriverFile objects on which this cmdlet bases rules. To obtain a driver file, use the Get-SystemDriver cmdlet. </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">DriverFile[]</command:parameterValue>
+        <dev:type>
+          <maml:name>DriverFile[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Fallback</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of levels of detail for generated rules. If this cmdlet cannot generate a rule at the specified level, this cmdlet attempts to generate it at a fallback level. The acceptable values for this parameter are the same as for Level. If you specify multiple fallback levels, this cmdlet tries them in order. </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">RuleLevel[]</command:parameterValue>
+        <dev:type>
+          <maml:name>RuleLevel[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="f">
+        <maml:name>FilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path for the Code Integrity policy .xml file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="l">
+        <maml:name>Level</maml:name>
+        <maml:description>
+          <maml:para>Specifies the primary level of detail for generated rules. The acceptable values for this parameter are:
+
+-- None 
+-- Hash 
+-- FileName 
+-- SignedVersion 
+-- Publisher 
+-- FilePublisher 
+-- LeafCertificate 
+-- PcaCertificate 
+-- RootCertificate 
+-- WHQL 
+-- WHQLPublisher 
+-- WHQLFilePublisher </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">RuleLevel</command:parameterValue>
+        <dev:type>
+          <maml:name>RuleLevel</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>NoScript</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet does not search script files. It searches portable executable files (PE files) only. Specify this parameter only if you do not provide driver files or rules.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>NoShadowCopy</maml:name>
+        <maml:description>
+          <maml:para>Indicates that the Volume Snapshot Service (VSS) does not make a shadow copy of the disk while the scan runs. This parameter could cause an incomplete scan for a system that is running. </maml:para>
+          <maml:para>If a scan fails due to VSS errors caused by low disk space on the target drive, this cmdlet prompts you to specify this parameter.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="false" position="named" aliases="o">
+        <maml:name>OmitPaths</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of paths that this cmdlet omits from the search. Specify this parameter only if you do not provide driver files or rules. We recommend that you omit C:\Windows.old. </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="c">
+        <maml:name>PathToCatroot</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of the CatRoot folder. Specify this parameter to scan a remote or mounted drive. Specify this parameter only if you do not provide driver files or rules.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="true(ByValue)" position="named" aliases="r">
+        <maml:name>Rules</maml:name>
+        <maml:description>
+          <maml:para>Specifies an array of Rule objects that this cmdlet includes in the policy. To obtain a rule object, use the Get-CIPolicy or New-CIPolicyRule cmdlets. </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="true">Rule[]</command:parameterValue>
+        <dev:type>
+          <maml:name>Rule[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="s">
+        <maml:name>ScanPath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path for this cmdlet to scan. You can specify a local or remote path. Specify this parameter only if you do not provide driver files or rules. If you specify a remote or mounted drive, also specify the PathToCatroot parameter. </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="u">
+        <maml:name>UserPEs</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet includes user mode files in the scan. Specify this parameter only if you do not provide driver files or rules.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Create a policy</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>The first command scans for driver information and creates rules at the Publisher level. The command creates a policy and stores it in the file that is named Policy.xml. This command specifies the OmitPaths parameter to exclude files in the temp\ConfigCITestBinaries folder. The command specifies the NoScript parameterso that it gets information for only PE files.
+PS C:\&gt;New-CIPolicy -ScanPath '.\temp\' -UserPEs -OmitPaths '.\temp\ConfigCITestBinaries' -NoScript -FilePath '.\Policy.xml' -Level Publisher
+Scan completed successfully
+
+The second command displays the contents of the policy. 
+PS C:\&gt;Get-Content -Path '.\policy.xml'
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;SiPolicy xmlns="urn:schemas-microsoft-com:sipolicy"&gt;
+  &lt;VersionEx&gt;10.0.0.0&lt;/VersionEx&gt;
+  &lt;PolicyTypeID&gt;{A244370E-44C9-4C06-B551-F6016E563076}&lt;/PolicyTypeID&gt;
+  &lt;PlatformID&gt;{2E07F7E4-194C-4D20-B7C9-6F44A6C5A234}&lt;/PlatformID&gt;
+  &lt;Rules&gt;
+    &lt;Rule&gt;
+      &lt;Option&gt;Enabled:Unsigned System Integrity Policy&lt;/Option&gt;
+    &lt;/Rule&gt;
+    &lt;Rule&gt;
+      &lt;Option&gt;Enabled:Audit Mode&lt;/Option&gt;
+    &lt;/Rule&gt;
+    &lt;Rule&gt;
+      &lt;Option&gt;Enabled:Advanced Boot Options Menu&lt;/Option&gt;
+    &lt;/Rule&gt;
+    &lt;Rule&gt;
+      &lt;Option&gt;Enabled:UMCI&lt;/Option&gt;
+    &lt;/Rule&gt;
+    &lt;Rule&gt;
+      &lt;Option&gt;Disabled:Script Enforcement&lt;/Option&gt;
+    &lt;/Rule&gt;
+  &lt;/Rules&gt;
+  &lt;!--EKUS--&gt;
+  &lt;EKUs /&gt;
+  &lt;!--File Rules--&gt;
+  &lt;FileRules&gt;
+    &lt;Allow ID="ID_ALLOW_A_2F" FriendlyName="\\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll Hash Sha1" Hash="BE0777
+F5AF88628D4555A875036648DF1AD19BBE" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_30" FriendlyName="\\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll Hash Sha256" Hash="6FA5
+AF724499C338A77FEEAD90F55DDF5F23D081C6DCE8E9DF486E95C6A9B310" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_31" FriendlyName="\\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll Hash Page Sha1" Hash="D
+41570F2E6E7E6245CF342131D4706C944562B1E" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_32" FriendlyName="\\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll Hash Page Sha256" Hash=
+"F714D9784E15B88F56180C8EE2B40C769CC83428954585A1DCF9A260FE967CDD" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_37" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\ntoskrnl.exe Hash Sha1" Ha
+sh="FD58E1BFA1E661C809F8A2437932B0F0308A99F8" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_38" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\ntoskrnl.exe Hash Sha256"
+Hash="A1C9FA473C2D79D0F68DF6EC72E31847F0FDA283D3A9E6B1405B0DF5929CCCB8" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_39" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\ntoskrnl.exe Hash Page Sha
+1" Hash="6D3764B75C6502634234911B8F224FC9568217C9" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_3A" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\ntoskrnl.exe Hash Page Sha
+256" Hash="2196AD3A00A59F4C35EEF7FE843FA3D6F80D5EFB3C674ADC087396B77AB35768" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_3F" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\storahci.sys Hash Sha1" Ha
+sh="28FAEFE1B18A979F9FF55744B22C6E5EA2949959" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_40" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\storahci.sys Hash Sha256"
+Hash="DA737C142A51A73D82E6AD677474C8031486FDEF018A6FE9D178564F83AB284B" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_41" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\storahci.sys Hash Page Sha
+1" Hash="029606A9B560F4921EC1122AA73C19C9B97F7764" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_42" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\storahci.sys Hash Page Sha
+256" Hash="2A5D6BCBFA55DB0F0487F45F4A6986AFC2C4783820EDA48DE9E0560E51D8DB56" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_33" FriendlyName="\\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll Hash Sha1" Hash="BE0777F5AF88628D4555A875036648DF1AD19BBE" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_34" FriendlyName="\\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll Hash Sha256" Hash="6FA5
+AF724499C338A77FEEAD90F55DDF5F23D081C6DCE8E9DF486E95C6A9B310" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_35" FriendlyName="\\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll Hash Page Sha1" Hash="D
+41570F2E6E7E6245CF342131D4706C944562B1E" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_36" FriendlyName="\\?\E:\cmdlets\temp\Microsoft.ConfigCI.Commands.dll Hash Page Sha256" Hash=
+"F714D9784E15B88F56180C8EE2B40C769CC83428954585A1DCF9A260FE967CDD" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_3B" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\ntoskrnl.exe Hash Sha1" Hash="FD58E1BFA1E661C809F8A2437932B0F0308A99F8" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_3C" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\ntoskrnl.exe Hash Sha256"
+Hash="A1C9FA473C2D79D0F68DF6EC72E31847F0FDA283D3A9E6B1405B0DF5929CCCB8" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_3D" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\ntoskrnl.exe Hash Page Sha
+1" Hash="6D3764B75C6502634234911B8F224FC9568217C9" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_3E" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\ntoskrnl.exe Hash Page Sha
+256" Hash="2196AD3A00A59F4C35EEF7FE843FA3D6F80D5EFB3C674ADC087396B77AB35768" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_43" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\storahci.sys Hash Sha1" Ha
+sh="28FAEFE1B18A979F9FF55744B22C6E5EA2949959" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_44" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\storahci.sys Hash Sha256"
+Hash="DA737C142A51A73D82E6AD677474C8031486FDEF018A6FE9D178564F83AB284B" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_45" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\storahci.sys Hash Page Sha
+1" Hash="029606A9B560F4921EC1122AA73C19C9B97F7764" /&gt;
+    &lt;Allow ID="ID_ALLOW_A_46" FriendlyName="\\?\E:\cmdlets\temp\PackageInspectorTestBinaries\storahci.sys Hash Page Sha
+256" Hash="2A5D6BCBFA55DB0F0487F45F4A6986AFC2C4783820EDA48DE9E0560E51D8DB56" /&gt;
+  &lt;/FileRules&gt;
+  &lt;!--Signers--&gt;
+  &lt;Signers&gt;
+    &lt;Signer ID="ID_SIGNER_S_D" Name="MSIT Test CodeSign CA 3"&gt;
+      &lt;CertRoot Type="TBS" Value="FA6B9A2230CE08BCA81D096B28CF495672401D3A43A0D285CF352464A6C9C7FD" /&gt;
+      &lt;CertPublisher Value="Microsoft Windows" /&gt;
+    &lt;/Signer&gt;
+    &lt;Signer ID="ID_SIGNER_S_E" Name="MSIT Test CodeSign CA 3"&gt;
+      &lt;CertRoot Type="TBS" Value="FA6B9A2230CE08BCA81D096B28CF495672401D3A43A0D285CF352464A6C9C7FD" /&gt;
+      &lt;CertPublisher Value="Microsoft Windows" /&gt;
+    &lt;/Signer&gt;
+    &lt;Signer ID="ID_SIGNER_S_13" Name="VeriSign Class 3 Code Signing 2010 CA"&gt;
+      &lt;CertRoot Type="TBS" Value="4843A82ED3B1F2BFBEE9671960E1940C942F688D" /&gt;
+      &lt;CertPublisher Value="NVIDIA Corporation" /&gt;
+    &lt;/Signer&gt;
+    &lt;Signer ID="ID_SIGNER_S_14" Name="Microsoft Windows Third Party Component CA 2012"&gt;
+      &lt;CertRoot Type="TBS" Value="CEC1AFD0E310C55C1DCC601AB8E172917706AA32FB5EAF826813547FDF02DD46" /&gt;
+      &lt;CertPublisher Value="Microsoft Windows Hardware Compatibility Publisher" /&gt;
+    &lt;/Signer&gt;
+    &lt;Signer ID="ID_SIGNER_S_15" Name="VeriSign Class 3 Code Signing 2010 CA"&gt;
+      &lt;CertRoot Type="TBS" Value="4843A82ED3B1F2BFBEE9671960E1940C942F688D" /&gt;
+      &lt;CertPublisher Value="NVIDIA Corporation" /&gt;
+    &lt;/Signer&gt;
+    &lt;Signer ID="ID_SIGNER_S_16" Name="Microsoft Windows Third Party Component CA 2012"&gt;
+      &lt;CertRoot Type="TBS" Value="CEC1AFD0E310C55C1DCC601AB8E172917706AA32FB5EAF826813547FDF02DD46" /&gt;
+      &lt;CertPublisher Value="Microsoft Windows Hardware Compatibility Publisher" /&gt;
+    &lt;/Signer&gt;
+  &lt;/Signers&gt;
+  &lt;!--Driver Signing Scenarios--&gt;
+  &lt;SigningScenarios&gt;
+    &lt;SigningScenario Value="131" ID="ID_SIGNINGSCENARIO_DRIVERS_1" FriendlyName="Auto generated policy on 11-13-2015"&gt;
+      &lt;ProductSigners&gt;
+        &lt;FileRulesRef&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_2F" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_30" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_31" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_32" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_37" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_38" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_39" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_3A" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_3F" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_40" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_41" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_42" /&gt;
+        &lt;/FileRulesRef&gt;
+        &lt;AllowedSigners&gt;
+          &lt;AllowedSigner SignerId="ID_SIGNER_S_D" /&gt;
+          &lt;AllowedSigner SignerId="ID_SIGNER_S_13" /&gt;
+          &lt;AllowedSigner SignerId="ID_SIGNER_S_14" /&gt;
+        &lt;/AllowedSigners&gt;
+      &lt;/ProductSigners&gt;
+    &lt;/SigningScenario&gt;
+    &lt;SigningScenario Value="12" ID="ID_SIGNINGSCENARIO_WINDOWS" FriendlyName="Auto generated policy on 11-13-2015"&gt;
+      &lt;ProductSigners&gt;
+        &lt;FileRulesRef&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_33" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_34" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_35" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_36" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_3B" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_3C" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_3D" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_3E" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_43" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_44" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_45" /&gt;
+          &lt;FileRuleRef RuleID="ID_ALLOW_A_46" /&gt;
+        &lt;/FileRulesRef&gt;
+        &lt;AllowedSigners&gt;
+          &lt;AllowedSigner SignerId="ID_SIGNER_S_E" /&gt;
+          &lt;AllowedSigner SignerId="ID_SIGNER_S_15" /&gt;
+          &lt;AllowedSigner SignerId="ID_SIGNER_S_16" /&gt;
+        &lt;/AllowedSigners&gt;
+      &lt;/ProductSigners&gt;
+    &lt;/SigningScenario&gt;
+  &lt;/SigningScenarios&gt;
+  &lt;UpdatePolicySigners /&gt;
+  &lt;CiSigners&gt;
+    &lt;CiSigner SignerId="ID_SIGNER_S_E" /&gt;
+    &lt;CiSigner SignerId="ID_SIGNER_S_15" /&gt;
+    &lt;CiSigner SignerId="ID_SIGNER_S_16" /&gt;
+  &lt;/CiSigners&gt;
+  &lt;HvciOptions&gt;0&lt;/HvciOptions&gt;
+&lt;/SiPolicy&gt; 
+</dev:code>
+        <dev:remarks>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2: Scan files that have an invalid signature format</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;New-CIPolicy -ScanPath '.\temp\' -UserPEs -FilePath ".\policy.xml" -Level Publisher -Fallback Hash
+Unable to generate rules for all scanned files at the requested level.  A list 
+of files not covered by the current policy can be found at 
+C:\Users\tocal\AppData\Local\Temp\tmp2F2D.tmp.  If it is safe to not include 
+these files, no action needs to be taken, otherwise a more complete policy may 
+be created using the -fallback switch
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command scans for driver information, and then creates rules at the Publisher level, just as the first example did. This command does not specify the OmitPaths and NoScript parameters. The command encounters files that have an invalid or corrupted signature format. The cmdlet returns an informational message about generated rules. </maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 3: Create rules for driver files in a variable </maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;$DriverFiles = Get-SystemDriver -ScanPath '.\temp\' -UserPEs -OmitPaths '.\temp\ConfigCITestBinaries' -NoScript
+PS C:\&gt; New-CIPolicy -Level Publisher -Fallback Hash -FilePath '.\policy02.xml' -DriverFiles $DriverFiles 
+</dev:code>
+        <dev:remarks>
+          <maml:para>The first command gets drivers by using the Get-SystemDriver cmdlet, and then stores them in the $DriverFiles variable.</maml:para>
+          <maml:para>The second command creates rules at the Publisher level for the items stored in $DriverFiles. This example has the same effect as the single command in the second example. </maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-CIPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-SystemDriver</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Merge-CIPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>New-CIPolicyRule</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Remove-CIPolicyRule</command:name>
+      <maml:description>
+        <maml:para>This cmdlet is not supported. </maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Remove</command:verb>
+      <command:noun>CIPolicyRule</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Remove-CIPolicyRule cmdlet is not supported. Do not use this cmdlet. </maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Remove-CIPolicyRule</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+          <maml:name>Id</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="f">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>
+            </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="f">
+        <maml:name>FilePath</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="none">
+        <maml:name>Id</maml:name>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Rule</maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title> 1: </maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:remarks>
+          <maml:para>
+          </maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Set-CIPolicyIdInfo</command:name>
+      <maml:description>
+        <maml:para>Modifies the name and ID of a Code Integrity policy.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Set</command:verb>
+      <command:noun>CIPolicyIdInfo</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Set-CIPolicyIdInfo cmdlet modifies the policy name and policy ID of a Code Integrity policy. Specify the .xml file of the policy to modify. Event Tracing for Windows (ETW) events use the PolicyID and Name properties to identify which policy is currently running on a computer.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-CIPolicyIdInfo</maml:name>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="pid">
+          <maml:name>PolicyId</maml:name>
+          <maml:description>
+            <maml:para>Specifies the value for the PolicyID property. This string is not required to be a GUID. </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="pn">
+          <maml:name>PolicyName</maml:name>
+          <maml:description>
+            <maml:para>Specifies the value for the Name property. </maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="f">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of a Code Integrity policy .xml file. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="f">
+        <maml:name>FilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of a Code Integrity policy .xml file. </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="pid">
+        <maml:name>PolicyId</maml:name>
+        <maml:description>
+          <maml:para>Specifies the value for the PolicyID property. This string is not required to be a GUID. </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="pn">
+        <maml:name>PolicyName</maml:name>
+        <maml:description>
+          <maml:para>Specifies the value for the Name property. </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Modify the ID and name of a policy</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Set-CIPolicyIdInfo -FilePath ".\Policy03.xml" -PolicyId "CIP077" -PolicyName "CIPolicy03"
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command modifies the policy ID and the policy name for the policy stored in the Policy03.xml file. </maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>Example 2: Modify the name of a policy</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Set-CIPolicyIdInfo -FilePath ".\Policy03.xml" -PolicyName "CIPolicy77"
+</dev:code>
+        <dev:remarks>
+          <maml:para>This command modifies only the policy name for the policy stored in the Policy03.xml file.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-CIPolicyIdInfo</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Set-CIPolicyVersion</command:name>
+      <maml:description>
+        <maml:para>Updates the version number of the policy.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Set</command:verb>
+      <command:noun>CIPolicyVersion</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Set-CIPolicyVersion cmdlet updates the version number of the policy for a signed policy scenario. When you update a signed policy, the policy must be replaced by a policy that has a signer specified in the UpdatePolicySigners property of the policy. The policy must also be an equal or greater version that the previous policy.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-CIPolicyVersion</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="f">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of a policy .xml file that this cmdlet udpates.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="v">
+          <maml:name>Version</maml:name>
+          <maml:description>
+            <maml:para>Specifies the version string with which this cmdlet replaces the current version of the policy. Specify the version in the following format: integer.integer.integer.integer. The New-CIPolicy and Merge-CIPolicy cmdlets create policies with the default version of 10.0.0.0.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="f">
+        <maml:name>FilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of a policy .xml file that this cmdlet udpates.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="v">
+        <maml:name>Version</maml:name>
+        <maml:description>
+          <maml:para>Specifies the version string with which this cmdlet replaces the current version of the policy. Specify the version in the following format: integer.integer.integer.integer. The New-CIPolicy and Merge-CIPolicy cmdlets create policies with the default version of 10.0.0.0.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Update the version number of a policy</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Set-CIPolicyVersion -FilePath '.\Policy.xml' -Version '11.1.0.2' 
+PS C:\&gt; Get-Content -Path '.Policy.xml'
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;SiPolicy xmlns="urn:schemas-microsoft-com:sipolicy"&gt;
+  &lt;VersionEx&gt;11.1.0.2&lt;/VersionEx&gt;
+  &lt;PolicyTypeID&gt;{A244370E-44C9-4C06-B551-F6016E563076}&lt;/PolicyTypeID&gt;
+</dev:code>
+        <dev:remarks>
+          <maml:para>The first command modifies the version of Policy.xml to be 11.1.0.2.</maml:para>
+          <maml:para>The second command displays the contents of the policy. This example shows the first few lines of the policy, which include the VersionEx property. It now has a value of 11.1.0.2. </maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Merge-CIPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>New-CIPolicy</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Set-HVCIOptions</command:name>
+      <maml:description>
+        <maml:para>Modifies hypervisor Code Integrity options for a policy.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Set</command:verb>
+      <command:noun>HVCIOptions</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Set-HVCIOptions cmdlet modifies hypervisor Code Integrity options for a policy. The policy stores these options in the HvciOptions property of the policy. You can specify any combination of the following values: 
+
+-- Enabled  
+-- DebugMode  
+-- Strict</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-HVCIOptions</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="f">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of the policy .xml file that this cmdlet modifies. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>DebugMode</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet turns on DebugMode in the policy.</maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Enabled</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet turns on Enabled in the policy. </maml:para>
+          </maml:description>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>Strict</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet turns on Strict in the policy.</maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-HVCIOptions</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="f">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of the policy .xml file that this cmdlet modifies. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+          <maml:name>None</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet removes all hypervisor Code Integrity options from the policy. In the policy itself, HvciOptions takes a value of zero (0). </maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>DebugMode</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet turns on DebugMode in the policy.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Enabled</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet turns on Enabled in the policy. </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="f">
+        <maml:name>FilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of the policy .xml file that this cmdlet modifies. </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>None</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet removes all hypervisor Code Integrity options from the policy. In the policy itself, HvciOptions takes a value of zero (0). </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="none">
+        <maml:name>Strict</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet turns on Strict in the policy.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Assign the Strict option</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>PS C:\&gt;Set-HVCIOptions -Strict -FilePath '.\Policy.xml'   
+PS C:\&gt; Get-Content -Path '.Policy.xml'
+    &lt;CiSigner SignerId="ID_SIGNER_S_21" /&gt;
+  &lt;/CiSigners&gt;
+  &lt;HvciOptions&gt;2&lt;/HvciOptions&gt;
+&lt;/SiPolicy&gt; 
+</dev:code>
+        <dev:remarks>
+          <maml:para>The first command assigns the Strict option in Policy.xml.</maml:para>
+          <maml:para>The second command displays the contents of the policy. This example shows the last few lines of the policy, which include the HvciOptions property. It now has a value of 2. </maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Set-RuleOption</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Set-RuleOption</command:name>
+      <maml:description>
+        <maml:para>Modifies rule options in a Code Integrity policy.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Set</command:verb>
+      <command:noun>RuleOption</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>The Set-RuleOption cmdlet modifies rule options in a Code Integrity policy. Rule options appear under the Rules property in the .xml policy file. To see the available rule options and their indexes, specify the Help parameter. This cmdlet adds the option that you specify by index. To remove a rule option, specify the Delete parameter. </maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-RuleOption</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="f">
+          <maml:name>FilePath</maml:name>
+          <maml:description>
+            <maml:para>Specifies the path of the policy .xml file that this cmdlet modifies. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="o">
+          <maml:name>Option</maml:name>
+          <maml:description>
+            <maml:para>Specifies the index of the rule option that this cmdlet modifies. Specify the Help parameter for option information. </maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="d">
+          <maml:name>Delete</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet removes the rule option that the Option parameter specifies. </maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-RuleOption</maml:name>
+        <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="h">
+          <maml:name>Help</maml:name>
+          <maml:description>
+            <maml:para>Indicates that this cmdlet displays the list of available options and their indexes. </maml:para>
+          </maml:description>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="d">
+        <maml:name>Delete</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet removes the rule option that the Option parameter specifies. </maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1" aliases="f">
+        <maml:name>FilePath</maml:name>
+        <maml:description>
+          <maml:para>Specifies the path of the policy .xml file that this cmdlet modifies. </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="named" aliases="h">
+        <maml:name>Help</maml:name>
+        <maml:description>
+          <maml:para>Indicates that this cmdlet displays the list of available options and their indexes. </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="2" aliases="o">
+        <maml:name>Option</maml:name>
+        <maml:description>
+          <maml:para>Specifies the index of the rule option that this cmdlet modifies. Specify the Help parameter for option information. </maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>none</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>
+          </maml:name>
+          <maml:uri>
+          </maml:uri>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+        </dev:type>
+        <maml:description>
+          <maml:para>
+          </maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:terminatingErrors />
+    <command:nonTerminatingErrors />
+    <command:examples>
+      <command:example>
+        <maml:title>Example 1: Remove a rule option</maml:title>
+        <maml:introduction>
+          <maml:para>
+          </maml:para>
+        </maml:introduction>
+        <dev:code>The first command displays the contents of the policy. This example shows only the first few lines of the policy, which include the Rules property. One of the options displayed is Enabled:Audit Mode.
+PS C:\&gt;Get-Content -Path '.Policy.xml'
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;SiPolicy xmlns="urn:schemas-microsoft-com:sipolicy"&gt;
+  &lt;VersionEx&gt;10.0.0.0&lt;/VersionEx&gt;
+  &lt;PolicyTypeID&gt;{A244370E-44C9-4C06-B551-F6016E563076}&lt;/PolicyTypeID&gt;
+  &lt;PlatformID&gt;{2E07F7E4-194C-4D20-B7C9-6F44A6C5A234}&lt;/PlatformID&gt;
+  &lt;Rules&gt;
+    &lt;Rule&gt;
+      &lt;Option&gt;Enabled:Unsigned System Integrity Policy&lt;/Option&gt;
+    &lt;/Rule&gt;
+    &lt;Rule&gt;
+      &lt;Option&gt;Enabled:Audit Mode&lt;/Option&gt;
+    &lt;/Rule&gt;
+    &lt;Rule&gt;
+      &lt;Option&gt;Enabled:Advanced Boot Options Menu&lt;/Option&gt;
+    &lt;/Rule&gt;
+    &lt;Rule&gt;
+      &lt;Option&gt;Enabled:UMCI&lt;/Option&gt;
+    &lt;/Rule&gt;
+  &lt;/Rules&gt;
+
+The second command removes the Enabled:Audit Mode from Policy.xml.The final command displays the contents of the policy again. Enabled:Audit Mode is no longer part of the policy.
+PS C:\&gt;Set-RuleOption -FilePath '.\Policy.xml' -Option 3 -Delete 
+PS C:\&gt; Get-Content -Path '.Policy.xml'
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;SiPolicy xmlns="urn:schemas-microsoft-com:sipolicy"&gt;
+  &lt;VersionEx&gt;10.0.0.0&lt;/VersionEx&gt;
+  &lt;PolicyTypeID&gt;{A244370E-44C9-4C06-B551-F6016E563076}&lt;/PolicyTypeID&gt;
+  &lt;PlatformID&gt;{2E07F7E4-194C-4D20-B7C9-6F44A6C5A234}&lt;/PlatformID&gt;
+  &lt;Rules&gt;
+    &lt;Rule&gt;
+      &lt;Option&gt;Enabled:Unsigned System Integrity Policy&lt;/Option&gt;
+    &lt;/Rule&gt;
+    &lt;Rule&gt;
+      &lt;Option&gt;Enabled:Advanced Boot Options Menu&lt;/Option&gt;
+    &lt;/Rule&gt;
+    &lt;Rule&gt;
+      &lt;Option&gt;Enabled:UMCI&lt;/Option&gt;
+    &lt;/Rule&gt;
+  &lt;/Rules&gt;
+</dev:code>
+        <dev:remarks>
+          <maml:para>This example removes Enabled:Audit Mode from a policy.</maml:para>
+          <maml:para />
+          <maml:para />
+        </dev:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Set-HVCIOptions</maml:linkText>
+        <maml:uri />
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+
+</helpItems>
