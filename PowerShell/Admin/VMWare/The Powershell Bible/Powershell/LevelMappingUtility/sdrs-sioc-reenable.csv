@@ -1,0 +1,23 @@
+#TYPE VMware.VimAutomation.PowerCliExtensions.CounterLevelMapping,,,
+Name,AggregateLevel,PerDeviceLevel,Server
+disk.numberReadAveraged.average,1,1,example.server.com
+disk.numberWriteAveraged.average,1,1,example.server.com
+virtualDisk.numberReadAveraged.average,1,1,example.server.com
+virtualDisk.numberWriteAveraged.average,1,1,example.server.com
+virtualDisk.totalReadLatency.average,1,1,example.server.com
+virtualDisk.totalWriteLatency.average,1,1,example.server.com
+datastore.numberReadAveraged.average,1,1,example.server.com
+datastore.numberWriteAveraged.average,1,1,example.server.com
+datastore.totalReadLatency.average,1,1,example.server.com
+datastore.totalWriteLatency.average,1,1,example.server.com
+datastore.datastoreIops.average,1,1,example.server.com
+datastore.sizeNormalizedDatastoreLatency.average,1,1,example.server.com
+datastore.datastoreReadIops.latest,1,1,example.server.com
+datastore.datastoreReadOIO.latest,1,1,example.server.com
+datastore.datastoreWriteIops.latest,1,1,example.server.com
+datastore.datastoreWriteOIO.latest,1,1,example.server.com
+datastore.siocActiveTimePercentage.average,1,1,example.server.com
+datastore.datastoreVMObservedLatency.latest,1,1,example.server.com
+datastore.datastoreMaxQueueDepth.latest,1,1,example.server.com
+disk.maxQueueDepth.average,1,1,example.server.com
+disk.deviceLatency.average,1,1,example.server.com

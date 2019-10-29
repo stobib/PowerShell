@@ -1,0 +1,82 @@
+PS C:\Windows\system32> Set-ExecutionPolicy -ExecutionPolicy ByPass
+Set-ExecutionPolicy Unrestricted
+
+\\w16asccmdb01.inf.utshare.local\ClientHealth$\ConfigMgrClientHealth.ps1 -Config \\w16asccmdb01.inf.utshare.local\ClientHealth$\Config.Xml -Webservice https://w16asccmdb01.inf.utshare.local/ConfigMgrClientHealth
+PowerShell version: 5.1.14393.3053. Script executing with Administrator rights.
+ConfigMgr Client Health 0.8.1 starting.
+Script last ran: 07/03/2019 17:55:11
+WMI Check: OK
+Compliance States: OK.
+Configuration Manager Client is installed
+Configuring service BITS StartupType to: Automatic (Delayed Start)...
+Test-Service : Failed to set Automatic (Delayed Start) StartupType on service BITS
+At \\w16asccmdb01.inf.utshare.local\ClientHealth$\ConfigMgrClientHealth.ps1:1446 char:17
++ ...             Test-Service -Name $service.Name -StartupType $service.St ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Test-Service
+ 
+Service BITS running: OK
+Service winmgmt startup: OK
+Service winmgmt running: OK
+Configuring service wuauserv StartupType to: Automatic (Delayed Start)...
+Test-Service : Failed to set Automatic (Delayed Start) StartupType on service wuauserv
+At \\w16asccmdb01.inf.utshare.local\ClientHealth$\ConfigMgrClientHealth.ps1:1446 char:17
++ ...             Test-Service -Name $service.Name -StartupType $service.St ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Test-Service
+ 
+Starting service: wuauserv...
+Service lanmanserver startup: OK
+Service lanmanserver running: OK
+Service RpcSs startup: OK
+Service RpcSs running: OK
+Service W32Time startup: OK
+Service W32Time running: OK
+Configuring service ccmexec StartupType to: Automatic (Delayed Start)...
+Test-Service : Failed to set Automatic (Delayed Start) StartupType on service ccmexec
+At \\w16asccmdb01.inf.utshare.local\ClientHealth$\ConfigMgrClientHealth.ps1:1446 char:17
++ ...             Test-Service -Name $service.Name -StartupType $service.St ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Test-Service
+ 
+Service ccmexec running: OK
+Service ccmexec uptime: OK
+SMSTSMgr: OK
+ConfigMgr Client Site Code: OK
+ConfigMgr Client Cache Size: OK
+WARNING: ConfigMgr Client Max Log Size: Configuring to 4096 KB
+ConfigMgr Client Max Log History: OK(1)
+ConfigMgr Client Provisioning Mode: OK
+ConfigMgr Client Certificate: OK
+ConfigMgr Hardware Inventory scan: OK
+Software Metering - PrepDriver: OK
+DNS Check: OK
+BITS: Error. Remediating
+GPO Cache: Broken(WUAHandler Log)
+GPO Cache: Repaired(WUAHandler Log)
+StateMessage: OK
+Adminshare Admin$: OK
+Adminshare C$: OK
+Drivers: OK
+Free space C: OK
+Restarting service CcmExec...
+Pending Reboot: OK
+Clearing ConfigMgr orphaned Cache items.
+Failed Clearing ConfigMgr orphaned Cache items.
+Starting Built-in Configuration Manager Client Health Evaluation
+Setting last ran to 07/03/2019 18:18:20
+Updating local logfile with results
+Updating fileshare logfile with results
+Out-File : The network name cannot be found.
+At \\w16asccmdb01.inf.utshare.local\ClientHealth$\ConfigMgrClientHealth.ps1:227 char:14
++         $obj|Out-File -Encoding utf8 -Append $logFile
++              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OpenError: (:) [Out-File], IOException
+    + FullyQualifiedErrorId : FileOpenFailure,Microsoft.PowerShell.Commands.OutFileCommand
+ 
+Updating SQL database with results using webservice
+
+PS C:\Windows\system32> 
