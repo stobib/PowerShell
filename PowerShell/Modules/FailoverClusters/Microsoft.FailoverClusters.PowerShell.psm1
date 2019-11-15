@@ -20,9 +20,10 @@ Add-Type -TypeDefinition @"
        Rack = 2000,
        Chassis = 3000,
        Node = 4000,
-       Enclosure = 5000
+       StorageNode = 5000
     }
 "@
+
 
 function Get-ClusterDiagnosticInfo
 {  
@@ -1406,6 +1407,7 @@ GenerateEventLogs
     End {}  
 }  
 Export-ModuleMember Get-ClusterDiagnosticInfo
+
 
 Set-Alias Enable-ClusterS2D -Value Enable-ClusterStorageSpacesDirect
 Export-ModuleMember -Alias Enable-ClusterS2D

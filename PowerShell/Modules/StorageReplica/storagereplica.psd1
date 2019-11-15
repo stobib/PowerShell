@@ -5,7 +5,7 @@
             Copyright="© Microsoft Corporation. All rights reserved."
             PowerShellVersion = '3.0'
             CLRVersion="4.0"
-            HelpInfoUri="http://go.microsoft.com/fwlink/?linkid=397379"
+            HelpInfoUri="https://go.microsoft.com/fwlink/?linkid=397379"
             ModuleVersion = '1.0'
             
             TypesToProcess = 'wvr.types.ps1xml'
@@ -32,6 +32,7 @@
                                   'Export-SRConfiguration',
                                   'Set-SRNetworkConstraint',
                                   'Get-SRNetworkConstraint',
-                                  'Remove-SRNetworkConstraint')
-
+                                  'Remove-SRNetworkConstraint',
+                                  'Mount-SRDestination',
+                                  'Dismount-SRDestination')
         }

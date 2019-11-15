@@ -8,7 +8,7 @@ $1MinInMilliSeconds = 60000
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-SessionCollectionConfiguration {
 [CmdletBinding(DefaultParameterSetName="General",
-HelpURI="http://go.microsoft.com/fwlink/?LinkId=254080")]
+HelpURI="https://go.microsoft.com/fwlink/?LinkId=254080")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDSessionHostCollectionGeneralProperties")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDSessionHostCollectionUserGroupProperties")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDSessionHostCollectionConnectionProperties")]
@@ -219,7 +219,7 @@ param (
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-SessionCollectionConfiguration {
 [CmdletBinding(DefaultParameterSetName="Default",
-HelpURI="http://go.microsoft.com/fwlink/?LinkId=254081")]
+HelpURI="https://go.microsoft.com/fwlink/?LinkId=254081")]
 param (
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0)]
     [string]

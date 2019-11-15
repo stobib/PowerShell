@@ -113,7 +113,10 @@ function Get-NetworkControllerDeploymentInfo
                 $str = "Failed to discover Connection URI for Network Controller on computer " + $NetworkController + " Use RestURI parameter."
                 Write-Host $str
             }
-            $NCURL = "https://" + $ncIpAddr
+            else
+            {
+                $NCURL = "https://" + $ncIpAddr
+            }
         }
         else
         {
@@ -187,7 +190,8 @@ function Debug-NetworkController
         [System.Management.Automation.PSCredential][parameter(Mandatory=$false, HelpMessage="Credential to use for Network Controller. Specify in case of Kerberos deployment.")]$Credential = $null,
         [String][parameter(Mandatory=$false, HelpMessage="The URI to be used for Network Controller REST APIs. Specify in case of wild card certificate deployment.")]$RestURI = $null,
         [String][parameter(Mandatory=$false, HelpMessage="Certificate thumbprint to use for Network Controller. Specify in case of certificate deployment.")]$CertificateThumbprint = $null,
-        [Hashtable][parameter(Mandatory=$false, HelpMessage="List of device Credentials. Specify if device credentials are different then Network Controller.")]$DeviceCredentials
+        [Hashtable][parameter(Mandatory=$false, HelpMessage="List of device Credentials. Specify if device credentials are different then Network Controller.")]$DeviceCredentials,
+        [Switch][parameter(Mandatory=$false, HelpMessage="Exclude SLB State information.")]$ExcludeSlbState = $false
     )
     # Set up eventing
     try { Stop-Transcript -ErrorAction Ignore | Out-Null } catch {}
@@ -199,6 +203,12 @@ function Debug-NetworkController
     $NCURL = $ncInfo.NetworkControllerURI
     $clientCert = $ncInfo.ClientCert
 
+    if ($ncInfo.NetworkControllerURI -eq $null)
+    {
+        Write-Host "Please use -RestURI".
+        return 
+    }
+
     if ($ncInfo.DiagnosticLogLocation -ne $null)
     {
         Write-Host "NetworkController Log Location " $ncInfo.DiagnosticLogLocation
@@ -208,13 +218,10 @@ function Debug-NetworkController
         Write-Host "NetworkController Log Location is local to each node"
     }
 
-    if ($Credential -ne $null)
+    if ($DeviceCredentials -eq $null -or $DeviceCredentials.Count -eq 0 -or $DeviceCredentials.GetType().Name -ne [System.Collections.Hashtable])
     {
-        if ($DeviceCredentials.Count -eq 0)
-        {
-            $DeviceCredentials = @{}
-            $DeviceCredentials.Add($Script:AllDeviceCredential, $Credential)
-        }
+        $DeviceCredentials = @{}
+        $DeviceCredentials.Add($Script:AllDeviceCredential, $Credential)
     }
 
     # get hosts connected to NC.
@@ -286,7 +293,7 @@ function Debug-NetworkController
     else
     {
         # Get Diagnostics data from all NC nodes
-        CollectDiagnosticsDataFromNC $ncInfo.Nodes $IncludeTraces $OutputDirectory $NCURL $Credential $clientCert
+        CollectDiagnosticsDataFromNC -nodes $ncInfo.Nodes -includeTraces $IncludeTraces -outputDirectory $OutputDirectory -NCURL $NCURL -credential $Credential -certificateThumbPrint $clientCert -excludeSlbState $ExcludeSlbState
 
         # Get Diagnostics data from all hosts
         CollectDiagnosticsDataFromServers $hosts.Values $IncludeTraces $OutputDirectory $DeviceCredentials
@@ -296,6 +303,18 @@ function Debug-NetworkController
 
         # Get Diagnostics data from all Muxes
         CollectDiagnosticsDataFromMuxs $muxes.Values $IncludeTraces $OutputDirectory $DeviceCredentials
+
+        if ($ncInfo.DiagnosticLogLocation -ne $null -and $IncludeTraces -eq $true)
+        {
+            $shareName = $ncInfo.DiagnosticLogLocation
+
+            if ($shareName  -gt 4 -and $shareName.SubString(0,5).Equals("file:"))
+            {
+                $shareName = $shareName.SubString(5) -replace '/','\'
+            }
+            Write-Host "Copying shared logs from" $shareName
+            Copy-Item -Path $shareName -Destination "$outputDirectory\\SharedLogs" -Recurse
+        }
     }
 
     Stop-Transcript
@@ -462,8 +481,6 @@ function CollectRESTDataFromNC
 {
     param($NCURI, $Destination, $Credential, $ClientCert)
 
-    md $Destination -ErrorAction SilentlyContinue | Out-Null
-
     $BaseUrl = "$NCURI/Networking/v1"
 
     InvokeREST $BaseUrl "accessControlLists" $Destination $Credential $ClientCert $null
@@ -601,14 +618,46 @@ function CollectDiagnosticsDataFromGateway
         md $OutDirectory -ErrorAction SilentlyContinue | Out-Null
 
         # Collect information
-        Get-NetCompartment | fl * > "$OutDirectory\NetCompartment.txt"
-        Get-NetIpInterface –IncludeAllCompartments | fl * > "$OutDirectory\NetIpInterface.txt"
+        $compartments = Get-NetCompartment 
+        $compartments | fl * > "$OutDirectory\NetCompartment.txt"
+        Get-NetIpInterface -IncludeAllCompartments | fl * > "$OutDirectory\NetIpInterface.txt"
         Get-NetRoute -IncludeAllCompartments | fl * > "$OutDirectory\NetRoutes.txt"
         Get-NetIpAddress -IncludeAllCompartments | fl * > "$OutDirectory\NetIPAddress.txt"
         Get-VpnS2SInterface | fl * > "$OutDirectory\VpnS2SInterface.txt"
         Get-RemoteAccess| fl * > "$OutDirectory\RemoteAccess.txt"
+        Get-BGPRouter | fl * > "$OutDirectory\BGPRouter.txt"
+        $gwService = Get-Service GatewayService
+        if ($gwService.Status -eq "Running")
+        {
+            Get-GatewayTunnel | fl * > "$OutDirectory\GatewayTunnels.txt"
+            Get-GatewayRoutingDomain | fl * > "$OutDirectory\GatewayRoutingDomain.txt"
+        }
+
+        Remove-Item "$OutDirectory\BGPPeer.txt" -ErrorAction SilentlyContinue
+        Remove-Item "$OutDirectory\BGPRouteInfo.txt" -ErrorAction SilentlyContinue
+        Remove-Item "$OutDirectory\BGPCustomRoute.txt" -ErrorAction SilentlyContinue
+
+        foreach ($c in $compartments)
+        {
+            if ($c.CompartmentId -eq 1)
+            {
+                Get-BGPPeer | fl * >> "$OutDirectory\BGPPeer.txt"
+                Get-BGPRouteInformation -Type All | fl * >> "$OutDirectory\BGPRouteInfo.txt"
+                Get-BGPCustomRoute | fl * >> "$OutDirectory\BGPCustomRoute.txt"
+            }
+            else
+            {
+                $RoutingDomain = $c.CompartmentDescription
+                Get-BGPPeer -RoutingDomain $RoutingDomain | fl * >> "$OutDirectory\BGPPeer.txt"
+                Get-BGPRouteInformation -Type All -RoutingDomain $RoutingDomain | fl * >> "$OutDirectory\BGPRouteInfo.txt"
+                Get-BGPCustomRoute -RoutingDomain $RoutingDomain | fl * >> "$OutDirectory\BGPCustomRoute.txt"
+            }
+        }
         #WFP state takes filename as input
         netsh wfp show state "$OutDirectory\wfpState.xml" | Out-Null
+
+        #Collect IKE/Operational events
+        wevtutil epl Microsoft-Windows-IKE/Operational "$OutDirectory\IkeOperational.evtx" /ow:true
     }
 
     if($IncludeTraces)
@@ -682,7 +731,7 @@ function CollectDiagnosticsDataFromMux
         md $OutDirectory -ErrorAction SilentlyContinue | Out-Null
 
         # Collect information
-        Get-NetIpInterface –IncludeAllCompartments | fl * > "$OutDirectory\NetIpInterface.txt"
+        Get-NetIpInterface -IncludeAllCompartments | fl * > "$OutDirectory\NetIpInterface.txt"
         Get-NetRoute -IncludeAllCompartments | fl * > "$OutDirectory\NetRoutes.txt"
         Get-NetIpAddress -IncludeAllCompartments | fl * > "$OutDirectory\NetIPAddress.txt"
     }
@@ -809,16 +858,18 @@ function CollectDiagnosticsDataFromServer
 
         # Collect additional information
         ipconfig /allcompartments /all > "$OutDirectory\ipconfigall.txt"
-        Get-NetAdapter > "$OutDirectory\networkadapters.txt"
-        Get-NetAdapter | fl * >> "$OutDirectory\networkadapters.txt"
+        $netAdapter = Get-NetAdapter
+        $netAdapter | ft > "$OutDirectory\networkadapters.txt"
+        $netAdapter | fl * >> "$OutDirectory\networkadapters.txt"
         Get-VMNetworkAdapter -All > "$OutDirectory\vmnetworkadapters.txt"
         Get-netipaddress -IncludeAllCompartments > "$OutDirectory\netipaddress.txt"
         Get-netroute -IncludeAllCompartments > "$OutDirectory\netroute.txt"
         Get-VMNetworkAdapterVlan > "$OutDirectory\vmnetworkadaptersvlan.txt"
         Get-vm | Get-VMNetworkAdapter | fl * >> "$OutDirectory\vmnetworkadapters.txt"
         Get-VMNetworkAdapterIsolation | fl * > "$OutDirectory\vmnetworkadapterisolation.txt"
-        Get-VMSwitch  > "$OutDirectory\vmswitches.txt"
-        Get-VMSwitch | fl * >> "$OutDirectory\vmswitches.txt"
+        $vSwitch = Get-VMSwitch 
+        $vSwitch | ft > "$OutDirectory\vmswitches.txt"
+        $vSwitch | fl * >> "$OutDirectory\vmswitches.txt"
     }
 
     if($IncludeTraces)
@@ -856,20 +907,6 @@ function CollectDiagnosticsDataFromNCNode
         Write-Host "Cannot connect to NC Node " $node
         return
     }
-    
-    if($IncludeTraces -eq $true)
-    {
-        try
-        {
-            # Reset Logman
-            logman stop NetworkControllerTrace | Out-Null
-            logman start NetworkControllerTrace | Out-Null
-        }
-        catch
-        {
-            # do nothing
-        }
-    }
 
     Write-Host "Collecting Diagnostics data from NC Node " $node
 
@@ -880,6 +917,70 @@ function CollectDiagnosticsDataFromNCNode
     CreatePSDrive -Credential $credential -Path $path
 
     md $DestinationPath -ErrorAction SilentlyContinue | Out-Null
+    
+    Invoke-Command -Session $psSession -ArgumentList $IncludeTraces,$sys -ScriptBlock  {
+        param
+        (
+            [bool][parameter(Mandatory=$false)]$IncludeTraces = $true,
+            [string]$sys
+        )
+
+    
+        if($IncludeTraces -eq $true)
+        {
+            try
+            {
+                # Reset Logman
+                logman stop NetworkControllerTrace | Out-Null
+                logman start NetworkControllerTrace | Out-Null
+            }
+            catch
+            {
+                # do nothing
+            }
+        }
+
+        $OutDirectory = "$sys\NCDiagnostics"
+        md $OutDirectory -ErrorAction SilentlyContinue | Out-Null
+
+        # Collect information
+        Get-NetworkControllerReplica -AllReplicas > "$OutDirectory\NetworkControllerReplica.txt"
+        Get-NetIpInterface -IncludeAllCompartments | fl * > "$OutDirectory\NetIpInterface.txt"
+        Get-NetIpAddress -IncludeAllCompartments | fl * > "$OutDirectory\NetIPAddress.txt"
+        #pick up manifests
+        Copy-Item -Path $sys\Windows\NetworkController\ApplicationManifest.xml -Destination "$OutDirectory" -ErrorAction SilentlyContinue
+        Copy-Item -Path $sys\Windows\NetworkController\ClusterManifest.xml -Destination "$OutDirectory" -ErrorAction SilentlyContinue
+        # Get Application and Cluster manifests from Service Fabric
+        $cluster = Connect-ServiceFabricCluster
+        if ($cluster)
+        {
+            $NCUri = "fabric:/NetworkController"
+            Get-ServiceFabricClusterManifest > "$OutDirectory\ClusterManifest.xml"
+            Get-ServiceFabricClusterHealth > "$OutDirectory\ClusterHealth.txt"
+            Get-ServiceFabricApplicationHealth -ApplicationName $NCUri > "$OutDirectory\AppHealth.txt"
+            $NCServices = Get-ServiceFabricService -ApplicationName $NCUri
+            $NCServices > "$OutDirectory\NCServices.txt"
+            foreach ($service in $NCServices)
+            {
+                $serviceTypeName=$service.ServiceTypeName
+                Get-ServiceFabricServiceHealth -ServiceName $service.ServiceName.AbsoluteUri > "$OutDirectory\$serviceTypeName.txt"
+                $partation = Get-ServiceFabricPartition -ServiceName $service.ServiceName.AbsoluteUri 
+                $replicas = Get-ServiceFabricReplica -PartitionId $partation.PartitionId
+                $replicas >> "$OutDirectory\$serviceTypeName.txt" 
+                foreach ($replica in $replicas)
+                {
+                    if ($replica.ReplicaId)
+                    {
+                        Get-ServiceFabricReplicaHealth -PartitionId $partation.PartitionId -ReplicaOrInstanceId $replica.ReplicaId >> "$OutDirectory\$serviceTypeName.txt"
+                    }
+                    else
+                    {
+                        Get-ServiceFabricReplicaHealth -PartitionId $partation.PartitionId -ReplicaOrInstanceId $replica.InstanceId >> "$OutDirectory\$serviceTypeName.txt"
+                    }
+                }
+            }
+        }
+    }
 
     Copy-Item  -Path "S:\NCDiagnostics" -Destination $outputDirectory -Recurse -ErrorAction SilentlyContinue
 
@@ -896,11 +997,13 @@ function CollectDiagnosticsDataFromNCNode
 
 function CollectDiagnosticsDataFromNC
 {
-    param($nodes, $includeTraces, $outputDirectory, $NCURL, $credential, $certificateThumbPrint, $clientCert)
+    param($nodes, $includeTraces, $outputDirectory, $NCURL, $credential, $certificateThumbPrint, $clientCert, $excludeSlbState)
 
     Write-Host "Collecting Diagnostics data from NC Nodes"
     
     $RestDestinationPath = [System.IO.Path]::Combine($outputDirectory, "NCDiagnostics")
+    md $RestDestinationPath -ErrorAction SilentlyContinue | Out-Null
+
     CollectNetworkControllerState $NCURL $RestDestinationPath $credential $clientCert
 
     foreach($node in $nodes)
@@ -911,7 +1014,10 @@ function CollectDiagnosticsDataFromNC
 
     CollectRESTDataFromNC $NCURL $RestDestinationPath $credential $clientCert | Out-Null
 
-    CollectSlbState $NCURL $RestDestinationPath $credential $clientCert
+    if ($excludeSlbState -eq $false)
+    {
+        CollectSlbState $NCURL $RestDestinationPath $credential $clientCert
+    }
 }
 
 function StartLogmanGateway
@@ -1157,18 +1263,18 @@ function GetCredentialsForDevice
 {
     param($mgmtIp, $deviceCreds)
 
-    if ($deviceCreds.ContainsKey($mgmtIp))
+    if ($deviceCreds)
     {
-        return $deviceCreds[$mgmtIp]
+        if ($deviceCreds.ContainsKey($mgmtIp))
+        {
+            return $deviceCreds[$mgmtIp]
+        }
+        elseif($deviceCreds.ContainsKey($Script:AllDeviceCredential))
+        {
+            return $deviceCreds[$Script:AllDeviceCredential]
+        }
     }
-    elseif($deviceCreds.ContainsKey($Script:AllDeviceCredential))
-    {
-        return $deviceCreds[$Script:AllDeviceCredential]
-    }
-    else
-    {
-        return $null
-    }
+    return $null
 }
 
 function Insert-TimedSleep

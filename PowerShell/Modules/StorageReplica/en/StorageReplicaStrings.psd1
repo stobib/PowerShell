@@ -1,4 +1,4 @@
-# Localized	10/08/2016 05:50 PM (GMT)	303:4.80.0411 	StorageReplicaStrings.psd1
+# Localized	03/23/2018 05:02 PM (GMT)	303:4.80.0411 	StorageReplicaStrings.psd1
 ConvertFrom-StringData -StringData @'
 FileExists             = Cannot write to file '{0}' because it already exists.
 PathIsDirectory        = Specify full path to file for Path parameter.

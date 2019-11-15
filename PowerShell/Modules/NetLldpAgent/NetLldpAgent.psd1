@@ -12,7 +12,7 @@
   
             PowerShellVersion = '3.0'  
   
-            HelpInfoUri="http://go.microsoft.com/fwlink/?LinkId=808419"      
+            HelpInfoUri="https://go.microsoft.com/fwlink/?LinkId=808419"      
 		      
             TypesToProcess = @("NetLldpAgent.Types.ps1xml" )
 
