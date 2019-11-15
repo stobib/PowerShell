@@ -1,23 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Types>
   <Type>
-    <Name>Microsoft.Management.Infrastructure.CimInstance#ROOT/MSCluster/MSCluster_NodeSupportedVersion</Name>
-    <Members>
-      <MemberSet>
-        <Name>PsStandardMembers</Name>
-        <Members>
-          <PropertySet>
-            <Name>DefaultDisplayPropertySet</Name>
-            <ReferencedProperties>
-              <Name>ClusterFunctionalLevel</Name>
-              <Name>ClusterUpgradeVersion</Name>
-            </ReferencedProperties>
-          </PropertySet>
-        </Members>
-      </MemberSet>
-    </Members>
-  </Type>
-  <Type>
     <Name>Microsoft.Management.Infrastructure.CimInstance#root/MSCluster/MSCluster_GroupSet</Name>
     <Members>
       <ScriptProperty>
@@ -107,7 +90,6 @@
               <Name>Type</Name>
               <Name>ParentName</Name>
               <Name>ChildrenNames</Name>
-              <Name>Location</Name>
             </ReferencedProperties>
           </PropertySet>
           <PropertySet>
@@ -120,76 +102,6 @@
       </MemberSet>
     </Members>
   </Type>
-
-  <Type>
-    <Name>Microsoft.Management.Infrastructure.CimInstance#root/MSCluster/MSCluster_StorageNode</Name>
-    <Members>
-      <MemberSet>
-        <Name>PsStandardMembers</Name>
-        <Members>
-          <NoteProperty>
-            <Name>DefaultDisplayProperty</Name>
-            <Value>Name</Value>
-          </NoteProperty>
-          <PropertySet>
-            <Name>DefaultDisplayPropertySet</Name>
-            <ReferencedProperties>
-              <Name>Name</Name>
-              <Name>State</Name>
-            </ReferencedProperties>
-          </PropertySet>
-          <PropertySet>
-            <Name>DefaultKeyPropertySet</Name>
-            <ReferencedProperties>
-              <Name>Name</Name>
-            </ReferencedProperties>
-          </PropertySet>
-        </Members>
-      </MemberSet>
-
-      <ScriptProperty>
-        <Name>State</Name>
-        <GetScriptBlock>
-          switch ( $this.psBase.CimInstanceProperties["State"].Value )
-          {
-           0 { "Unknown" }
-           1 { "Up" }
-           2 { "Down" }
-           3 { "Paused" }
-           4 { "Starting" }
-           5 { "Stopping" }
-          Default { "Unknown" }
-          }
-        </GetScriptBlock>
-      </ScriptProperty>
-      <ScriptProperty>
-        <Name>StorageNodeHealth</Name>
-        <GetScriptBlock>
-          switch ( $this.psBase.CimInstanceProperties["StorageNodeHealth"].Value )
-          {
-           0 { "Unknown" }
-           1 { "Unhealthy" }
-           2 { "Warning" }
-           3 { "Healthy" }
-          Default { "Unknown" }
-          }
-        </GetScriptBlock>
-      </ScriptProperty>
-      <ScriptProperty>
-        <Name>StorageNodeOperationalStatus</Name>
-        <GetScriptBlock>
-          switch ( $this.psBase.CimInstanceProperties["StorageNodeOperationalStatus"].Value )
-          {
-           0 { "Unknown" }
-           1 { "Missing" }
-           2 { "Okay" }
-          Default { "Unknown" }
-          }
-        </GetScriptBlock>
-      </ScriptProperty>
-    </Members>
-  </Type>
-
   <Type>
     <Name>Microsoft.Management.Infrastructure.CimInstance#root/MSCluster/MSCluster_StorageSpacesDirect</Name>
     <Members>
@@ -208,97 +120,7 @@
               <Name>CacheModeSSD</Name>
               <Name>CachePageSizeKBytes</Name>
               <Name>CacheState</Name>
-              <Name>Name</Name>
-              <Name>ScmUse</Name>
               <Name>State</Name>
-            </ReferencedProperties>
-          </PropertySet>
-          <PropertySet>
-            <Name>DefaultKeyPropertySet</Name>
-            <ReferencedProperties>
-              <Name>Name</Name>
-            </ReferencedProperties>
-          </PropertySet>
-        </Members>
-      </MemberSet>
-
-      <ScriptProperty>
-        <Name>CacheModeHDD</Name>
-        <GetScriptBlock>
-          switch ( $this.psBase.CimInstanceProperties["CacheModeHDD"].Value )
-          {
-           0 { "Disabled" }
-           4 { "ReadOnly" }
-          12 { "ReadWrite" }
-           8 { "WriteOnly" }
-          Default { "Unknown" }
-          }
-        </GetScriptBlock>
-      </ScriptProperty>
-      <ScriptProperty>
-        <Name>CacheModeSSD</Name>
-        <GetScriptBlock>
-          switch ( $this.psBase.CimInstanceProperties["CacheModeSSD"].Value )
-          {
-           0 { "Disabled" }
-           4 { "ReadOnly" }
-          12 { "ReadWrite" }
-           8 { "WriteOnly" }
-          Default { "Unknown" }
-          }
-        </GetScriptBlock>
-      </ScriptProperty>
-      <ScriptProperty>
-        <Name>CacheState</Name>
-        <GetScriptBlock>
-          switch ( $this.psBase.CimInstanceProperties["CacheState"].Value )
-          {
-          0 { "Disabled" }
-          2 { "Enabled" }
-          Default { "Enabled" }
-          }
-        </GetScriptBlock>
-      </ScriptProperty>
-      <ScriptProperty>
-        <Name>ScmUse</Name>
-        <GetScriptBlock>
-          switch ( $this.psBase.CimInstanceProperties["ScmUse"].Value )
-          {
-          0 { "Cache" }
-          1 { "Capacity" }
-          Default { "Invalid" }
-          }
-        </GetScriptBlock>
-      </ScriptProperty>
-      <ScriptProperty>
-        <Name>State</Name>
-        <GetScriptBlock>
-          switch ( $this.psBase.CimInstanceProperties["State"].Value )
-          {
-          0 { "Disabled" }
-          1 { "Enabled" }
-          Default { "Unknown" }
-          }
-        </GetScriptBlock>
-      </ScriptProperty>
-    </Members>
-  </Type>
-
-  <Type>
-    <Name>Microsoft.Management.Infrastructure.CimInstance#root/MSCluster/MSCluster_StorageSpacesDirectEnable</Name>
-    <Members>
-      <MemberSet>
-        <Name>PsStandardMembers</Name>
-        <Members>
-          <NoteProperty>
-            <Name>DefaultDisplayProperty</Name>
-            <Value>Name</Value>
-          </NoteProperty>
-          <PropertySet>
-            <Name>DefaultDisplayPropertySet</Name>
-            <ReferencedProperties>
-              <Name>Node</Name>
-              <Name>EnableReportName</Name>
             </ReferencedProperties>
           </PropertySet>
           <PropertySet>
@@ -727,22 +549,54 @@
       </MemberSet>
     </Members>
   </Type>
-
   <Type>
-    <Name>Microsoft.Management.Infrastructure.CimInstance#MSCluster_HealthFault</Name>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#root/MSCluster/MSCluster_StorageSpacesDirect</Name>
     <Members>
       <ScriptProperty>
-        <Name>PerceivedSeverity</Name>
+        <Name>CacheModeHDD</Name>
         <GetScriptBlock>
-          switch ( $this.psBase.CimInstanceProperties["PerceivedSeverity"].Value )
+          switch ( $this.psBase.CimInstanceProperties["CacheModeHDD"].Value )
           {
-          0 { "Unknown" }
-          2 { "Information" }
-          3 { "Degraded/Warning" }
-          4 { "Minor" }
-          5 { "Major" }
-          6 { "Critical" }
-          7 { "Fatal/NonRecoverable" }
+           0 { "Disabled" }
+           4 { "ReadOnly" }
+          12 { "ReadWrite" }
+           8 { "WriteOnly" }
+          Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>CacheModeSSD</Name>
+        <GetScriptBlock>
+          switch ( $this.psBase.CimInstanceProperties["CacheModeSSD"].Value )
+          {
+           0 { "Disabled" }
+           4 { "ReadOnly" }
+          12 { "ReadWrite" }
+           8 { "WriteOnly" }
+          Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>CacheState</Name>
+        <GetScriptBlock>
+          switch ( $this.psBase.CimInstanceProperties["CacheState"].Value )
+          {
+          0 { "Disabled" }
+          2 { "Enabled" }
+          Default { "Enabled" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>State</Name>
+        <GetScriptBlock>
+          switch ( $this.psBase.CimInstanceProperties["State"].Value )
+          {
+          0 { "Disabled" }
+          1 { "Enabled" }
+          Default { "Unknown" }
           }
         </GetScriptBlock>
       </ScriptProperty>

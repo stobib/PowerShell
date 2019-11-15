@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>  
-<Types>
+<Types>  
     <Type>
         <Name>Microsoft.Management.Infrastructure.CimInstance#ROOT/Microsoft/Windows/Hgs/MSFT_HgsClientConfiguration</Name>
         <Members>
@@ -26,20 +26,6 @@
                 <GetScriptBlock>
                     [Microsoft.Powershell.Cmdletization.GeneratedTypes.HgsClientConfiguration.AttestationSubstatus] ($this.PSBase.CimInstanceProperties['AttestationSubstatus'].Value)
                 </GetScriptBlock>
-            </ScriptProperty>
-            <ScriptProperty>
-                <Name>IsFallbackInUse</Name>
-                    <GetScriptBlock>
-                         ($this.PSBase.CimInstanceProperties['AttestationServerUrl'].Value -and `
-                          $this.PSBase.CimInstanceProperties['LastAttestationServerUrl'].Value -and `
-                          $this.PSBase.CimInstanceProperties['LastAttestationServerUrl'].Value `
-                           -ine $this.PSBase.CimInstanceProperties['AttestationServerUrl'].Value) `
-                        -or `
-                         ($this.PSBase.CimInstanceProperties['KeyProtectionServerUrl'].Value -and `
-                          $this.PSBase.CimInstanceProperties['LastKeyProtectionServerUrl'].Value -and  `
-                          $this.PSBase.CimInstanceProperties['LastKeyProtectionServerUrl'].Value `
-                           -ine $this.PSBase.CimInstanceProperties['KeyProtectionServerUrl'].Value)
-                    </GetScriptBlock>
             </ScriptProperty>
         </Members>
     </Type>

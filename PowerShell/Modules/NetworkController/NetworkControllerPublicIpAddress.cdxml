@@ -73,7 +73,7 @@
     <CmdletAdapterPrivateData>
       <Data Name="EntityTypeName">Microsoft.Windows.NetworkController.PublicIpAddress</Data>
       <Data Name="EntitySetName">Default.Microsoft_WindowsAzure_Networking_Nrp_Frontend_Contract_Csm_Public_PublicIpAddress</Data>
-      <Data Name="CustomUriSuffix">/networking/v2/publicIpAddresses/[ResourceId]</Data>
+      <Data Name="CustomUriSuffix">/networking/v1/publicIpAddresses/[ResourceId]</Data>
       <Data Name="CreateRequestMethod">Put</Data>
       <Data Name="UpdateRequestMethod">Put</Data>
     </CmdletAdapterPrivateData>

@@ -54,7 +54,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-UserSession {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254076")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254076")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDUserSession[]")]
 param (
     [Parameter(Mandatory=$false, Position=0, ValueFromPipelineByPropertyName=$true)]
@@ -184,7 +184,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Send-UserMessage {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254077")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254077")]
 param (
     [Parameter(Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true)]
     [String]
@@ -214,7 +214,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Invoke-UserLogoff {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254078")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254078")]
 param (
     [Parameter(Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true)]
     [String]
@@ -245,7 +245,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Disconnect-User {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254079")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254079")]
 param (
     [Parameter(Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true)]
     [String]

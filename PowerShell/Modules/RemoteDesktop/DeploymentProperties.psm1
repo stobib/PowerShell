@@ -3,7 +3,7 @@ Import-Module $PSScriptRoot\Utility.psm1
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-LicenseConfiguration {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254063")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254063")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.LicensingSetting[]")]
 param (
 
@@ -74,7 +74,7 @@ param (
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-LicenseConfiguration {
 [cmdletBinding(DefaultParameterSetName="ModePS",
-HelpURI="https://go.microsoft.com/fwlink/?LinkId=254064")]
+HelpURI="http://go.microsoft.com/fwlink/?LinkId=254064")]
 param (
 
     [Parameter(Mandatory=$true,ParameterSetName="ModePS")]
@@ -182,7 +182,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-DeploymentGatewayConfiguration {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254065")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254065")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.CustomGatewaySettings")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.GatewaySettings")]
 param (
@@ -311,7 +311,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-DeploymentGatewayConfiguration {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254066")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254066")]
 param (
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
     [ValidateSet(

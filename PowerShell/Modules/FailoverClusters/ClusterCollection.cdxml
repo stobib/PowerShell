@@ -187,9 +187,9 @@
             </CmdletOutputMetadata>  
           </ReturnValue> 
           <Parameters>
-            <Parameter ParameterName="StartupDelayTrigger">
+            <Parameter ParameterName="StartupSetting">
               <Type PSType="MSCLUSTER.MSCluster_GroupSet.StartupSettingType" />
-              <CmdletParameterMetadata IsMandatory="false">
+              <CmdletParameterMetadata Aliases="StartupDelayTrigger" IsMandatory="false">
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="StartupCount">
@@ -237,7 +237,7 @@
           <Parameters>
             <Parameter ParameterName="Name">
               <Type PSType="System.String" />
-              <CmdletParameterMetadata IsMandatory="true" Position="0">
+              <CmdletParameterMetadata IsMandatory="true">
                 <ValidateNotNull />
                 <ValidateNotNullOrEmpty />
               </CmdletParameterMetadata>
@@ -261,50 +261,6 @@
         </Method>
       </Cmdlet>
 
-        <Cmdlet>
-        <CmdletMetadata Verb="New" Noun="ClusterAvailabilitySet"/>
-        <Method MethodName="CreateAvailabilitySet">
-          <ReturnValue>  
-            <Type PSType="uint32" />  
-            <CmdletOutputMetadata> 
-              <ErrorCode />  
-            </CmdletOutputMetadata>  
-          </ReturnValue> 
-          <Parameters>
-            <Parameter ParameterName="Name">
-              <Type PSType="System.String" />
-              <CmdletParameterMetadata IsMandatory="true" Position="0">
-                <ValidateNotNull />
-                <ValidateNotNullOrEmpty />
-              </CmdletParameterMetadata>
-            </Parameter>
-            <!-- Usage -->
-            <Parameter ParameterName="Group">
-              <Type PSType="System.String[]" />
-              <CmdletParameterMetadata IsMandatory="false" />
-            </Parameter>
-            <Parameter ParameterName="UpdateDomains">
-              <Type PSType="System.uint32" />
-              <CmdletParameterMetadata IsMandatory="true" />
-            </Parameter>
-            <Parameter ParameterName="FaultDomains">
-              <Type PSType="System.uint32" />
-              <CmdletParameterMetadata IsMandatory="true" />
-            </Parameter>
-            <Parameter ParameterName="ReserveSpareNode">
-              <Type PSType="Boolean" />
-              <CmdletParameterMetadata IsMandatory="false">
-              </CmdletParameterMetadata>
-            </Parameter>
-
-            <!-- CMDLET OUTPUT -->
-            <Parameter ParameterName="CreatedAvailabilitySet">
-              <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#root/MSCluster/MSCluster_GroupSet"/>
-              <CmdletOutputMetadata />
-            </Parameter>
-          </Parameters>
-        </Method>
-      </Cmdlet>
 
         <Cmdlet>
         <CmdletMetadata Verb="Get" Noun="ClusterGroupDependency"  />

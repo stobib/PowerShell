@@ -3,7 +3,7 @@
     Author="Microsoft Corporation"
     CompanyName="Microsoft Corporation"
     Copyright="© Microsoft Corporation. All rights reserved."
-    HelpInfoUri = "https://go.microsoft.com/fwlink/?linkid=216367"
+    HelpInfoUri = "http://go.microsoft.com/fwlink/?linkid=216367"
     ModuleVersion = "1.0.0.0"
     NestedModules = @('Policy.cdxml', 'Policy.psm1', 'QosVolume.cdxml', 'PolicyStore.cdxml')
     FormatsToProcess = 'Qos.Formats.ps1xml'

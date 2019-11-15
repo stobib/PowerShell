@@ -5,7 +5,7 @@ Import-Module $PSScriptRoot\CustomRdpProperty.psm1
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-VirtualDesktopCollectionConfiguration {
 [CmdletBinding(DefaultParameterSetName="General",
-HelpURI="https://go.microsoft.com/fwlink/?LinkId=254111")]
+HelpURI="http://go.microsoft.com/fwlink/?LinkId=254111")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDVirtualDesktopCollectionGeneralProperties")]
 [OutputType("System.Security.Principal.SecurityIdentifier")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDVirtualDesktopCollectionUserProfileDisksProperties")]
@@ -265,7 +265,7 @@ param (
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-VirtualDesktopCollectionConfiguration {
 [CmdletBinding(DefaultParameterSetName="General",
-HelpURI="https://go.microsoft.com/fwlink/?LinkId=254112")]
+HelpURI="http://go.microsoft.com/fwlink/?LinkId=254112")]
 param (
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0)]
     [string]
@@ -677,7 +677,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-PersonalVirtualDesktopPatchSchedule {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254113")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254113")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDPersonalVirtualDesktopPatchSchedule[]")]
 param (
     [Parameter(Mandatory=$false)]
@@ -756,7 +756,7 @@ param (
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Remove-PersonalVirtualDesktopPatchSchedule {
 [CmdletBinding(SupportsShouldProcess=$true,
-HelpURI="https://go.microsoft.com/fwlink/?LinkId=254114")]
+HelpURI="http://go.microsoft.com/fwlink/?LinkId=254114")]
 param (
     [Parameter(Mandatory=$false)]
     [string]
@@ -862,7 +862,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function New-PersonalVirtualDesktopPatchSchedule {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254115")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254115")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDPersonalVirtualDesktopPatchSchedule")]
 param (
     [Parameter(Mandatory=$true)]
@@ -993,7 +993,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-PersonalVirtualDesktopPatchSchedule {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254116")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254116")]
 param (
     [Parameter(Mandatory=$true)]
     [string]

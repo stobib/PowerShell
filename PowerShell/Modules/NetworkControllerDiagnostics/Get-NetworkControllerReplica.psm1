@@ -17,7 +17,7 @@ function Get-NetworkControllerReplica()
     }
 
     $a = Connect-ServiceFabricCluster -WarningAction "SilentlyContinue"
-    Write-Output ""
+    Write-Host ""
 
     if([String]::IsNullOrEmpty($ServiceTypeName))
     {
@@ -31,7 +31,7 @@ function Get-NetworkControllerReplica()
 
     foreach ($service in $services) 
     {
-        "Replicas for service:" + $service.ServiceTypeName
+        Write-Host "Replicas for service:" $service.ServiceTypeName -ForeGroundColor Yellow
         $replicas = Get-ServiceFabricPartition $service.ServiceName | Get-ServiceFabricReplica 
         if ($AllReplicas -eq $false) { $replicas = $replicas | where {$_.ReplicaRole -eq "Primary"} } 
         $replicas | Select-Object ReplicaRole,NodeName,ReplicaStatus | fl 

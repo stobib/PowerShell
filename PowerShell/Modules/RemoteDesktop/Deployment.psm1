@@ -6,7 +6,7 @@ Import-Module $PSScriptRoot\VirtualDesktopCollectionProperties.psm1
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function New-VirtualDesktopDeployment {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254049")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254049")]
 param (
 
     [Parameter(Mandatory=$true, Position=0)]
@@ -254,7 +254,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function New-SessionDeployment {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254050")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254050")]
 param (
 
     [Parameter(Mandatory=$true, Position=0)]
@@ -494,7 +494,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Add-Server {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254051")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254051")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDDeploymentServer[]")]
 param (
 
@@ -956,7 +956,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Remove-Server {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254052")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254052")]
 param (
 
     [Parameter(Mandatory=$true, Position=0)]
@@ -1289,7 +1289,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-Server {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254053")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254053")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDDeploymentServer[]")]
 param (
 
@@ -1403,7 +1403,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-ConnectionBrokerHighAvailability {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254054")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254054")]
 param (
 
     [Parameter(Mandatory=$false, Position=0)]
@@ -1572,7 +1572,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-ActiveManagementServer {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254055")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254055")]
 param (
 
     [Parameter(Mandatory=$true, Position=0)]
@@ -1617,7 +1617,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-ClientAccessName {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254056")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254056")]
 param (
 
     [Parameter(Mandatory=$false, Position=0)]
@@ -1676,7 +1676,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-DatabaseConnectionString {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254057")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254057")]
 param (
 
     [Parameter(Mandatory=$false, Position=0)]
@@ -1889,7 +1889,7 @@ param (
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 #need to update the help link ID (254057) once we update the help doc
 function Remove-DatabaseConnectionString {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254057")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254057")]
 param (
 
     [Parameter(ParameterSetName="DatabaseConnectionString", Mandatory=$true)]
@@ -2031,7 +2031,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-ConnectionBrokerHighAvailability {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254058")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254058")]
 [OutputType("Microsoft.RemoteDesktopServices.Common.RDCBHADetails")]
 param (
 
@@ -2105,7 +2105,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-VirtualDesktopTemplateExportPath {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254059")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254059")]
 [OutputType([String])]
 param(
     [Parameter(Mandatory=$false)]
@@ -2137,7 +2137,7 @@ param(
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-VirtualDesktopTemplateExportPath {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254060")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254060")]
 param(
     [Parameter(Mandatory=$false)]
     [string]
@@ -2179,7 +2179,7 @@ param(
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Test-OUAccess {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254061")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254061")]
 param(
 
     [Parameter(Mandatory=$false)]
@@ -2291,7 +2291,7 @@ param(
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Grant-OUAccess {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254062")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254062")]
 param(
 
     [Parameter(Mandatory=$false)]
