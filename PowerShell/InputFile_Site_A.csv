@@ -1,0 +1,16 @@
+﻿Name,State,Status,Provisioned Space,Used Space,Host CPU,Host Mem,EVC Mode,HA Protection
+win10adba001.vdi,Powered On,Normal,358.11  GB,358.11  GB,2683,8241,,Protected
+win10adba002.vdi,Powered On,Normal,338.11  GB,338.11  GB,206,8242,,Protected
+win10adba003.vdi,Powered On,Normal,152.11  GB,152.11  GB,68,18750,,Protected
+win10adba004.vdi,Powered On,Normal,136.11  GB,136.11  GB,137,16469,,Protected
+win10adba005.vdi,Powered On,Normal,378.11  GB,378.11  GB,160,8242,,Protected
+win10adba006.vdi,Powered On,Normal,366.11  GB,366.11  GB,91,16462,,Protected
+win10adba007.vdi,Powered On,Normal,308.11  GB,106.01  GB,183,32897,,Protected
+win10adba008.vdi,Powered On,Normal,136.11  GB,136.11  GB,114,16471,,Protected
+win10adba009.vdi,Powered On,Normal,136.11  GB,136.11  GB,137,16466,,Protected
+win10adba010.vdi,Powered On,Normal,136.11  GB,136.11  GB,137,16469,,Protected
+win10adba011.vdi,Powered On,Normal,136.11  GB,136.11  GB,137,16471,,Protected
+win10adba012.vdi,Powered On,Normal,136.11  GB,136.11  GB,160,16471,,Protected
+win10adba013.vdi,Powered On,Normal,136.11  GB,136.11  GB,160,16471,,Protected
+win10adba014.vdi,Powered On,Normal,136.11  GB,136.11  GB,11153,14375,,Protected
+win10adba015.vdi,Powered On,Normal,136.11  GB,136.11  GB,137,16471,,Protected
