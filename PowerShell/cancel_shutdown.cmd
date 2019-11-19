@@ -4,7 +4,7 @@ Set ENV=prd
 Set S=1
 :Main
 Set Host=zahy%ENV%ntz0%S%.%ENV%.utshare.local
-ping -n 4 -w 5 %Host%
+ping -n 5 -w 5 %Host%
 shutdown /a /m \\%Host%
 powershell %UptimePS1% %Host%
 Set /A S=%S%+1
