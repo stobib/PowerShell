@@ -1,244 +1,258 @@
-﻿Name,State,Status,Provisioned Space,Used Space,Host CPU,Host Mem,EVC Mode,HA Protection
-dawin10tel.vdi,Powered Off,Normal,88.19  GB,79.64  GB,0,0,,N/A
-vm-obia-b01.vdi,Powered On,Normal,156.11  GB,156.11  GB,109,16479,,Protected
-vm-obia-b02.vdi,Powered On,Normal,156.11  GB,156.11  GB,724,16482,,Protected
-vm-obia-b03.vdi,Powered On,Normal,156.11  GB,156.11  GB,109,16480,,Protected
-vm-obia-b04.vdi,Powered On,Normal,156.11  GB,156.11  GB,109,16479,,Protected
-vm-obia-b05.vdi,Powered On,Normal,156.11  GB,156.11  GB,746,16480,,Protected
-vm-obia-b06.vdi,Powered On,Normal,156.11  GB,156.11  GB,197,16478,,Protected
-vm-obia-b07.vdi,Powered On,Warning,156.11  GB,156.11  GB,11874,16474,,Protected
-vm-obia-b08.vdi,Powered On,Normal,156.11  GB,156.11  GB,87,16479,,Protected
-vm-obia-b09.vdi,Powered On,Normal,156.11  GB,156.11  GB,417,16479,,Protected
-vm-obia-b10.vdi,Powered On,Normal,156.11  GB,156.11  GB,834,16483,,Protected
-vm-obia-b11.vdi,Powered On,Normal,156.11  GB,156.11  GB,43,4690,,Protected
-vm-obia-b12.vdi,Powered On,Normal,156.11  GB,156.11  GB,2919,16479,,Protected
-vm-obia-b13.vdi,Powered On,Normal,156.11  GB,156.11  GB,65,16472,,Protected
-vm-obia-b14.vdi,Powered On,Normal,156.11  GB,156.11  GB,219,16479,,Protected
-vm-obia-b15.vdi,Powered On,Normal,156.11  GB,156.11  GB,87,5539,,Protected
-vm-obia-b16.vdi,Powered On,Normal,156.11  GB,156.11  GB,65,16479,,Protected
-vm-obia-b17.vdi,Powered On,Normal,156.11  GB,156.11  GB,131,16480,,Protected
-vm-obia-b18.vdi,Powered On,Normal,156.11  GB,156.11  GB,3402,16464,,Protected
-vm-obia-b19.vdi,Powered On,Normal,156.11  GB,156.11  GB,131,16480,,Protected
-vm-obia-b20.vdi,Powered On,Normal,156.11  GB,156.11  GB,65,4396,,Protected
-w10-zadev-ac01.vdi,Powered On,Normal,120  GB,102.2  GB,87,16463,,Protected
-w10-zadev-ac02.vdi,Powered On,Normal,136.11  GB,125.29  GB,131,16465,,Protected
-w10-zadev-ac03.vdi,Powered On,Normal,120  GB,104.52  GB,131,16469,,Protected
-w10-zadev-ac04.vdi,Powered On,Normal,120  GB,105.48  GB,1974,16465,,Protected
-w10-zadev-ac05.vdi,Powered On,Normal,120  GB,101.89  GB,175,16470,,Protected
-w10-zadev-ac06.vdi,Powered On,Normal,120  GB,99.02  GB,219,16462,,Protected
-w10-zadev-ac07.vdi,Powered On,Normal,120  GB,100.52  GB,2985,16472,,Protected
-w10-zadev-pc01,Powered On,Normal,120  GB,108.7  GB,285,16468,,Protected
-w10-zadev-pc02,Powered On,Normal,120  GB,112.34  GB,219,16472,,Protected
-w10asydev001.vdi,Powered On,Normal,100  GB,99.35  GB,131,8241,,Protected
-w10asydev002.vdi,Powered On,Normal,100  GB,99.3  GB,153,8241,,Protected
-w10asydev003.vdi,Powered On,Normal,100  GB,99.25  GB,131,8233,,Protected
-w10asydev004.vdi,Powered On,Normal,100  GB,99.24  GB,153,8239,,Protected
-w10asydev005.vdi,Powered On,Normal,100  GB,99.33  GB,131,8235,,Protected
-win10aardev00.vdi,Powered On,Normal,100  GB,99.1  GB,109,8086,,Protected
-win10aardev01.vdi,Powered On,Normal,100  GB,99.24  GB,197,8241,,Protected
-win10aardev02.vdi,Powered On,Normal,200  GB,104.44  GB,307,8251,,Protected
-win10aardev03.vdi,Powered On,Normal,100  GB,99.21  GB,504,8244,,Protected
-win10aardev04.vdi,Powered On,Normal,100  GB,99.41  GB,307,8238,,Protected
-win10aardev05.vdi,Powered On,Warning,100  GB,99.1  GB,3512,8233,,Protected
-win10aardev06.vdi,Powered On,Normal,108.11  GB,107.46  GB,175,8245,,Protected
-win10aardev07.vdi,Powered On,Normal,100  GB,96.11  GB,87,8245,,Protected
-win10aardev08.vdi,Powered On,Normal,100  GB,99.1  GB,109,8248,,Protected
-win10aardev09.vdi,Powered On,Normal,108.11  GB,106.32  GB,87,6397,,Protected
-win10aardev10.vdi,Powered On,Normal,100  GB,99.42  GB,87,7633,,Protected
-win10aardev11.vdi,Powered On,Normal,100  GB,99.41  GB,153,8243,,Protected
-win10aardev12.vdi,Powered On,Normal,100  GB,99.44  GB,87,7765,,Protected
-win10aardev13.vdi,Powered On,Normal,100  GB,99.22  GB,153,8240,,Protected
-win10aardev14.vdi,Powered On,Normal,100  GB,98.77  GB,65,8244,,Protected
-win10aardev15.vdi,Powered On,Normal,120  GB,97.64  GB,65,16472,,Protected
-Win10aardev17.vdi,Powered On,Normal,100  GB,95.05  GB,87,8173,,Protected
-win10aardev18.vdi,Powered On,Normal,60  GB,59.66  GB,21,4941,,Protected
-win10aardev19.vdi,Powered On,Normal,120  GB,101.88  GB,65,16461,,Protected
-win10aardev20.vdi,Powered On,Normal,120  GB,77.63  GB,131,16471,,Protected
-win10aardev21.vdi,Powered On,Normal,120  GB,78.41  GB,153,16459,,Protected
-win10aardev22.vdi,Powered On,Normal,120  GB,79.7  GB,131,15103,,Protected
-win10aardev23.vdi,Powered On,Normal,120  GB,77.72  GB,109,15077,,Protected
-win10aardev24.vdi,Powered On,Normal,120  GB,74.01  GB,131,16465,,Protected
-win10aardev25.vdi,Powered On,Normal,120  GB,91.05  GB,131,16403,,Protected
-win10adadev01.vdi,Powered On,Normal,120  GB,105.5  GB,1996,16468,,Protected
-win10adadev02.vdi,Powered On,Normal,120  GB,101.78  GB,307,16473,,Protected
-win10adadev03.vdi,Powered On,Normal,136.11  GB,120.43  GB,482,16376,,Protected
-win10adadev04.vdi,Powered On,Normal,120  GB,107.4  GB,131,16470,,Protected
-win10adadev05.vdi,Powered On,Normal,120  GB,106.27  GB,263,16466,,Protected
-win10adadev06.vdi,Powered On,Normal,120  GB,104.25  GB,263,16466,,Protected
-win10adadev07.vdi,Powered On,Normal,120  GB,105.09  GB,395,16468,,Protected
-win10adadev08.vdi,Powered On,Normal,120  GB,102.16  GB,307,16464,,Protected
-win10adadev09.vdi,Powered On,Normal,120  GB,102.67  GB,241,16472,,Protected
-win10adadev10.vdi,Powered On,Normal,120  GB,104.71  GB,373,16470,,Protected
-win10adadev11.vdi,Powered On,Normal,120  GB,100.83  GB,241,16468,,Protected
-win10adadev12.vdi,Powered On,Normal,120  GB,99.38  GB,153,16471,,Protected
-win10adadev13.vdi,Powered On,Normal,120  GB,102.52  GB,197,16470,,Protected
-win10adadev14.vdi,Powered On,Normal,120  GB,102.14  GB,131,16471,,Protected
-win10adadev15.vdi,Powered On,Normal,120  GB,103.69  GB,1777,16471,,Protected
-win10adadev16.vdi,Powered On,Normal,120  GB,115.59  GB,1141,16469,,Protected
-win10adadev17.vdi,Powered On,Normal,120  GB,102.79  GB,460,16472,,Protected
-win10adadev18.vdi,Powered On,Normal,120  GB,104.34  GB,241,16471,,Protected
-win10adadev19.vdi,Powered On,Normal,120  GB,101.6  GB,65,16479,,Protected
-win10adadev20.vdi,Powered On,Normal,136.11  GB,120.4  GB,241,11964,,Protected
-win10adadev21.vdi,Powered On,Normal,120  GB,104.7  GB,241,16472,,Protected
-win10adadev22.vdi,Powered On,Normal,120  GB,100.1  GB,153,16470,,Protected
-win10adadev23.vdi,Powered On,Normal,120  GB,102.9  GB,417,16465,,Protected
-win10adadev24.vdi,Powered On,Normal,120  GB,109.04  GB,263,16471,,Protected
-win10adadev25.vdi,Powered On,Normal,120  GB,103.01  GB,263,16472,,Protected
-win10adadev26.vdi,Powered On,Normal,120  GB,104.76  GB,153,16471,,Protected
-win10adadev27.vdi,Powered On,Normal,120  GB,102.37  GB,175,16471,,Protected
-win10adadev28.vdi,Powered On,Normal,120  GB,107.7  GB,197,16471,,Protected
-win10adadev29.vdi,Powered On,Normal,120  GB,103.91  GB,153,16472,,Protected
-win10adadev30.vdi,Powered On,Normal,120  GB,107.56  GB,131,16471,,Protected
-win10adadev31.vdi,Powered On,Normal,120  GB,101.93  GB,131,13674,,Protected
-win10adadev32.vdi,Powered On,Normal,120  GB,104.76  GB,131,16471,,Protected
-win10adadev33.vdi,Powered On,Normal,120  GB,105.6  GB,219,16471,,Protected
-win10adadev34.vdi,Powered On,Normal,120  GB,108.58  GB,724,16471,,Protected
-win10adadev35.vdi,Powered On,Normal,120  GB,103.96  GB,3007,16471,,Protected
-win10adadev36.vdi,Powered On,Normal,120  GB,102.87  GB,131,16472,,Protected
-win10adadev37.vdi,Powered On,Normal,120  GB,103.19  GB,131,16471,,Protected
-win10adadev38.vdi,Powered On,Normal,120  GB,103.15  GB,131,16466,,Protected
-win10adadev39.vdi,Powered On,Normal,120  GB,107.63  GB,724,16465,,Protected
-win10adadev40.vdi,Powered On,Normal,120  GB,103.15  GB,899,16472,,Protected
-win10adadev41.vdi,Powered On,Normal,120  GB,103.8  GB,285,16468,,Protected
-win10adadev42.vdi,Powered On,Normal,120  GB,104.14  GB,131,14072,,Protected
-win10adadev43.vdi,Powered On,Normal,120  GB,105.36  GB,219,16473,,Protected
-win10adadev44.vdi,Powered On,Normal,120  GB,102.6  GB,921,16471,,Protected
-win10adadev45.vdi,Powered On,Normal,120  GB,110.08  GB,768,16471,,Protected
-win10adadev46.vdi,Powered On,Normal,120  GB,99.01  GB,131,16424,,Protected
-win10adadev47.vdi,Powered On,Normal,100  GB,92.07  GB,153,8242,,Protected
-win10adadev48.vdi,Powered On,Normal,120  GB,100.85  GB,131,16471,,Protected
-win10adadev49.vdi,Powered On,Normal,120  GB,101.35  GB,153,16472,,Protected
-win10adadev50.vdi,Powered On,Normal,120  GB,93.19  GB,241,16471,,Protected
-win10adba016.vdi-TEMP,Powered On,Normal,1.12  TB,349.31  GB,175,16443,,Protected
-win10admy000.vdi,Powered On,Normal,112.11  GB,111.82  GB,153,8334,,Protected
-win10admy001.vdi,Powered On,Normal,952.11  GB,136.96  GB,1185,32914,,Protected
-win10admy002.vdi,Powered On,Normal,152.11  GB,121.01  GB,680,16111,,Protected
-win10admy003.vdi,Powered On,Normal,112.11  GB,110.07  GB,87,13899,,Protected
-win10admy004.vdi,Powered On,Normal,182.11  GB,140.66  GB,153,7581,,Protected
-win10admy005.vdi,Powered On,Normal,112.11  GB,111.65  GB,460,15482,,Protected
-win10admy006.vdi,Powered On,Normal,152.11  GB,110.19  GB,2983,15825,,Protected
-win10admy007.vdi,Powered On,Normal,152.11  GB,120.1  GB,131,11033,,Protected
-win10admy008.vdi,Powered On,Normal,152.11  GB,119.71  GB,153,8498,,Protected
-win10admy009.vdi,Powered On,Normal,132.11  GB,111.64  GB,131,13815,,Protected
-win10admy010.vdi,Powered On,Normal,152.11  GB,119.7  GB,745,10990,,Protected
-win10apbdev01.vdi,Powered On,Normal,136.11  GB,136.11  GB,109,13417,,Protected
-win10argdev01.vdi,Powered On,Normal,120  GB,112.07  GB,417,16465,,Protected
-win10argdev02.vdi,Powered On,Normal,120  GB,77.12  GB,65,15246,,Protected
-win10argdev03.vdi,Powered On,Normal,120  GB,76.53  GB,65,14768,,Protected
-win10argdev04.vdi,Powered On,Normal,120  GB,76.43  GB,65,15705,,Protected
-win10argdev05.vdi,Powered On,Normal,120  GB,76.03  GB,65,14133,,Protected
-win10asadev01.vdi,Powered On,Normal,120  GB,103.8  GB,1404,16470,,Protected
-win10asadev02.vdi,Powered On,Normal,120  GB,103.48  GB,153,16350,,Protected
-win10asadev03.vdi,Powered On,Normal,120  GB,106.31  GB,153,16471,,Protected
-win10asadev04.vdi,Powered On,Normal,120  GB,102.17  GB,197,16368,,Protected
-win10asadev05.vdi,Powered On,Normal,120  GB,106.91  GB,2063,16471,,Protected
-win10asadev06.vdi,Powered On,Normal,120  GB,111.05  GB,131,16472,,Protected
-win10asadev07.vdi,Powered On,Normal,120  GB,94.82  GB,351,16471,,Protected
-win10asadev08.vdi,Powered On,Normal,120  GB,104.58  GB,263,16471,,Protected
-win10asadev09.vdi,Powered On,Normal,136.11  GB,122.44  GB,175,16471,,Protected
-win10asadev10.vdi,Powered On,Normal,120  GB,103.95  GB,131,16471,,Protected
-win10asadev11.vdi,Powered On,Normal,120  GB,78.79  GB,131,16470,,Protected
-win10asadev12.vdi,Powered On,Normal,120  GB,78.27  GB,131,16471,,Protected
-win10asadev13.vdi,Powered On,Normal,120  GB,78.83  GB,219,15849,,Protected
-win10asadev14.vdi,Powered On,Normal,120  GB,78.59  GB,263,13851,,Protected
-win10asadev15.vdi,Powered On,Normal,120  GB,91.85  GB,219,16369,,Protected
-win10asydev00.vdi,Powered On,Normal,100  GB,86.13  GB,87,7319,,Protected
-win10asydev01.vdi,Powered On,Normal,100  GB,99.22  GB,109,8239,,Protected
-win10asydev02.vdi,Powered On,Normal,120  GB,101.66  GB,329,16471,,Protected
-win10asydev03.vdi,Powered On,Normal,100  GB,91.08  GB,285,15502,,Protected
-win10asydev04.vdi,Powered On,Normal,100  GB,97.75  GB,87,7237,,Protected
-win10asydev05.vdi,Powered On,Normal,100  GB,99.47  GB,109,6336,,Protected
-win10asydev06.vdi,Powered On,Normal,108.11  GB,87.86  GB,263,8250,,Protected
-win10asydev07.vdi,Powered On,Normal,120  GB,105.16  GB,241,16465,,Protected
-win10asydev09.vdi,Powered On,Normal,100  GB,84.19  GB,87,7923,,Protected
-win10asydev10.vdi,Powered On,Normal,160  GB,105.34  GB,285,8242,,Protected
-win10asydev100.vdi,Powered On,Normal,120  GB,104.79  GB,109,14319,,Protected
-win10asydev101.vdi,Powered On,Normal,128.11  GB,87.73  GB,219,8242,,Protected
-win10asydev102.vdi,Powered On,Normal,120  GB,72.56  GB,65,14243,,Protected
-win10asydev103.vdi,Powered On,Normal,120  GB,107.66  GB,153,16465,,Protected
-win10asydev104.vdi,Powered On,Normal,120  GB,111.05  GB,175,16469,,Protected
-win10asydev105.vdi,Powered On,Normal,120  GB,116.75  GB,153,14576,,Protected
-win10asydev106.vdi,Powered On,Normal,120  GB,102.13  GB,65,15340,,Protected
-win10asydev107.vdi,Powered On,Normal,120  GB,77.5  GB,87,13682,,Protected
-win10asydev108.vdi,Powered On,Normal,120  GB,77.43  GB,43,15439,,Protected
-win10asydev109.vdi,Powered On,Normal,120  GB,74.74  GB,65,14094,,Protected
-win10asydev11.vdi,Powered On,Normal,120  GB,114.93  GB,636,16470,,Protected
-win10asydev110.vdi,Powered On,Normal,120  GB,89.75  GB,65,10040,,Protected
-win10asydev111.vdi,Powered On,Normal,120  GB,103.27  GB,65,7201,,Protected
-win10asydev112.vdi,Powered On,Normal,120  GB,76.36  GB,65,14407,,Protected
-win10asydev113.vdi,Powered On,Normal,100  GB,83.92  GB,87,6005,,Protected
-win10asydev114.vdi,Powered On,Normal,120  GB,77.12  GB,65,13705,,Protected
-win10asydev115.vdi,Powered On,Normal,136.11  GB,136.11  GB,87,16491,,Protected
-win10asydev12.vdi,Powered On,Normal,120  GB,111.88  GB,131,16472,,Protected
-win10asydev13.vdi,Powered On,Normal,120  GB,118.77  GB,153,16465,,Protected
-win10asydev14.vdi,Powered On,Normal,120  GB,102.25  GB,307,16472,,Protected
-win10asydev15.vdi,Powered On,Normal,120  GB,105.1  GB,1668,16468,,Protected
-win10asydev16.vdi,Powered On,Normal,120  GB,104.7  GB,1513,16471,,Protected
-win10asydev17.vdi,Powered On,Normal,120  GB,104.99  GB,5575,16465,,Protected
-win10asydev18.vdi,Powered On,Normal,136.11  GB,120.28  GB,416,16479,,Protected
-win10asydev19.vdi,Powered On,Normal,120  GB,102.66  GB,219,16470,,Protected
-win10asydev20.vdi,Powered On,Normal,120  GB,104.13  GB,131,16467,,Protected
-win10asydev21.vdi,Powered On,Normal,120  GB,116.6  GB,3007,16469,,Protected
-win10asydev22.vdi,Powered On,Normal,120  GB,106.02  GB,153,16399,,Protected
-win10asydev23.vdi,Powered On,Normal,120  GB,107.26  GB,197,16472,,Protected
-win10asydev24.vdi,Powered On,Normal,120  GB,104.46  GB,3270,16470,,Protected
-win10asydev25.vdi,Powered On,Normal,120  GB,101.33  GB,131,11692,,Protected
-win10asydev26.vdi,Powered On,Normal,120  GB,106.01  GB,131,16471,,Protected
-win10asydev27.vdi,Powered On,Normal,120  GB,106.22  GB,131,16479,,Protected
-win10asydev28.vdi,Powered On,Normal,120  GB,108.14  GB,153,16472,,Protected
-win10asydev29.vdi,Powered On,Normal,120  GB,103.36  GB,153,16462,,Protected
-win10asydev30.vdi,Powered On,Normal,120  GB,105.09  GB,197,16469,,Protected
-win10asydev31.vdi,Powered On,Normal,80  GB,79.39  GB,131,7162,,Protected
-win10asydev32.vdi,Powered On,Normal,100  GB,99.47  GB,285,8240,,Protected
-win10asydev33.vdi,Powered On,Normal,100  GB,82.86  GB,219,8240,,Protected
-win10asydev35.vdi,Powered On,Normal,120  GB,80.33  GB,65,9778,,Protected
-win10asydev36.vdi,Powered On,Normal,100  GB,99.31  GB,109,6372,,Protected
-win10asydev37.vdi,Powered On,Normal,120  GB,111.89  GB,175,16469,,Protected
-win10asydev38.vdi,Powered On,Normal,100  GB,84.89  GB,351,7832,,Protected
-win10asydev39.vdi,Powered On,Normal,120  GB,105.51  GB,131,16468,,Protected
-win10asydev40.vdi,Powered On,Normal,120  GB,103.47  GB,131,11610,,Protected
-win10asydev41.vdi,Powered On,Normal,120  GB,106.57  GB,219,16469,,Protected
-win10asydev42.vdi,Powered On,Normal,120  GB,103.26  GB,153,16467,,Protected
-win10asydev43.vdi,Powered On,Normal,120  GB,102.36  GB,131,10592,,Protected
-win10asydev44.vdi,Powered On,Normal,120  GB,107.36  GB,329,16471,,Protected
-win10asydev45.vdi,Powered On,Normal,120  GB,107.14  GB,351,16469,,Protected
-win10asydev46.vdi,Powered On,Normal,120  GB,107.97  GB,153,11830,,Protected
-win10asydev47.vdi,Powered On,Normal,380  GB,148.2  GB,175,8240,,Protected
-win10asydev48.vdi,Powered On,Normal,120  GB,107.86  GB,131,16470,,Protected
-win10asydev49.vdi,Powered On,Normal,120  GB,106.48  GB,197,16471,,Protected
-win10asydev50.vdi,Powered On,Normal,120  GB,89.94  GB,153,16469,,Protected
-win10asydev51.vdi,Powered On,Normal,120  GB,101.53  GB,131,16470,,Protected
-win10asydev52.vdi,Powered On,Normal,120  GB,106.3  GB,2369,16478,,Protected
-win10asydev53.vdi,Powered On,Normal,120  GB,103.95  GB,285,16465,,Protected
-win10asydev54.vdi,Powered On,Normal,120  GB,109.56  GB,131,12737,,Protected
-win10asydev55.vdi,Powered On,Normal,120  GB,103.91  GB,109,11714,,Protected
-win10asydev56.vdi,Powered On,Normal,120  GB,101.7  GB,307,16469,,Protected
-win10asydev57.vdi,Powered On,Normal,120  GB,105.45  GB,153,16472,,Protected
-win10asydev58.vdi,Powered On,Normal,120  GB,103.66  GB,175,9926,,Protected
-win10asydev59.vdi,Powered On,Normal,120  GB,103.72  GB,834,16471,,Protected
-win10asydev60.vdi,Powered On,Normal,120  GB,108.61  GB,153,16479,,Protected
-win10asydev62.vdi,Powered On,Normal,100  GB,87.49  GB,65,7843,,Protected
-win10asydev63.vdi,Powered On,Normal,100  GB,92.75  GB,526,8248,,Protected
-win10asydev64.vdi,Powered On,Normal,128.11  GB,95.65  GB,109,8241,,Protected
-win10asydev65.vdi,Powered On,Normal,128.11  GB,104.41  GB,197,8251,,Protected
-win10asydev66.vdi,Powered On,Normal,120  GB,106.76  GB,153,16469,,Protected
-win10asydev67.vdi,Powered On,Normal,120  GB,103.13  GB,263,16471,,Protected
-win10asydev68.vdi,Powered On,Normal,120  GB,101.91  GB,197,10824,,Protected
-win10asydev69.vdi,Powered On,Normal,120  GB,107.04  GB,131,11097,,Protected
-win10asydev70.vdi,Powered On,Normal,120  GB,107.31  GB,175,16463,,Protected
-win10asydev75.vdi,Powered On,Normal,100  GB,83.21  GB,548,8239,,Protected
-win10asydev89.vdi,Powered On,Normal,100  GB,86.63  GB,87,7161,,Protected
-win10asydev91.vdi,Powered On,Normal,100  GB,88.48  GB,87,7259,,Protected
-win10asydev97.vdi,Powered On,Normal,120  GB,119.14  GB,87,8241,,Protected
-win10asydev98.vdi,Powered On,Normal,100  GB,94.34  GB,285,8243,,Protected
-win10asydev99.vdi,Powered On,Normal,100  GB,99.22  GB,131,8250,,Protected
-win10atydev00.vdi,Powered On,Normal,120  GB,102.87  GB,131,16471,,Protected
-win10atydev01.vdi,Powered On,Normal,120  GB,109.7  GB,2019,16469,,Protected
-win10atydev02.vdi,Powered On,Normal,120  GB,106.64  GB,921,16471,,Protected
-win10atydev03.vdi,Powered On,Normal,120  GB,106.18  GB,504,16472,,Protected
-win10audit01.vdi,Powered On,Normal,720  GB,317.31  GB,197,8347,,Protected
-win10dbay003.vdi,Powered On,Normal,350  GB,177.41  GB,680,7102,,Protected
-win10dbay004.vdi,Powered On,Normal,350  GB,215.47  GB,285,8241,,Protected
-win10dbay007.vdi,Powered On,Normal,100  GB,99.34  GB,482,8244,,Protected
-win10tylgold01.vdi,Powered On,Normal,100  GB,99.32  GB,43,7857,,Protected
-win81adba001.vdi,Powered On,Normal,160  GB,65.02  GB,109,6500,,Protected
+Name	State	Status	Provisioned Space	Used Space	Host CPU	Host Mem	EVC Mode	HA Protection
+vm-obia-b01.vdi	Powered On	Normal	156.11  GB	156.11  GB	87	16480		Protected
+vm-obia-b02.vdi	Powered On	Normal	156.11  GB	156.11  GB	131	16482		Protected
+vm-obia-b03.vdi	Powered On	Normal	156.11  GB	156.11  GB	153	16480		Protected
+vm-obia-b04.vdi	Powered On	Normal	156.11  GB	156.11  GB	87	16480		Protected
+vm-obia-b05.vdi	Powered On	Normal	156.11  GB	156.11  GB	285	16480		Protected
+vm-obia-b06.vdi	Powered On	Normal	156.11  GB	156.11  GB	285	16479		Protected
+vm-obia-b07.vdi	Powered On	Normal	156.11  GB	156.11  GB	109	16474		Protected
+vm-obia-b08.vdi	Powered On	Normal	156.11  GB	156.11  GB	131	16480		Protected
+vm-obia-b09.vdi	Powered On	Normal	156.11  GB	156.11  GB	460	16480		Protected
+vm-obia-b10.vdi	Powered On	Normal	156.11  GB	156.11  GB	131	16482		Protected
+vm-obia-b11.vdi	Powered On	Normal	156.11  GB	156.11  GB	43	9025		Protected
+vm-obia-b12.vdi	Powered On	Normal	156.11  GB	156.11  GB	175	16480		Protected
+vm-obia-b13.vdi	Powered On	Normal	156.11  GB	156.11  GB	43	16473		Protected
+vm-obia-b14.vdi	Powered On	Normal	156.11  GB	156.11  GB	175	16480		Protected
+vm-obia-b15.vdi	Powered On	Normal	156.11  GB	156.11  GB	175	16469		Protected
+vm-obia-b16.vdi	Powered On	Normal	156.11  GB	156.11  GB	65	16479		Protected
+vm-obia-b17.vdi	Powered On	Normal	156.11  GB	156.11  GB	87	16480		Protected
+vm-obia-b18.vdi	Powered On	Normal	156.11  GB	156.11  GB	329	16480		Protected
+vm-obia-b19.vdi	Powered On	Normal	156.11  GB	156.11  GB	175	16482		Protected
+vm-obia-b20.vdi	Powered On	Normal	156.11  GB	156.11  GB	43	9405		Protected
+w10asydev001.vdi	Powered On	Normal	100  GB	99.35  GB	109	8249		Protected
+w10asydev002.vdi	Powered On	Normal	100  GB	99.3  GB	153	8247		Protected
+w10asydev003.vdi	Powered On	Normal	100  GB	99.25  GB	109	8233		Protected
+w10asydev004.vdi	Powered On	Normal	100  GB	99.24  GB	87	8247		Protected
+w10asydev005.vdi	Powered On	Normal	100  GB	99.33  GB	131	8244		Protected
+w10-zadev-ac01.vdi	Powered On	Normal	120  GB	102.2  GB	87	16463		Protected
+w10-zadev-ac02.vdi	Powered On	Normal	136.11  GB	125.29  GB	219	16465		Protected
+w10-zadev-ac03.vdi	Powered On	Normal	120  GB	104.52  GB	109	16469		Protected
+w10-zadev-ac04.vdi	Powered On	Normal	120  GB	105.48  GB	1338	16465		Protected
+w10-zadev-ac05.vdi	Powered On	Normal	120  GB	101.89  GB	109	16470		Protected
+w10-zadev-ac06.vdi	Powered On	Normal	120  GB	99.02  GB	87	16462		Protected
+w10-zadev-ac07.vdi	Powered On	Normal	120  GB	100.52  GB	153	16471		Protected
+w10-zadev-pc01	Powered On	Normal	120  GB	108.7  GB	175	16468		Protected
+w10-zadev-pc02	Powered On	Normal	120  GB	112.34  GB	131	16472		Protected
+win10aardev00.vdi	Powered On	Normal	100  GB	99.1  GB	87	8244		Protected
+win10aardev01.vdi	Powered On	Normal	100  GB	99.24  GB	109	8250		Protected
+win10aardev02.vdi	Powered On	Normal	200  GB	104.44  GB	109	8241		Protected
+win10aardev03.vdi	Powered On	Normal	100  GB	99.21  GB	175	8244		Protected
+win10aardev04.vdi	Powered On	Normal	100  GB	99.41  GB	394	8239		Protected
+win10aardev05.vdi	Powered On	Normal	100  GB	99.1  GB	921	8218		Protected
+win10aardev06.vdi	Powered On	Normal	108.11  GB	107.46  GB	131	8245		Protected
+win10aardev07.vdi	Powered On	Normal	100  GB	96.11  GB	87	8245		Protected
+win10aardev08.vdi	Powered On	Normal	100  GB	99.1  GB	87	8248		Protected
+win10aardev09.vdi	Powered On	Normal	108.11  GB	106.32  GB	153	8243		Protected
+win10aardev10.vdi	Powered On	Normal	100  GB	99.42  GB	109	8241		Protected
+win10aardev11.vdi	Powered On	Normal	100  GB	99.41  GB	153	8243		Protected
+win10aardev12.vdi	Powered On	Normal	100  GB	99.44  GB	65	8244		Protected
+win10aardev13.vdi	Powered On	Normal	108.11  GB	107.5  GB	87	8248		Protected
+win10aardev14.vdi	Powered On	Normal	100  GB	98.77  GB	131	8245		Protected
+win10aardev15.vdi	Powered On	Normal	120  GB	97.64  GB	65	14824		Protected
+Win10aardev17.vdi	Powered On	Normal	100  GB	95.05  GB	109	8237		Protected
+win10aardev18.vdi	Powered On	Normal	60  GB	59.66  GB	21	4949		Protected
+win10aardev19.vdi	Powered On	Normal	120  GB	101.88  GB	131	16461		Protected
+win10aardev20.vdi	Powered On	Normal	120  GB	77.63  GB	153	16471		Protected
+win10aardev21.vdi	Powered On	Normal	120  GB	78.41  GB	175	16459		Protected
+win10aardev22.vdi	Powered On	Normal	120  GB	79.7  GB	131	15103		Protected
+win10aardev23.vdi	Powered On	Normal	120  GB	77.72  GB	153	15077		Protected
+win10aardev24.vdi	Powered On	Normal	120  GB	74.01  GB	109	16465		Protected
+win10aardev25.vdi	Powered On	Normal	120  GB	91.05  GB	153	16402		Protected
+win10adadev01.vdi	Powered On	Normal	120  GB	105.5  GB	2018	16468		Protected
+win10adadev02.vdi	Powered On	Normal	120  GB	101.78  GB	131	16473		Protected
+win10adadev03.vdi	Powered On	Normal	136.11  GB	120.43  GB	219	16468		Protected
+win10adadev04.vdi	Powered On	Normal	120  GB	107.4  GB	131	16470		Protected
+win10adadev05.vdi	Powered On	Normal	120  GB	106.27  GB	219	16466		Protected
+win10adadev06.vdi	Powered On	Normal	120  GB	104.25  GB	131	16466		Protected
+win10adadev07.vdi	Powered On	Normal	120  GB	105.09  GB	131	16469		Protected
+win10adadev08.vdi	Powered On	Normal	120  GB	102.16  GB	131	16468		Protected
+win10adadev09.vdi	Powered On	Normal	120  GB	102.67  GB	153	16471		Protected
+win10adadev10.vdi	Powered On	Normal	120  GB	104.71  GB	131	16470		Protected
+win10adadev11.vdi	Powered On	Normal	120  GB	100.83  GB	197	16468		Protected
+win10adadev12.vdi	Powered On	Normal	120  GB	99.38  GB	219	16471		Protected
+win10adadev13.vdi	Powered On	Normal	120  GB	102.52  GB	131	16470		Protected
+win10adadev14.vdi	Powered On	Normal	120  GB	102.14  GB	153	16472		Protected
+win10adadev15.vdi	Powered On	Normal	120  GB	103.69  GB	636	16471		Protected
+win10adadev16.vdi	Powered On	Normal	120  GB	115.59  GB	153	16469		Protected
+win10adadev17.vdi	Powered On	Normal	120  GB	102.79  GB	395	16471		Protected
+win10adadev18.vdi	Powered On	Normal	120  GB	104.34  GB	241	16472		Protected
+win10adadev19.vdi	Powered On	Normal	120  GB	101.6  GB	241	16480		Protected
+win10adadev20.vdi	Powered On	Normal	136.11  GB	120.4  GB	175	15125		Protected
+win10adadev21.vdi	Powered On	Normal	120  GB	104.7  GB	197	16471		Protected
+win10adadev22.vdi	Powered On	Normal	120  GB	100.1  GB	131	16470		Protected
+win10adadev23.vdi	Powered On	Normal	120  GB	102.9  GB	395	16465		Protected
+win10adadev24.vdi	Powered On	Normal	120  GB	109.04  GB	197	16471		Protected
+win10adadev25.vdi	Powered On	Normal	120  GB	103.01  GB	197	16472		Protected
+win10adadev26.vdi	Powered On	Normal	120  GB	104.76  GB	175	16471		Protected
+win10adadev27.vdi	Powered On	Normal	120  GB	102.37  GB	131	16471		Protected
+win10adadev28.vdi	Powered On	Normal	120  GB	107.7  GB	680	16471		Protected
+win10adadev29.vdi	Powered On	Normal	120  GB	103.91  GB	131	16471		Protected
+win10adadev30.vdi	Powered On	Normal	120  GB	107.56  GB	175	16470		Protected
+win10adadev31.vdi	Powered On	Normal	120  GB	101.93  GB	109	13673		Protected
+win10adadev32.vdi	Powered On	Normal	120  GB	104.76  GB	109	16471		Protected
+win10adadev33.vdi	Powered On	Normal	120  GB	105.6  GB	219	16471		Protected
+win10adadev34.vdi	Powered On	Normal	120  GB	108.58  GB	417	16471		Protected
+win10adadev35.vdi	Powered On	Normal	120  GB	103.96  GB	131	16471		Protected
+win10adadev36.vdi	Powered On	Normal	120  GB	102.87  GB	153	16471		Protected
+win10adadev37.vdi	Powered On	Normal	120  GB	103.19  GB	153	16472		Protected
+win10adadev38.vdi	Powered On	Normal	120  GB	103.15  GB	153	16471		Protected
+win10adadev39.vdi	Powered On	Normal	120  GB	107.63  GB	219	16465		Protected
+win10adadev40.vdi	Powered On	Normal	120  GB	103.15  GB	153	16472		Protected
+win10adadev41.vdi	Powered On	Normal	120  GB	103.8  GB	153	16469		Protected
+win10adadev42.vdi	Powered On	Normal	120  GB	104.14  GB	109	14071		Protected
+win10adadev43.vdi	Powered On	Normal	120  GB	105.36  GB	131	16473		Protected
+win10adadev44.vdi	Powered On	Normal	120  GB	102.6  GB	197	16471		Protected
+win10adadev45.vdi	Powered On	Normal	120  GB	110.08  GB	175	16472		Protected
+win10adadev46.vdi	Powered On	Normal	120  GB	99.01  GB	197	16469		Protected
+win10adadev47.vdi	Powered On	Normal	100  GB	92.07  GB	87	8242		Protected
+win10adadev48.vdi	Powered On	Normal	120  GB	100.85  GB	109	16472		Protected
+win10adadev49.vdi	Powered On	Normal	120  GB	101.35  GB	131	16473		Protected
+win10adadev50.vdi	Powered On	Normal	120  GB	93.19  GB	219	16470		Protected
+win10adba001.vdi	Powered On	Normal	358.11  GB	358.11  GB	2683	8241		Protected
+win10adba002.vdi	Powered On	Normal	338.11  GB	338.11  GB	206	8242		Protected
+win10adba003.vdi	Powered On	Normal	152.11  GB	152.11  GB	68	18750		Protected
+win10adba004.vdi	Powered On	Normal	136.11  GB	136.11  GB	137	16469		Protected
+win10adba005.vdi	Powered On	Normal	378.11  GB	378.11  GB	160	8242		Protected
+win10adba006.vdi	Powered On	Normal	366.11  GB	366.11  GB	91	16462		Protected
+win10adba007.vdi	Powered On	Normal	308.11  GB	106.01  GB	183	32897		Protected
+win10adba008.vdi	Powered On	Normal	136.11  GB	136.11  GB	114	16471		Protected
+win10adba009.vdi	Powered On	Normal	136.11  GB	136.11  GB	137	16466		Protected
+win10adba010.vdi	Powered On	Normal	136.11  GB	136.11  GB	137	16469		Protected
+win10adba011.vdi	Powered On	Normal	136.11  GB	136.11  GB	137	16471		Protected
+win10adba012.vdi	Powered On	Normal	136.11  GB	136.11  GB	160	16471		Protected
+win10adba013.vdi	Powered On	Normal	136.11  GB	136.11  GB	160	16471		Protected
+win10adba014.vdi	Powered On	Normal	136.11  GB	136.11  GB	11153	14375		Protected
+win10adba015.vdi	Powered On	Normal	136.11  GB	136.11  GB	137	16471		Protected
+win10adba016.vdi-TEMP	Powered On	Normal	1.12  TB	349.31  GB	197	16442		Protected
+win10admy000.vdi	Powered On	Normal	112.11  GB	111.82  GB	131	11424		Protected
+win10admy001.vdi	Powered On	Normal	952.11  GB	136.96  GB	3378	32893		Protected
+win10admy002.vdi	Powered On	Normal	152.11  GB	121.01  GB	131	32902		Protected
+win10admy003.vdi	Powered On	Normal	112.11  GB	110.07  GB	109	13900		Protected
+win10admy004.vdi	Powered On	Normal	182.11  GB	140.66  GB	109	19517		Protected
+win10admy005.vdi	Powered On	Normal	112.11  GB	111.65  GB	241	16413		Protected
+win10admy006.vdi	Powered On	Normal	152.11  GB	110.19  GB	263	12516		Protected
+win10admy007.vdi	Powered On	Normal	152.11  GB	120.1  GB	131	14174		Protected
+win10admy008.vdi	Powered On	Normal	152.11  GB	119.71  GB	153	11716		Protected
+win10admy009.vdi	Powered On	Normal	132.11  GB	111.64  GB	87	13891		Protected
+win10admy010.vdi	Powered On	Normal	152.11  GB	119.7  GB	109	14182		Protected
+win10apbdev01.vdi	Powered On	Normal	136.11  GB	136.11  GB	87	16490		Protected
+win10argdev01.vdi	Powered On	Normal	120  GB	112.07  GB	417	16465		Protected
+win10argdev02.vdi	Powered On	Normal	120  GB	77.12  GB	65	15298		Protected
+win10argdev03.vdi	Powered On	Normal	120  GB	76.53  GB	65	14802		Protected
+win10argdev04.vdi	Powered On	Normal	120  GB	76.43  GB	43	15706		Protected
+win10argdev05.vdi	Powered On	Normal	120  GB	76.03  GB	65	14387		Protected
+win10asadev01.vdi	Powered On	Normal	120  GB	103.8  GB	131	16470		Protected
+win10asadev02.vdi	Powered On	Normal	120  GB	103.48  GB	131	16470		Protected
+win10asadev03.vdi	Powered On	Normal	120  GB	106.31  GB	175	16471		Protected
+win10asadev04.vdi	Powered On	Normal	120  GB	102.17  GB	109	16470		Protected
+win10asadev05.vdi	Powered On	Normal	120  GB	106.91  GB	153	16472		Protected
+win10asadev06.vdi	Powered On	Normal	120  GB	111.05  GB	131	16472		Protected
+win10asadev07.vdi	Powered On	Normal	120  GB	94.82  GB	351	16471		Protected
+win10asadev08.vdi	Powered On	Normal	120  GB	104.58  GB	263	16471		Protected
+win10asadev09.vdi	Powered On	Normal	136.11  GB	122.44  GB	131	16472		Protected
+win10asadev10.vdi	Powered On	Normal	120  GB	103.95  GB	131	16471		Protected
+win10asadev11.vdi	Powered On	Normal	120  GB	78.79  GB	131	16470		Protected
+win10asadev12.vdi	Powered On	Normal	120  GB	78.27  GB	131	16471		Protected
+win10asadev13.vdi	Powered On	Normal	120  GB	78.83  GB	109	15848		Protected
+win10asadev14.vdi	Powered On	Normal	120  GB	78.59  GB	285	13851		Protected
+win10asadev15.vdi	Powered On	Normal	120  GB	91.85  GB	219	16369		Protected
+win10asydev00.vdi	Powered On	Normal	100  GB	86.13  GB	87	8240		Protected
+win10asydev01.vdi	Powered On	Normal	100  GB	99.22  GB	460	8247		Protected
+win10asydev02.vdi	Powered On	Normal	120  GB	101.66  GB	153	16470		Protected
+win10asydev03.vdi	Powered On	Normal	100  GB	91.08  GB	241	15502		Protected
+win10asydev04.vdi	Powered On	Normal	100  GB	97.75  GB	87	8239		Protected
+win10asydev05.vdi	Powered On	Normal	100  GB	99.47  GB	109	8239		Protected
+win10asydev06.vdi	Powered On	Normal	108.11  GB	87.86  GB	2985	8250		Protected
+win10asydev07.vdi	Powered On	Normal	120  GB	105.16  GB	197	16465		Protected
+win10asydev09.vdi	Powered On	Normal	100  GB	84.19  GB	87	8244		Protected
+win10asydev10.vdi	Powered On	Normal	160  GB	105.34  GB	197	8242		Protected
+win10asydev100.vdi	Powered On	Normal	120  GB	104.79  GB	109	14417		Protected
+win10asydev101.vdi	Powered On	Normal	128.11  GB	87.73  GB	109	6840		Protected
+win10asydev102.vdi	Powered On	Normal	120  GB	72.56  GB	65	14257		Protected
+win10asydev103.vdi	Powered On	Normal	120  GB	107.66  GB	131	16465		Protected
+win10asydev104.vdi	Powered On	Normal	120  GB	111.05  GB	109	16470		Protected
+win10asydev105.vdi	Powered On	Normal	120  GB	116.75  GB	153	16205		Protected
+win10asydev106.vdi	Powered On	Normal	120  GB	102.13  GB	87	15306		Protected
+win10asydev107.vdi	Powered On	Normal	120  GB	77.5  GB	65	13693		Protected
+win10asydev108.vdi	Powered On	Normal	120  GB	77.43  GB	65	15439		Protected
+win10asydev109.vdi	Powered On	Normal	120  GB	74.74  GB	65	14145		Protected
+win10asydev11.vdi	Powered On	Normal	120  GB	114.93  GB	175	16469		Protected
+win10asydev110.vdi	Powered On	Normal	120  GB	89.75  GB	65	10044		Protected
+win10asydev111.vdi	Powered On	Normal	120  GB	103.27  GB	87	7241		Protected
+win10asydev112.vdi	Powered On	Normal	120  GB	76.36  GB	65	14407		Protected
+win10asydev113.vdi	Powered On	Normal	100  GB	83.92  GB	87	8237		Protected
+win10asydev114.vdi	Powered On	Normal	120  GB	77.12  GB	65	13815		Protected
+win10asydev115.vdi	Powered On	Normal	136.11  GB	136.11  GB	460	16492		Protected
+win10asydev12.vdi	Powered On	Normal	120  GB	111.88  GB	197	16472		Protected
+win10asydev13.vdi	Powered On	Normal	120  GB	118.77  GB	153	16465		Protected
+win10asydev14.vdi	Powered On	Normal	120  GB	102.25  GB	175	16471		Protected
+win10asydev15.vdi	Powered On	Normal	120  GB	105.1  GB	131	16468		Protected
+win10asydev16.vdi	Powered On	Normal	120  GB	104.7  GB	219	16471		Protected
+win10asydev17.vdi	Powered On	Normal	120  GB	104.99  GB	131	16465		Protected
+win10asydev18.vdi	Powered On	Normal	136.11  GB	120.28  GB	175	16481		Protected
+win10asydev19.vdi	Powered On	Normal	120  GB	102.66  GB	153	16470		Protected
+win10asydev20.vdi	Powered On	Normal	120  GB	104.13  GB	197	16467		Protected
+win10asydev21.vdi	Powered On	Normal	120  GB	116.6  GB	175	16469		Protected
+win10asydev22.vdi	Powered On	Normal	120  GB	106.02  GB	131	16471		Protected
+win10asydev23.vdi	Powered On	Normal	120  GB	107.26  GB	153	16471		Protected
+win10asydev24.vdi	Powered On	Normal	120  GB	104.46  GB	153	16470		Protected
+win10asydev25.vdi	Powered On	Normal	120  GB	101.33  GB	109	12739		Protected
+win10asydev26.vdi	Powered On	Normal	120  GB	106.01  GB	131	16471		Protected
+win10asydev27.vdi	Powered On	Normal	120  GB	106.22  GB	109	16479		Protected
+win10asydev28.vdi	Powered On	Normal	120  GB	108.14  GB	219	16471		Protected
+win10asydev29.vdi	Powered On	Normal	120  GB	103.36  GB	131	16462		Protected
+win10asydev30.vdi	Powered On	Normal	120  GB	105.09  GB	131	16469		Protected
+win10asydev31.vdi	Powered On	Normal	80  GB	79.39  GB	131	8239		Protected
+win10asydev32.vdi	Powered On	Normal	100  GB	99.47  GB	87	8247		Protected
+win10asydev33.vdi	Powered On	Normal	100  GB	82.86  GB	153	8241		Protected
+win10asydev35.vdi	Powered On	Normal	120  GB	80.33  GB	65	9778		Protected
+win10asydev36.vdi	Powered On	Normal	100  GB	99.31  GB	131	8239		Protected
+win10asydev37.vdi	Powered On	Normal	120  GB	111.89  GB	131	16469		Protected
+win10asydev38.vdi	Powered On	Normal	100  GB	84.89  GB	87	8238		Protected
+win10asydev39.vdi	Powered On	Normal	120  GB	105.51  GB	175	16468		Protected
+win10asydev40.vdi	Powered On	Normal	120  GB	103.47  GB	131	11967		Protected
+win10asydev41.vdi	Powered On	Normal	120  GB	106.57  GB	131	16469		Protected
+win10asydev42.vdi	Powered On	Normal	120  GB	103.26  GB	175	16472		Protected
+win10asydev43.vdi	Powered On	Normal	120  GB	102.36  GB	131	11680		Protected
+win10asydev44.vdi	Powered On	Normal	120  GB	107.36  GB	109	16471		Protected
+win10asydev45.vdi	Powered On	Normal	120  GB	107.14  GB	131	16468		Protected
+win10asydev46.vdi	Powered On	Normal	120  GB	107.97  GB	109	11836		Protected
+win10asydev47.vdi	Powered On	Normal	380  GB	148.2  GB	131	8240		Protected
+win10asydev48.vdi	Powered On	Normal	120  GB	107.86  GB	109	16471		Protected
+win10asydev49.vdi	Powered On	Normal	120  GB	106.48  GB	131	16472		Protected
+win10asydev50.vdi	Powered On	Normal	120  GB	89.94  GB	131	16470		Protected
+win10asydev51.vdi	Powered On	Normal	120  GB	101.53  GB	131	16470		Protected
+win10asydev52.vdi	Powered On	Normal	120  GB	106.3  GB	109	16477		Protected
+win10asydev53.vdi	Powered On	Normal	120  GB	103.95  GB	153	16464		Protected
+win10asydev54.vdi	Powered On	Normal	120  GB	109.56  GB	153	12739		Protected
+win10asydev55.vdi	Powered On	Normal	120  GB	103.91  GB	109	11724		Protected
+win10asydev56.vdi	Powered On	Normal	120  GB	101.7  GB	131	16468		Protected
+win10asydev57.vdi	Powered On	Normal	120  GB	105.45  GB	175	16471		Protected
+win10asydev58.vdi	Powered On	Normal	120  GB	103.66  GB	109	11862		Protected
+win10asydev59.vdi	Powered On	Normal	120  GB	103.72  GB	109	16471		Protected
+win10asydev60.vdi	Powered On	Normal	120  GB	108.61  GB	131	16478		Protected
+win10asydev62.vdi	Powered On	Normal	100  GB	87.49  GB	65	8241		Protected
+win10asydev63.vdi	Powered On	Normal	100  GB	92.75  GB	175	8249		Protected
+win10asydev64.vdi	Powered On	Normal	128.11  GB	95.65  GB	109	8242		Protected
+win10asydev65.vdi	Powered On	Normal	128.11  GB	104.41  GB	197	8251		Protected
+win10asydev66.vdi	Powered On	Normal	120  GB	106.76  GB	109	16470		Protected
+win10asydev67.vdi	Powered On	Normal	120  GB	103.13  GB	175	16471		Protected
+win10asydev68.vdi	Powered On	Normal	120  GB	101.91  GB	153	11928		Protected
+win10asydev69.vdi	Powered On	Normal	120  GB	107.04  GB	109	12045		Protected
+win10asydev70.vdi	Powered On	Normal	120  GB	107.31  GB	219	16463		Protected
+win10asydev75.vdi	Powered On	Normal	100  GB	83.21  GB	1075	8240		Protected
+win10asydev89.vdi	Powered On	Normal	100  GB	86.63  GB	87	8237		Protected
+win10asydev91.vdi	Powered On	Normal	100  GB	88.48  GB	109	8238		Protected
+win10asydev97.vdi	Powered On	Normal	120  GB	119.14  GB	65	8241		Protected
+win10asydev98.vdi	Powered On	Normal	100  GB	94.34  GB	241	8243		Protected
+win10asydev99.vdi	Powered On	Normal	100  GB	99.22  GB	329	8250		Protected
+win10atydev00.vdi	Powered On	Normal	120  GB	102.87  GB	131	16471		Protected
+win10atydev01.vdi	Powered On	Normal	120  GB	109.7  GB	351	16469		Protected
+win10atydev02.vdi	Powered On	Normal	120  GB	106.64  GB	153	16471		Protected
+win10atydev03.vdi	Powered On	Normal	120  GB	106.18  GB	219	16471		Protected
+win10audit01.vdi	Powered On	Normal	720  GB	317.31  GB	153	14903		Protected
+win10dbay003.vdi	Powered On	Normal	350  GB	177.41  GB	351	8239		Protected
+win10dbay004.vdi	Powered On	Normal	350  GB	215.47  GB	197	8241		Protected
+win10dbay007.vdi	Powered On	Normal	100  GB	99.34  GB	109	8243		Protected
+win10tylgold01.vdi	Powered On	Normal	100  GB	99.32  GB	65	8162		Protected
+win81adba001.vdi	Powered On	Normal	160  GB	65.02  GB	43	8236		Protected
