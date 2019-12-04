@@ -4,7 +4,7 @@ Import-Module $PSScriptRoot\RemoteAppIcon.psm1
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-RemoteApp {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254068")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254068")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RemoteApp[]")]
 param (
     
@@ -130,7 +130,7 @@ param (
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function New-RemoteApp {
 [CmdletBinding(DefaultParameterSetName="Session",
-HelpURI="https://go.microsoft.com/fwlink/?LinkId=254069")]
+HelpURI="http://go.microsoft.com/fwlink/?LinkId=254069")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RemoteApp")]
 param (
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0)]
@@ -515,7 +515,7 @@ param (
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-RemoteApp {
 [CmdletBinding(DefaultParameterSetName="Session",
-HelpURI="https://go.microsoft.com/fwlink/?LinkId=254070")]
+HelpURI="http://go.microsoft.com/fwlink/?LinkId=254070")]
 param (
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0)]
     [String]
@@ -848,7 +848,7 @@ param (
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Remove-RemoteApp {
 [CmdletBinding(SupportsShouldProcess=$true,
-HelpURI="https://go.microsoft.com/fwlink/?LinkId=254071")]
+HelpURI="http://go.microsoft.com/fwlink/?LinkId=254071")]
 param (
     
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0)]
@@ -952,7 +952,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-FileTypeAssociation {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254072")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254072")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.FileTypeAssociation[]")]
 param (
     [Parameter(Mandatory=$false, ValueFromPipelineByPropertyName=$true, Position=0)]
@@ -1076,7 +1076,7 @@ param (
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-FileTypeAssociation {
 [CmdletBinding(DefaultParameterSetName="Session",
-HelpURI="https://go.microsoft.com/fwlink/?LinkId=254073")]
+HelpURI="http://go.microsoft.com/fwlink/?LinkId=254073")]
 param (
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0)]
     [String]

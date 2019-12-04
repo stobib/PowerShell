@@ -4,7 +4,7 @@ Import-Module $PSScriptRoot\Utility.psm1
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-Workspace {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254117")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254117")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.WorkspaceClass[]")]
     param (
     [Parameter(Mandatory=$false)]
@@ -52,7 +52,7 @@ function Get-Workspace {
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-Workspace {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254118")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254118")]
     param (
     [Parameter(Mandatory=$true, Position=0)]
     [string]

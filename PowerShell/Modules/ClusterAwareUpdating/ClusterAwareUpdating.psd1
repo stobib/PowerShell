@@ -80,7 +80,7 @@ FileList = @()
 PrivateData = ''
 
 # HelpInfo URI of this module
-HelpInfoURI = 'https://go.microsoft.com/fwlink/?linkid=390759'
+HelpInfoURI = 'http://go.microsoft.com/fwlink/?linkid=390759'
 
 }
 

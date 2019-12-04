@@ -81,7 +81,6 @@ NestedModules = @('ComplexTypeDefinitions.psm1',
                'NetworkControllerStatistics.cdxml',
                'NetworkControllerVirtualNetworkConfiguration.cdxml',
                'NetworkControllerVirtualSwitchConfiguration.cdxml',
-               'NetworkControllerAuditingSettingsConfiguration.cdxml',
                'NetworkControllerRoute.cdxml',
                'NetworkControllerRouteTable.cdxml',
                'NetworkControllerServiceInsertion.cdxml',
@@ -98,12 +97,7 @@ NestedModules = @('ComplexTypeDefinitions.psm1',
                'NetworkControllerNetworkInterfaceIpConfiguration.cdxml',
                'NetworkControllerVirtualSubnet.cdxml',
                'NetworkcontrollerConnectivityCheck.cdxml',
-               'NetworkcontrollerConnectivityCheckResult.cdxml',
-               'NetworkcontrollerBackup.cdxml',
-               'NetworkcontrollerRestore.cdxml',
-               'NetworkcontrollerSubnetEgressReset.cdxml',
-               'NetworkControllerIpReservation.cdxml',
-               'NetworkControllerVirtualNetworkPeering.cdxml'
+               'NetworkcontrollerConnectivityCheckResult.cdxml'
 )
 
 # Functions to export from this module
@@ -128,7 +122,7 @@ AliasesToExport = '*'
 # PrivateData = ''
 
 # HelpInfo URI of this module
-HelpInfoURI = 'https://go.microsoft.com/fwlink/?linkid=216368'
+HelpInfoURI = 'http://go.microsoft.com/fwlink/?linkid=216368'
 
 # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
 # DefaultCommandPrefix = ''

@@ -3,7 +3,7 @@ Import-Module $PSScriptRoot\Utility.psm1
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-RemoteDesktop {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254074")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254074")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDPublishedRemoteDesktop[]")]
 param (
     [Parameter(Mandatory=$false)]
@@ -49,7 +49,7 @@ param (
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-RemoteDesktop {
 [CmdletBinding(SupportsShouldProcess=$true,
-HelpURI="https://go.microsoft.com/fwlink/?LinkId=254075")]
+HelpURI="http://go.microsoft.com/fwlink/?LinkId=254075")]
 param (
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0)]
     [string]

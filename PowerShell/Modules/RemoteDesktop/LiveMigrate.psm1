@@ -141,7 +141,7 @@ function Copy-GoldLocally
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Move-VirtualDesktop 
 {
-[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254067")]
+[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254067")]
     # Parameters
     param (
         # Specify name of the Source host in this parameter.

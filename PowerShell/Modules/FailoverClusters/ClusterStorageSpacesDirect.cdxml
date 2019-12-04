@@ -6,7 +6,7 @@
     <StaticCmdlets>
 
       <Cmdlet>
-        <CmdletMetadata Verb="Enable" HelpUri="https://go.microsoft.com/fwlink/?LinkId=615932" ConfirmImpact="High"/>
+        <CmdletMetadata Verb="Enable" HelpUri="http://go.microsoft.com/fwlink/?LinkId=615932" ConfirmImpact="High"/>
         <Method MethodName="EnableStorageSpacesDirect" CmdletParameterSet="WithCacheDeviceModel">
           <ReturnValue>
             <Type PSType="uint32" />
@@ -52,17 +52,6 @@
               <Type PSType="string[]" />
               <CmdletParameterMetadata  IsMandatory="true"/>
             </Parameter>
-            <Parameter ParameterName="CollectPerformanceHistory" DefaultValue="1">
-              <Type PSType="System.Boolean" />
-              <CmdletParameterMetadata/>
-            </Parameter>
-
-            <!-- CMDLET OUTPUT  -->
-            <Parameter ParameterName="StorageSpacesDirect">
-              <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#root/MSCluster/MSCluster_StorageSpacesDirectEnable"/>
-              <CmdletOutputMetadata />
-            </Parameter>
-
           </Parameters>
         </Method>
         <Method MethodName="EnableStorageSpacesDirect" CmdletParameterSet="WithXML">
@@ -112,17 +101,6 @@
                 <ValidateNotNullOrEmpty/>
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="CollectPerformanceHistory" DefaultValue="1">
-              <Type PSType="System.Boolean" />
-              <CmdletParameterMetadata/>
-            </Parameter>
-
-            <!-- CMDLET OUTPUT  -->
-            <Parameter ParameterName="StorageSpacesDirect">
-              <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#root/MSCluster/MSCluster_StorageSpacesDirectEnable"/>
-              <CmdletOutputMetadata />
-            </Parameter>
-
           </Parameters>
         </Method>
         <Method MethodName="EnableStorageSpacesDirect" CmdletParameterSet="Auto">
@@ -166,23 +144,12 @@
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata/>
             </Parameter>
-            <Parameter ParameterName="CollectPerformanceHistory" DefaultValue="1">
-              <Type PSType="System.Boolean" />
-              <CmdletParameterMetadata/>
-            </Parameter>
-
-            <!-- CMDLET OUTPUT  -->
-            <Parameter ParameterName="StorageSpacesDirect">
-              <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#root/MSCluster/MSCluster_StorageSpacesDirectEnable"/>
-              <CmdletOutputMetadata />
-            </Parameter>
-
           </Parameters>
         </Method>
       </Cmdlet>
 
       <Cmdlet>
-        <CmdletMetadata Verb="Disable" HelpUri="https://go.microsoft.com/fwlink/?LinkId=615933" ConfirmImpact="High"/>
+        <CmdletMetadata Verb="Disable" HelpUri="http://go.microsoft.com/fwlink/?LinkId=615933" ConfirmImpact="High"/>
         <Method MethodName="DisableStorageSpacesDirect" CmdletParameterSet="DefaultParameterSet">
           <ReturnValue>
             <Type PSType="uint32" />
@@ -200,7 +167,7 @@
       </Cmdlet>
 
       <Cmdlet>
-        <CmdletMetadata Verb="Get" HelpUri="https://go.microsoft.com/fwlink/?LinkId=691107"/>
+        <CmdletMetadata Verb="Get" HelpUri="http://go.microsoft.com/fwlink/?LinkId=691107"/>
         <Method MethodName="GetStorageSpacesDirect" CmdletParameterSet="DefaultParameterSet">
           <ReturnValue>
             <Type PSType="uint32" />
@@ -225,7 +192,7 @@
       </Cmdlet>
 
       <Cmdlet>
-        <CmdletMetadata Verb="Set" HelpUri="https://go.microsoft.com/fwlink/?LinkId=691106" />
+        <CmdletMetadata Verb="Set" HelpUri="http://go.microsoft.com/fwlink/?LinkId=691106" />
         <Method MethodName="SetStorageSpacesDirect">
           <ReturnValue>
             <Type PSType="uint32" />
@@ -250,10 +217,6 @@
               <Type PSType="string[]" />
               <CmdletParameterMetadata/>
             </Parameter>
-            <Parameter ParameterName="ScmUse">
-              <Type PSType="MSCLUSTER.MSCluster_StorageSpacesDirect.ScmUse" />
-              <CmdletParameterMetadata/>
-            </Parameter>
             <Parameter ParameterName="SkipEligibilityChecks">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata/>
@@ -264,7 +227,7 @@
 
       <Cmdlet>
         <CmdletMetadata Verb="Repair" DefaultCmdletParameterSet="DefaultParameterSet" ConfirmImpact="High"/>
-          <!--HelpUri="https://go.microsoft.com/fwlink/?LinkId=691106"-->
+          <!--HelpUri="http://go.microsoft.com/fwlink/?LinkId=691106"-->
         <Method MethodName="RepairStorageSpacesDirect" CmdletParameterSet="DefaultParameterSet" >
           <ReturnValue>
             <Type PSType="uint32" />
@@ -344,10 +307,6 @@
     <Enum EnumName="MSCLUSTER.MSCluster_StorageSpacesDirect.CacheStateType" UnderlyingType="System.UInt32">
       <Value Name="Disabled" Value="0" />
       <Value Name="Enabled" Value="2" />
-    </Enum>
-    <Enum EnumName="MSCLUSTER.MSCluster_StorageSpacesDirect.ScmUse" UnderlyingType="System.UInt32">
-      <Value Name="Cache" Value="0" />
-      <Value Name="Capacity" Value="1" />
     </Enum>
   </Enums>
 </PowerShellMetadata>

@@ -14,7 +14,6 @@
     ModuleVersion = '1.0.0.0'
     AliasesToExport = @()
     FunctionsToExport = @('Get-HgsClientConfiguration',
-                          'Test-HgsClientConfiguration',
                           'Set-HgsClientConfiguration',
                           'New-HgsGuardian',
                           'Get-HgsGuardian',
@@ -26,5 +25,5 @@
                           'Grant-HgsKeyProtectorAccess',
                           'Revoke-HgsKeyProtectorAccess')
     PowerShellVersion = '3.0'
-    HelpInfoUri = "https://go.microsoft.com/fwlink/?linkid=519076"
+    HelpInfoUri = "http://go.microsoft.com/fwlink/?linkid=519076"
 }
