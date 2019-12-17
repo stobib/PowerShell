@@ -1,6 +1,7 @@
 ﻿Clear-Host;Clear-History
 Import-Module ProcessCredentials
 $Global:CurrentVersion=("5.00.8853.1000")
+$Global:SCCMClientLocation=$null
 $Global:MPA="A01"
 $Global:MPB="B01"
 $Global:LogAge="30"
@@ -16,6 +17,7 @@ $ScriptPath=$MyInvocation.MyCommand.Definition
 $ScriptName=$MyInvocation.MyCommand.Name
 $ErrorActionPreference='SilentlyContinue'
 Set-Location ($ScriptPath.Replace($ScriptName,""))
+Set-Variable -Name CCMPath -Value ($env:SystemRoot+"\CCM")
 Set-Variable -Name System32 -Value ($env:SystemRoot+"\System32")
 Set-Variable -Name LogFolder -Value ($ScriptName.Replace(".ps1",""))
 Set-Variable -Name LogFolderPath -Value ($env:USERPROFILE+"\Desktop\"+$LogFolder)
@@ -417,8 +419,14 @@ Function Get-WMIStatus{
 	}
 }
 # Installs SCCM Client #
-Function Install-SCCMClient{
+Function Install-SCCMClient{Param([Parameter(Mandatory=$True)]$HostName,[Parameter(Mandatory=$True)]$Credentials)
 	Add-LogEntry("---------------------------")"1"
+	Add-LogEntry("Opening a 'New-PSSession' on '"+$HostName+"'.")"1"
+    $RS=New-PSSession -ComputerName $HostName -Credential $Credentials
+    Enter-PSSession -Session $RS
+    Invoke-Command -Session $RS -ScriptBlock{($Env:TEMP+"\UnInstallClient.bat ")}
+
+
 	If($InstallClient-eq$true){
 		If(Test-path -Path $CCMPath){
 			Add-LogEntry("SCCM client install files found")"1"
@@ -567,6 +575,7 @@ If(Test-Path -LiteralPath $SystemListFile){
     $SystemList=@()
     ForEach($CurrentLineValue In Get-Content -Path $SystemListFile){
         If($CurrentLineValue-like"* 10.*"){
+            $InstallClient=$false
             $HostName=($CurrentLineValue -Split(" 10."))[0].Trim()
             $NetBIOS=($HostName -Split(" "))[0].Trim()
             $HostName=($HostName.Replace($NetBIOS+" ","")).Trim()
@@ -599,8 +608,8 @@ If(Test-Path -LiteralPath $SystemListFile){
                 }
                 $ClientLogFileName=($ClientLogFilePath+"\SCCMClientHealthCheck.log")
                 $ClientVersion=(Get-ClientInstalled -HostName $HostName -Credentials $SecureCredentials)-Split(";")[0]
-                If($ClientVersion[0]-ne$CurrentVersion){
-                    Stop
+                If(($ClientVersion[0]-ne$CurrentVersion)-or($InstallClient-eq$true)){
+                    Install-SCCMClient -HostName $HostName -Credentials $SecureCredentials
                 }Else{
                     Add-LogEntry("The SCCM Client version installed is: "+$ClientVersion[0])"1"
                     Add-LogEntry("and the state of CCMExec.exe on the system is: "+$ClientVersion[1])"1"
