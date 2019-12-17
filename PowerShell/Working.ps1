@@ -1,32 +1,26 @@
 ﻿Clear-Host;Clear-History
 Import-Module ProcessCredentials
-Import-Module Posh-SSH
 $Global:Domain=("utshare.local")
 $Global:DomainUser=(($env:USERNAME+"@"+$Domain).ToLower())
-Switch($DomainUser){
-    {($_-like"sy10*")-or($_-like"sy60*")}{Break}
-    Default{$DomainUser=(("sy1000829946@"+$Domain).ToLower());Break}
-}
 $SecureCredentials=SetCredentials -SecureUser $DomainUser -Domain ($Domain).Split(".")[0]
-If(!($SecureCredentials)){$SecureCredentials=get-credential}
-$secpas=$SecureCredentials.Password
-$ServerList=@("arcsdevibz01.dev.utshare.local")
-$Command=("ls -al /home/"+($DomainUser).Split("@")[0])
-Foreach($FQDN In $ServerList){
-    $Results=$null
-    $SessionID=New-SSHSession -ComputerName $FQDN -Credential $SecureCredentials
-    $Results=Invoke-SSHCommand -Index $SessionID.sessionid -Command $Command
-    If($Results.ExitStatus-eq0){
-        Write-Host("`tSuccessfully connected to "+$FQDN+" using [Posh-SSH].")
-    }ElseIf($Results.ExitStatus-eq2){
-        $stream = $SessionID.Session.CreateShellStream("PS-SSH", 0, 0, 0, 0, 100)
-        $SSHusersName = ($DomainUser).Split("@")[0].Trim()
-        $Command=("chown "+$SSHusersName+" /home/"+$SSHusersName+"/ -R")
-        $results = Invoke-SSHStreamExpectSecureAction -ShellStream $stream -Command ("sudo su -") -ExpectString "[sudo] password for $($SSHusersName):" -SecureAction $secpas
-        $Results=Invoke-SSHCommandStream -SSHSession $SessionID -Command $Command
-        Write-Host $Results
-    }Else{
-        Write-Host $Results
-    }
-    $SessionID.Disconnect()
-}
+If(!($SecureCredentials)){$SecureCredentials=Get-Credential}
+$HostName=("win10admy001.vdi."+$Domain).ToLower()
+$UnInstallClient=@"
+@Echo Off
+Echo: Uninstalling the old SCCM client ... Please Wait!
+%1\ccmsetup.exe /Uninstall
+:Start
+Tasklist /FI "ImageName eq ccmsetup.exe" | Find /i "ccmsetup.exe" >> null
+IF ERRORLEVEL 2 Goto Running
+IF ERRORLEVEL 1 Goto End
+:Running
+Goto Start
+:end
+Echo: Uninstall of the old SCCM client is complete.
+Exit
+"@
+$RS=New-PSSession -ComputerName $HostName -Credential $Credentials
+Enter-PSSession -Session $RS
+Add-Content $Env:TEMP\UnInstallClient.bat $UnInstallClient
+Invoke-Command -Session $RS -ScriptBlock{($Env:TEMP+"\UnInstallClient.bat "+$SCCMClientLocation)}
+Remove-Item "$Env:TEMP\UnInstallClient.bat"
