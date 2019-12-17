@@ -7,7 +7,7 @@ $Global:MPB="B01"
 $Global:LogAge="30"
 $Global:Message=$null
 $Global:SiteCode=$null
-$ReturnCode=$null
+$Global:ReturnCode=$null
 $Global:LogCleaned=$false
 $Global:InstallClient=$false
 $Global:ClientLogFileName=$null
@@ -422,9 +422,25 @@ Function Get-WMIStatus{
 Function Install-SCCMClient{Param([Parameter(Mandatory=$True)]$HostName,[Parameter(Mandatory=$True)]$Credentials)
 	Add-LogEntry("---------------------------")"1"
 	Add-LogEntry("Opening a 'New-PSSession' on '"+$HostName+"'.")"1"
+    $UnInstallClient=@"
+@Echo Off
+Echo: Uninstalling the old SCCM client ... Please Wait!
+%1\ccmsetup.exe /Uninstall
+:Start
+Tasklist /FI "ImageName eq ccmsetup.exe" | Find /i "ccmsetup.exe" >> null
+IF ERRORLEVEL 2 Goto Running
+IF ERRORLEVEL 1 Goto End
+:Running
+Goto Start
+:end
+Echo: Uninstall of the old SCCM client is complete.
+Exit
+"@
+	Add-Content $Env:TEMP\UnInstallClient.bat $UnInstallClient
     $RS=New-PSSession -ComputerName $HostName -Credential $Credentials
     Enter-PSSession -Session $RS
-    Invoke-Command -Session $RS -ScriptBlock{($Env:TEMP+"\UnInstallClient.bat ")}
+    Invoke-Command -Session $RS -ScriptBlock{($Env:TEMP+"\UnInstallClient.bat "+$SCCMClientLocation)}
+	Remove-Item "$Env:TEMP\UnInstallClient.bat"
 
 
 	If($InstallClient-eq$true){
@@ -437,24 +453,6 @@ Function Install-SCCMClient{Param([Parameter(Mandatory=$True)]$HostName,[Paramet
                 Add-LogEntry("WARNING: Could not remove ccmsetup folder")"2"
             }
 			Add-LogEntry("Running SCCM Client uninstall")"1"
-			$UninstallClient=@"
-                @ECHO off
-                ECHO Uninstalling the old client...Please Wait
-                %1\ccmsetup.exe /Uninstall
-			
-                :start
-                tasklist /FI "IMAGENAME eq ccmsetup.exe" | find /i "ccmsetup.exe" >> null
-			 
-                IF ERRORLEVEL 2 GOTO running
-                IF ERRORLEVEL 1 GOTO end
-			
-                :running
-                goto start
-			
-                :end
-                ECHO uninstall Complete
-                exit cmd.exe 
-"@
 			Add-Content $Env:TEMP\UninstallClient.bat $UninstallClient
 			Invoke-Expression "$Env:TEMP\UninstallClient.bat $SCCMClientLocation"
 			Remove-Item "$Env:TEMP\UninstallClient.bat"
