@@ -1,0 +1,72 @@
+PEM10 configuation changes (Chassis' 1-6 - Fabric A1, A2, B1, & B2)
+-----------------------------------------------------------------------
+conf
+!
+int vla 112
+description iSCSI Storage Network to bypass firewall
+name iSCSI_Storage
+mtu 9216
+no shutdown
+!
+int po1
+vla tag 112
+!
+int ran te 0/1-32
+vla tag 112
+end
+wr m
+exit
+
+S6000a1 configuation changes
+-----------------------------------------------------------------------
+conf
+!
+int te 1/16/1
+des VLAN 112, te1/16/1 --> Compellent SC9000 [59230], port 6/1 (iSCSI Network)
+no ip address
+mtu 9216
+no shutdown
+!
+int te 1/16/3
+des VLAN 112, te1/16/3 --> Compellent SC9000 [59231], port 6/1 (iSCSI Network)
+no ip address
+mtu 9216
+no shutdown
+!
+int vla 112
+description iSCSI Storage Network to bypass firewall
+name iSCSI_Storage
+no ip address
+mtu 9216
+tag te 1/16/1,1/16/3
+tag po 11,13,15,17,19,21,23,25,27,29,31,33
+no shutdown
+wr m
+exit
+
+S6000a2 configuation changes
+-----------------------------------------------------------------------
+conf
+!
+int te 1/16/1
+des VLAN 112, te1/16/1 --> Compellent SC9000 [59230], port 6/2 (iSCSI Network)
+no ip address
+mtu 9216
+no shutdown
+!
+int te 1/16/3
+des VLAN 112, te1/16/3 --> Compellent SC9000 [59231], port 6/2 (iSCSI Network)
+no ip address
+mtu 9216
+no shutdown
+!
+int vla 112
+description iSCSI Storage Network to bypass firewall
+name iSCSI_Storage
+no ip address
+mtu 9216
+tag te 1/16/1,1/16/3
+tag po 12,14,16,18,20,22,24,26,28,30,32,34
+no shutdown
+wr m
+exit
