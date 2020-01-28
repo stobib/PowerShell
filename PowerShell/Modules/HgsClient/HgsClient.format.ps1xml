@@ -48,6 +48,21 @@
                             <ListItem>
                                 <PropertyName>AttestationSubstatus</PropertyName>
                             </ListItem>
+                            <ListItem>
+                                <Label>FallbackKeyProtectionServerUrl</Label>
+                                <ScriptBlock>
+                                    $_.FallbackKeyProtectionServerUrl | select -First 1
+                                </ScriptBlock>
+                            </ListItem>
+                            <ListItem>
+                                <Label>FallbackAttestationServerUrl</Label>
+                                <ScriptBlock>
+                                    $_.FallbackAttestationServerUrl | select -First 1
+                                </ScriptBlock>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>IsFallbackInUse</PropertyName>
+                            </ListItem>
                         </ListItems>
                     </ListEntry>
                 </ListEntries>

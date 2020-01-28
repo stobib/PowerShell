@@ -10,7 +10,7 @@
       ///
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="New" Noun="SRGroup" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="New" Noun="SRGroup" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <Method MethodName="NewSrGroup" >
           <ReturnValue>
             <Type PSType="System.Int32" />
@@ -61,22 +61,22 @@
                 <ValidateNotNullOrEmpty />
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="EnableConsistencyGroups"> 
+            <Parameter ParameterName="EnableConsistencyGroups">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="EC" IsMandatory="false" Position="6">
                 <AllowEmptyString />
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="EnableEncryption"> 
+            <Parameter ParameterName="EnableEncryption">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="EE" IsMandatory="false" Position="7">
                 <AllowEmptyString />
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
             <!-- CMDLET OUTPUT -->
             <Parameter ParameterName="Output">
@@ -86,14 +86,14 @@
           </Parameters>
         </Method>
       </Cmdlet>
-      
+
       <!--
       //
       // Remove-SRGroup
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Remove" Noun="SRGroup" ConfirmImpact="High" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Remove" Noun="SRGroup" ConfirmImpact="High" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <Method MethodName="RemoveSrGroup" >
           <ReturnValue>
             <Type PSType="System.Int32" />
@@ -117,14 +117,14 @@
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>
       </Cmdlet>
-      
+
       <!--
 
       //
@@ -133,7 +133,7 @@
 
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Set" Noun="SRGroup" ConfirmImpact="High" DefaultCmdletParameterSet="AddVolumes" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Set" Noun="SRGroup" ConfirmImpact="High" DefaultCmdletParameterSet="AddVolumes" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <!-- AddVolumes -->
         <Method MethodName="SetGroupAddVolumes" CmdletParameterSet="AddVolumes">
           <ReturnValue>
@@ -165,9 +165,9 @@
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>
@@ -230,9 +230,9 @@
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>
@@ -267,21 +267,21 @@
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>
       </Cmdlet>
-      
+
       <!--
       //
       // Get-SRGroup
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Get" Noun="SRGroup" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Get" Noun="SRGroup" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <!-- FromPartnership -->
         <Method MethodName="GetGroupFromPartnership" CmdletParameterSet="FromPartnership">
           <ReturnValue>
@@ -357,14 +357,14 @@
           </Parameters>
         </Method>
       </Cmdlet>
-      
+
       <!--
       //
       // Suspend-SRGroup
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Suspend" Noun="SRGroup" ConfirmImpact="High" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Suspend" Noun="SRGroup" ConfirmImpact="High" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <Method MethodName="SuspendGroup" >
           <ReturnValue>
             <Type PSType="System.Int32" />
@@ -388,21 +388,21 @@
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>
       </Cmdlet>
-      
+
       <!--
       //
       // Sync-SRGroup
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Sync" Noun="SRGroup" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Sync" Noun="SRGroup" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <Method MethodName="SyncGroup" >
           <ReturnValue>
             <Type PSType="System.Int32" />
@@ -426,21 +426,21 @@
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>
       </Cmdlet>
-      
+
       <!--
       //
       // Get-SRPartnership
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Get" Noun="SRPartnership" DefaultCmdletParameterSet="NonCluster" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Get" Noun="SRPartnership" DefaultCmdletParameterSet="NonCluster" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <!-- NonCluster -->
         <Method MethodName="GetPartnership" CmdletParameterSet="NonCluster">
           <ReturnValue>
@@ -522,7 +522,7 @@
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Remove" Noun="SRPartnership" ConfirmImpact="High" DefaultCmdletParameterSet="NonCluster" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Remove" Noun="SRPartnership" ConfirmImpact="High" DefaultCmdletParameterSet="NonCluster" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <Method MethodName="RemovePartnership" CmdletParameterSet="NonCluster">
           <ReturnValue>
             <Type PSType="System.Int32" />
@@ -559,6 +559,13 @@
                 <ValidateNotNullOrEmpty />
               </CmdletParameterMetadata>
             </Parameter>
+            <Parameter ParameterName="ApplyChanges">
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="ADA" IsMandatory="false" Position="5">
+                <ValidateNotNull />
+                <ValidateNotNullOrEmpty />
+              </CmdletParameterMetadata>
+            </Parameter>
             <Parameter ParameterName="IgnoreRemovalFailure"> 
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="IRF" IsMandatory="false" Position="99">
@@ -566,21 +573,21 @@
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>
       </Cmdlet>
-      
+
       <!--
       //
       // New-SRPartnership
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="New" Noun="SRPartnership" DefaultCmdletParameterSet="CreatePartnership" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="New" Noun="SRPartnership" DefaultCmdletParameterSet="CreatePartnership" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <!-- CreateTopology -->
         <Method MethodName="CreateTopology" CmdletParameterSet="CreateTopology">
           <ReturnValue>
@@ -680,13 +687,13 @@
                 <AllowEmptyString />
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="Seeded"> 
+            <Parameter ParameterName="Seeded">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="S" IsMandatory="false" Position="13">
                 <AllowEmptyString />
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="EnableConsistencyGroups"> 
+            <Parameter ParameterName="EnableConsistencyGroups">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="EC" IsMandatory="false" Position="14">
                 <AllowEmptyString />
@@ -699,16 +706,16 @@
                 <ValidateNotNullOrEmpty />
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="EnableEncryption"> 
+            <Parameter ParameterName="EnableEncryption">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="EE" IsMandatory="false" Position="99">
                 <AllowEmptyString />
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="Output">
               <Type PSType="Microsoft.Management.Infrastructure.CimInstance[]" />
@@ -766,7 +773,7 @@
                 <AllowEmptyString />
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="Seeded"> 
+            <Parameter ParameterName="Seeded">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="S" IsMandatory="false" Position="6">
                 <AllowEmptyString />
@@ -779,16 +786,16 @@
                 <ValidateNotNullOrEmpty />
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="EnableEncryption"> 
+            <Parameter ParameterName="EnableEncryption">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="EE" IsMandatory="false" Position="99">
                 <AllowEmptyString />
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
             <!-- CMDLET OUTPUT -->
             <Parameter ParameterName="Output">
@@ -804,7 +811,7 @@
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Set" Noun="SRPartnership" ConfirmImpact="High" DefaultCmdletParameterSet="AddVolumes" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Set" Noun="SRPartnership" ConfirmImpact="High" DefaultCmdletParameterSet="AddVolumes" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <!-- AddVolumes -->
         <Method MethodName="SetPartnershipAddVolumes" CmdletParameterSet="AddVolumes">
           <ReturnValue>
@@ -856,16 +863,16 @@
                 <ValidateNotNullOrEmpty />
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="Seeded"> 
+            <Parameter ParameterName="Seeded">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="S" IsMandatory="false" Position="9">
                 <AllowEmptyString />
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>
@@ -907,9 +914,9 @@
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>
@@ -987,7 +994,7 @@
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Clear" Noun="SRMetadata" ConfirmImpact="High" DefaultCmdletParameterSet="RG" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Clear" Noun="SRMetadata" ConfirmImpact="High" DefaultCmdletParameterSet="RG" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <!-- AllServer -->
         <Method MethodName="ClearMetadataAll" CmdletParameterSet="AllServer">
           <ReturnValue>
@@ -1004,31 +1011,31 @@
                 <ValidateNotNullOrEmpty />
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="AllConfiguration"> 
+            <Parameter ParameterName="AllConfiguration">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="AC" IsMandatory="false" Position="1">
                 <AllowEmptyString />
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="AllLogs"> 
+            <Parameter ParameterName="AllLogs">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="AL" IsMandatory="false" Position="2">
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="AllPartitions"> 
+            <Parameter ParameterName="AllPartitions">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="AP" IsMandatory="false" Position="3">
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="NoRestart"> 
+            <Parameter ParameterName="NoRestart">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="NR" IsMandatory="false" Position="98">
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>
@@ -1055,25 +1062,25 @@
                 <ValidateNotNullOrEmpty />
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="Logs"> 
+            <Parameter ParameterName="Logs">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="LO" IsMandatory="false" Position="3">
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="Partition"> 
+            <Parameter ParameterName="Partition">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="PA" IsMandatory="false" Position="4">
               </CmdletParameterMetadata>
             </Parameter>
-            <Parameter ParameterName="NoRestart"> 
+            <Parameter ParameterName="NoRestart">
               <Type PSType="System.Management.Automation.SwitchParameter" />
               <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="NR" IsMandatory="false" Position="98">
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>
@@ -1085,7 +1092,7 @@
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Grant" Noun="SRAccess" ConfirmImpact="High" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Grant" Noun="SRAccess" ConfirmImpact="High" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <Method MethodName="GrantSrAccess" >
           <ReturnValue>
             <Type PSType="System.Int32" />
@@ -1109,21 +1116,21 @@
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>
       </Cmdlet>
 
-        <!--
+      <!--
       //
       // Revoke-SRAccess
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Revoke" Noun="SRAccess" ConfirmImpact="High" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Revoke" Noun="SRAccess" ConfirmImpact="High" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <Method MethodName="RevokeSrAccess" >
           <ReturnValue>
             <Type PSType="System.Int32" />
@@ -1161,7 +1168,7 @@
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Get" Noun="SRAccess" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Get" Noun="SRAccess" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <Method MethodName="GetSrAccess" >
           <ReturnValue>
             <Type PSType="System.Int32" />
@@ -1200,7 +1207,7 @@
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Grant" Noun="SRDelegation" ConfirmImpact="High" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Grant" Noun="SRDelegation" ConfirmImpact="High" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <Method MethodName="GrantSrUserAccess" >
           <ReturnValue>
             <Type PSType="System.Int32" />
@@ -1231,21 +1238,21 @@
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>
       </Cmdlet>
-      
+
       <!--
       //
       // Get-SRDelegation
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Get" Noun="SRDelegation" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Get" Noun="SRDelegation" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <Method MethodName="GetSrUserAccess" >
           <ReturnValue>
             <Type PSType="System.Int32" />
@@ -1269,14 +1276,14 @@
           </Parameters>
         </Method>
       </Cmdlet>
-      
+
       <!--
       //
       // Revoke-SRDelegation
       //
       -->
       <Cmdlet>
-        <CmdletMetadata Verb="Revoke" Noun="SRDelegation" ConfirmImpact="High" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Revoke" Noun="SRDelegation" ConfirmImpact="High" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <Method MethodName="RevokeSrUserAccess" >
           <ReturnValue>
             <Type PSType="System.Int32" />
@@ -1320,7 +1327,7 @@
       -->
 
       <Cmdlet>
-        <CmdletMetadata Verb="Get" Noun="SRNetworkConstraint" DefaultCmdletParameterSet="GetConstraint" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Get" Noun="SRNetworkConstraint" DefaultCmdletParameterSet="GetConstraint" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <!-- GetNetworkConstraint -->
         <Method MethodName="GetNetworkConstraint" CmdletParameterSet="GetConstraint">
           <ReturnValue>
@@ -1373,7 +1380,7 @@
       -->
 
       <Cmdlet>
-        <CmdletMetadata Verb="Remove" Noun="SRNetworkConstraint" ConfirmImpact="High" DefaultCmdletParameterSet="RemoveConstraint" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+        <CmdletMetadata Verb="Remove" Noun="SRNetworkConstraint" ConfirmImpact="High" DefaultCmdletParameterSet="RemoveConstraint" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <!-- RemoveNetworkConstraint -->
         <Method MethodName="RemoveNetworkConstraint" CmdletParameterSet="RemoveConstraint">
           <ReturnValue>
@@ -1412,9 +1419,9 @@
               </CmdletParameterMetadata>
             </Parameter>
             <Parameter ParameterName="cim:operationOption:Force">
-                <Type PSType="System.Management.Automation.SwitchParameter" />
-                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
-                </CmdletParameterMetadata>
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="100">
+              </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>
@@ -1427,8 +1434,8 @@
       //
       -->
 
-       <Cmdlet>
-        <CmdletMetadata Verb="Set" Noun="SRNetworkConstraint" DefaultCmdletParameterSet="SetConstraint" HelpUri="http://go.microsoft.com/fwlink/?linkid=397379" />
+      <Cmdlet>
+        <CmdletMetadata Verb="Set" Noun="SRNetworkConstraint" DefaultCmdletParameterSet="SetConstraint" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
         <!-- SetNetworkConstraint -->
         <Method MethodName="SetNetworkConstraint" CmdletParameterSet="SetConstraint">
           <ReturnValue>
@@ -1479,10 +1486,91 @@
                 <ValidateNotNull />
                 <ValidateNotNullOrEmpty />
               </CmdletParameterMetadata>
-            </Parameter>          
+            </Parameter>
             <Parameter ParameterName="Output">
               <Type PSType="Microsoft.Management.Infrastructure.CimInstance[]" />
               <CmdletOutputMetadata />
+            </Parameter>
+          </Parameters>
+        </Method>
+      </Cmdlet>
+      <!--
+      ///
+      /// Mount-SRDestination
+      ///
+      -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Mount" Noun="SRDestination" ConfirmImpact="High" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
+        <Method MethodName="MountSrDestinationGroup" >
+          <ReturnValue>
+            <Type PSType="System.Int32" />
+            <CmdletOutputMetadata>
+              <ErrorCode />
+            </CmdletOutputMetadata>
+          </ReturnValue>
+          <Parameters>
+            <Parameter ParameterName="ComputerName">
+              <Type PSType="System.String" />
+              <CmdletParameterMetadata ValueFromPipelineByPropertyName="true" Aliases="CN" IsMandatory="false" Position="0">
+                <ValidateNotNull />
+                <ValidateNotNullOrEmpty />
+              </CmdletParameterMetadata>
+            </Parameter>
+            <Parameter ParameterName="Name">
+              <Type PSType="System.String" />
+              <CmdletParameterMetadata ValueFromPipelineByPropertyName="true" Aliases="N" IsMandatory="true" Position="1">
+                <ValidateNotNull />
+                <ValidateNotNullOrEmpty />
+              </CmdletParameterMetadata>
+            </Parameter>
+            <Parameter ParameterName="TemporaryPath">
+              <Type PSType="System.String" />
+              <CmdletParameterMetadata ValueFromPipelineByPropertyName="false" Aliases="D" IsMandatory="true" Position="2">
+                <ValidateNotNull />
+                <ValidateNotNullOrEmpty />
+              </CmdletParameterMetadata>
+            </Parameter>
+            <Parameter ParameterName="cim:operationOption:Force">
+                <Type PSType="System.Management.Automation.SwitchParameter" />
+                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="99">
+                </CmdletParameterMetadata>
+            </Parameter>          
+          </Parameters>
+        </Method>
+      </Cmdlet>
+      <!--
+      ///
+      /// Dismount-SRDestination
+      ///
+      -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Dismount" Noun="SRDestination" ConfirmImpact="High" HelpUri="https://go.microsoft.com/fwlink/?linkid=397379" />
+        <Method MethodName="UnMountSrDestinationGroup" >
+          <ReturnValue>
+            <Type PSType="System.Int32" />
+            <CmdletOutputMetadata>
+              <ErrorCode />
+            </CmdletOutputMetadata>
+          </ReturnValue>
+          <Parameters>
+            <Parameter ParameterName="ComputerName">
+              <Type PSType="System.String" />
+              <CmdletParameterMetadata ValueFromPipelineByPropertyName="true" Aliases="CN" IsMandatory="false" Position="0">
+                <ValidateNotNull />
+                <ValidateNotNullOrEmpty />
+              </CmdletParameterMetadata>
+            </Parameter>
+            <Parameter ParameterName="Name">
+              <Type PSType="System.String" />
+              <CmdletParameterMetadata ValueFromPipelineByPropertyName="true" Aliases="N" IsMandatory="true" Position="1">
+                <ValidateNotNull />
+                <ValidateNotNullOrEmpty />
+              </CmdletParameterMetadata>
+            </Parameter>
+			<Parameter ParameterName="cim:operationOption:Force">
+                <Type PSType="System.Management.Automation.SwitchParameter" />
+                <CmdletParameterMetadata PSName="Force" ValueFromPipelineByPropertyName="false" Aliases="F" IsMandatory="false" Position="99">
+                </CmdletParameterMetadata>
             </Parameter>
           </Parameters>
         </Method>

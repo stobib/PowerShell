@@ -53,7 +53,7 @@ param(
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-SessionHost {
-[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=390820")]
+[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=390820")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDServer[]")]
 param (
 
@@ -134,7 +134,7 @@ param (
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Set-SessionHost
 {
-[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=390820")]
+[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=390820")]
 param (
 
     [Parameter(Mandatory=$true, Position=0)]
@@ -237,7 +237,7 @@ function Remove-SessionHost
 {
 
 [CmdletBinding(SupportsShouldProcess=$true,
-HelpURI="http://go.microsoft.com/fwlink/?LinkId=390820")]
+HelpURI="https://go.microsoft.com/fwlink/?LinkId=390820")]
 param (
 
     [Parameter(Mandatory=$true, Position=0)]
@@ -339,7 +339,7 @@ param (
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Add-SessionHost 
 {
-[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=390820")]
+[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=390820")]
 param (
 
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0)]
@@ -453,7 +453,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-SessionCollection {
-[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=390820")]
+[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=390820")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDSessionCollection[]")]
 param (
 
@@ -577,7 +577,7 @@ function Remove-SessionCollection
 {
 
 [CmdletBinding(SupportsShouldProcess=$true,
-HelpURI="http://go.microsoft.com/fwlink/?LinkId=390820")]
+HelpURI="https://go.microsoft.com/fwlink/?LinkId=390820")]
 param (
 
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0)]
@@ -658,7 +658,7 @@ param (
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function New-SessionCollection 
 {
-[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=390820")]
+[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=390820")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDSessionCollection")]
 [CmdletBinding(DefaultParametersetName='PooledSessionCollection')] 
 param (
@@ -859,7 +859,7 @@ param (
 
 
 function Set-PersonalSessionDesktopAssignment{
-[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=390820")]
+[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=390820")]
 param(
     [Parameter(Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true)]
     [string]
@@ -1020,7 +1020,7 @@ param(
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Remove-PersonalSessionDesktopAssignment{
 [CmdletBinding(DefaultParameterSetName="RemoveByUser", SupportsShouldProcess=$true,
-HelpURI="http://go.microsoft.com/fwlink/?LinkId=390820")]
+HelpURI="https://go.microsoft.com/fwlink/?LinkId=390820")]
 param(
     [Parameter(Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true, ParameterSetName="RemoveByUser")]
     [Parameter(Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true, ParameterSetName="RemoveByDesktop")]
@@ -1183,7 +1183,7 @@ param(
 function
 Get-PersonalSessionDesktopAssignment{
 [CmdletBinding(DefaultParameterSetName="GetByCollection",
-HelpURI="http://go.microsoft.com/fwlink/?LinkId=390820")]
+HelpURI="https://go.microsoft.com/fwlink/?LinkId=390820")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.RDPersonalSessionDesktopAssignment[]")]
 param(
     [Parameter(Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true, ParameterSetName="GetByCollection")]
@@ -1333,7 +1333,7 @@ param(
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function
 Export-PersonalSessionDesktopAssignment {
-[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=390820")]
+[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=390820")]
 param(
     [Parameter(Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true)]
     [string]
@@ -1398,7 +1398,7 @@ param(
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function
 Import-PersonalSessionDesktopAssignment {
-[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=390820")]
+[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=390820")]
 param(
 
     [Parameter(Mandatory=$true, Position=0, ValueFromPipelineByPropertyName=$true)]

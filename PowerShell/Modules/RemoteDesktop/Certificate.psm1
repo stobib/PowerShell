@@ -3,7 +3,7 @@ Import-Module $PSScriptRoot\Utility.psm1
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-Certificate {
-[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254046")]
+[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254046")]
 [OutputType("Microsoft.RemoteDesktopServices.Management.Certificate[]")]
 param (
 
@@ -102,7 +102,7 @@ param (
 
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function New-Certificate {
-[CmdletBinding(HelpURI="http://go.microsoft.com/fwlink/?LinkId=254047")]
+[CmdletBinding(HelpURI="https://go.microsoft.com/fwlink/?LinkId=254047")]
 param (
 
     [Parameter(Mandatory=$true, Position=0)]
@@ -251,7 +251,7 @@ param (
 function Set-Certificate {
 
 [CmdletBinding(DefaultParametersetName="Reapply",
-HelpURI="http://go.microsoft.com/fwlink/?LinkId=254048")]
+HelpURI="https://go.microsoft.com/fwlink/?LinkId=254048")]
 param (
 
     [Parameter(Mandatory=$true, Position=0)]

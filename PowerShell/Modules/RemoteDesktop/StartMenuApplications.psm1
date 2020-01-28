@@ -5,7 +5,7 @@ Import-Module $PSScriptRoot\RemoteAppPublishing.psm1
 # .ExternalHelp RemoteDesktop.psm1-help.xml
 function Get-AvailableApp {
 [CmdletBinding(DefaultParameterSetName="Session",
-HelpURI="http://go.microsoft.com/fwlink/?LinkId=254089")]
+HelpURI="https://go.microsoft.com/fwlink/?LinkId=254089")]
 [OutputType("New-Object Microsoft.RemoteDesktopServices.Management.StartMenuApp[]")]
 param (
     [Parameter(Mandatory=$true, ValueFromPipelineByPropertyName=$true, Position=0)]
