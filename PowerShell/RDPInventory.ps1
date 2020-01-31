@@ -1,21 +1,6 @@
 Clear-Host;Clear-History
 Import-Module ProcessCredentials
-$Global:Separator="________________________________________________________________________________________________________________________"
-$Global:ResetHost=@();$ResetHost=""
 $Global:SiteCodes=@("A","B")
-$Global:FailedToConnect=@();$FailedToConnect=""
-$Global:PortNotListening=@();$PortNotListening=""
-$Global:ExcludedFolders=@(
-    "Excluded",
-    "Retired",
-    "Templates",
-    "UTD IaaS (Root)",
-    "RPA-INF (Support)",
-    "RPA-NON (Dev)",
-    "RPA-NRP (Tst)",
-    "RPA-PRD (Prd)",
-    "Templates (RPA-VDI Images)"
-)
 $Global:Domain=("utshare.local")
 $Global:DomainUser=(($env:USERNAME+"@"+$Domain).ToLower())
 $ScriptPath=$MyInvocation.MyCommand.Definition
@@ -27,7 +12,6 @@ Set-Location ($ScriptPath.Replace($ScriptName,""))
 Set-Variable -Name SecureCredentials -Value $null
 Set-Variable -Name LogName -Value ($ScriptName.Replace("ps1","log"))
 Set-Variable -Name LogFile -Value ($WorkingPath+"\"+$LogName)
-Set-Variable -Name TempFile -Value ($env:TEMP+"\"+$LogName)
 Set-Variable -Name WorkingCSV -Value ($ScriptName.Replace(".ps1","_RAW.csv"))
 Set-Variable -Name WorkCSVFile -Value ($WorkingPath+"\"+$WorkingCSV)
 Set-Variable -Name ExportCSV -Value ($ScriptName.Replace("ps1","csv"))
@@ -60,45 +44,6 @@ Function ReportFinishedActivity(){
    $Script:PercentComplete=(100.0/$TotalActivities)*$Script:CompletedActivities
    $Script:PercentComplete=[Math]::Min(99,$PercentComplete)
    Write-Progress -Activity $LoadingActivity -CurrentOperation $Script:CurrentActivity -PercentComplete $Script:PercentComplete
-}
-Function ResolveIPAddress{Param([IPAddress][Parameter(Mandatory=$True)]$IP,[Parameter(Mandatory=$True)]$FQDN)
-    $SubDomain=($FQDN.Split(".")[1])    
-    Try{
-        If($IP-eq0.0.0.0){
-            $AddressList=([System.Net.Dns]::GetHostEntry($FQDN).AddressList)
-            $IP=$AddressList.IPAddressToString
-            $1st=($IP.Split(".")[0]);$2nd=($IP.Split(".")[1]);$3rd=($IP.Split(".")[2]);$4th=($IP.Split(".")[3])
-            $ReverseZone=($3rd+"."+$2nd+"."+$1st+".in-addr.arpa")
-            Add-DnsServerResourceRecordPtr -Name ($4th) -ZoneName ($ReverseZone) -AllowUpdateAny -TimeToLive 01:00:00 -AgeRecord -PtrDomainName $FQDN
-            Return $AddressList
-        }Else{
-            $ComputerName=[System.Net.Dns]::GetHostEntry($IP).HostName
-            Return ($ComputerName.ToLower())
-        }
-    }Catch{
-        $FQDN=($NetBIOS+"."+$SubDomain+"."+$Domain).ToLower()
-        If($_.Exception.Message-eq'Exception calling "GetHostByAddress" with "1" argument(s): "The requested name is valid, but no data of the requested type was found"'){
-            $1st=($IP.Split(".")[0]);$2nd=($IP.Split(".")[1]);$3rd=($IP.Split(".")[2]);$4th=($IP.Split(".")[3])
-            $ReverseZone=($3rd+"."+$2nd+"."+$1st+".in-addr.arpa")
-            Add-DnsServerResourceRecordPtr -Name ($4th) -ZoneName ($ReverseZone) -AllowUpdateAny -TimeToLive 01:00:00 -AgeRecord -PtrDomainName $FQDN
-        }ElseIf($_.Exception.Message-eq'Exception calling "GetHostByName" with "1" argument(s): "No such host is known"'){
-            $ForwardZone=(($FQDN.Split(".")[1])+"."+$Domain).ToLower()
-            Add-DnsServerResourceRecordA -Name $ComputerName -ZoneName ($ForwardZone) -AllowUpdateAny -IPv4Address $IP -TimeToLive 01:00:00 -CreatePtr
-        }Else{
-            Write-Host $_.Exception.Message -ForegroundColor Green
-        }
-    }
-}
-Function Test-OpenPort{[CmdletBinding()]Param([Parameter(Position=0)]$Target='localhost', 
-[Parameter(Mandatory=$True,Position=1,Helpmessage='Enter Port Numbers. Separate them by comma.')]$Port)
-    $Result=@()
-    ForEach($T In $Target){
-        ForEach($P In $Port){
-            $A=Test-NetConnection -ComputerName $T -Port $P -WarningAction SilentlyContinue
-            $Result+=New-Object -TypeName PSObject -Property ([ordered]@{'Target'=$A.ComputerName;'RemoteAddress'=$A.RemoteAddress;'Port'=$A.RemotePort;'Status'=$A.tcpTestSucceeded})
-        }
-    }
-    Return $Result
 }
 Switch($DomainUser){
     {($_-like"sy10*")-or($_-like"sy60*")}{Break}
@@ -133,8 +78,6 @@ $Script:CurrentActivity=""
 $Script:ServerList="ServerList.txt"
 $Script:ProcessList=($WorkingPath+"\"+$ServerList)
 $Script:totalActivities=$ModuleList.Count+1
-$Script:PortNotListening=@();$PortNotListening=""
-$Script:FailedToConnect=@();$FailedToConnect=""
 LoadModules
 $PowerCliFriendlyVersion=[VMware.VimAutomation.Sdk.Util10.ProductInfo]::PowerCliFriendlyVersion
 $Host.ui.RawUI.WindowTitle=$PowerCliFriendlyVersion
@@ -182,45 +125,42 @@ ForEach($Site In $SiteCodes){
             $Reason=("["+$SecureCredentials.UserName+"] was successfully connected to: ["+$vSphere+"]")
             Write-Host ("Beginning to process script because "+$Reason+".") -ForegroundColor Cyan -BackgroundColor DarkBlue
             Get-VM|Select-Object Name,Guest,Folder|Where-Object {($_.Guest-Like"*Windows 10*")-or($_.Guest-Like"win10*")-or($_.Guest-Like"w10*")}|Where-Object {$_.Folder-notlike"*RPA*"}|Sort Name|Export-Csv -Path ($WorkingPath+"\"+$WorkingCSV) –NoTypeInformation
-            $CsvHeaders|Select-Object -Property "Name","State","Status","Provisioned Space","Used Space","Host CPU","Host Mem","Host","Guest OS","Memory Size","CPUs","IP Address","VMware Tools","Version Status","DNS Name","Encryption","Datacenter","Cluster","Computer Type"|Export-Csv -LiteralPath $ExportFile -NoTypeInformation
+            $CsvHeaders|Select-Object -Property "Name","State","LastBootTime","Provisioned Space","Used Space","Host","Guest OS","Memory Size","CPUs","IP Address","VMware Tools","Version Status","DNS Name","Encryption","Datacenter","Cluster","Computer Type"|Export-Csv -LiteralPath $ExportFile -NoTypeInformation
             Import-Csv ($WorkingPath+"\"+$WorkingCSV)|ForEach-Object{
                 $VMCount++
+                $VMName=$_.Name
                 $IPAddress=""
                 $DataCenter=""
                 $Cluster=""
-                $VMName=$_.Name
                 $VMLabel=Get-View -Filter @{"Name"="^$VMName$"} -ViewType VirtualMachine -Property Name,Summary.QuickStats.UptimeSeconds|Select-Object Name,$LastBootProp
                 ForEach($VM In $VMLabel){
                     [System.Net.IPAddress]$IPAddress=@()
-                    If(Test-Path -Path $TempFile){Remove-Item $TempFile}
                     If($_.Name-eq$VM.Name){
                         $FQDN=((Get-VM $_.Name).Guest.HostName).ToLower()
                         Write-Host ("Beginning to process: "+$FQDN)
-                        $VMStatus=Get-VM|Where-Object{$_.Name-like($VM.Name)}|Select-Object *
+                        $VMStatus=Get-View -ViewType Virtualmachine|Where-Object{$_.Name-like($VM.Name)}|Select-Object *
                         $xA=$VMStatus.Name
-                        $xB=$VMStatus.PowerState
-                        $xC=$VMStatus.Guest.State
-                        $xD=$VMStatus.ProvisionedSpaceGB
-                        $xE=$VMStatus.UsedSpaceGB
-                        $xF=$VMStatus.Host.NumCpu
-                        $xG=$VMStatus.Host.MemoryTotalGB
-                        $xH=$VMStatus.Host.Name
-                        $xI=$VMStatus.Guest.OSFullName
-                        $xJ=$VMStatus.MemoryGB
-                        $xK=$VMStatus.NumCpu
-                        $xL=$VMStatus.Guest.IPAddress
+                        $xB=$VMStatus.Summary.Runtime.PowerState
+                        $xC=$VMLabel.LastBootTime
+                        $xD=[math]::Round(($VMStatus.Summary.Storage.Committed+$VMStatus.Summary.Storage.UnCommitted)/1GB,2)
+                        $xE=[math]::Round($VMStatus.Summary.Storage.Committed/1GB,2)
+                        $xF=Get-View -Id $VMStatus.Runtime.Host -Property Name|Select-Object -ExpandProperty Name
+                        $xG=$VMStatus.Guest.GuestFullName
+                        $xH=$VMStatus.Summary.Config.MemorySizeMB
+                        $xI=$VMStatus.Summary.Config.NumCpu
+                        $xJ=$VMStatus.Guest.IPAddress
                         Switch($xL.Split(".")[1]){
                             {$_-eq"118"}{$DataCenter="SITE-A-ARDC";$Cluster="MGT-A";Break}
                             Default{$DataCenter="SITE-B-UDCC";$Cluster="VDI-B";Break}
                         }
-                        $xM=$VMStatus.ExtensionData.Client.Version
-                        $xN=$VMStatus.Guest.State
-                        $xO=$FQDN
-                        $xP="No"
-                        $xQ=$DataCenter
-                        $xR=$Cluster
-                        $xS=$VMStatus.ExtensionData.MoRef.Type
-                        $AppendRow=($xA+","+$xB+","+$xC+","+$xD+","+$xE+","+$xF+","+$xG+","+$xH+","+$xI+","+$xJ+","+$xK+","+$xL+","+$xM+","+$xN+","+$xO+","+$xP+","+$xQ+","+$xR+","+$xS)
+                        $xK=$VMStatus.Guest.ToolsVersion
+                        $xL=$VMStatus.Guest.GuestState
+                        $xM=$VMStatus.Guest.HostName
+                        $xN="No"
+                        $xO=$DataCenter
+                        $xP=$Cluster
+                        $xQ=$VMStatus.MoRef.Type
+                        $AppendRow=($xA+","+$xB+","+$xC+","+$xD+","+$xE+","+$xF+","+$xG+","+$xH+","+$xI+","+$xJ+","+$xK+","+$xL+","+$xM+","+$xN+","+$xO+","+$xP+","+$xQ)
                         $AppendRow|Out-File $ExportFile -Append
                         $AppendRow=""
                     }
@@ -238,8 +178,9 @@ ForEach($Site In $SiteCodes){
         }
     }Else{
         $Reason=("["+$SecureCredentials.UserName+"] was unable to connect to: ["+$vSphere+"]")
-        ("Failed to begin processing script because "+$Reason+".")|Out-File $LogFile -Append
-        Write-Host ("Failed to beginning process script because "+$Reason+".") -ForegroundColor Yellow -BackgroundColor DarkRed
+        $Reason+=("Failed to begin processing script because "+$Reason+".")
+        $Reason|Out-File $LogFile -Append
+        Write-Host $Reason -ForegroundColor Yellow -BackgroundColor DarkRed
     }
     $Message=$null;$Reason=$null;$VMProcessed=0;$VMCount=0;$EXcount=0;$POCount=0
     Rename-Item -Path ($ProcessList) -NewName "ProcessedList.txt" -Force
