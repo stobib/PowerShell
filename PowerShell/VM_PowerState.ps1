@@ -3,6 +3,20 @@ Import-Module ActiveDirectory
 Import-Module ProcessCredentials
 $Global:Domain = ($env:USERDNSDOMAIN.ToLower())
 Set-Variable -Name VCMgrSrvList -Value @('vcmgra01.inf','vcmgrb01.inf')
+Clear-History;Clear-Host
+$Global:DataEntry = ""
+$Global:VCMgrSrv=""
+[int]$FormHeight=200
+[int]$FormWidth=400
+[int]$LabelLeft=10
+[int]$LabelTop=20
+[int]$TextboxTop=$LabelTop*2
+[int]$ButtonTop=$FormHeight/2
+[int]$ButtonLeft=$FormWidth/4
+[int]$ButtonHeight=$FormHeight/6.5
+[int]$ButtonWidth=$FormWidth/4.5
+[int]$LabelHeight=$FormHeight/$LabelLeft
+[int]$LabelWidth=$FormWidth-($LabelLeft*4)
 $moduleList = @(
     "VMware.VimAutomation.Core",
     "VMware.VimAutomation.Vds",
@@ -77,6 +91,36 @@ Function Get-VMByPowerState{[CmdletBinding(defaultparametersetname='ByName')]
         }
     }
 }
+Function Get-VMStatus{[CmdletBinding(defaultparametersetname='ByName')]
+    Param(
+        [Parameter(Mandatory=$true,Position = 0,ParameterSetName='ByName')][Alias("ComputerName")][string]$Name = '*',
+        [Parameter(Mandatory=$true,ParameterSetName='ByDatacenter')][Alias("vCenterHost")][string]$Server = $null
+    )
+    Process{
+        If($server -ne $null){
+            connect-viserver $server
+            Clear-Host
+        }
+        $vms = Get-VM|Select-Object Name,PowerState
+        $vmcount = $vms.count
+        If($vmcount -gt "0"){
+            If($outfile -eq $null){
+                ""
+                Write-Host ("List of all "+$PowerState+" VM's:")
+                $vms
+                ""
+                Write-Host ("There are ["+$vmcount+"] ["+$PowerState+"] VM's")
+            }
+            If($outfile -ne $null){
+                ""
+                Write-Host "Outputting to file as requested."
+                Out-File -FilePath $outfile -InputObject $vms}
+            }
+        If($server -ne $null){
+            disconnect-viserver $server -force:$true -confirm:$false
+        }
+    }
+}
 Function LoadModules(){
     ReportStartOfActivity ("Searching for ["+$productShortName+"] module components...")
     $loaded = Get-Module -Name $moduleList -ErrorAction Ignore | % {$_.Name}
@@ -109,19 +153,6 @@ Switch($DomainUser){
 }
 $SecureCredentials=SetCredentials -SecureUser $DomainUser -Domain ($Domain).Split(".")[0]
 If(!($SecureCredentials)){$SecureCredentials=Get-Credential}
-Clear-History;Clear-Host
-$Global:DataEntry = ""
-[int]$FormHeight=$form.Size.Height=200
-[int]$FormWidth=$form.Size.Width=400
-[int]$LabelLeft=10
-[int]$LabelTop=20
-[int]$TextboxTop=$LabelTop*2
-[int]$ButtonTop=$FormHeight/2
-[int]$ButtonLeft=$FormWidth/4
-[int]$ButtonHeight=$FormHeight/6.5
-[int]$ButtonWidth=$FormWidth/4.5
-[int]$LabelHeight=$FormHeight/$LabelLeft
-[int]$LabelWidth=$FormWidth-($LabelLeft*4)
 Do{
     Add-Type -AssemblyName System.Windows.Forms
     Add-Type -AssemblyName System.Drawing
@@ -180,13 +211,31 @@ Do{
                 Break
             }
             Default{
-                $Hostname=($DataEntry+"*")
+                $Connected = $false
+                $Hostname = ($DataEntry+"*")
                 $Hostname = (Get-ADComputer -Filter {DNSHostname -like $Hostname} -Properties Name,IPv4Address,OperatingSystem|Sort-Object Name|Select-Object DNSHostName,IPv4Address,OperatingSystem)
                 If($Hostname){
-                    ForEach($ComputerName In $Hostname){
-                        $DNSHostName = $ComputerName.DNSHostName
-                        Get-VMByPowerState
-                        Write-Host $DNSHostName
+                    If($VCMgrSrv-eq""){
+                        ForEach($VCMgrSite In $VCMgrSrvList){
+                            $Server = ($VCMgrSite+"."+$Domain)
+                            $Return = Test-NetConnection -ComputerName $Server
+                            If($Return.PingSucceeded -eq $True){
+                                $VCMgrSrv=Connect-VIServer -Server $Return.ComputerName -Credential $SecureCredentials
+                                If(!($VCMgrSrv.Port-eq"")){
+                                    $Connected=$true
+                                    Clear-Host
+                                    #Break
+                                }
+                            }
+                        }
+                    }
+                    ForEach($VMGuest In $Hostname){
+                        $DNSHostName = (($VMGuest.DNSHostName).Split(".")[0]+".*")
+                        $VMStatus=Get-VMStatus -Name $DNSHostName -Server $VCMgrSrv
+                        Write-Host $VMStatus
+                    }
+                    If($Connected){
+                        Disconnect-VIServer $VCMgrSrv -Force:$true -Confirm:$false
                     }
                 }
                 Break
