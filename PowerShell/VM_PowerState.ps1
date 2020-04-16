@@ -220,12 +220,7 @@ Do{
                             $Server = ($VCMgrSite+"."+$Domain)
                             $Return = Test-NetConnection -ComputerName $Server
                             If($Return.PingSucceeded -eq $True){
-                                $VCMgrSrv=Connect-VIServer -Server $Return.ComputerName -Credential $SecureCredentials
-                                If(!($VCMgrSrv.Port-eq"")){
-                                    $Connected=$true
-                                    Clear-Host
-                                    #Break
-                                }
+                                Clear-Host
                             }
                         }
                     }
@@ -233,9 +228,6 @@ Do{
                         $DNSHostName = (($VMGuest.DNSHostName).Split(".")[0]+".*")
                         $VMStatus=Get-VMStatus -Name $DNSHostName -Server $VCMgrSrv
                         Write-Host $VMStatus
-                    }
-                    If($Connected){
-                        Disconnect-VIServer $VCMgrSrv -Force:$true -Confirm:$false
                     }
                 }
                 Break
