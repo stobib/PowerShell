@@ -3,6 +3,7 @@ Import-Module ActiveDirectory
 Import-Module ProcessCredentials
 $Global:Domain = ($env:USERDNSDOMAIN.ToLower())
 Set-Variable -Name VCMgrSrvList -Value @('vcmgra01.inf','vcmgrb01.inf')
+$Global:SecureCredentials = $null
 Clear-History;Clear-Host
 $Global:DataEntry = ""
 $Global:VCMgrSrv=""
@@ -39,86 +40,24 @@ $script:completedActivities = 0
 $script:percentComplete = 0
 $script:currentActivity = ""
 $script:totalActivities = $moduleList.Count + 1
-<#
-    .SYNOPSIS
-        Gets a list of VM's dependant on power state.
-    .DESCRIPTION
-        Gets a list of VM's dependant on power state.
-    .PARAMETER Cluster
-        Name of the cluster to retrieve VM's from. Supports Wildcards.
-    .PARAMETER PowerState
-        REQUIRED. The power state of the VM's that you are looking for.
-        Valid state options are:
-            PoweredOn
-            PoweredOff
-            Suspended
-    .PARAMETER Server
-        The name or IP of the vCenter or ESX(i) host to connect to. This assumes that you have sufficient access rights as the logged on user.
-    .PARAMETER Outfile
-        Name & path to an output file.
-    .EXAMPLE
-        Get-PowerState -Cluster ClusterName -State PoweredOn -Server 127.0.0.1 -outfile filename.txt
-#>
-Function Get-VMByPowerState{[CmdletBinding(defaultparametersetname='ByName')]
+Function Get-VMStatus{
     Param(
-        [Parameter(Mandatory=$False,Position = 0,ParameterSetName='ByName')][Alias("ClusterName")][string]$Cluster = '*',
-        [Parameter(Mandatory=$true,ParameterSetName='ByDatacenter')][Alias("PowerStateEntry")][string]$PowerState,
-        [Parameter(Mandatory=$false,ParameterSetName='ByDatacenter')][Alias("vCenterHost")][string]$Server = $null,
-        [Parameter(Mandatory=$false,ParameterSetName='ByDatacenter')][Alias("Output File Name")]$outfile = $null
+        [Parameter(Mandatory=$true)][Alias("ComputerName")][string]$Name = '*',
+        [Parameter(Mandatory=$true)][Alias("vCenterHost")][string]$Server = $null,
+        [Parameter(Mandatory=$true)][Alias("vCenterAdmin")][PSCredential]$VCAdmin = $null
     )
-    Process{
-        If($server -ne $null){
-            connect-viserver $server
+    Begin{
+        If($Server -ne $null){
+            Connect-VIServer $Server -Credential $VCAdmin|Out-Null
             Clear-Host
-        }
-        $vms = Get-VM|Where-Object {$_.PowerState -eq $PowerState}|Select-Object Name,PowerState
-        $vmcount = $vms.count
-        If($vmcount -gt "0"){
-            If($outfile -eq $null){
-                ""
-                Write-Host ("List of all "+$PowerState+" VM's:")
-                $vms
-                ""
-                Write-Host ("There are ["+$vmcount+"] ["+$PowerState+"] VM's")
-            }
-            If($outfile -ne $null){
-                ""
-                Write-Host "Outputting to file as requested."
-                Out-File -FilePath $outfile -InputObject $vms}
-            }
-        If($server -ne $null){
-            disconnect-viserver $server -force:$true -confirm:$false
         }
     }
-}
-Function Get-VMStatus{[CmdletBinding(defaultparametersetname='ByName')]
-    Param(
-        [Parameter(Mandatory=$true,Position = 0,ParameterSetName='ByName')][Alias("ComputerName")][string]$Name = '*',
-        [Parameter(Mandatory=$true,ParameterSetName='ByDatacenter')][Alias("vCenterHost")][string]$Server = $null
-    )
     Process{
-        If($server -ne $null){
-            connect-viserver $server
-            Clear-Host
-        }
-        $vms = Get-VM|Select-Object Name,PowerState
-        $vmcount = $vms.count
-        If($vmcount -gt "0"){
-            If($outfile -eq $null){
-                ""
-                Write-Host ("List of all "+$PowerState+" VM's:")
-                $vms
-                ""
-                Write-Host ("There are ["+$vmcount+"] ["+$PowerState+"] VM's")
-            }
-            If($outfile -ne $null){
-                ""
-                Write-Host "Outputting to file as requested."
-                Out-File -FilePath $outfile -InputObject $vms}
-            }
-        If($server -ne $null){
-            disconnect-viserver $server -force:$true -confirm:$false
-        }
+        $vms = Get-VM|Where-Object{$_.Name -like ($Name+"*")}|Select-Object Name,PowerState
+    }
+    End{
+        Disconnect-VIServer $Server -Force:$true -Confirm:$false
+        Return ($vms)
     }
 }
 Function LoadModules(){
@@ -211,6 +150,9 @@ Do{
                 Break
             }
             Default{
+                $VMResults = $null
+                $VMHostName = @()
+                $VMPowerState = @()
                 $Connected = $false
                 $Hostname = ($DataEntry+"*")
                 $Hostname = (Get-ADComputer -Filter {DNSHostname -like $Hostname} -Properties Name,IPv4Address,OperatingSystem|Sort-Object Name|Select-Object DNSHostName,IPv4Address,OperatingSystem)
@@ -220,15 +162,31 @@ Do{
                             $Server = ($VCMgrSite+"."+$Domain)
                             $Return = Test-NetConnection -ComputerName $Server
                             If($Return.PingSucceeded -eq $True){
+                                If($Return.RemoteAddress-like"10.118.*"){
+                                    $VCMgrSiteA=$Return
+                                }Else{
+                                    $VCMgrSiteB=$Return
+                                }
                                 Clear-Host
                             }
                         }
                     }
+                    [System.Collections.ArrayList]$VMHeaders=@()
                     ForEach($VMGuest In $Hostname){
                         $DNSHostName = (($VMGuest.DNSHostName).Split(".")[0]+".*")
-                        $VMStatus=Get-VMStatus -Name $DNSHostName -Server $VCMgrSrv
-                        Write-Host $VMStatus
+                        If($VMGuest.IPv4Address-like"10.118.*"){
+                            $VCMgrSrv=$VCMgrSiteA
+                        }Else{
+                            $VCMgrSrv=$VCMgrSiteB
+                        }
+                        $VMResults=Get-VMStatus -Name $DNSHostName -Server $VCMgrSrv.ComputerName -VCAdmin $SecureCredentials
+                        $VMHostName=($VMResults.Name)
+                        $VMPowerState=($VMResults.PowerState)
+                        $NewRow=[PSCustomObject]@{'VMGuest'=$VMHostName;'PowerState'=$VMPowerState}
+                        $VMHeaders.Add($NewRow)|Out-Null
+                        $NewRow=$null
                     }
+                    $VMHeaders|Format-List -Property VMGuest,PowerState
                 }
                 Break
             }
