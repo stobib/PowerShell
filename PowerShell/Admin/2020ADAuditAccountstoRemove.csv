@@ -1,0 +1,63 @@
+FirstName,LastName,UserName,PasswordNeverExpires,mail,LastLogonDate,Created
+Kiran,Suravaram,sy6001219255,FALSE,ksuravaram@utsystem.edu,5/16/2018 9:34,5/5/2017 10:25
+Srinivasan,Tikkireddi,sy6001278200,FALSE,stikkireddi@utsystem.edu,1/6/2020 9:45,5/30/2018 13:44
+Sudheer,Babbur,sy6001219750,FALSE,sbabbur@erpagroup.com,2/1/2019 12:15,2/1/2019 11:08
+Joseph,Harvey,sy6001159333,FALSE,jharvey@utsystem.edu,3/9/2018 15:38,6/5/2017 11:42
+Esther,Dominguez,sy6001134359,FALSE,,3/29/2018 16:15,3/2/2018 11:16
+Christine,Orosco,sy6001162412,FALSE,corosco@utsystem.edu,4/27/2018 7:35,1/24/2017 15:05
+Benjamin,Oakley,da2010030210,FALSE,oakley@utdallas.edu,,8/30/2018 16:01
+Clif,Harden,da2010098714,FALSE,charden@utdallas.edu,,4/4/2018 14:19
+Chaney,Edwards,da2010109578,FALSE,Chaney.Edwards@utdallas.edu,9/8/2017 8:37,6/20/2017 17:00
+Jazzmyn,Wilson,da2011185086,FALSE,jbw083000@utdallas.edu,,8/9/2018 13:10
+Venkata,Eluri,da2021351900,FALSE,vxe160230@utdallas.edu,,4/28/2017 16:28
+Rahul,Raj,da2021409762,FALSE,rxr170001@utdallas.edu,,7/3/2018 13:59
+Sheretha,Measells,da4030000843,FALSE,sxm127131@utdallas.edu,,7/25/2018 13:51
+Adam,Cantwell,da4030001228,FALSE,abc120130@utdallas.edu,,2/26/2018 15:48
+Creshona,George,da4030001273,FALSE,ccg120030@utdallas.edu,,7/25/2018 13:55
+Debbie,Reynolds,da4030003753,FALSE,dar150630@utdallas.edu,,7/25/2018 13:57
+Jaime,Huerta,ep6001010117,FALSE,jhuerta4@utep.edu,2/25/2019 18:10,9/12/2018 13:26
+Griselda,Castilla,rg6001127034,FALSE,griselda.castilla@utrgv.edu,,6/19/2017 8:50
+Debbie,Gilchrist,rg6001127055,FALSE,debbie.gilchrist@utrgv.edu,,6/19/2017 9:40
+Roger,Rodriguez,rg6001127081,FALSE,rogelio.rodriguez@utrgv.edu,,6/19/2017 9:36
+Mario,Salinas,rg6001127084,FALSE,mario.salinas@utrgv.edu,7/12/2017 14:01,4/4/2017 11:00
+Kelly,Shannon,rg6001127085,FALSE,kelly.shannon@utrgv.edu,,3/27/2018 13:34
+Fidencio,Tamez,rg6001127086,FALSE,fidencio.tamez@utrgv.edu,,6/19/2017 9:21
+Vanessa,Valdez,rg6001127090,FALSE,vanessa.valdez@utrgv.edu,,6/19/2017 10:32
+Rudy,Ybanez,rg6001127093,FALSE,ooo631@utrgv.edu,7/4/2017 9:05,4/4/2017 10:59
+Elias,Ozuna,rg6001132334,FALSE,elias.ozuna@utrgv.edu,,6/19/2017 9:23
+Jose,Gutierrez,rg6001134137,FALSE,jose.e.gutierrez@utrgv.edu,,7/10/2017 7:52
+Christopher,Jazinski,rg6001134219,FALSE,,,10/26/2017 10:28
+Myriam,Rivera,rg6001134311,FALSE,myriam.rivera@utrgv.edu,7/19/2018 15:18,10/10/2017 9:18
+Jaime,Nunez,rg6001134354,FALSE,,,4/26/2018 15:45
+Michelle,Alvarado,rg6001134363,FALSE,michelle.alvarado@utrgv.edu,,6/19/2017 8:43
+Isabel,Reyna,rg6001134404,FALSE,isabel.reyna@utrgv.edu,8/5/2019 13:00,6/28/2017 7:17
+Alejandro,Chapa,rg6001135470,FALSE,alejandro.chapa@utrgv.edu,,6/19/2017 10:43
+Xinmin,Chen,rg6001135471,FALSE,xinmin.chen@utrgv.edu,3/19/2018 9:43,6/19/2017 8:52
+Raquel,Garcia,rg6001135482,FALSE,raquel.garcia@utrgv.edu,,6/19/2017 10:36
+Roy,Garza,rg6001135486,FALSE,roy.garza@utrgv.edu,,6/19/2017 9:25
+Aida,Patino,rg6001135553,FALSE,,,6/19/2017 10:27
+JR,Torrez,rg6001135569,FALSE,jr.torrez@utrgv.edu,,6/19/2017 9:45
+Josie,Lopez,rg6001136182,FALSE,josie.lopez@utrgv.edu,,3/22/2018 6:45
+Tomas,Aguado,rg6001136306,FALSE,tomas.aguado@utrgv.edu,5/31/2018 18:34,3/22/2018 6:39
+Sofia,Montes,rg6001138871,FALSE,sofia.montes@utrgv.edu,,6/19/2017 9:46
+Sandra,Mendez,rg6001140909,FALSE,sandra.mendez@utrgv.edu,4/4/2018 15:30,3/22/2018 6:42
+Victoria,Lopez,rg6001140948,FALSE,victoria.lopez@utrgv.edu,,6/19/2017 10:30
+Stefan,Pena,rg6001152149,FALSE,Stefan.pena01@utrgv.edu,4/4/2018 16:40,3/22/2018 6:47
+Carlos,Espinoza,rg6001153770,FALSE,Carlos.espinosa01@utrgv.edu,3/22/2018 8:36,3/22/2018 6:48
+David,Guerra,rg6001245932,FALSE,david.guerra@utrgv.edu,6/28/2018 11:32,4/23/2018 14:03
+Aracely,Esquivel,rg6001245960,FALSE,aracely.esquivel01@utrgv.edu,6/4/2018 11:15,4/23/2018 14:08
+Elvin,Flores,rg6001246173,FALSE,elvin.flores01@utrgv.edu,12/14/2018 14:16,5/14/2018 11:05
+Ram,Chimmiri,rg6001271662,FALSE,,5/7/2018 9:43,3/6/2018 13:34
+Francis,Duchaney,sa5001019327,TRUE,francis.duchaney@utsa.edu,,4/18/2019 17:05
+Mark,McCoy,ty5000000000,FALSE,,,7/27/2017 15:08
+Elizabeth,Bonner,ty5000071318,FALSE,ebonner@uttyler.edu,8/3/2018 10:20,6/13/2017 13:33
+Ashlynn,Jones,ty5000401881,FALSE,ashlynnjones@uttyler.edu,11/16/2018 11:24,11/2/2018 14:06
+Michael,Giordano,ty5000415513,FALSE,mgiordano@uttyler.edu,4/3/2019 9:26,6/13/2017 13:33
+Alyssa,Finley,ty5000433722,FALSE,,1/6/2020 8:50,5/2/2019 14:32
+Thayer,Merritt,ty6001139755,FALSE,tmerritt@uttyler.edu,,6/13/2017 13:33
+Pruthvin,Nagaraj,ty6001201940,FALSE,PNagaraj@uttyler.edu,10/12/2018 10:51,12/20/2017 16:05
+Elizabeth,Lucas,ty6001211257,FALSE,ELucas@uttyler.edu,5/30/2019 7:50,6/13/2017 13:33
+Miao,Li,ty6001287751,FALSE,mli@uttyler.edu,,10/29/2018 10:22
+Armando,Rivera,ty6001289114,FALSE,ARivera@uttyler.edu,,11/8/2018 7:59
+Juri,Kyoya,ty6001289117,FALSE,JKyoya@uttyler.edu,,11/8/2018 8:20
+Nagendra,Somasetty,ty6001296097,FALSE,NSomasetty@uttyler.edu,,2/27/2019 9:13
