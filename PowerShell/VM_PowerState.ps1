@@ -2,7 +2,7 @@
 param(
   [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][string]$ComputerName,
   [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][boolean]$DefaultAnswer,
-  [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][int]$TelnetPort,
+  [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][uint64]$TelnetPort,
   [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][int]$TimeOut
 )
 Clear-Host;Clear-History
@@ -20,7 +20,7 @@ Set-Variable -Name VCMgrSrvList -Value @('vcmgra01.inf','vcmgrb01.inf')
 $Global:LogLocation=($ScriptPath.Replace($ScriptName,"")+"Logs\"+$ScriptName.Replace(".ps1",""))
 $Global:LogDate=Get-Date -Format "yyyy-MMdd_HHmm"
 If($DefaultAnswer-eq$false){[boolean]$DefaultAnswer=0}
-If($TelnetPort-eq0){[int]$TelnetPort=0}
+If($TelnetPort-eq0){[uint64]$TelnetPort=0}
 If($TimeOut-eq0){[int]$TimeOut=10}
 $Global:SecureCredentials=$null
 $Global:PortTest="Not checked"
@@ -118,6 +118,71 @@ Function ReportStartOfActivity($activity){
     $script:currentActivity=$activity
     Write-Progress -Activity $loadingActivity -CurrentOperation $script:currentActivity -PercentComplete $script:percentComplete
 }
+Function ValidatePortRange{
+    Param(
+        [Parameter(Mandatory=$true)][Alias("vCenterHost")][object]$PortNumber=0
+)
+    If(($PortNumber-gt65535)-or($PortNumber-lt0)){
+        $Message=("["+$PortNumber+"] is not a valid port number.  Please enter a number between 0 and 65535 for the port you want to check.")
+        $Title="Port number not within the valid port number range!"
+        #Value  Description   
+        #0 Show OK button. 
+        #1 Show OK and Cancel buttons. 
+        #2 Show Abort, Retry, and Ignore buttons. 
+        #3 Show Yes, No, and Cancel buttons. 
+        #4 Show Yes and No buttons. 
+        #5 Show Retry and Cancel buttons. 
+        #  http://msdn.microsoft.com/en-us/library/x83z1d9f(v=vs.84).aspx
+        $TestPort=new-object -comobject wscript.shell 
+        $intAnswer=$TestPort.popup($Message,$TimeOut,$Title,0) #first number is timeout, second is display.
+        Add-Type -AssemblyName System.Windows.Forms
+        Add-Type -AssemblyName System.Drawing
+        # Form design
+        $form=New-Object System.Windows.Forms.Form
+        $form.Text=$Title
+        $form.Size=New-Object System.Drawing.Size(440,220)
+        $form.StartPosition='CenterScreen'
+        # Botton variables
+        $okButton=New-Object System.Windows.Forms.Button
+        $okButton.Location=New-Object System.Drawing.Point(111,111)
+        $okButton.Size=New-Object System.Drawing.Size(90,35)
+        $okButton.Text='OK'
+        $okButton.DialogResult=[System.Windows.Forms.DialogResult]::OK
+        $form.AcceptButton=$okButton
+        $form.Controls.Add($okButton)
+        # Cancel Button design and action
+        $cancelButton=New-Object System.Windows.Forms.Button
+        $cancelButton.Location=New-Object System.Drawing.Point(211,111)
+        $cancelButton.Size=New-Object System.Drawing.Size(90,35)
+        $cancelButton.Text='Cancel'
+        $cancelButton.DialogResult=[System.Windows.Forms.DialogResult]::Cancel
+        $form.CancelButton=$cancelButton
+        $form.Controls.Add($cancelButton)
+        # Form Label values
+        $label=New-Object System.Windows.Forms.Label
+        $label.Location=New-Object System.Drawing.Point(10,20)
+        $label.Size=New-Object System.Drawing.Size(400,50)
+        $label.Text="Please enter the port number that you want to test.  It needs to be within 0 and 65535 to be valid."
+        $form.Controls.Add($label)
+        # Form Textbox values
+        $textBox=New-Object System.Windows.Forms.TextBox
+        $textBox.Location=New-Object System.Drawing.Point(10,70)
+        $textBox.Size=New-Object System.Drawing.Size(400,35)
+        # Form Controls
+        $form.Controls.Add($textBox)
+        $form.Topmost=$true
+        $form.Add_Shown({$textBox.Select()})
+        # Form results actions
+        $result=$form.ShowDialog()
+        If($result -eq [System.Windows.Forms.DialogResult]::Cancel){
+            $PortNumber=0
+        }
+        If($result -eq [System.Windows.Forms.DialogResult]::OK){
+            $PortNumber=$textBox.Text
+        }
+    }
+    Return $PortNumber
+}
 LoadModules
 Write-Progress -Activity $loadingActivity -Completed
 Switch($DomainUser){
@@ -127,7 +192,11 @@ Switch($DomainUser){
 $SecureCredentials=SetCredentials -SecureUser $DomainUser -Domain($Domain).Split(".")[0]
 If(!($SecureCredentials)){$SecureCredentials=Get-Credential}
 Do{
-    If($ComputerName1-eq""){
+    Do{
+        $TelnetPort=ValidatePortRange -PortNumber $TelnetPort
+        Set-Location $System32 # Testing terminate value
+    }Until(($TelnetPort-ge0)-and($TelnetPort-le65535))
+    If($ComputerName-eq""){
         Add-Type -AssemblyName System.Windows.Forms
         Add-Type -AssemblyName System.Drawing
         # Form design
@@ -157,7 +226,7 @@ Do{
         $label.Size=New-Object System.Drawing.Size($LabelWidth,$LabelHeight)
         $label.Text='Please enter the hostname of the computer.'
         $form.Controls.Add($label)
-        # Form Textbob values
+        # Form Textbox values
         $textBox=New-Object System.Windows.Forms.TextBox
         $textBox.Location=New-Object System.Drawing.Point($LabelLeft,$TextboxTop)
         $textBox.Size=New-Object System.Drawing.Size($LabelWidth,$LabelHeight)
@@ -344,7 +413,5 @@ Do{
             Break
         }
     }
-    $ComputerName=$null
-    $DataEntry=$null
 }Until($DataEntry.ToLower()-eq"exit")
 Set-Location $System32
