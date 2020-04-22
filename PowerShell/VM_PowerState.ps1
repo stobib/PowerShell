@@ -10,6 +10,7 @@ Set-Variable -Name RestartNeeded -Value 0
 Set-Variable -Name Repositories -Value @('PSGallery')
 Set-Variable -Name ModuleList -Value @('Rsat.ActiveDirectory.')
 Set-Variable -Name OriginalPref -Value $ProgressPreference
+Set-Variable -Name PowerCLIPath -Value (${env:ProgramFiles(x86)}+"\VMware\Infrastructure\PowerCLI")
 $ProgressPreference="SilentlyContinue"
 Write-Host ("Please be patient while prerequisite modules are installed and loaded.")
 ForEach($Repository In $Repositories){
