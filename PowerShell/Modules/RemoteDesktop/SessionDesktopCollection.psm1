@@ -482,12 +482,15 @@ param (
     try
     {
         $wmiNamespace = "root\cimv2\rdms"
-        $wmiQuery = "SELECT * FROM Win32_RDSHCollection"
-        if($CollectionName)
-        {
-            $wmiQuery = $wmiQuery + " WHERE Name='" + $CollectionName + "'"
-        }
-        $rdSessionCollections = Get-WmiObject -Namespace $wmiNamespace -Query $wmiQuery -ComputerName $ConnectionBroker -Authentication PacketPrivacy -ErrorAction Stop
+        
+        $cimSessionOption = New-CimSessionOption -PacketPrivacy
+        $cimSession = New-CimSession -ComputerName $ConnectionBroker -SessionOption $cimSessionOption
+        
+        $options = New-Object Microsoft.Management.Infrastructure.Options.CimOperationOptions
+        $options.ShortenLifetimeOfResults = $true
+
+        $wmiClass = "Win32_RDSHCollection"        
+        $rdSessionCollections = $cimSession.EnumerateInstances($wmiNamespace, $wmiClass, $options)
     }
     catch
     {
@@ -507,6 +510,15 @@ param (
     $ResourceTypeRemoteApp = (Get-ResourceString ResourceTypeRemoteApp)
     $ResourceTypeRemoteDesktop = (Get-ResourceString ResourceTypeRemoteDesktop)
 
+    $enumOptions = New-Object System.Management.EnumerationOptions
+    $enumOptions.Rewindable = $false
+    $enumOptions.ReturnImmediately = $true
+
+    $connectionOptions = new-object System.Management.ConnectionOptions
+    $connectionOptions.Authentication=[System.Management.AuthenticationLevel]::PacketPrivacy
+    
+    $scope = New-Object System.Management.ManagementScope(("\\" + $ConnectionBroker + "\" + $wmiNamespace), $connectionOptions)
+
     foreach ($rdSessionCollection in $rdSessionCollections)
     {
 
@@ -516,7 +528,11 @@ param (
         try
         {
             $wmiQuery = "SELECT * FROM Win32_RDSHServer WHERE CollectionAlias='" + $rdSessionCollection.Alias + "'"
-            $rdSessionServerCount = [int]( ([array](Get-WmiObject -Namespace $wmiNamespace -Query $wmiQuery -ComputerName $ConnectionBroker -Authentication PacketPrivacy -ErrorAction Stop)).Count)
+            
+            $query = New-Object System.Management.ObjectQuery $wmiQuery
+            $results = New-Object System.Management.ManagementObjectSearcher $scope, $query, $enumOptions
+            $items = $results.Get()
+            $rdSessionServerCount = $items.Count 
         }
         catch
         {
@@ -526,7 +542,12 @@ param (
         try
         {
             $wmiRemoteAppQuery = "SELECT * FROM Win32_RDMSPublishedApplication WHERE PoolName='" + $rdSessionCollection.Alias + "'"
-            $rdRemoteAppCount = [int]( ([array](Get-WmiObject -Namespace $wmiNamespace -Query $wmiRemoteAppQuery -ComputerName $ConnectionBroker -Authentication PacketPrivacy -ErrorAction Stop)).Count)
+            
+            $query = New-Object System.Management.ObjectQuery $wmiRemoteAppQuery
+            $results = New-Object System.Management.ManagementObjectSearcher $scope, $query, $enumOptions
+            $items = $results.Get()
+            $rdRemoteAppCount = $items.Count 
+
             if ( $rdRemoteAppCount -eq 0 )
             {
                 $RdSessionResurceType = $ResourceTypeRemoteDesktop

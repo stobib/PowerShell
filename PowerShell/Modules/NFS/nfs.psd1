@@ -3,8 +3,8 @@
             GUID = '108AE179-3094-4223-91E4-B9099069017A'
             Author="Microsoft Corporation"
             CompanyName="Microsoft Corporation"
-            Copyright="© Microsoft Corporation. All rights reserved."
-            PowerShellVersion = '3.0'
+            Copyright="Â© Microsoft Corporation. All rights reserved."
+            PowerShellVersion = '5.1'
             CLRVersion="4.0"
             HelpInfoUri="http://go.microsoft.com/fwlink/?linkid=390807"
             ModuleVersion = '1.0'
@@ -54,5 +54,5 @@
                                   'Set-NfsShare',
                                   'Test-NfsMappingStore',
                                   'Revoke-NfsMountedClient')
-        }
-
+            CompatiblePSEditions = @('Desktop','Core')
+}

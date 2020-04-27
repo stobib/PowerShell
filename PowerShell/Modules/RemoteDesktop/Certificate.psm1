@@ -262,6 +262,10 @@ param (
     [string]
     $ImportPath,
 
+    [Parameter(Mandatory=$false, ParameterSetName="Thumbprint")]
+    [string]
+    $Thumbprint,
+
     [Parameter(Mandatory=$false, ParameterSetName="Import")]
     [Parameter(Mandatory=$false, ParameterSetName="Reapply")]
     [System.Security.SecureString]
@@ -345,6 +349,16 @@ param (
                         $params = Get-BoundParameter $PSBoundParameters @{
                                             "Role" = "Role"
                                             "Password" = "Password"
+                                            "ConnectionBroker" = "RDManagementServer"
+                                            "Credential" = "PSCredential"
+                                            }
+                        break
+                    }
+
+        "Thumbprint" {
+                        $params = Get-BoundParameter $PSBoundParameters @{
+                                            "Role" = "Role"
+                                            "Thumbprint" = "Thumbprint"
                                             "ConnectionBroker" = "RDManagementServer"
                                             "Credential" = "PSCredential"
                                             }
