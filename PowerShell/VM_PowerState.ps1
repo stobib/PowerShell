@@ -66,6 +66,7 @@ Function Get-VMStatus{
     Begin{
         If(($ServerData.VCManagerServer -ne $null)-and($VCAdmin -ne $null)){
             Connect-VIServer $ServerData.VCManagerServer -Credential $VCAdmin|Out-Null
+            Clear-Host
         }
     }
     Process{
@@ -163,10 +164,10 @@ Function ValidatePortRange{
         $form.Add_Shown({$textBox.Select()})
         # Form results actions
         $result=$form.ShowDialog()
-        If($result -eq [System.Windows.Forms.DialogResult]::Cancel){
+        If($result-eq[System.Windows.Forms.DialogResult]::Cancel){
             $PortNumber=0
         }
-        If($result -eq [System.Windows.Forms.DialogResult]::OK){
+        If($result-eq[System.Windows.Forms.DialogResult]::OK){
             $PortNumber=$textBox.Text
         }
     }
@@ -192,7 +193,7 @@ If($RestartNeeded-eq1){
         "VMware.VimAutomation.Cloud",
         "VMware.VimAutomation.PCloud",
         "VMware.VimAutomation.Cis.Core",
-        #"VMware.VimAutomation.Storage",
+        "VMware.VimAutomation.Storage",
         "VMware.VimAutomation.HorizonView",
         "VMware.VimAutomation.HA",
         "VMware.VimAutomation.vROps",
@@ -219,10 +220,6 @@ If($RestartNeeded-eq1){
     $SecureCredentials=SetCredentials -SecureUser $DomainUser -Domain($Domain).Split(".")[0]
     If(!($SecureCredentials)){$SecureCredentials=Get-Credential}
     Do{
-        Do{
-            $TelnetPort=ValidatePortRange -PortNumber $TelnetPort
-            Set-Location $System32 # Testing terminate value
-        }Until(($TelnetPort-ge0)-and($TelnetPort-le65535))
         $ProgressPreference=$OriginalPreference
         If($ComputerName-eq""){
             Add-Type -AssemblyName System.Windows.Forms
@@ -264,10 +261,10 @@ If($RestartNeeded-eq1){
             $form.Add_Shown({$textBox.Select()})
             # Form results actions
             $result=$form.ShowDialog()
-            If($result -eq [System.Windows.Forms.DialogResult]::Cancel){
+            If($result-eq[System.Windows.Forms.DialogResult]::Cancel){
                 $DataEntry="exit"
             }
-            If($result -eq [System.Windows.Forms.DialogResult]::OK){
+            If($result-eq[System.Windows.Forms.DialogResult]::OK){
                 $Hostname=""
                 $DataEntry=$textBox.Text
             }
@@ -276,6 +273,9 @@ If($RestartNeeded-eq1){
                 $DataEntry=($ComputerName.ToLower())
             }
         }
+        Do{
+            $TelnetPort=ValidatePortRange -PortNumber $TelnetPort
+        }Until(($TelnetPort-ge0)-and($TelnetPort-le65535))
         Switch(($DataEntry).ToLower()){
             {($_-eq"exit")}{
                 Break
@@ -303,7 +303,7 @@ If($RestartNeeded-eq1){
                         ForEach($VCMgrSite In $VCMgrSrvList){
                             $Server=($VCMgrSite+"."+$Domain)
                             $Results=Test-NetConnection -ComputerName $Server
-                            If($Results.PingSucceeded -eq $True){
+                            If($Results.PingSucceeded-eq$True){
                                 If($Results.RemoteAddress-like"10.118.*"){
                                     $VCMgrSiteA=$Results
                                 }Else{
@@ -324,7 +324,7 @@ If($RestartNeeded-eq1){
                         If($VMGuest.IPv4Address){
                             If($TelnetPort-ne0){
                                 $PortResults=Test-NetConnection -ComputerName $VMGuest.DNSHostName -Port $TelnetPort -InformationLevel "Detailed"
-                                If($PortResults.RemotePort -eq $TelnetPort){
+                                If($PortResults.RemotePort-eq$TelnetPort){
                                     If($PortResults.TcpTestSucceeded-eq$true){
                                         $PortTest="Open"
                                     }Else{
@@ -393,8 +393,8 @@ If($RestartNeeded-eq1){
                                 If($VMPowerState-eq"PoweredOff"){
                                     $Message=("["+$VMHostName+"] is currently ["+$VMPowerState+"].  Do you want to power it on?")
                                     $Title="VMGuest powered off!"
-                                    $PowerState = new-object -comobject wscript.shell 
-                                    $intAnswer = $PowerState.popup($Message,$TimeOut,$Title,4)
+                                    $PowerState=new-object -comobject wscript.shell 
+                                    $intAnswer=$PowerState.popup($Message,$TimeOut,$Title,4)
                                     If($DefaultAnswer-eq$false){
                                         $intAnswer="No"
                                     }Else{
@@ -419,10 +419,10 @@ If($RestartNeeded-eq1){
                         }
                         $intCounter++
                     }Until($intCounter-ge2)
-                    $ProgressPreference="SilentlyContinue"
-                    $ProgressHeader="There were ["+$VMCounter+"] systems that matched the search value ["+$DataEntry+"]."
-                    Write-Progress -Activity $ProgressHeader -Completed
+                    Write-Progress -Activity $ProgressHeader -Status $ProgressStatus -Completed
+                    Clear-History;Clear-Host
                     $VMHeaders|Format-List -Property VMGuest,PowerState
+                    $ComputerName=""
                 }
                 Break
             }
