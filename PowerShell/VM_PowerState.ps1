@@ -8,11 +8,20 @@ param(
 Clear-History;Clear-Host
 Set-Variable -Name RestartNeeded -Value 0
 Set-Variable -Name Repositories -Value @('PSGallery')
+Set-Variable -Name PackageProviders -Value @('Nuget')
 Set-Variable -Name ModuleList -Value @('Rsat.ActiveDirectory.')
 Set-Variable -Name OriginalPref -Value $ProgressPreference
 Set-Variable -Name PowerCLIPath -Value (${env:ProgramFiles(x86)}+"\VMware\Infrastructure\PowerCLI")
 $ProgressPreference="SilentlyContinue"
 Write-Host ("Please be patient while prerequisite modules are installed and loaded.")
+$NugetPackage=Find-PackageProvider -Name $PackageProviders
+ForEach($Provider In $PackageProviders){
+    $FindPackage=Find-PackageProvider -Name $Provider
+    $GetPackage=Get-PackageProvider -Name $Provider
+    If($FindPackage.Version-ne$GetPackage.Version){
+        Install-PackageProvider -Name $FindPackage.Name -Force -Scope CurrentUser
+    }
+}
 ForEach($Repository In $Repositories){
     Set-PSRepository -Name $Repository -InstallationPolicy Trusted
 }
@@ -209,8 +218,8 @@ If($RestartNeeded-eq1){
     $script:percentComplete=0
     $script:currentActivity=""
     $script:totalActivities=$moduleList.Count + 1
-    Set-PowerCLIConfiguration -Scope Session -ParticipateInCEIP $false -DisplayDeprecationWarnings $false -Confirm:$false|Out-Null
     LoadModules
+    Set-PowerCLIConfiguration -Scope AllUsers -ParticipateInCEIP $false -DisplayDeprecationWarnings $false -Confirm:$false|Out-Null
     Write-Progress -Activity $loadingActivity -Completed
     Clear-Host;Clear-History
     Switch($DomainUser){
