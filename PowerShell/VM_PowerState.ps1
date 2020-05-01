@@ -5,6 +5,8 @@ param(
   [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][uint64]$TelnetPort,
   [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][int]$TimeOut
 )
+[datetime]$Global:StartTime=Get-Date -Format o
+[datetime]$Global:EndTime=0
 Clear-History;Clear-Host
 Set-Variable -Name RestartNeeded -Value 0
 Set-Variable -Name Repositories -Value @('PSGallery')
@@ -12,6 +14,7 @@ Set-Variable -Name PackageProviders -Value @('Nuget')
 Set-Variable -Name ModuleList -Value @('Rsat.ActiveDirectory.')
 Set-Variable -Name OriginalPref -Value $ProgressPreference
 Set-Variable -Name PowerCLIPath -Value (${env:ProgramFiles(x86)}+"\VMware\Infrastructure\PowerCLI")
+# PowerShell Version (.NetFramework Error Checking) ---> Future change needed for PowerShell Core 7.0
 $ProgressPreference="SilentlyContinue"
 Write-Host ("Please be patient while prerequisite modules are installed and loaded.")
 $NugetPackage=Find-PackageProvider -Name $PackageProviders
@@ -36,25 +39,31 @@ ForEach($ModuleName In $ModuleList){
 }
 Write-Host ("THe prerequisite modules are now installed and ready to process this script.")
 $ProgressPreference=$OriginalPref
+# PowerShell Version (.NetFramework Error Checking) ---<
 Import-Module ActiveDirectory
 Import-Module ProcessCredentials
 $ErrorActionPreference='SilentlyContinue'
-$Global:DomainUser=($env:USERNAME.ToLower())
-$Global:Domain=($env:USERDNSDOMAIN.ToLower())
-$ScriptPath=$MyInvocation.MyCommand.Definition
-$ScriptName=$MyInvocation.MyCommand.Name
+[string]$Global:DomainUser=($env:USERNAME.ToLower())
+[string]$Global:Domain=($env:USERDNSDOMAIN.ToLower())
+[string]$Global:ScriptPath=$MyInvocation.MyCommand.Definition
+[string]$Global:ScriptName=$MyInvocation.MyCommand.Name
 Set-Location ($ScriptPath.Replace($ScriptName,""))
 Set-Variable -Name System32 -Value ($env:SystemRoot+"\System32")
 Set-Variable -Name VCMgrSrvList -Value @('vcmgra01.inf','vcmgrb01.inf')
-$Global:LogLocation=($ScriptPath.Replace($ScriptName,"")+"Logs\"+$ScriptName.Replace(".ps1",""))
-$Global:LogDate=Get-Date -Format "yyyy-MMdd_HHmm"
+[string]$Global:LogLocation=($ScriptPath.Replace($ScriptName,"")+"Logs\"+$ScriptName.Replace(".ps1",""))
+[string]$Global:LogDate=Get-Date -Format "yyyy-MMdd"
+[string]$Global:LogCurrentIP=($LogLocation+"\Current_IP_"+$LogDate+".log")
+[string]$Global:LogMissingIP=($LogLocation+"\Missing_IP_"+$LogDate+".log")
 If($DefaultAnswer-eq$false){[boolean]$DefaultAnswer=0}
 If($TelnetPort-eq0){[uint64]$TelnetPort=0}
+[string]$Global:PortTest="Not tested"
 If($TimeOut-eq0){[int]$TimeOut=10}
 $Global:SecureCredentials=$null
-$Global:PortTest="Not checked"
+[String]$Global:RunTime=$null
+[string]$Global:VCMgrSrv=""
 $Global:DataEntry=""
-$Global:VCMgrSrv=""
+[int]$Global:toFast=1
+[int]$Global:toSlow=10
 [int]$FormHeight=200
 [int]$FormWidth=400
 [int]$LabelLeft=10
@@ -73,31 +82,115 @@ Function Get-VMStatus{
         [Parameter(Mandatory=$true)][Alias("vCenterAdmin")][PSCredential]$VCAdmin=$null
     )
     Begin{
-        If(($ServerData.VCManagerServer -ne $null)-and($VCAdmin -ne $null)){
-            Connect-VIServer $ServerData.VCManagerServer -Credential $VCAdmin|Out-Null
-            Clear-Host
-        }
+        $StartConnection=0
+        Do{
+            ForEach($VCManager In $ServerData.VCManagerServer){
+                If(($VCManager -ne $null)-and($VCAdmin -ne $null)){
+                    Connect-VIServer $VCManager -Credential $VCAdmin|Out-Null
+                    Clear-Host;Break
+                }
+            }
+            $StartConnection++
+        }Until($StartConnection-eq1)
     }
     Process{
-        $intVMGuest=0
         [System.Collections.ArrayList]$RowData=@()
         ForEach($VMGuest In $ServerData){
-            $ProgressHeader="Logged into: ["+($ServerData.VCManagerServer).Split("")[0]+"] using credentials: ["+$VCAdmin.UserName+"@"+$Domain+"]."
-            $ProgressStatus="Retrieving PowerState for ["+$VMGuest.VMGuestNames+"]."
-            Write-Progress -Activity $ProgressHeader -Status $ProgressStatus -Completed;Start-Sleep -Seconds 1
+            $VCManagerServer=($ServerData.VCManagerServer).Split("")[0]
+            $VMStatusHeader="Logged into: ["+$VCManagerServer+"] using credentials: ["+$VCAdmin.UserName+"@"+$Domain+"]."
+            $VMStatusProgress="Retrieving PowerState for ["+$VMGuest.VMGuestNames+"]."
             $NetBIOS=($VMGuest.VMGuestNames.Split(".")[0])
-            $VMGuestInfo=Get-VM|Where-Object{$_.Name -like($NetBIOS+"*")}|Select-Object Name,PowerState
-            $VMHostName=($VMGuestInfo.Name)
-            $VMPowerState=($VMGuestInfo.PowerState)
-            $NewRow=[PSCustomObject]@{'VMGuest'=$VMHostName;'PowerState'=$VMPowerState;'Guest IP'=$VMGuest.VMGuestIPv4;'Port Check'=$VMGuest.PortTest}
-            $RowData.Add($NewRow)|Out-Null
-            $Message=$ProgressStatus+$NewRow|Out-File ($LogLocation+"\Current_IP_"+$LogDate+".log") -Append
-            $NewRow=$null
-            $intVMGuest++
+            $VMGuestInfo=Get-VM|Where-Object{$_.Name -like($NetBIOS+".*")}|Select-Object Name,PowerState,Guest
+            If($VMGuestInfo.Name){
+                If($VMGuestInfo.PowerState-eq"PoweredOn"){
+                    If(($VMGuestInfo.Guest.OSFullName).ToLower()-notlike"*server*"){
+                        $VMHostName=($VMGuestInfo.Name)
+                        $VMPowerState=($VMGuestInfo.PowerState)
+                        $GuestOS=($VMGuestInfo.Guest.OSFullName)
+                        $IPAddress=($VMGuestInfo.Guest.IPAddress)
+                        $NewRow=[PSCustomObject]@{'VMGuest'=$VMHostName;'PowerState'=$VMPowerState;'GuestOS'=$GuestOS;'IPv4Address'=$IPAddress;'PortCheck'=$VMGuest.PortTest}
+                        $VMStatusProgress+=$NewRow
+                        $RowData.Add($NewRow)|Out-Null
+                        $Message=$VMStatusProgress|Out-File $LogCurrentIP -Append
+                        $NewRow=$null
+                        Write-Progress -Activity $VMStatusHeader -Status $VMStatusProgress;Start-Sleep -Milliseconds $toFast
+                    }
+                }ElseIf($VMGuestInfo.PowerState-eq"PoweredOff"){
+<#                  http://msdn.microsoft.com/en-us/library/x83z1d9f(v=vs.84).aspx                  #>
+<# Button Types
+                    Decimal value    Hexadecimal value    Description
+                    0                0x0                  Show OK button.
+                    1                0x1                  Show OK and Cancel buttons.
+                    2                0x2                  Show Abort, Retry, and Ignore buttons.
+                    3                0x3                  Show Yes, No, and Cancel buttons.
+                    4                0x4                  Show Yes and No buttons.
+                    5                0x5                  Show Retry and Cancel buttons.
+                    6                0x6                  Show Cancel, Try Again, and Continue buttons.
+#>#             Button Types
+<# Icon Types
+                    Decimal value    Hexadecimal value    Description
+                    16               0x10                 Show "Stop Mark" icon.
+                    32               0x20                 Show "Question Mark" icon.
+                    48               0x30                 Show "Exclamation Mark" icon.
+                    64               0x40                 Show "Information Mark" icon.
+#>#             Icon Types
+<# Return Value
+                    Decimal value    Description
+                    -1               The user did not click a button before nSecondsToWait seconds elapsed.
+                    1                OK button
+                    2                Cancel button
+                    3                Abort button
+                    4                Retry button
+                    5                Ignore button
+                    6                Yes button
+                    7                No button
+                    10               Try Again button
+                    11               Continue button
+#>#             Return Value
+                    $Message=("["+$VMGuestInfo.Name+"] is currently ["+$VMGuestInfo.PowerState+"].  Do you want to power it on?")
+                    $Title="VM-Guest powered off!"
+                    $PowerState=New-Object -ComObject WScript.Shell
+                    $intAnswer=$PowerState.Popup($Message,$TimeOut,$Title,36) # Icon is the last variable.
+                    If($intAnswer-eq-1){
+                        If($DefaultAnswer-eq$false){
+                            $intAnswer=7
+                        }Else{
+                            $intAnswer=6
+                        }
+                    }
+                    Switch($intAnswer){
+                        6{$Response="Yes";Break}
+                        7{$Response="No";Break}
+                        Default{$Response="No";Break}
+                    }
+                    If($Response-eq"Yes"){
+                        Connect-VIServer $VCManagerServer -Credential $SecureCredentials|Out-Null
+                        Start-VM -VM $VMGuestInfo.Name -Confirm:$false -RunAsync
+                        Disconnect-VIServer $VCManagerServer -Force:$true -Confirm:$false|Out-Null
+                        $VMHostName=($VMGuest.VMGuestNames)
+                        $VMPowerState="Sent command to power on."
+                        $GuestOS="Not validated."
+                        $IPAddress=($VMGuest.VMGuestIPv4)
+                        $NewRow=[PSCustomObject]@{'VMGuest'=$VMHostName;'PowerState'=$VMPowerState;'GuestOS'=$GuestOS;'IPv4Address'=$IPAddress;'PortCheck'=$VMGuest.PortTest}
+                        $VMStatusProgress+=$NewRow
+                        $RowData.Add($NewRow)|Out-Null
+                        $Message=$VMStatusProgress|Out-File $LogCurrentIP -Append
+                        $NewRow=$null
+                        Write-Progress -Activity $VMStatusHeader -Status $VMStatusProgress;Start-Sleep -Milliseconds $toFast
+                    }
+                }
+            }
         }
     }
     End{
-        Disconnect-VIServer $ServerData.VCManagerServer -Force:$true -Confirm:$false
+        $EndConnection=0
+        Write-Progress -Activity $VMStatusHeader -Status $VMStatusProgress -Completed
+        Do{
+            ForEach($VCManager In $ServerData.VCManagerServer){
+                Disconnect-VIServer $ServerData.VCManagerServer -Force:$true -Confirm:$false;Break
+            }
+            $EndConnection++
+        }Until($EndConnection-eq1)
         Return ($RowData)
     }
 }
@@ -132,8 +225,8 @@ Function ValidatePortRange{
     If(($PortNumber-gt65535)-or($PortNumber-lt0)){
         $Message=("["+$PortNumber+"] is not a valid port number.  Please enter a number between 0 and 65535 for the port you want to check.")
         $Title="Port number not within the valid port number range!"
-        $TestPort=new-object -comobject wscript.shell 
-        $intAnswer=$TestPort.popup($Message,$TimeOut,$Title,0)
+        $TestPort=New-Object -ComObject WScript.Shell 
+        $intAnswer=$TestPort.Popup($Message,$TimeOut,$Title,48)
         Add-Type -AssemblyName System.Windows.Forms
         Add-Type -AssemblyName System.Drawing
         # Form design
@@ -185,16 +278,8 @@ Function ValidatePortRange{
 If($RestartNeeded-eq1){
     $Message="A restart of your computer is needed before this script can be run."
     $Title="Reboot required!"
-    #Value  Description   
-    #0 Show OK button. 
-    #1 Show OK and Cancel buttons. 
-    #2 Show Abort, Retry, and Ignore buttons. 
-    #3 Show Yes, No, and Cancel buttons. 
-    #4 Show Yes and No buttons. 
-    #5 Show Retry and Cancel buttons. 
-    #  http://msdn.microsoft.com/en-us/library/x83z1d9f(v=vs.84).aspx
-    $Responce=new-object -comobject wscript.shell 
-    $intAnswer=$Responce.popup($Message,0,$Title,0) #first number is timeout, second is display.
+    $Responce=New-Object -ComObject WScript.Shell 
+    $intAnswer=$Responce.Popup($Message,0,$Title,32)
 }Else{
     $moduleList=@(
         "VMware.VimAutomation.Core",
@@ -220,6 +305,23 @@ If($RestartNeeded-eq1){
     $script:totalActivities=$moduleList.Count + 1
     LoadModules
     Set-PowerCLIConfiguration -Scope AllUsers -ParticipateInCEIP $false -DisplayDeprecationWarnings $false -Confirm:$false|Out-Null
+    # Process Existing Log Files
+    [string[]]$LogFiles=@($LogCurrentIP,$LogMissingIP)
+    ForEach($LogFile In $LogFiles){
+        If(Test-Path -Path $LogFile){
+            $FileName=(Split-Path -Path $LogFile -Leaf).Replace(".log","")
+            $Files=Get-Item -Path ($LogLocation+"\*.*")
+            [int]$FileCount=0
+            ForEach($File In $Files){
+                If(!($File.Mode-eq"d----")-and($File.Name-like($FileName+"*"))){
+                    $FileCount++
+                }
+            }
+            If($FileCount-gt0){
+                Rename-Item -Path $LogFile -NewName ($FileName+"("+$FileCount+").log")
+            }
+        }
+    }
     Write-Progress -Activity $loadingActivity -Completed
     Clear-Host;Clear-History
     Switch($DomainUser){
@@ -304,9 +406,8 @@ If($RestartNeeded-eq1){
                 $VMHostName=@()
                 $VMPowerState=@()
                 $Connected=$false
-                $ProgressStatus=""
                 $Hostname=($DataEntry+"*")
-                $Hostname=(Get-ADComputer -Filter {DNSHostname -like $Hostname} -Properties Name,IPv4Address,OperatingSystem|Sort-Object Name|Select-Object DNSHostName,IPv4Address,OperatingSystem)
+                $Hostname=(Get-ADComputer -Filter{DNSHostname -like $Hostname} -Properties Name,IPv4Address,OperatingSystem,LastLogonDate|Sort-Object Name)
                 If($Hostname){
                     If($VCMgrSrv-eq""){
                         ForEach($VCMgrSite In $VCMgrSrvList){
@@ -329,9 +430,13 @@ If($RestartNeeded-eq1){
                     If(!(Test-Path -Path $LogLocation)){mkdir $LogLocation}
                     ForEach($VMGuest In $Hostname){
                         $VCManager=""
+                        $PortTest="Not tested"
                         $DNSHostName=(($VMGuest.DNSHostName).Split(".")[0]+".*")
                         If($VMGuest.IPv4Address){
                             If($TelnetPort-ne0){
+                                $TestPortHeader="Verifying that TCP Port: ["+$TelnetPort+"] is listening and access is allowed."
+                                $TestPortProgress="  Currently testing VM Guest: ["+$VMGuest.DNSHostName+"]."
+                                Write-Progress -Activity $TestPortHeader -Status $TestPortProgress;Start-Sleep -Milliseconds $toFast
                                 $PortResults=Test-NetConnection -ComputerName $VMGuest.DNSHostName -Port $TelnetPort -InformationLevel "Detailed"
                                 If($PortResults.RemotePort-eq$TelnetPort){
                                     If($PortResults.TcpTestSucceeded-eq$true){
@@ -340,6 +445,7 @@ If($RestartNeeded-eq1){
                                         $PortTest="Closed"
                                     }
                                 }
+                                Write-Progress -Activity $TestPortHeader -Status $TestPortProgress -Completed
                             }
                             If($VMGuest.IPv4Address-like"10.118.*"){
                                 $DataSiteA+=($VCMgrSiteA.ComputerName,$VMGuest.DNSHostName,$VMGuest.IPv4Address,$PortTest)
@@ -362,81 +468,79 @@ If($RestartNeeded-eq1){
                             }
                             $NewRow=$null
                             $VMCounter++
-                            $ProgressHeader="Beginning to process the VM's that are assigned to: ["+$VCManager+"]."
-                            $ProgressStatus="  VM Guest: ["+$VMGuest.DNSHostName+"] is assigned IP Address: ["+$VMGuest.IPv4Address+"]."
+                            $SiteSortHeader="Beginning to process the VM's that are assigned to: ["+$VCManager+"]."
+                            $SiteSortProgress="  VM Guest: ["+$VMGuest.DNSHostName+"] is assigned IP Address: ["+$VMGuest.IPv4Address+"]."
                         }Else{
-                            $ProgressHeader="The computer being processed doesn't have an IP Address!"
-                            $ProgressStatus="  ["+$VMGuest.DNSHostName+"] could verify the assignment to VCenter Manager site."
-                            $Message=$ProgressHeader+$ProgressStatus|Out-File ($LogLocation+"\Missing_IP_"+$LogDate+".log") -Append
+                            $LastLogon=$VMGuest.LastLogonDate
+                            [datetime]$CurrentDate=Get-Date
+                            [datetime]$LastLogonDate=$LastLogon
+                            $DateDiff=([datetime]$CurrentDate.Date)-([datetime]$LastLogonDate.Date)
+                            $SiteSortHeader="The computer being processed doesn't have an IP Address!"
+                            If($DateDiff.TotalDays-ge30){
+                                $SiteSortProgress=("  ["+$VMGuest.DNSHostName+"] has been off-line for: '"+$DateDiff.TotalDays+"' days and needs to be reviewed for removal from the "+$Domain+" domain.")
+                            }Else{
+                                $SiteSortProgress={"  ["+$VMGuest.DNSHostName+"] couldn't verify the assignment to VCenter Manager site."}
+                            }
+                            $Message=$SiteSortHeader+$SiteSortProgress|Out-File $LogMissingIP -Append
                         }
-                        Write-Progress -Activity $ProgressHeader -Status $ProgressStatus;Start-Sleep -Seconds 1
+                        Write-Progress -Activity $SiteSortHeader -Status $SiteSortProgress;Start-Sleep -Milliseconds $toFast
                     }
+                    Write-Progress -Activity $SiteSortHeader -Status $SiteSortProgress -Completed
                     Do{
                         If($intCounter-eq0){
                             If($HeadersSiteA){
-                                $ProgressHeader="Beginning to process the VM's that are assigned to: ["+($HeadersSiteA.VCManagerServer).Split("")[0]+"]."
-                                $ProgressStatus="Currently working on the first of ["+$VMCounter+"] system search matches."
-                                Write-Progress -Activity $ProgressHeader -Status $ProgressStatus;Start-Sleep -Seconds 5
+                                $VCMgrSiteHeader="Beginning to process the VM's that are assigned to: ["+($HeadersSiteA.VCManagerServer).Split("")[0]+"]."
+                                $VCMgrSiteProgress="   Retrieving data for the first of ["+$VMCounter+"] system search matches."
                                 $VMResults=Get-VMStatus -ServerData $HeadersSiteA -VCAdmin $SecureCredentials
+                                Write-Progress -Activity $VCMgrSiteHeader -Status $VCMgrSiteProgress;Start-Sleep -Milliseconds $toSlow
                             }
                         }
                         If($intCounter-eq1){
                             If($HeadersSiteB){
-                                $ProgressHeader="Beginning to process the VM's that are assigned to: ["+($HeadersSiteB.VCManagerServer).Split("")[0]+"]."
-                                $ProgressStatus="Currently working on the remaining ["+($VMCounter-$ProgressLoop)+"] system search matches."
-                                Write-Progress -Activity $ProgressHeader -Status $ProgressStatus;Start-Sleep -Seconds 5
+                                $VCMgrSiteHeader="Beginning to process the VM's that are assigned to: ["+($HeadersSiteB.VCManagerServer).Split("")[0]+"]."
+                                $VCMgrSiteProgress="   Retrieving data for the remaining ["+($VMCounter-$ProgressLoop)+"] system search matches."
                                 $VMResults=Get-VMStatus -ServerData $HeadersSiteB -VCAdmin $SecureCredentials
+                                Write-Progress -Activity $VCMgrSiteHeader -Status $VCMgrSiteProgress;Start-Sleep -Milliseconds $toSlow
                             }
                         }
                         If(!($VMResults.VMGuest-eq$null)-or(!($VMResults.VMGuest-eq""))){
                             ForEach($VMGuestInfo In $VMResults){
                                 $ProgressLoop++
-                                $ProgressStatus="Currently working on ["+$ProgressLoop+"] of the ["+$VMCounter+"] system search matches."
-                                $ProgressHeader="Processing the ["+$VMCounter+"] system that were found that match the search value ["+$DataEntry+"] you entered."
-                                Write-Progress -Activity $ProgressHeader -Status $ProgressStatus -PercentComplete($ProgressLoop/$VMCounter*100);Start-Sleep -Seconds 1
-                                $VMHostName=($VMGuestInfo.VMGuest)
-                                $VMPowerState=($VMGuestInfo.PowerState)
-                                $NewRow=[PSCustomObject]@{'VMGuest'=$VMHostName;'PowerState'=$VMPowerState}
-                                $VMHeaders.Add($NewRow)|Out-Null
-                                $NewRow=$null
-                                If($VMPowerState-eq"PoweredOff"){
-                                    $Message=("["+$VMHostName+"] is currently ["+$VMPowerState+"].  Do you want to power it on?")
-                                    $Title="VMGuest powered off!"
-                                    $PowerState=new-object -comobject wscript.shell 
-                                    $intAnswer=$PowerState.popup($Message,$TimeOut,$Title,4)
-                                    If($DefaultAnswer-eq$false){
-                                        $intAnswer="No"
-                                    }Else{
-                                        $intAnswer="Yes"
-                                    }
-                                    Switch($intAnswer){
-                                        6{$Response="No";Break}
-                                        7{$Response="Yes";Break}
-                                        Default{$Response=$DefaultAnswer;Break}
-                                    }
-                                    If($Response-eq"Yes"){
-                                        Switch($intCounter){
-                                            0{$VCManagerServer=$VCMgrSiteA.ComputerName;Break}
-                                            1{$VCManagerServer=$VCMgrSiteB.ComputerName;Break}
-                                        }
-                                        Connect-VIServer $VCManagerServer -Credential $SecureCredentials|Out-Null
-                                        Start-VM -VM $VMHostName -Confirm:$false -RunAsync
-                                        Disconnect-VIServer $VCManagerServer -Force:$true -Confirm:$false|Out-Null
-                                    }
+                                $VMResultsHeader="Processing the ["+$VMCounter+"] system that were found that match the search value ["+$DataEntry+"] you entered."
+                                $VMResultsProgress="Currently working on ["+$ProgressLoop+"] of the ["+$VMCounter+"] system search matches."
+                                If(($VMGuestInfo.VMGuest-ne"")-or($VMGuestInfo.VMGuest-ne$null)){
+                                    $VMHostName=($VMGuestInfo.VMGuest)
+                                    $VMPowerState=($VMGuestInfo.PowerState)
+                                    $GuestOS=($VMGuestInfo.GuestOS)
+                                    $IPAddress=($VMGuestInfo.IPv4Address)
+                                    $NewRow=[PSCustomObject]@{'Guest Name'=$VMHostName;'Power State'=$VMPowerState;'Operating System'=$GuestOS;'IP Address(s)'=$IPAddress}
+                                    $VMHeaders.Add($NewRow)|Out-Null
+                                    $NewRow=$null
                                 }
+                                Write-Progress -Activity $VMResultsHeader -Status $VMResultsProgress -PercentComplete($ProgressLoop/$VMCounter*100);Start-Sleep -Milliseconds $toFast
                             }
+                            Write-Progress -Activity $VMResultsHeader -Status $VMResultsProgress -Completed
                         }
                         $intCounter++
                     }Until($intCounter-ge2)
-                    Write-Progress -Activity $ProgressHeader -Status $ProgressStatus -Completed
+                    Write-Progress -Activity $VCMgrSiteHeader -Status $VCMgrSiteProgress -Completed
                     Clear-History;Clear-Host
-                    $VMHeaders|Format-List -Property VMGuest,PowerState
+                    $VMHeaders|Format-List -Property ('Guest Name','Power State','Operating System','IP Address(s)')
                     $ComputerName=""
                 }
+                $EndTime=Get-Date -Format o
+                $RunTime=(New-TimeSpan -Start $StartTime -End $EndTime)
                 Break
             }
         }
     }Until($DataEntry.ToLower()-eq"exit")
+    If($EndTime-eq0){
+        [datetime]$EndTime=Get-Date -Format o
+        $RunTime=(New-TimeSpan -Start $StartTime -End $EndTime)
+        Write-Host ("Script runtime: ["+$RunTime+"]")
+    }Else{
+        Write-Host ("Script runtime: ["+$RunTime.Hours+":"+$RunTime.Minutes+":"+$RunTime.Seconds+"."+$RunTime.Milliseconds+"]")
+    }
     Set-Location $System32
 }
 $ProgressPreference=$OriginalPreference
