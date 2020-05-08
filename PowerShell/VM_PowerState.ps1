@@ -1,45 +1,86 @@
 ﻿[CmdletBinding()]
 param(
-  [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][string]$ComputerName,
-  [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][boolean]$DefaultAnswer,
-  [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][uint64]$TelnetPort,
-  [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][int]$TimeOut
+    [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][string]$ComputerName,
+    [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][boolean]$DefaultAnswer,
+    [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][uint64]$TelnetPort,
+    [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][int]$TimeOut,
+    [parameter(ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][string[]]$LogFileNames=@()
 )
+# NOTE: The below default parameter value option can be used to set default values to command line parameters
+$DefaultParameterValues=@{"LogFileNames"="Current_IP_","Missing_IP_"}
+If!($LogFileNames){$LogFileNames+=($DefaultParameterValues.LogFileNames)}
+<#             http://msdn.microsoft.com/en-us/library/x83z1d9f(v=vs.84).aspx             #>
+<# Button Types
+                    Decimal value    Hexadecimal value    Description
+                    0                0x0                  Show OK button.
+                    1                0x1                  Show OK and Cancel buttons.
+                    2                0x2                  Show Abort, Retry, and Ignore buttons.
+                    3                0x3                  Show Yes, No, and Cancel buttons.
+                    4                0x4                  Show Yes and No buttons.
+                    5                0x5                  Show Retry and Cancel buttons.
+                    6                0x6                  Show Cancel, Try Again, and Continue buttons.
+#>#             Button Types
+<# Icon Types
+                    Decimal value    Hexadecimal value    Description
+                    16               0x10                 Show "Stop Mark" icon.
+                    32               0x20                 Show "Question Mark" icon.
+                    48               0x30                 Show "Exclamation Mark" icon.
+                    64               0x40                 Show "Information Mark" icon.
+#>#             Icon Types
+<# Return Value
+                    Decimal value    Description
+                    -1               The user did not click a button before nSecondsToWait seconds elapsed.
+                    1                OK button
+                    2                Cancel button
+                    3                Abort button
+                    4                Retry button
+                    5                Ignore button
+                    6                Yes button
+                    7                No button
+                    10               Try Again button
+                    11               Continue button
+#>#             Return Value
 [datetime]$Global:StartTime=Get-Date -Format o
 [datetime]$Global:EndTime=0
+$Global:LogonServer=$null
 Clear-History;Clear-Host
-Set-Variable -Name RestartNeeded -Value 0
-Set-Variable -Name Repositories -Value @('PSGallery')
-Set-Variable -Name PackageProviders -Value @('Nuget')
-Set-Variable -Name ModuleList -Value @('Rsat.ActiveDirectory.')
-Set-Variable -Name OriginalPref -Value $ProgressPreference
-Set-Variable -Name PowerCLIPath -Value (${env:ProgramFiles(x86)}+"\VMware\Infrastructure\PowerCLI")
-# PowerShell Version (.NetFramework Error Checking) ---> Future change needed for PowerShell Core 7.0
-$ProgressPreference="SilentlyContinue"
-Write-Host ("Please be patient while prerequisite modules are installed and loaded.")
-$NugetPackage=Find-PackageProvider -Name $PackageProviders
-ForEach($Provider In $PackageProviders){
-    $FindPackage=Find-PackageProvider -Name $Provider
-    $GetPackage=Get-PackageProvider -Name $Provider
-    If($FindPackage.Version-ne$GetPackage.Version){
-        Install-PackageProvider -Name $FindPackage.Name -Force -Scope CurrentUser
-    }
-}
-ForEach($Repository In $Repositories){
-    Set-PSRepository -Name $Repository -InstallationPolicy Trusted
-}
-ForEach($ModuleName In $ModuleList){
-    $RSATCheck=Get-WindowsCapability -Name ($ModuleName+"*") -Online|Select-Object -Property Name,State
-    If($RSATCheck.State-eq"NotPresent"){
-        $InstallStatus=Add-WindowsCapability -Name $RSATCheck.Name -Online
-        If($InstallStatus.RestartNeeded-eq$true){
-            $RestartNeeded=1
+[boolean]$Global:bElevated=([System.Security.Principal.WindowsIdentity]::GetCurrent()).Groups -contains "S-1-5-32-544"
+If($bElevated){
+    Set-Variable -Name RestartNeeded -Value 0
+    Set-Variable -Name Repositories -Value @('PSGallery')
+    Set-Variable -Name PackageProviders -Value @('Nuget')
+    Set-Variable -Name ModuleList -Value @('Rsat.ActiveDirectory.')
+    Set-Variable -Name OriginalPref -Value $ProgressPreference
+    # PowerShell Version (.NetFramework Error Checking) >>>--->
+    [int]$PSVersion=([string]$PSVersionTable.PSVersion.Major+"."+[string]$PSVersionTable.PSVersion.Minor)
+    If($PSVersion-lt7){
+        $ProgressPreference="SilentlyContinue"
+        Write-Host ("Please be patient while prerequisite modules are installed and loaded.")
+        $NugetPackage=Find-PackageProvider -Name $PackageProviders
+                            ForEach($Provider In $PackageProviders){
+        $FindPackage=Find-PackageProvider -Name $Provider
+        $GetPackage=Get-PackageProvider -Name $Provider
+        If($FindPackage.Version-ne$GetPackage.Version){
+            Install-PackageProvider -Name $FindPackage.Name -Force -Scope CurrentUser
         }
+        }
+            ForEach($Repository In $Repositories){
+        Set-PSRepository -Name $Repository -InstallationPolicy Trusted
+        }
+                                    ForEach($ModuleName In $ModuleList){
+        $RSATCheck=Get-WindowsCapability -Name ($ModuleName+"*") -Online|Select-Object -Property Name,State
+        If($RSATCheck.State-eq"NotPresent"){
+            $InstallStatus=Add-WindowsCapability -Name $RSATCheck.Name -Online
+            If($InstallStatus.RestartNeeded-eq$true){
+                $RestartNeeded=1
+            }
+        }
+        }
+        Write-Host ("THe prerequisite modules are now installed and ready to process this script.")
+        $ProgressPreference=$OriginalPref
     }
+    # PowerShell Version (.NetFramework Error Checking) <---<<<
 }
-Write-Host ("THe prerequisite modules are now installed and ready to process this script.")
-$ProgressPreference=$OriginalPref
-# PowerShell Version (.NetFramework Error Checking) ---<
 Import-Module ActiveDirectory
 Import-Module ProcessCredentials
 $ErrorActionPreference='SilentlyContinue'
@@ -49,11 +90,81 @@ $ErrorActionPreference='SilentlyContinue'
 [string]$Global:ScriptName=$MyInvocation.MyCommand.Name
 Set-Location ($ScriptPath.Replace($ScriptName,""))
 Set-Variable -Name System32 -Value ($env:SystemRoot+"\System32")
+Switch($DomainUser){
+    {($_-like"sy100*")-or($_-like"sy600*")}{Break}
+    Default{$DomainUser=(("sy1000829946@"+$Domain).ToLower());Break}
+}
+$SecureCredentials=SetCredentials -SecureUser $DomainUser -Domain($Domain).Split(".")[0]
+If(!($SecureCredentials)){$SecureCredentials=Get-Credential}
+# Get current domain using logged-on user's credentials
+$CurrentDomain="LDAP://"+([ADSI]"").distinguishedName
+$LogonServer=New-Object System.DirectoryServices.DirectoryEntry($CurrentDomain,
+$SecureCredentials.UserName,$SecureCredentials.GetNetworkCredential().Password)
+$SecureFilePath=($env:USERPROFILE+"\AppData\Local\Credentials\"+($Domain).Split(".")[0])
+If($LogonServer.Name-eq$null){ # <<---<<< Added "!()" for testing
+    [boolean]$bMissing=$false
+    If(Test-Path -Path $SecureFilePath){
+        $Files=Get-Item -Path ($SecureFilePath+"\*")
+        [int]$FileCount=0
+        [datetime]$FileDate1=0
+        [datetime]$FileDate2=0
+        ForEach($File In $Files){
+            $FileName=($File.Name).Split(".")[0]
+            If($FileName-eq$DomainUser){
+                $FileDate2=$File.CreationTime
+                $Key2=(Get-Content -Path ($SecureFilePath+"\"+$FileName+".*") -Raw).Substring(0,37)
+            }Else{
+                $FileDate1=$File.CreationTime
+                $Key1=(Get-Content -Path ($SecureFilePath+"\"+$FileName+".*") -Raw).Substring(0,37)
+            }
+            $FileCount++
+        }
+        [int]$CreationTime=(New-TimeSpan -Start $FileDate1 -End $FileDate2).TotalMilliseconds
+        If(($FileCount-lt2)-or($CreationTime-gt100)){
+            If(!($Key1-eq$Key2)){
+                $bMissing=$true
+            }
+        }
+    }
+    If($bMissing){
+        Set-Location $System32
+        $ProgressPreference=$OriginalPreference
+        Write-Host ("Authentication failed - please verify your username: ["+$SecureCredentials.UserName+"] and password.")
+        Exit # Terminate the script.
+    }
+}Else{
+    write-host ("Successfully authenticated with domain ["+$Domain+"].")
+}
+# Process Existing Log Files
+[string]$Global:LogLocation=($ScriptPath.Replace($ScriptName,"")+"Logs\"+$ScriptName.Replace(".ps1",""))
+[string]$Global:LogDate=Get-Date -Format "yyyy-MMdd"
+[string[]]$LogFiles=@()
+[int]$intCount=0
+ForEach($LogFile In $LogFileNames){
+    $intCount++
+    New-Variable -Name "LogFN$($intCount)" -Value ([string]($LogLocation+"\"+$LogFile+$LogDate+".log"))
+    $LogFiles+=(Get-Variable -Name "LogFN$($intCount)").Value
+}
+ForEach($LogFile In $LogFiles){
+    If(Test-Path -Path $LogFile){
+        $FileName=(Split-Path -Path $LogFile -Leaf).Replace(".log","")
+        $Files=Get-Item -Path ($LogLocation+"\*.*")
+        [int]$FileCount=0
+        ForEach($File In $Files){
+            If(!($File.Mode-eq"d----")-and($File.Name-like($FileName+"*"))){
+                $FileCount++
+            }
+        }
+        If($FileCount-gt0){
+            Rename-Item -Path $LogFile -NewName ($FileName+"("+$FileCount+").log")
+        }
+    }
+}
+Clear-History;Clear-Host
+# Script Body >>>--->> Unique code for Windows PowerShell scripting
 Set-Variable -Name VCMgrSrvList -Value @('vcmgra01.inf','vcmgrb01.inf')
 [string]$Global:LogLocation=($ScriptPath.Replace($ScriptName,"")+"Logs\"+$ScriptName.Replace(".ps1",""))
 [string]$Global:LogDate=Get-Date -Format "yyyy-MMdd"
-[string]$Global:LogCurrentIP=($LogLocation+"\Current_IP_"+$LogDate+".log")
-[string]$Global:LogMissingIP=($LogLocation+"\Missing_IP_"+$LogDate+".log")
 If($DefaultAnswer-eq$false){[boolean]$DefaultAnswer=0}
 If($TelnetPort-eq0){[uint64]$TelnetPort=0}
 [string]$Global:PortTest="Not tested"
@@ -63,7 +174,7 @@ $Global:SecureCredentials=$null
 [string]$Global:VCMgrSrv=""
 $Global:DataEntry=""
 [int]$Global:toFast=1
-[int]$Global:toSlow=10
+[int]$Global:toSlow=5
 [int]$FormHeight=200
 [int]$FormWidth=400
 [int]$LabelLeft=10
@@ -96,6 +207,12 @@ Function Get-VMStatus{
     Process{
         [System.Collections.ArrayList]$RowData=@()
         ForEach($VMGuest In $ServerData){
+            [boolean]$bProcessVM=$false
+            $VMGuestInfo=""
+            $VMHostName=""
+            $VMPowerState=""
+            $GuestOS=""
+            $IPAddress=""
             $VCManagerServer=($ServerData.VCManagerServer).Split("")[0]
             $VMStatusHeader="Logged into: ["+$VCManagerServer+"] using credentials: ["+$VCAdmin.UserName+"@"+$Domain+"]."
             $VMStatusProgress="Retrieving PowerState for ["+$VMGuest.VMGuestNames+"]."
@@ -108,45 +225,9 @@ Function Get-VMStatus{
                         $VMPowerState=($VMGuestInfo.PowerState)
                         $GuestOS=($VMGuestInfo.Guest.OSFullName)
                         $IPAddress=($VMGuestInfo.Guest.IPAddress)
-                        $NewRow=[PSCustomObject]@{'VMGuest'=$VMHostName;'PowerState'=$VMPowerState;'GuestOS'=$GuestOS;'IPv4Address'=$IPAddress;'PortCheck'=$VMGuest.PortTest}
-                        $VMStatusProgress+=$NewRow
-                        $RowData.Add($NewRow)|Out-Null
-                        $Message=$VMStatusProgress|Out-File $LogCurrentIP -Append
-                        $NewRow=$null
-                        Write-Progress -Activity $VMStatusHeader -Status $VMStatusProgress;Start-Sleep -Milliseconds $toFast
+                        $bProcessVM=$true
                     }
                 }ElseIf($VMGuestInfo.PowerState-eq"PoweredOff"){
-<#                  http://msdn.microsoft.com/en-us/library/x83z1d9f(v=vs.84).aspx                  #>
-<# Button Types
-                    Decimal value    Hexadecimal value    Description
-                    0                0x0                  Show OK button.
-                    1                0x1                  Show OK and Cancel buttons.
-                    2                0x2                  Show Abort, Retry, and Ignore buttons.
-                    3                0x3                  Show Yes, No, and Cancel buttons.
-                    4                0x4                  Show Yes and No buttons.
-                    5                0x5                  Show Retry and Cancel buttons.
-                    6                0x6                  Show Cancel, Try Again, and Continue buttons.
-#>#             Button Types
-<# Icon Types
-                    Decimal value    Hexadecimal value    Description
-                    16               0x10                 Show "Stop Mark" icon.
-                    32               0x20                 Show "Question Mark" icon.
-                    48               0x30                 Show "Exclamation Mark" icon.
-                    64               0x40                 Show "Information Mark" icon.
-#>#             Icon Types
-<# Return Value
-                    Decimal value    Description
-                    -1               The user did not click a button before nSecondsToWait seconds elapsed.
-                    1                OK button
-                    2                Cancel button
-                    3                Abort button
-                    4                Retry button
-                    5                Ignore button
-                    6                Yes button
-                    7                No button
-                    10               Try Again button
-                    11               Continue button
-#>#             Return Value
                     $Message=("["+$VMGuestInfo.Name+"] is currently ["+$VMGuestInfo.PowerState+"].  Do you want to power it on?")
                     $Title="VM-Guest powered off!"
                     $PowerState=New-Object -ComObject WScript.Shell
@@ -164,20 +245,21 @@ Function Get-VMStatus{
                         Default{$Response="No";Break}
                     }
                     If($Response-eq"Yes"){
-                        Connect-VIServer $VCManagerServer -Credential $SecureCredentials|Out-Null
                         Start-VM -VM $VMGuestInfo.Name -Confirm:$false -RunAsync
-                        Disconnect-VIServer $VCManagerServer -Force:$true -Confirm:$false|Out-Null
                         $VMHostName=($VMGuest.VMGuestNames)
                         $VMPowerState="Sent command to power on."
                         $GuestOS="Not validated."
                         $IPAddress=($VMGuest.VMGuestIPv4)
-                        $NewRow=[PSCustomObject]@{'VMGuest'=$VMHostName;'PowerState'=$VMPowerState;'GuestOS'=$GuestOS;'IPv4Address'=$IPAddress;'PortCheck'=$VMGuest.PortTest}
-                        $VMStatusProgress+=$NewRow
-                        $RowData.Add($NewRow)|Out-Null
-                        $Message=$VMStatusProgress|Out-File $LogCurrentIP -Append
-                        $NewRow=$null
-                        Write-Progress -Activity $VMStatusHeader -Status $VMStatusProgress;Start-Sleep -Milliseconds $toFast
+                        $bProcessVM=$true
                     }
+                }
+                If($bProcessVM){
+                    $NewRow=[PSCustomObject]@{'VMGuest'=$VMHostName;'PowerState'=$VMPowerState;'GuestOS'=$GuestOS;'IPv4Address'=$IPAddress;'PortCheck'=$VMGuest.PortTest}
+                    $VMStatusProgress+=$NewRow
+                    $RowData.Add($NewRow)|Out-Null
+                    $Message=$VMStatusProgress|Out-File $LogFN1 -Append
+                    $NewRow=$null
+                    Write-Progress -Activity $VMStatusHeader -Status $VMStatusProgress;Start-Sleep -Milliseconds $toFast
                 }
             }
         }
@@ -306,7 +388,7 @@ If($RestartNeeded-eq1){
     LoadModules
     Set-PowerCLIConfiguration -Scope AllUsers -ParticipateInCEIP $false -DisplayDeprecationWarnings $false -Confirm:$false|Out-Null
     # Process Existing Log Files
-    [string[]]$LogFiles=@($LogCurrentIP,$LogMissingIP)
+    [string[]]$LogFiles=@($LogFN1,$LogFN2)
     ForEach($LogFile In $LogFiles){
         If(Test-Path -Path $LogFile){
             $FileName=(Split-Path -Path $LogFile -Leaf).Replace(".log","")
@@ -324,12 +406,6 @@ If($RestartNeeded-eq1){
     }
     Write-Progress -Activity $loadingActivity -Completed
     Clear-Host;Clear-History
-    Switch($DomainUser){
-        {($_-like"sy100*")-or($_-like"sy600*")}{Break}
-        Default{$DomainUser=(("sy1000829946@"+$Domain).ToLower());Break}
-    }
-    $SecureCredentials=SetCredentials -SecureUser $DomainUser -Domain($Domain).Split(".")[0]
-    If(!($SecureCredentials)){$SecureCredentials=Get-Credential}
     Do{
         $ProgressPreference=$OriginalPreference
         If($ComputerName-eq""){
@@ -481,7 +557,7 @@ If($RestartNeeded-eq1){
                             }Else{
                                 $SiteSortProgress={"  ["+$VMGuest.DNSHostName+"] couldn't verify the assignment to VCenter Manager site."}
                             }
-                            $Message=$SiteSortHeader+$SiteSortProgress|Out-File $LogMissingIP -Append
+                            $Message=$SiteSortHeader+$SiteSortProgress|Out-File $LogFN2 -Append
                         }
                         Write-Progress -Activity $SiteSortHeader -Status $SiteSortProgress;Start-Sleep -Milliseconds $toFast
                     }
@@ -505,10 +581,10 @@ If($RestartNeeded-eq1){
                         }
                         If(!($VMResults.VMGuest-eq$null)-or(!($VMResults.VMGuest-eq""))){
                             ForEach($VMGuestInfo In $VMResults){
-                                $ProgressLoop++
-                                $VMResultsHeader="Processing the ["+$VMCounter+"] system that were found that match the search value ["+$DataEntry+"] you entered."
-                                $VMResultsProgress="Currently working on ["+$ProgressLoop+"] of the ["+$VMCounter+"] system search matches."
-                                If(($VMGuestInfo.VMGuest-ne"")-or($VMGuestInfo.VMGuest-ne$null)){
+                                If($VMGuestInfo.VMGuest){
+                                    $ProgressLoop++
+                                    $VMResultsHeader="Processing the ["+$VMCounter+"] system that were found that match the search value ["+$DataEntry+"] you entered."
+                                    $VMResultsProgress="Currently working on ["+$ProgressLoop+"] of the ["+$VMCounter+"] system search matches."
                                     $VMHostName=($VMGuestInfo.VMGuest)
                                     $VMPowerState=($VMGuestInfo.PowerState)
                                     $GuestOS=($VMGuestInfo.GuestOS)
@@ -516,8 +592,8 @@ If($RestartNeeded-eq1){
                                     $NewRow=[PSCustomObject]@{'Guest Name'=$VMHostName;'Power State'=$VMPowerState;'Operating System'=$GuestOS;'IP Address(s)'=$IPAddress}
                                     $VMHeaders.Add($NewRow)|Out-Null
                                     $NewRow=$null
+                                    Write-Progress -Activity $VMResultsHeader -Status $VMResultsProgress -PercentComplete($ProgressLoop/$VMCounter*100);Start-Sleep -Milliseconds $toFast
                                 }
-                                Write-Progress -Activity $VMResultsHeader -Status $VMResultsProgress -PercentComplete($ProgressLoop/$VMCounter*100);Start-Sleep -Milliseconds $toFast
                             }
                             Write-Progress -Activity $VMResultsHeader -Status $VMResultsProgress -Completed
                         }
@@ -534,13 +610,14 @@ If($RestartNeeded-eq1){
             }
         }
     }Until($DataEntry.ToLower()-eq"exit")
-    If($EndTime-eq0){
-        [datetime]$EndTime=Get-Date -Format o
-        $RunTime=(New-TimeSpan -Start $StartTime -End $EndTime)
-        Write-Host ("Script runtime: ["+$RunTime+"]")
-    }Else{
-        Write-Host ("Script runtime: ["+$RunTime.Hours+":"+$RunTime.Minutes+":"+$RunTime.Seconds+"."+$RunTime.Milliseconds+"]")
-    }
-    Set-Location $System32
 }
+# Script Body <<---<<< Unique code for Windows PowerShell scripting
+If($EndTime-eq0){
+    [datetime]$EndTime=Get-Date -Format o
+    $RunTime=(New-TimeSpan -Start $StartTime -End $EndTime)
+    Write-Host ("Script runtime: ["+$RunTime+"]")
+}Else{
+    Write-Host ("Script runtime: ["+$RunTime.Hours+":"+$RunTime.Minutes+":"+$RunTime.Seconds+"."+$RunTime.Milliseconds+"]")
+}
+Set-Location $System32
 $ProgressPreference=$OriginalPreference
