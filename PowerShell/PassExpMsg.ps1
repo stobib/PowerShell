@@ -96,7 +96,7 @@ If(!($SecureCredentials)){$SecureCredentials=Get-Credential}
 $CurrentDomain="LDAP://"+([ADSI]"").distinguishedName
 $LogonServer=New-Object System.DirectoryServices.DirectoryEntry($CurrentDomain,
 $SecureCredentials.UserName,$SecureCredentials.GetNetworkCredential().Password)
-$SecureFilePath=($env:USERPROFILE+"\AppData\Local\Credentials\"+($Domain).Split(".")[0])
+$SecureFilePath=($env:USERiPROFILE+"\AppData\Local\Credentials\"+($Domain).Split(".")[0])
 If($LogonServer.Name-eq$null){ # <<---<<< Added "!()" for testing
     [boolean]$bMissing=$false
     If(Test-Path -Path $SecureFilePath){
@@ -162,6 +162,7 @@ ForEach($LogFile In $LogFiles){
 }
 Clear-History;Clear-Host
 # Script Body >>>--->> Unique code for Windows PowerShell scripting
+[string]$Global:gSmtpServer="mail.utshare.utsystem.edu"
 [string]$ScriptTitle="Password Expiration Message"
 [int64]$iPriorDays=-365
 [datetime]$ScriptStartTime=Get-Date -Format o
@@ -181,14 +182,14 @@ Function Check-Description($ADUserData){
             Default{$Word|Check-Spelling;Break}
         }
         If($Desc-eq""){
-            $Desc=$Word -replace("`t|`n|`r`n"," ")
+            $Desc=$Word -replace("`t|`n|`r`r"," ")
         }Else{
-            $Desc=($Desc+" "+$Word -replace("`t|`n|`r`n"," "))
+            $Desc=($Desc+" "+$Word -replace("`t|`n|`r`r"," "))
         }
     }
     If($Desc-eq""){$Desc=$SvcAcct}
     Try{
-        Get-ADUser -Identity $ADUserData.SamAccountName|Set-ADUser -Description $Desc -WhatIf|Out-Null
+        Get-ADUser -Identity $ADUserData.SamAccountName|Set-ADUser -Description $Desc|Out-Null
         ("Changed the description on account: ["+$ADUserData.SamAccountName+"] to ["+$Desc+"]")|Out-File -FilePath $LogFN1 -Append
     }Catch{}
 }
@@ -253,9 +254,11 @@ Function RecordActivity(){[CmdletBinding()]
 [string]$Global:SelfServiceTitle=("UT System, SIS self-service password portal")
 [string]$Global:SelfServiceUrl=("https://selfserve.utshare.utsystem.edu")
 [string]$Global:DomainShortTitle="UTS - SIS"
-[string]$Global:SvcCntrTitle="Service Center Title"
-[string]$Global:SvcCntrPhone="(800) 123-4567"
+[string]$Global:SvcCntrTitle="UT System, SIS, Service Center"
+[string]$Global:SvcCntrPhone="(469) 284-7351"
+[string]$Global:SvcCntrEmail="GRP-SIS_ServiceCenter@utsystem.edu <GRP-SIS_ServiceCenter@utsystem.edu>"
 [string]$Global:SvcCntrTeam="your friendly Service Center team"
+[string]$Global:gAdminEmail="Bob Stobie <bstobie@utsystem.edu>"
 [boolean]$Global:gbSvcAcct=$false
 [int16]$Global:giLineWidth=120
 [int64]$toFast=5
@@ -317,21 +320,22 @@ Do{
             $VerifyOUStructure=Get-ADOrganizationalUnit -Identity $NewPath
             If($VerifyOUStructure-eq""){
                 $SplitPath=$NewPath -Split("OU=Services,")
-                New-ADOrganizationalUnit -Name "Services" -Path $SplitPath -WhatIf|Out-Null
+                New-ADOrganizationalUnit -Name "Services" -Path $SplitPath|Out-Null
                 ("Create new OU for [Services] to ["+$SplitPath+"]")|Out-File -FilePath $LogFN1 -Append
             }
-            Get-ADUser -Identity $Record.SamAccountName|Move-ADObject -TargetPath $NewPath -WhatIf|Out-Null
+            Get-ADUser -Identity $Record.SamAccountName|Move-ADObject -TargetPath $NewPath|Out-Null
             ("Changed the OU for ["+$Record.SamAccountName+"] to ["+$NewPath+"]")|Out-File -FilePath $LogFN1 -Append
         }
         If($gbSvcAcct-eq$true){
             If($Record.PasswordNeverExpires-eq$false){
-                Get-ADUser -Identity $Record.SamAccountName|Move-ADObject -PasswordNeverExpires $true -WhatIf|Out-Null
+                Get-ADUser -Identity $Record.SamAccountName|Move-ADObject -PasswordNeverExpires $true|Out-Null
                 ("Changed the [Password Never Expires] value to ["+$true+"] for ["+$Record.SamAccountName+"]")|Out-File -FilePath $LogFN1 -Append
             }
         }
         If($gbSvcAcct-eq$false){
             [string]$HomeDir=""
             [string]$HomeDrv="W:"
+            [string]$FullName=""
             [string]$TestID=($Record.Name).ToUpper()
             $TestID=$TestID[0..($TestID.length)][0]+$TestID[0..($TestID.length)][1]
             [string](Set-Variable -Name Greeting -Value "Good ")
@@ -344,7 +348,7 @@ Do{
             If(($Record.HomeDirectory-like"*replication*")-or($Record.HomeDirectory-eq$null)){
                 $HomeDir=("\\"+$Domain+"\cifs\Users\"+$TestID+"\"+$Record.Name)
                 Try{
-                    Get-ADUser -Identity $Record.SamAccountName|Set-ADUser -HomeDirectory $HomeDir -WhatIf
+                    Get-ADUser -Identity $Record.SamAccountName|Set-ADUser -HomeDirectory $HomeDir
                     ("Changed the [Home Directory] for ["+$Record.SamAccountName+"] to ["+$HomeDir+"]")|Out-File -FilePath $LogFN1 -Append
                     If(Test-Path -Path $HomeDir){
                         New-Item -Path $HomeDir -ItemType Directory|Out-Null
@@ -355,7 +359,7 @@ Do{
             }
             If(!$Record.HomeDrive-eq"W:"){
                 Try{
-                    Get-ADUser -Identity $Record.SamAccountName|Set-ADUser -HomeDrive $HomeDrv -WhatIf
+                    Get-ADUser -Identity $Record.SamAccountName|Set-ADUser -HomeDrive $HomeDrv
                     ("Changed the [Home Drive] for ["+$Record.SamAccountName+"] to ["+$HomeDrv+"]")|Out-File -FilePath $LogFN1 -Append
                 }Catch{
                 }
@@ -363,7 +367,7 @@ Do{
             [string]$SendToAddress=""
             If($Record.EmailAddress-eq$null){
                 If($Record.altSecurityIdentities-ne$null){
-                    Get-ADUser -Identity $Record.SamAccountName|Set-ADUser -EmailAddress $Record.altSecurityIdentities -WhatIf
+                    Get-ADUser -Identity $Record.SamAccountName|Set-ADUser -EmailAddress $Record.altSecurityIdentities
                     ("Added the [Email Address] for ["+$Record.SamAccountName+"] to ["+$Record.altSecurityIdentities+"]")|Out-File -FilePath $LogFN1 -Append
                     $SendToAddress=$Record.altSecurityIdentities
                 }Else{
@@ -373,7 +377,7 @@ Do{
                 $SendToAddress=$Record.EmailAddress
             }
             If($Record.PasswordNeverExpires-eq$true){
-                Get-ADUser -Identity $Record.SamAccountName|Move-ADObject -PasswordNeverExpires $false -WhatIf
+                Get-ADUser -Identity $Record.SamAccountName|Move-ADObject -PasswordNeverExpires $false
                 ("Changed the [Password Never Expires] value to ["+$false+"] for ["+$Record.SamAccountName+"]")|Out-File -FilePath $LogFN1 -Append
             }
             [uint16]$GetTime=(Get-Date).Hour
@@ -383,20 +387,22 @@ Do{
                 Default{($Greeting+="evening")|Out-Null;Break}
             }
             If($ByPassEmail-eq$false){
+                $FullName=($Record.GivenName+" "+$Record.Surname)
+                $SendToAddress=($FullName+" <"+$SendToAddress+">")
                 ("Scripting message to be sent to ["+$Record.SamAccountName+"] using email address: ["+$SendToAddress+"]")|Out-File -FilePath $LogFN2 -Append
                 ("-"*$giLineWidth)|Out-File -FilePath $LogFN2 -Append
                 $TextInfo=(Get-Culture).TextInfo
                 $UserName=$TextInfo.ToTitleCase(($Record.GivenName).ToLower())
-                [string]$MessageBody=($Greeting+" "+$UserName+",`r`n") # |Out-Host
+                [string]$MessageBody=($Greeting+" "+$UserName+",`r`r") # |Out-Host
                 [string]$strDate=(($Record.PasswordLastSet).Date).tostring("MM/dd/yyyy")
-                $MessageBody+=("This is a reminder that your "+$DomainFullTitle+" password is set to expire on "+$strDate+".  Your "+$DomainShortTitle+" credentials are used for accessing "+$DomainTitle+" on the "+$DomainShortTitle+" network.`r`n") # |Out-Host
-                $MessageBody+=("Passwords may be changed either while logged into a remote desktop workstation (RDP System) or from "+$SelfServiceUrl+".  If your using an RDP System, you can press the key combination [CTRL+ALT+END] to bring up the security menu on the remote workstation.  From there you can select to change your password, or you can use the self-service portal.  The "+$SelfServiceTitle+" site is your self-service website for changing your "+$DomainTitle+" password.`r`n") # |Out-Host
-                $MessageBody+=("A brief set of instructions is given below.  Please contact the "+$SvcCntrTitle+" "+$SvcCntrPhone+", if you have any questions.`r`n") # |Out-Host
+                $MessageBody+=("This is a reminder that your "+$DomainFullTitle+" password is set to expire on "+$strDate+".  Your "+$DomainShortTitle+" credentials are used for accessing "+$DomainTitle+" on the "+$DomainShortTitle+" network.  A brief set of instructions is given below.`r`r") # |Out-Host
+                $MessageBody+=("Passwords may be changed either while logged into a remote desktop workstation (RDP System) or from "+$SelfServiceUrl+".  If your using an RDP System, you can press the key combination [CTRL+ALT+END] to bring up the security menu on the remote workstation.  From there you can select to change your password, or you can use the self-service portal.  The "+$SelfServiceTitle+" site is your self-service website for changing your "+$DomainTitle+" password.`r`r") # |Out-Host
+                $MessageBody+=("Please contact the "+$SvcCntrTitle+" "+$SvcCntrPhone+", if you have any questions.`r`r") # |Out-Host
                 $TitleBlock=$TextInfo.ToTitleCase(($SvcCntrTeam).ToLower())
-                $MessageBody+=("Thank You,`r`n"+$TitleBlock+"`r`n") # |Out-Host
-                $MessageBody+=("This message has been digitally signed by the "+$SvcCntrTitle+".  To examine the signature, click the red ribbon icon in the upper right corner of this message.  If you would like to further verify the authenticity of this message, please contact "+$SvcCntrPhone+".`r`n") # |Out-Host
+                $MessageBody+=("Thank You,`r"+$TitleBlock+"`r`r") # |Out-Host
+                $MessageBody+=("This message has been digitally signed by the "+$SvcCntrTitle+".  To examine the signature, click the red ribbon icon in the upper right corner of this message.  If you would like to further verify the authenticity of this message, please contact "+$SvcCntrPhone+".`r`r") # |Out-Host
                 ($MessageBody)|Out-File -FilePath $LogFN2 -Append
-                
+                Send-MailMessage -From $SvcCntrEmail -To $SendToAddress  -Attachments .\GRP-SIS_ServiceCenter.pfx -Priority High -Subject ($SvcCntrTitle+" "+$ScriptTitle) -Body $MessageBody -SmtpServer $gSmtpServer
                 ("-"*$giLineWidth)|Out-File -FilePath $LogFN2 -Append
             }Else{
             }
