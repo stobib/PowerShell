@@ -168,8 +168,8 @@ ForEach($Site In $SiteCodes){
             }
             $AttachmentList=$null
             $Sender=($vSphere.Split(".")[0]+"@"+$Domain)
-            $EmailTo=("dschaubert@utsystem.edu")
-            $SendTo=("Schaubert, Derek <$($EmailTo)>")
+            $EmailTo=("GRP-SIS_ServiceCenter@utsystem.edu")
+            $SendTo=("GRP-SIS_ServiceCenter <$($EmailTo)>")
             $Message=("Start Time: "+$StartTime+"`n`n")
             $Message+=("The ["+$ExportCSV+"] file contains a list of ["+$VMCount+"] RDP Systems that were processed from vSphere inventory.")
             $Message+=("`n`nEnd Time: "+(Get-Date))
