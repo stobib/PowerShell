@@ -251,6 +251,10 @@
             {
               $str = $LocalizedData.IDS_PROB_NEED_CLASS_CONFIG -f ($LocalizedData.IDS_PROB_CODE -f ($this.PSBase.CimInstanceProperties['ConfigManagerErrorCode'].Value))
             }
+            CM_PROB_GUEST_ASSIGNMENT_FAILED
+            {
+              $str = $LocalizedData.IDS_PROB_GUEST_ASSIGNMENT_FAILED -f ($LocalizedData.IDS_PROB_CODE -f ($this.PSBase.CimInstanceProperties['ConfigManagerErrorCode'].Value))
+            }
             Default
             {
               $str = $LocalizedData.IDS_PROB_UNKNOWN_WITHCODE -f ($LocalizedData.IDS_PROB_CODE -f ($this.PSBase.CimInstanceProperties['ConfigManagerErrorCode'].Value))

@@ -12,39 +12,39 @@
           <Property PropertyName="Name">
             <Type PSType="System.String"/>
             <RegularQuery AllowGlobbing="true">
-              <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="false"/>     
+              <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="false"/>
             </RegularQuery>
-          </Property> 
+          </Property>
           <Property PropertyName="InterfaceAlias">
             <Type PSType="System.String"/>
             <RegularQuery AllowGlobbing="true">
-              <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="true"/>     
+              <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="true"/>
             </RegularQuery>
-          </Property> 
+          </Property>
           <Property PropertyName="InterfaceIndex">
             <Type PSType="System.Uint32"/>
             <RegularQuery AllowGlobbing="false">
-              <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="true"/>     
+              <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="true"/>
             </RegularQuery>
-          </Property> 
+          </Property>
           <Property PropertyName="NetworkCategory">
             <Type PSType="NetConnectionProfile.NetworkCategory"/>
             <RegularQuery AllowGlobbing="false">
-              <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="false"/>     
+              <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="false"/>
             </RegularQuery>
-          </Property> 
+          </Property>
           <Property PropertyName="IPv4Connectivity">
             <Type PSType="NetConnectionProfile.IPv4Connectivity"/>
             <RegularQuery AllowGlobbing="false">
-              <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="false"/>     
+              <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="false"/>
             </RegularQuery>
-          </Property> 
+          </Property>
           <Property PropertyName="IPv6Connectivity">
             <Type PSType="NetConnectionProfile.IPv6Connectivity"/>
             <RegularQuery AllowGlobbing="false">
-              <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="false"/>     
+              <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="false"/>
             </RegularQuery>
-          </Property> 
+          </Property>
         </QueryableProperties>
       </GetCmdletParameters>
       <GetCmdlet>
@@ -66,35 +66,35 @@
             <Property PropertyName="Name">
               <Type PSType="System.String"/>
               <RegularQuery AllowGlobbing="true">
-                <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="false"/>     
+                <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="false"/>
               </RegularQuery>
-            </Property> 
+            </Property>
             <Property PropertyName="InterfaceAlias">
               <Type PSType="System.String"/>
               <RegularQuery AllowGlobbing="true">
-                <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="true"/>     
+                <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="true"/>
               </RegularQuery>
-            </Property> 
+            </Property>
             <Property PropertyName="InterfaceIndex">
               <Type PSType="System.Uint32"/>
               <RegularQuery AllowGlobbing="false">
-                <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="true"/>     
+                <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="true"/>
               </RegularQuery>
-            </Property> 
+            </Property>
             <Property PropertyName="IPv4Connectivity">
               <Type PSType="NetConnectionProfile.IPv4Connectivity"/>
               <RegularQuery AllowGlobbing="false">
-                <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="false"/>     
+                <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="false"/>
               </RegularQuery>
-            </Property> 
+            </Property>
             <Property PropertyName="IPv6Connectivity">
               <Type PSType="NetConnectionProfile.IPv6Connectivity"/>
               <RegularQuery AllowGlobbing="false">
-                <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="false"/>     
+                <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="false"/>
               </RegularQuery>
             </Property>
           </QueryableProperties>
-        </GetCmdletParameters>           
+        </GetCmdletParameters>
       </Cmdlet>
 
     </InstanceCmdlets>
@@ -103,23 +103,23 @@
 
   <Enums>
     <Enum EnumName="NetConnectionProfile.NetworkCategory" UnderlyingType="System.UInt32">
-      <Value Name="Public" Value="0" />        
+      <Value Name="Public" Value="0" />
       <Value Name="Private" Value="1" />
       <Value Name="DomainAuthenticated" Value="2" />
     </Enum>
 
     <Enum EnumName="NetConnectionProfile.IPv4Connectivity" UnderlyingType="System.UInt32">
-      <Value Name="Disconnected" Value="0" />        
+      <Value Name="Disconnected" Value="0" />
       <Value Name="NoTraffic" Value="1" />
-      <Value Name="Subnet" Value="2" />   
+      <Value Name="Subnet" Value="2" />
       <Value Name="LocalNetwork" Value="3" />
       <Value Name="Internet" Value="4" />
     </Enum>
 
     <Enum EnumName="NetConnectionProfile.IPv6Connectivity" UnderlyingType="System.UInt32">
-      <Value Name="Disconnected" Value="0" />        
+      <Value Name="Disconnected" Value="0" />
       <Value Name="NoTraffic" Value="1" />
-      <Value Name="Subnet" Value="2" />   
+      <Value Name="Subnet" Value="2" />
       <Value Name="LocalNetwork" Value="3" />
       <Value Name="Internet" Value="4" />
     </Enum>

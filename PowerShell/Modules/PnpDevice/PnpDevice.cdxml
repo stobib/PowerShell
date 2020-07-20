@@ -209,6 +209,7 @@
       <Value Name="CM_PROB_DEVICE_RESET" Value="54" />
       <Value Name="CM_PROB_CONSOLE_LOCKED" Value="55" />
       <Value Name="CM_PROB_NEED_CLASS_CONFIG" Value="56" />
+      <Value Name="CM_PROB_GUEST_ASSIGNMENT_FAILED" Value="57" />
     </Enum>
     <Enum EnumName="PnpDeviceProperty.Type" UnderlyingType="uint32">
       <Value Name="Empty" Value="0" />

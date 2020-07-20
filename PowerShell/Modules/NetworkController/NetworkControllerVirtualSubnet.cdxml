@@ -83,7 +83,7 @@
     <CmdletAdapterPrivateData>
       <Data Name="EntityTypeName">Microsoft.Windows.NetworkController.VirtualSubnet</Data>
       <Data Name="EntitySetName">Default.Microsoft_Windows_Networking_NetworkController_Framework_NbContracts_VirtualSubnet</Data>
-      <Data Name="CustomUriSuffix">/networking/v3/virtualNetworks/{VirtualNetworkId}/subnets/[ResourceId]</Data>
+      <Data Name="CustomUriSuffix">/networking/v1/virtualNetworks/{VirtualNetworkId}/subnets/[ResourceId]</Data>
       <Data Name="CreateRequestMethod">Put</Data>
       <Data Name="UpdateRequestMethod">Put</Data>
     </CmdletAdapterPrivateData>

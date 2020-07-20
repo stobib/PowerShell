@@ -52,7 +52,9 @@ class StorageHistory
     [UInt16]$Version
     [String]$FriendlyName
     [String]$SerialNumber
-    [String]$DeviceId
+    [String]$AdapterSerialNumber
+    [String]$FirmwareRevision
+    [String]$DeviceGuid
     [String]$DeviceNumber
     [String]$BusType
     [String]$MediaType
@@ -79,6 +81,10 @@ class StorageHistory
     [UInt64]$QueueIoPausedCount
     [UInt64]$QueueIoUntaggedCommandOutstandingCount
     [UInt64]$QueueIoPausedForUntaggedCount
+    [UInt64]$TotalErrors
+    [UInt64]$TotalReadWriteErrors
+    [UInt64]$TotalImpendingDeviceFailureErrors
+    [UInt64]$TotalDeviceFailureErrors
     [UInt16]$BucketCount
     [UInt64[]]$BucketIoLatency
     [UInt64[]]$BucketSuccessIoCount
@@ -96,7 +102,9 @@ class StorageHistoryAggregate
     [UInt16]$Version
     [String]$FriendlyName
     [String]$SerialNumber
-    [String]$DeviceId
+    [String]$AdapterSerialNumber
+    [String]$FirmwareRevision
+    [String]$DeviceGuid
     [String]$DeviceNumber
     [String]$BusType
     [String]$MediaType
@@ -125,6 +133,10 @@ class StorageHistoryAggregate
     [Double]$QueueIoPausedCount
     [Double]$QueueIoUntaggedCommandOutstandingCount
     [Double]$QueueIoPausedForUntaggedCount
+    [Double]$TotalErrors
+    [Double]$TotalReadWriteErrors
+    [Double]$TotalImpendingDeviceFailureErrors
+    [Double]$TotalDeviceFailureErrors
     [UInt16]$BucketCount
     [UInt64[]]$BucketIoLatency
     [Double[]]$BucketSuccessIoCount
@@ -133,6 +145,150 @@ class StorageHistoryAggregate
     [Double[]]$BucketTotalIoTime
     [UInt32[]]$BucketIoPercent
     [UInt32[]]$BucketHighestLatencyCount
+}
+
+class StorageError
+{
+    [UInt16]$Version
+    [String]$FriendlyName
+    [String]$SerialNumber
+    [String]$AdapterSerialNumber
+    [String]$FirmwareRevision
+    [String]$DeviceGuid
+    [String]$DeviceNumber
+    [String]$BusType
+    [String]$MediaType
+    [DateTime]$EventTime
+    [UInt32]$ServiceDuration
+    [UInt32]$QueueWaitDuration
+    [Byte]$Command
+    [Byte]$SrbStatus
+    [Byte]$ScsiStatus
+    [Byte]$SenseKey
+    [Byte]$SenseCode
+    [Byte]$SenseCodeQualifier
+    [UInt32]$IoSize
+    [UInt32]$QueueDepth
+    [UInt64]$LBA
+}
+
+
+$PopulateStorageError = {
+
+    Param
+    (
+        [Ref]
+        $Object,
+
+        [System.Diagnostics.Eventing.Reader.EventRecord]
+        $EventRecord,
+
+        [System.String]
+        $FriendlyName,
+
+        [System.String]
+        $SerialNumber,
+
+        [System.String]
+        $AdapterSerialNumber,
+
+        [System.String]
+        $FirmwareRevision,
+
+        [System.String]
+        $DeviceGuid,
+
+        [System.String]
+        $Number,
+
+        [System.String]
+        $BusType,
+
+        [System.String]
+        $MediaType
+    )
+
+    $eventXml = [XML]$EventRecord.ToXml()
+    $tempObject = [PsCustomObject]@{}
+
+    for ($index = 0; $index -lt $eventXml.Event.EventData.Data.Count; $index++)
+    {
+        $tempObject | Add-Member -MemberType NoteProperty `
+                                 -Name $eventXml.Event.EventData.Data[$index].Name `
+                                 -Value $eventXml.Event.EventData.Data[$index].'#Text'
+    }
+
+    $Object.Value.PSObject.TypeNames.Insert( 0, "Microsoft.Windows.StorageManagement.StorageError" )
+    $Object.Value.PSObject.TypeNames.Insert( 1, "Microsoft.Windows.StorageManagement.StorageError_v1" )
+
+    $Object.Value.Version = [UInt16]$tempObject.Version
+
+    if ([String]::IsNullOrEmpty($FriendlyName) -eq $false)
+    {
+        $Object.Value.FriendlyName = $FriendlyName
+    }
+    else
+    {
+        $Object.Value.FriendlyName = $tempObject.ProductId
+    }
+
+    if ([String]::IsNullOrEmpty($SerialNumber) -eq $false)
+    {
+        $Object.Value.SerialNumber = $SerialNumber
+    }
+    else
+    {
+        $Object.Value.SerialNumber = $tempObject.SerialNumber
+    }
+
+    if ([String]::IsNullOrEmpty($AdapterSerialNumber) -eq $false)
+    {
+        $Object.Value.AdapterSerialNumber = $AdapterSerialNumber
+    }
+    else
+    {
+        $Object.Value.AdapterSerialNumber = $tempObject.AdapterSerialNumber
+    }
+
+    if ([String]::IsNullOrEmpty($FirmwareRevision) -eq $false)
+    {
+        $Object.Value.FirmwareRevision = $FirmwareRevision
+    }
+
+    $Object.Value.DeviceGuid          = $DeviceGuid
+    $Object.Value.DeviceNumber        = $Number
+
+    if ([String]::IsNullOrEmpty($BusType) -eq $false)
+    {
+        $Object.Value.BusType         = $BusType
+    }
+    else
+    {
+        switch ($tempObject.BusType)
+        {
+            "8"     { $Object.Value.BusType = "RAID" }
+            "10"    { $Object.Value.BusType = "SAS" }
+            "11"    { $Object.Value.BusType = "SATA" }
+            "14"    { $Object.Value.BusType = "Virtual" }
+            "17"    { $Object.Value.BusType = "NVMe" }
+            "19"    { $Object.Value.BusType = "UFS" }
+            default { $Object.Value.BusType = "Unknown" }
+        }
+    }
+
+    $Object.Value.MediaType          = $MediaType
+    $Object.Value.EventTime          = $event.TimeCreated
+    $Object.Value.ServiceDuration    = $tempObject.RequestDuration_ms
+    $Object.Value.QueueWaitDuration  = $tempObject.WaitDuration_ms
+    $Object.Value.Command            = $tempObject.Command
+    $Object.Value.SrbStatus          = $tempObject.SrbStatus
+    $Object.Value.ScsiStatus         = $tempObject.ScsiStatus
+    $Object.Value.SenseKey           = $tempObject.SenseKey
+    $Object.Value.SenseCode          = $tempObject.AddSense
+    $Object.Value.SenseCodeQualifier = $tempObject.AddSenseQ
+    $Object.Value.IoSize             = $tempObject.IoSize
+    $Object.Value.QueueDepth         = $tempObject.QueueDepth
+    $Object.Value.LBA                = $tempObject.LBA
 }
 
 
@@ -153,7 +309,13 @@ $PopulateStorageHistory = {
         $SerialNumber,
 
         [System.String]
-        $Id,
+        $AdapterSerialNumber,
+
+        [System.String]
+        $FirmwareRevision,
+
+        [System.String]
+        $DeviceGuid,
 
         [System.String]
         $Number,
@@ -197,7 +359,25 @@ $PopulateStorageHistory = {
         $Object.Value.SerialNumber = $tempObject.SerialNumber
     }
 
-    $Object.Value.DeviceId            = $Id
+    if ([String]::IsNullOrEmpty($AdapterSerialNumber) -eq $false)
+    {
+        $Object.Value.AdapterSerialNumber = $AdapterSerialNumber
+    }
+    else
+    {
+        $Object.Value.AdapterSerialNumber = $tempObject.AdapterSerialNumber
+    }
+
+    if ([String]::IsNullOrEmpty($FirmwareRevision) -eq $false)
+    {
+        $Object.Value.FirmwareRevision = $FirmwareRevision
+    }
+    else
+    {
+        $Object.Value.FirmwareRevision = $tempObject.FirmwareRevision
+    }
+
+    $Object.Value.DeviceGuid          = $DeviceGuid
     $Object.Value.DeviceNumber        = $Number
 
     if ([String]::IsNullOrEmpty($BusType) -eq $false)
@@ -257,12 +437,13 @@ $PopulateStorageHistory = {
             }
         }
 
-        for ($index = 0; $index -lt $Object.Value.BucketCount; $index++)
+        if ($Object.Value.TotalIoCount -gt 0)
         {
-            $Object.Value.BucketIoPercent[$index] = ($Object.Value.BucketTotalIoCount[$index] * 100) / $Object.Value.TotalIoCount
+            for ($index = 0; $index -lt $Object.Value.BucketCount; $index++)
+            {
+                $Object.Value.BucketIoPercent[$index] = ($Object.Value.BucketTotalIoCount[$index] * 100) / $Object.Value.TotalIoCount
+            }
         }
-
-        $Object.Value.AvgIoLatency = $Object.Value.TotalIoLatency / $Object.Value.TotalIoCount
     }
     elseif (($Object.Value.Version -ge 9) -or  ($Object.Value.Version -le 11))
     {
@@ -325,20 +506,27 @@ $PopulateStorageHistory = {
             $Object.Value.SuccessIoCount         += $Object.Value.BucketSuccessIoCount[$index]
             $Object.Value.FailedIoCount          += $Object.Value.BucketFailedIoCount[$index]
             $Object.Value.TotalIoLatency         += $Object.Value.BucketTotalIoTime[$index]
-            $Object.Value.BucketIoPercent[$index] = ($Object.Value.BucketTotalIoCount[$index] * 100) / $Object.Value.TotalIoCount
+
+            if ($Object.Value.TotalIoCount -gt 0)
+            {
+                $Object.Value.BucketIoPercent[$index] = ($Object.Value.BucketTotalIoCount[$index] * 100) / $Object.Value.TotalIoCount
+            }
 
             if ($Object.Value.BucketTotalIoCount[$index] -gt 0)
             {
                 $Object.Value.HighestLatencyBucket = $index
             }
         }
+    }
 
+    if ($Object.Value.TotalIoCount -gt 0)
+    {
         $Object.Value.AvgIoLatency = $Object.Value.TotalIoLatency / $Object.Value.TotalIoCount
+    }
 
-        if (($Object.Value.Version -eq 11) -and ($Object.Value.TotalQueueIoCount -gt 0))
-        {
-            $Object.Value.AvgQueueIoWaitTime = $Object.Value.TotalQueueIoWaitTime / $Object.Value.TotalQueueIoCount
-        }
+    if (($Object.Value.Version -eq 11) -and ($Object.Value.TotalQueueIoCount -gt 0))
+    {
+        $Object.Value.AvgQueueIoWaitTime = $Object.Value.TotalQueueIoWaitTime / $Object.Value.TotalQueueIoCount
     }
 }
 
@@ -353,6 +541,16 @@ $AugmentStorageHistory = {
         [System.Diagnostics.Eventing.Reader.EventRecord]
         $EventRecord
     )
+
+    $eventXml = [XML]$EventRecord.ToXml()
+    $tempObject = [PsCustomObject]@{}
+
+    for ($index = 0; $index -lt $eventXml.Event.EventData.Data.Count; $index++)
+    {
+        $tempObject | Add-Member -MemberType NoteProperty `
+                                 -Name $eventXml.Event.EventData.Data[$index].Name `
+                                 -Value $eventXml.Event.EventData.Data[$index].'#Text'
+    }
 
     if ($EventRecord.Id -eq 502)
     {
@@ -371,6 +569,13 @@ $AugmentStorageHistory = {
         }
 
         $Object.Value.ResponsiveTime.Add($EventRecord.TimeCreated)
+    }
+    elseif ($EventRecord.Id -eq 504)
+    {
+        $Object.Value.TotalErrors                       = $tempObject.TotalErrors
+        $Object.Value.TotalReadWriteErrors              = $tempObject.TotalReadWriteErrors
+        $Object.Value.TotalImpendingDeviceFailureErrors = $tempObject.TotalImpendingDeviceFailureErrors
+        $Object.Value.TotalDeviceFailureErrors          = $tempObject.TotalDeviceFailureErrors
     }
 }
 
@@ -402,7 +607,9 @@ $PopulateStorageHistoryAggregate = {
         $AggregateObject.Value.Version                  = $Object.Value.Version
         $AggregateObject.Value.FriendlyName             = $Object.Value.FriendlyName
         $AggregateObject.Value.SerialNumber             = $Object.Value.SerialNumber
-        $AggregateObject.Value.DeviceId                 = $Object.Value.DeviceId
+        $AggregateObject.Value.AdapterSerialNumber      = $Object.Value.AdapterSerialNumber
+        $AggregateObject.Value.FirmwareRevision         = $Object.Value.FirmwareRevision
+        $AggregateObject.Value.DeviceGuid               = $Object.Value.DeviceGuid
         $AggregateObject.Value.DeviceNumber             = $Object.Value.DeviceNumber
         $AggregateObject.Value.BusType                  = $Object.Value.BusType
         $AggregateObject.Value.MediaType                = $Object.Value.MediaType
@@ -434,6 +641,10 @@ $PopulateStorageHistoryAggregate = {
         $AggregateObject.Value.QueueIoPausedCount                     = $Object.Value.QueueIoPausedCount
         $AggregateObject.Value.QueueIoUntaggedCommandOutstandingCount = $Object.Value.QueueIoUntaggedCommandOutstandingCount
         $AggregateObject.Value.QueueIoPausedForUntaggedCount          = $Object.Value.QueueIoPausedForUntaggedCount
+        $AggregateObject.Value.TotalErrors                            = $Object.Value.TotalErrors
+        $AggregateObject.Value.TotalReadWriteErrors                   = $Object.Value.TotalReadWriteErrors
+        $AggregateObject.Value.TotalImpendingDeviceFailureErrors      = $Object.Value.TotalImpendingDeviceFailureErrors
+        $AggregateObject.Value.TotalDeviceFailureErrors               = $Object.Value.TotalDeviceFailureErrors
         $AggregateObject.Value.BucketCount                            = $Object.Value.BucketCount
 
         $AggregateObject.Value.BucketIoLatency               = New-Object -TypeName System.UInt64[] $AggregateObject.Value.BucketCount
@@ -525,6 +736,10 @@ $PopulateStorageHistoryAggregate = {
         $AggregateObject.Value.QueueIoPausedCount                     += $Object.Value.QueueIoPausedCount
         $AggregateObject.Value.QueueIoUntaggedCommandOutstandingCount += $Object.Value.QueueIoUntaggedCommandOutstandingCount
         $AggregateObject.Value.QueueIoPausedForUntaggedCount          += $Object.Value.QueueIoPausedForUntaggedCount
+        $AggregateObject.Value.TotalErrors                            += $Object.Value.TotalErrors
+        $AggregateObject.Value.TotalReadWriteErrors                   += $Object.Value.TotalReadWriteErrors
+        $AggregateObject.Value.TotalImpendingDeviceFailureErrors      += $Object.Value.TotalImpendingDeviceFailureErrors
+        $AggregateObject.Value.TotalDeviceFailureErrors               += $Object.Value.TotalDeviceFailureErrors
 
         for ($index = 0; $index -lt $AggregateObject.Value.BucketCount; $index++)
         {
@@ -556,11 +771,12 @@ function Get-StorageHistory
 
         [System.String]
         [Parameter(
-            ParameterSetName  = 'ByDeviceId',
+            ParameterSetName  = 'ByDeviceGuid',
             ValueFromPipeline = $false,
             Mandatory         = $true)]
         [ValidateNotNullOrEmpty()]
-        $DeviceId,
+        [Alias("DeviceId")]
+        $DeviceGuid,
 
         [System.String]
         [Parameter(
@@ -585,7 +801,7 @@ function Get-StorageHistory
             ParameterSetName = 'ByPhysicalDisk',
             Mandatory        = $false)]
         [Parameter(
-            ParameterSetName = 'ByDeviceId',
+            ParameterSetName = 'ByDeviceGuid',
             Mandatory        = $false)]
         [Parameter(
             ParameterSetName = 'ByDeviceNumber',
@@ -598,7 +814,7 @@ function Get-StorageHistory
             ParameterSetName = 'ByPhysicalDisk',
             Mandatory        = $false)]
         [Parameter(
-            ParameterSetName = 'ByDeviceId',
+            ParameterSetName = 'ByDeviceGuid',
             Mandatory        = $false)]
         [Parameter(
             ParameterSetName = 'ByDeviceNumber',
@@ -610,12 +826,24 @@ function Get-StorageHistory
             ParameterSetName = 'ByPhysicalDisk',
             Mandatory        = $false)]
         [Parameter(
-            ParameterSetName = 'ByDeviceId',
+            ParameterSetName = 'ByDeviceGuid',
             Mandatory        = $false)]
         [Parameter(
             ParameterSetName = 'ByDeviceNumber',
             Mandatory        = $false)]
-        $Disaggregate
+        $Disaggregate,
+
+        [Switch]
+        [Parameter(
+            ParameterSetName = 'ByPhysicalDisk',
+            Mandatory        = $false)]
+        [Parameter(
+            ParameterSetName = 'ByDeviceGuid',
+            Mandatory        = $false)]
+        [Parameter(
+            ParameterSetName = 'ByDeviceNumber',
+            Mandatory        = $false)]
+        $Errors
     )
 
     Begin
@@ -668,55 +896,82 @@ function Get-StorageHistory
 
                 if (-not $LogFile)
                 {
-                    $storageNode = $PhysicalDisk | Get-StorageNode -PhysicallyConnected
+                    $subsystem = $PhysicalDisk | get-storagesubsystem
 
-                    if (-not $storageNode)
+                    if ($subsystem.Model -eq "Clustered Windows Storage" -and
+                        $subsystem.StorageConnectionType -eq "Local Storage")
                     {
-                        $errorObject = CreateErrorRecord -ErrorId "ObjectNotFound" `
-                                                         -ErrorMessage "A storage node was not found for the physical disk" `
-                                                         -ErrorCategory ([System.Management.Automation.ErrorCategory]::ObjectNotFound) `
-                                                         -Exception $null `
-                                                         -TargetObject $null
+                        # If the subsystem is clustered local (storage spaces direct) use
+                        # SSU mapping since it works for 'Lost Communication' drives
 
-                        $psCmdlet.WriteError($errorObject)
-                        return
+                        $storageScaleUnit = $PhysicalDisk | Get-StorageScaleUnit
+
+                        if (-not $storageScaleUnit)
+                        {
+                            $errorObject = CreateErrorRecord -ErrorId "ObjectNotFound" `
+                                                             -ErrorMessage "A storage scale unit was not found for the physical disk" `
+                                                             -ErrorCategory ([System.Management.Automation.ErrorCategory]::ObjectNotFound) `
+                                                             -Exception $null `
+                                                             -TargetObject $null
+
+                            $psCmdlet.WriteError($errorObject)
+                            return
+                        }
+
+                        $computerName = $storageScaleUnit.FriendlyName
+                    }
+                    else
+                    {
+                        $storageNode = $PhysicalDisk | Get-StorageNode -PhysicallyConnected
+
+                        if (-not $storageNode)
+                        {
+                            $errorObject = CreateErrorRecord -ErrorId "ObjectNotFound" `
+                                                             -ErrorMessage "A storage node was not found for the physical disk" `
+                                                             -ErrorCategory ([System.Management.Automation.ErrorCategory]::ObjectNotFound) `
+                                                             -Exception $null `
+                                                             -TargetObject $null
+
+                            $psCmdlet.WriteError($errorObject)
+                            return
+                        }
+
+                        $computerName = $storageNode.Name
                     }
                 }
 
                 # Extract the device guid from the object id
-                # It is of the format ' <>:PD:<DeviceId>" '
-                $id = $PhysicalDisk.ObjectId.Split(":")[2].TrimEnd('"')
+                # It is of the format ' <>:PD:<DeviceGuid>" '
+                $guid = $PhysicalDisk.ObjectId.Split(":")[2].TrimEnd('"')
 
-                $friendlyName = $PhysicalDisk.FriendlyName
+                $friendlyName        = $PhysicalDisk.FriendlyName
+                $serialNumber        = $PhysicalDisk.SerialNumber
+                $adapterSerialNumber = $PhysicalDisk.AdapterSerialNumber
+                $firmwareRevision    = $PhysicalDisk.FirmwareVersion
 
-                if ($PhysicalDisk.BusType -eq "NVMe")
+                if ($PhysicalDisk.DeviceId -ge 0)
                 {
-                    $serialNumber = $PhysicalDisk.AdapterSerialNumber
-                }
-                else
-                {
-                    $serialNumber = $PhysicalDisk.SerialNumber
+                    $deviceNumber = $PhysicalDisk.DeviceId
                 }
 
-                $deviceNumber = $PhysicalDisk.DeviceId
                 $busType      = $PhysicalDisk.BusType
                 $mediaType    = $PhysicalDisk.MediaType
             }
 
             { @(                 `
-                "ByDeviceId"     `
+                "ByDeviceGuid"   `
                 ) -contains $_   `
             }
             {
                 try
                 {
-                    [System.Guid]::Parse($DeviceId) | Out-Null
-                    $id = $DeviceId
+                    [System.Guid]::Parse($DeviceGuid) | Out-Null
+                    $guid = $DeviceGuid
                 }
                 catch
                 {
                     $errorObject = CreateErrorRecord -ErrorId "InvalidArgument" `
-                                                     -ErrorMessage "DeviceId should be a GUID of the format 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' or '{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}'" `
+                                                     -ErrorMessage "DeviceGuid (or DeviceId) should be a GUID of the format 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' or '{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}'" `
                                                      -ErrorCategory ([System.Management.Automation.ErrorCategory]::InvalidArgument) `
                                                      -Exception $null `
                                                      -TargetObject $null
@@ -731,15 +986,25 @@ function Get-StorageHistory
         # Build the query to look for the specific events in storport log
         #
 
-        $eventFilter = "EventID=502 or EventID=503 or EventID=505"
-
-        if ($NumberOfHours)
+        if ($PSBoundParameters.ContainsKey("Errors"))
         {
-            $query = "*[System[($eventFilter) and TimeCreated[timediff(@SystemTime) <= $($NumberOfHours*3600*1000)]]] and *[EventData[Data[@Name='ClassDeviceGuid'] and (Data='$id')]]"
+            $eventFilter = "EventID=549"
         }
         else
         {
-            $query = "*[System[($eventFilter)]] and *[EventData[Data[@Name='ClassDeviceGuid'] and (Data='$id')]]"
+            $eventFilter = "EventID=502 or `
+                            EventID=503 or `
+                            EventID=504 or `
+                            EventID=505"
+        }
+
+        if ($NumberOfHours)
+        {
+            $query = "*[System[($eventFilter) and TimeCreated[timediff(@SystemTime) <= $($NumberOfHours*3600*1000)]]] and *[EventData[Data[@Name='ClassDeviceGuid'] and (Data='$guid')]]"
+        }
+        else
+        {
+            $query = "*[System[($eventFilter)]] and *[EventData[Data[@Name='ClassDeviceGuid'] and (Data='$guid')]]"
         }
 
         #
@@ -750,13 +1015,13 @@ function Get-StorageHistory
 
         try
         {
-            if ($storageNode)
+            if ($computerName)
             {
                 if ($Credential)
                 {
                     $events = Get-WinEvent -LogName Microsoft-Windows-Storage-Storport/Operational `
                                            -FilterXPath $query `
-                                           -ComputerName $storageNode.Name `
+                                           -ComputerName $computerName `
                                            -Credential $Credential `
                                            -ErrorAction Stop `
                                            -Oldest
@@ -765,7 +1030,7 @@ function Get-StorageHistory
                 {
                     $events = Get-WinEvent -LogName Microsoft-Windows-Storage-Storport/Operational `
                                            -FilterXPath $query `
-                                           -ComputerName $storageNode.Name `
+                                           -ComputerName $computerName `
                                            -ErrorAction Stop `
                                            -Oldest
                 }
@@ -806,84 +1071,121 @@ function Get-StorageHistory
 
         Write-Progress -Activity "Get-StorageHistory" -PercentComplete 0 -CurrentOperation "Constructing storage history objects" -Status "1/2"
 
-        $firstEvent = $true
-
-        for ($index = 0; $index -lt $events.count;)
+        if ($PSBoundParameters.ContainsKey("Errors"))
         {
-            $event = $events[$index]
-
-            #
-            # A StorageHistory object is created for every 505 event.
-            # Following non-505 events are collaped into it till
-            # the next 505 event is encountered. All non-505 events
-            # before the first 505 event are ignored
-            #
-            if ($event.Id -ne 505)
-            {
-                $index++
-                continue
-            }
-
-            [StorageHistory]$data = [StorageHistory]::new()
-
-            &$PopulateStorageHistory -Object ([ref]$data) `
-                                     -EventRecord $event `
-                                     -FriendlyName $friendlyName `
-                                     -SerialNumber $serialNumber `
-                                     -Id $id `
-                                     -Number $deviceNumber `
-                                     -BusType $busType `
-                                     -MediaType $mediaType | Out-Null
-
-            #
-            # Check if there are any non-505 events following it
-            #
-
-            for ($index++; $index -lt $events.count; $index++)
+            for ($index = 0; $index -lt $events.count;)
             {
                 $event = $events[$index]
+                $index++
 
-                if ($event.Id -eq 505)
-                {
-                    break
-                }
+                [StorageError]$data = [StorageError]::new()
 
-                &$AugmentStorageHistory -Object ([ref]$data) `
-                                        -EventRecord $event | Out-Null
-            }
+                &$PopulateStorageError -Object ([ref]$data) `
+                                       -EventRecord $event `
+                                       -FriendlyName $friendlyName `
+                                       -SerialNumber $serialNumber `
+                                       -AdapterSerialNumber $adapterSerialNumber `
+                                       -FirmwareRevision $firmwareRevision `
+                                       -DeviceGuid $guid `
+                                       -Number $deviceNumber `
+                                       -BusType $busType `
+                                       -MediaType $mediaType | Out-Null
 
-            if ($PSBoundParameters.ContainsKey("Disaggregate"))
-            {
                 $psCmdlet.WriteObject($data)
             }
-            else
+        }
+        else
+        {
+            $firstEvent = $true
+
+            for ($index = 0; $index -lt $events.count;)
             {
-                if ($firstEvent)
+                $event = $events[$index]
+                $index++
+
+                #
+                # A StorageHistory object is created for every 505 event.
+                # Following non-505 events are collaped into it till
+                # the next 505 event is encountered. All non-505 events
+                # before the first 505 event are ignored
+                #
+                if ($event.Id -ne 505)
                 {
-                    [StorageHistoryAggregate]$aggregateData = [StorageHistoryAggregate]::new()
-                    $firstEvent = $false
+                    continue
                 }
 
-                &$PopulateStorageHistoryAggregate -AggregateObject ([ref]$aggregateData) `
-                                                  -Object ([ref]$data) | Out-Null
+                [StorageHistory]$data = [StorageHistory]::new()
+
+                &$PopulateStorageHistory -Object ([ref]$data) `
+                                         -EventRecord $event `
+                                         -FriendlyName $friendlyName `
+                                         -SerialNumber $serialNumber `
+                                         -AdapterSerialNumber $adapterSerialNumber `
+                                         -FirmwareRevision $firmwareRevision `
+                                         -DeviceGuid $guid `
+                                         -Number $deviceNumber `
+                                         -BusType $busType `
+                                         -MediaType $mediaType | Out-Null
+
+                #
+                # If there are no IOs, skip
+                #
+
+                if ($data.TotalIoCount -eq 0)
+                {
+                    continue
+                }
+
+                #
+                # Check if there are any non-505 events following it
+                #
+
+                for (; $index -lt $events.count; $index++)
+                {
+                    $event = $events[$index]
+
+                    if ($event.Id -eq 505)
+                    {
+                        break
+                    }
+
+                    &$AugmentStorageHistory -Object ([ref]$data) `
+                                            -EventRecord $event | Out-Null
+                }
+
+                if ($PSBoundParameters.ContainsKey("Disaggregate"))
+                {
+                    $psCmdlet.WriteObject($data)
+                }
+                else
+                {
+                    if ($firstEvent)
+                    {
+                        [StorageHistoryAggregate]$aggregateData = [StorageHistoryAggregate]::new()
+                        $firstEvent = $false
+                    }
+
+                    &$PopulateStorageHistoryAggregate -AggregateObject ([ref]$aggregateData) `
+                                                    -Object ([ref]$data) | Out-Null
+                }
             }
-        }
 
-        if ($aggregateData)
-        {
-            $aggregateData.AvgIoLatency     = $aggregateData.TotalIoLatency / $aggregateData.TotalIoCount
-
-            if ($aggregateData.TotalQueueIoCount -gt 0)
+            if ($aggregateData)
             {
-                $aggregateData.AvgQueueIoWaitTime = $aggregateData.TotalQueueIoWaitTime / $aggregateData.TotalQueueIoCount
-            }
+                $aggregateData.AvgIoLatency     = $aggregateData.TotalIoLatency / $aggregateData.TotalIoCount
 
-            for ($index = 0; $index -lt $aggregateData.BucketCount; $index++)
-            {
-                $aggregateData.BucketIoPercent[$index] = ($aggregateData.BucketTotalIoCount[$index] * 100) / $aggregateData.TotalIoCount
-            }
+                if ($aggregateData.TotalQueueIoCount -gt 0)
+                {
+                    $aggregateData.AvgQueueIoWaitTime = $aggregateData.TotalQueueIoWaitTime / $aggregateData.TotalQueueIoCount
+                }
 
-            $psCmdlet.WriteObject($aggregateData)
+                for ($index = 0; $index -lt $aggregateData.BucketCount; $index++)
+                {
+                    $aggregateData.BucketIoPercent[$index] = ($aggregateData.BucketTotalIoCount[$index] * 100) / $aggregateData.TotalIoCount
+                }
+
+                $psCmdlet.WriteObject($aggregateData)
+            }
         }
 
         Write-Progress -Activity "Get-StorageHistory" -Completed -Status "2/2"
@@ -6016,6 +6318,8 @@ function New-Volume
 
             $errorObject = $null
             $output      = $null
+            $retry       = 0
+            $time        = 1
             $virtualdisk = $null
             $volume      = $null
 
@@ -6072,7 +6376,22 @@ function New-Volume
                     $progressPreference = "Continue"
 
                     $virtualdisk = $output.CreatedVirtualDisk
-                    $disk = $output.CreatedVirtualDisk | get-disk -CimSession $session
+
+                    do
+                    {
+                        $disk = $output.CreatedVirtualDisk | get-disk -CimSession $session
+
+                        if ($disk -or ($retry -ge 3))
+                        {
+                            break
+                        }
+
+                        Start-Sleep -Seconds $time
+
+                        $retry++
+                        $time = $time * 2
+                    }
+                    while ($disk -eq $null)
 
                     if ($disk -eq $null)
                     {
@@ -7039,6 +7358,9 @@ function Enable-StorageMaintenanceMode
         [Microsoft.Management.Infrastructure.CimSession]
         $CimSession,
 
+        [System.Nullable[Bool]]
+        $ValidateMaintenanceMode,
+
         [Switch]
         $AsJob
     )
@@ -7111,6 +7433,11 @@ function Enable-StorageMaintenanceMode
         if ($includeValidationFlags)
         {
           $arguments.Add("ValidationFlags", $validationFlags)
+        }
+
+        if ($ValidateMaintenanceMode -ne $null)
+        {
+            $arguments.Add("ValidateMaintenanceMode", $ValidateMaintenanceMode)
         }
 
         $storageSubSystem = $InputObject | Get-StorageSubSystem -CimSession $CimSession

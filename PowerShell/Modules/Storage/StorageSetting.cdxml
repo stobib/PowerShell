@@ -75,7 +75,7 @@
         </Enum>
         <Enum EnumName="StorageSetting.ScrubPolicy" UnderlyingType="System.UInt32">
           <Value Name="Off" Value="0" />
-          <Value Name="IntegrityStreams" Value="1" />
+          <Value Name="IntegrityStreams" Value="3" />
           <Value Name="All" Value="2" />
         </Enum>
     </Enums>

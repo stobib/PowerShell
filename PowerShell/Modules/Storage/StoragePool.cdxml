@@ -296,6 +296,16 @@
                 <Type PSType="System.UInt64" />
                 <CmdletParameterMetadata />
             </Parameter>
+            <!-- IsManualAttach -->
+            <Parameter ParameterName="IsManualAttach">
+                <Type PSType="System.Boolean" />
+                <CmdletParameterMetadata />
+            </Parameter>
+            <!-- IsManualAttach -->
+            <Parameter ParameterName="AddToCluster">
+                <Type PSType="System.Boolean" />
+                <CmdletParameterMetadata />
+            </Parameter>
             <!-- CMDLET OUTPUT -->
             <Parameter ParameterName="CreatedVirtualDisk">
               <Type PSType="Microsoft.Management.Infrastructure.CimInstance" />

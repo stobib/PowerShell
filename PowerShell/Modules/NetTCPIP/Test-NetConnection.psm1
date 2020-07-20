@@ -310,9 +310,9 @@ function Test-NetConnection
         {
             param ($TestNetConnectionResult)
 
-            $TestNetConnectionResult.DNSOnlyRecords = @( Resolve-DnsName $ComputerName -DnsOnly -NoHostsFile -Type A_AAAA -ErrorAction SilentlyContinue | where-object {($_.QueryType -eq "A") -or ($_.QueryType -eq "AAAA") } )
+            $TestNetConnectionResult.DNSOnlyRecords = @( Resolve-DnsName $ComputerName -DnsOnly -NoHostsFile -Type A_AAAA -ErrorAction SilentlyContinue | where-object {($_.QueryType -eq "A") -or ($_.QueryType -eq "AAAA") -or ($_.QueryType -eq "PTR")} )
             $TestNetConnectionResult.LLMNRNetbiosRecords = @( Resolve-DnsName $ComputerName -LlmnrNetbiosOnly   -NoHostsFile -ErrorAction SilentlyContinue | where-object {($_.QueryType -eq "A") -or ($_.QueryType -eq "AAAA") } )
-            $TestNetConnectionResult.BasicNameResolution = @(Resolve-DnsName $ComputerName -ErrorAction SilentlyContinue | where-object {($_.QueryType -eq "A") -or ($_.QueryType -eq "AAAA")} )
+            $TestNetConnectionResult.BasicNameResolution = @(Resolve-DnsName $ComputerName -ErrorAction SilentlyContinue | where-object {($_.QueryType -eq "A") -or ($_.QueryType -eq "AAAA") -or ($_.QueryType -eq "PTR")} )
 
             $TestNetConnectionResult.AllNameResolutionResults = $Return.BasicNameResolution  + $Return.DNSOnlyRecords + $Return.LLMNRNetbiosRecords | Sort-Object -Unique -Property Address
             return $TestNetConnectionResult

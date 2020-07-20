@@ -78,12 +78,20 @@ Copyright (c) Microsoft Corporation.  All rights reserved.
               <ScriptBlock>$_.UdpSegmentationOffloadHardwareCapabilities.IPv4MinSegmentCountSupported</ScriptBlock>
             </ListItem>
             <ListItem>
+              <label>IPv4SubMssFinalSegmentSupported</label>
+              <ScriptBlock>$_.UdpSegmentationOffloadHardwareCapabilities.IPv4SubMssFinalSegmentSupported</ScriptBlock>
+            </ListItem>
+            <ListItem>
               <label>IPv6MaxOffLoadSizeSupported</label>
               <ScriptBlock>$_.UdpSegmentationOffloadHardwareCapabilities.IPv6MaxOffLoadSizeSupported</ScriptBlock>
             </ListItem>
             <ListItem>
               <label>IPv6MinSegmentCountSupported</label>
               <ScriptBlock>$_.UdpSegmentationOffloadHardwareCapabilities.IPv6MinSegmentCountSupported</ScriptBlock>
+            </ListItem>
+            <ListItem>
+              <label>IPv6SubMssFinalSegmentSupported</label>
+              <ScriptBlock>$_.UdpSegmentationOffloadHardwareCapabilities.IPv6SubMssFinalSegmentSupported</ScriptBlock>
             </ListItem>
             <ListItem>
               <label>IPv6IpExtensionHeadersSupported</label>

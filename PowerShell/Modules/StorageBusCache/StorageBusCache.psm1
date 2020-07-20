@@ -162,6 +162,89 @@ namespace Microsoft.SFS.StorageBusCache
             public UInt32 PartitionNumber;
         }
 
+        public enum PARTITION_STYLE : int
+        {
+            PARTITION_STYLE_MBR = 0,
+            PARTITION_STYLE_GPT = 1,
+            PARTITION_STYLE_RAW = 2
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct DRIVE_LAYOUT_INFORMATION_MBR
+        {
+            public UInt32 DiskSignature;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct DRIVE_LAYOUT_INFORMATION_GPT
+        {
+            public Guid DiskId;
+            public UInt64 StartingUsableOffset;
+            public UInt64 UsableLength;
+            public UInt32 MaxPartitionCount;
+        }
+
+        [StructLayout(LayoutKind.Explicit)]
+        public struct PARTITION_INFORMATION_MBR
+        {
+            [FieldOffset(0)]
+            public Byte PartitionType;
+            [FieldOffset(1)]
+            public Boolean BootIndicator;
+            [FieldOffset(2)]
+            public Boolean RecognizedPartition;
+            [FieldOffset(4)]
+            public UInt32 HiddenSectors;
+        }
+
+        [StructLayout(LayoutKind.Explicit, CharSet=CharSet.Unicode)]
+        public struct PARTITION_INFORMATION_GPT
+        {
+            [FieldOffset(0)]
+            public Guid PartitionType;
+            [FieldOffset(16)]
+            public Guid PartitionId;
+            [FieldOffset(32)]
+            public UInt64 Attributes;
+            [FieldOffset(40)]
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 36)]
+            public string PartitionName;
+        }
+
+        [StructLayout(LayoutKind.Explicit)]
+        public struct PARTITION_INFORMATION_EX
+        {
+            [FieldOffset(0)]
+            public PARTITION_STYLE PartitionStyle;
+            [FieldOffset(8)]
+            public UInt64 StartingOffset;
+            [FieldOffset(16)]
+            public UInt64 PartitionLength;
+            [FieldOffset(24)]
+            public UInt32 PartitionNumber;
+            [FieldOffset(28)]
+            public Boolean RewritePartition;
+            [FieldOffset(32)]
+            public PARTITION_INFORMATION_MBR Mbr;
+            [FieldOffset(32)]
+            public PARTITION_INFORMATION_GPT Gpt;
+        }
+
+        [StructLayout(LayoutKind.Explicit)]
+        public struct DRIVE_LAYOUT_INFORMATION_EX
+        {
+            [FieldOffset(0)]
+            public PARTITION_STYLE PartitionStyle;
+            [FieldOffset(4)]
+            public UInt32 PartitionCount;
+            [FieldOffset(8)]
+            public DRIVE_LAYOUT_INFORMATION_MBR Mbr;
+            [FieldOffset(8)]
+            public DRIVE_LAYOUT_INFORMATION_GPT Gpt;
+            [FieldOffset(48)]
+            public PARTITION_INFORMATION_EX[] PartitionEntry;
+        }
+
         #endregion
 
         #region PInvoke Definitions
@@ -223,23 +306,34 @@ namespace Microsoft.SFS.StorageBusCache
         public static Guid GUID_DEVINTERFACE_DISK = new Guid(0x53f56307, 0xb6bf, 0x11d0, 0x94, 0xf2, 0x00, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b);
         public static Guid GUID_DEVINTERFACE_STORAGEPORT = new Guid(0x2ACCFE60, 0xC130, 0x11D2, 0xb0, 0x82, 0x00, 0xa0, 0xc9, 0x1e, 0xfb, 0x8b); //{2ACCFE60-C130-11D2-B082-00A0C91EFB8B}
 
-        //ioctl code
-        const uint IOCTL_PARTMGR_BASE = 0x00000070;
-        const uint IOCTL_CBFLT_BASE   = 0x791;
-        const uint IOCTL_STORAGE_BASE = 0x0000002d;
+        // SBL cache partition type GUIDs
+        public static Guid PARTITION_SBL_CACHE_SSD_GUID = new Guid(0xeeff8352, 0xdd2a, 0x44db, 0xae, 0x83, 0xbe, 0xe1, 0xcf, 0x74, 0x81, 0xdc);
+        public static Guid PARTITION_SBL_CACHE_SSD_RESERVED_GUID = new Guid(0xdcc0c7c1, 0x55ad, 0x4f17, 0x9d, 0x43, 0x4b, 0xc7, 0x76, 0xe0, 0x11, 0x7e);
+        public static Guid PARTITION_SBL_CACHE_HDD_GUID = new Guid(0x03aaa829, 0xebfc, 0x4e7e, 0xaa, 0xc9, 0xc4, 0xd7, 0x6c, 0x63, 0xb2, 0x4b);
 
-        private static uint IOCTL_DISK_REAUCTION_DISK = CTL_CODE(IOCTL_PARTMGR_BASE, 7, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS);
-        private static uint IOCTL_CBFLT_IS_SUPPORTED_DISK = CTL_CODE(IOCTL_CBFLT_BASE, 0x09, METHOD_BUFFERED, FILE_READ_ACCESS);
-        private static uint IOCTL_CBFLT_SET_PROFILE = CTL_CODE(IOCTL_CBFLT_BASE, 0x1b, METHOD_BUFFERED, FILE_WRITE_ACCESS);
+        //ioctl code
+        public const uint IOCTL_PARTMGR_BASE = 0x00000070;
+        public const uint IOCTL_CBFLT_BASE   = 0x791;
+        public const uint IOCTL_STORAGE_BASE = 0x0000002d;
+        public const uint FILE_DEVICE_DISK   = 0x00000007;
+        public const uint IOCTL_DISK_BASE    = FILE_DEVICE_DISK;
+
+        private static uint IOCTL_DISK_REAUCTION_DISK          = CTL_CODE(IOCTL_PARTMGR_BASE, 7, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS);
+        private static uint IOCTL_CBFLT_IS_SUPPORTED_DISK      = CTL_CODE(IOCTL_CBFLT_BASE, 0x09, METHOD_BUFFERED, FILE_READ_ACCESS);
+        private static uint IOCTL_CBFLT_SET_PROFILE            = CTL_CODE(IOCTL_CBFLT_BASE, 0x1b, METHOD_BUFFERED, FILE_WRITE_ACCESS);
         private static uint IOCTL_STORAGE_GET_DEVICE_NUMBER_EX = CTL_CODE(IOCTL_STORAGE_BASE, 0x0421, METHOD_BUFFERED, FILE_ANY_ACCESS);
-        private static uint IOCTL_STORAGE_GET_DEVICE_NUMBER = CTL_CODE(IOCTL_STORAGE_BASE, 0x0420, METHOD_BUFFERED, FILE_ANY_ACCESS);
+        private static uint IOCTL_STORAGE_GET_DEVICE_NUMBER    = CTL_CODE(IOCTL_STORAGE_BASE, 0x0420, METHOD_BUFFERED, FILE_ANY_ACCESS);
+        private static uint IOCTL_DISK_GET_DRIVE_LAYOUT_EX     = CTL_CODE(IOCTL_DISK_BASE, 0x0014, METHOD_BUFFERED, FILE_ANY_ACCESS);
+        private static uint IOCTL_DISK_SET_DRIVE_LAYOUT_EX     = CTL_CODE(IOCTL_DISK_BASE, 0x0015, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS);
 
         // clusbflt
         const string CLUSBFLT_PR_MANAGER = "\\\\?\\GLOBALROOT\\Device\\CLUSBFLT\\PrMgr$";
         const string CLUSBFLT_BLOCK_TARGETFILE = "\\\\?\\GLOBALROOT\\Device\\CLUSBFLT\\BlockTarget$";
 
-        public static UInt32 Standalone_Profile_Default = 0x01F0;
-        public static UInt32 Standalone_Profile_Claim_Flash = 0x00F0;
+        public static UInt32 Standalone_Profile_Default     = 0x000101F0;
+        public static UInt32 Standalone_Profile_Claim_Flash = 0x000000F0;
+
+        public static UInt32 Standalone_Cache_Binding_Attributes = 0x00000007;
 
         #endregion
 
@@ -323,8 +417,8 @@ namespace Microsoft.SFS.StorageBusCache
             bool boolResult = false;
             IntPtr hDevice = IntPtr.Zero;
             IntPtr outputPtr = IntPtr.Zero;
-            
-            StorageBusDisk disk = new StorageBusDisk();            
+
+            StorageBusDisk disk = new StorageBusDisk();
             disk.Guid = Guid.Empty.ToString();
             disk.Number = 0;
 
@@ -543,6 +637,250 @@ namespace Microsoft.SFS.StorageBusCache
             return boolResult;
         }
 
+        private static IntPtr ComputeFieldOffset(IntPtr buffer, Type parentStructure, string fieldName)
+        {
+            long offset = (long)Marshal.OffsetOf(parentStructure, fieldName);
+            return (IntPtr)((long)buffer + offset);
+        }
+
+        private static IntPtr ComputeFieldOffsetAtIndex(IntPtr buffer, Type parentStructure, string fieldName, UInt32 index)
+        {
+            Type fieldType = parentStructure.GetField(fieldName).FieldType.GetElementType();
+            long elementSize = Marshal.SizeOf(fieldType);
+            long offset = (long)Marshal.OffsetOf(parentStructure, fieldName) + elementSize * index;
+            return (IntPtr)((long)buffer + offset);
+        }
+
+        private static PARTITION_INFORMATION_EX Unmarshal_PARTITION_INFORMATION_EX(IntPtr buffer, UInt32 size)
+        {
+            if (size < (UInt32)Marshal.SizeOf(typeof(PARTITION_INFORMATION_EX)))
+                throw new ArgumentException("Insufficient buffer size to unmarshal PARTITION_INFORMATION_EX.", "buffer");
+            PARTITION_INFORMATION_EX info = (PARTITION_INFORMATION_EX)Marshal.PtrToStructure(
+                buffer, typeof(PARTITION_INFORMATION_EX));
+            if (info.PartitionStyle == PARTITION_STYLE.PARTITION_STYLE_MBR)
+                info.Mbr = (PARTITION_INFORMATION_MBR)Marshal.PtrToStructure(
+                    ComputeFieldOffset(buffer, typeof(PARTITION_INFORMATION_EX), "Mbr"),
+                    typeof(PARTITION_INFORMATION_MBR));
+            if (info.PartitionStyle == PARTITION_STYLE.PARTITION_STYLE_GPT)
+                info.Gpt = (PARTITION_INFORMATION_GPT)Marshal.PtrToStructure(
+                    ComputeFieldOffset(buffer, typeof(PARTITION_INFORMATION_EX), "Gpt"),
+                    typeof(PARTITION_INFORMATION_GPT));
+            return info;
+        }
+
+        private static DRIVE_LAYOUT_INFORMATION_EX Unmarshal_DRIVE_LAYOUT_INFORMATION_EX(IntPtr buffer, UInt32 size)
+        {
+            DRIVE_LAYOUT_INFORMATION_EX info = new DRIVE_LAYOUT_INFORMATION_EX();
+            info.PartitionStyle = (PARTITION_STYLE)Marshal.ReadInt32(buffer);
+            info.PartitionCount = (UInt32)Marshal.ReadInt32(ComputeFieldOffset(buffer,
+                typeof(DRIVE_LAYOUT_INFORMATION_EX), "PartitionCount"));
+            if (size < ((UInt32)Marshal.OffsetOf(typeof(DRIVE_LAYOUT_INFORMATION_EX), "PartitionEntry") +
+                info.PartitionCount * (UInt32)Marshal.SizeOf(typeof(PARTITION_INFORMATION_EX))))
+                throw new ArgumentException("Insufficient buffer size to unmarshal DRIVE_LAYOUT_INFORMATION_EX.", "buffer");
+            if (info.PartitionStyle == PARTITION_STYLE.PARTITION_STYLE_MBR)
+                info.Mbr = (DRIVE_LAYOUT_INFORMATION_MBR)Marshal.PtrToStructure(
+                    ComputeFieldOffset(buffer, typeof(DRIVE_LAYOUT_INFORMATION_EX), "Mbr"),
+                    typeof(DRIVE_LAYOUT_INFORMATION_MBR));
+            if (info.PartitionStyle == PARTITION_STYLE.PARTITION_STYLE_GPT)
+                info.Gpt = (DRIVE_LAYOUT_INFORMATION_GPT)Marshal.PtrToStructure(
+                    ComputeFieldOffset(buffer, typeof(DRIVE_LAYOUT_INFORMATION_EX), "Gpt"),
+                    typeof(DRIVE_LAYOUT_INFORMATION_GPT));
+            info.PartitionEntry = new PARTITION_INFORMATION_EX[info.PartitionCount];
+            size -= (UInt32)Marshal.OffsetOf(typeof(DRIVE_LAYOUT_INFORMATION_EX), "PartitionEntry");
+            for (UInt32 partNumber = 0; partNumber < info.PartitionCount; partNumber++)
+            {
+                info.PartitionEntry[partNumber] = Unmarshal_PARTITION_INFORMATION_EX(ComputeFieldOffsetAtIndex(buffer,
+                    typeof(DRIVE_LAYOUT_INFORMATION_EX), "PartitionEntry", partNumber), size);
+                size -= (UInt32)Marshal.SizeOf(typeof(PARTITION_INFORMATION_EX));
+            }
+            return info;
+        }
+
+        private static void Marshal_DRIVE_LAYOUT_INFORMATION_EX(DRIVE_LAYOUT_INFORMATION_EX layout, IntPtr buffer, UInt32 size)
+        {
+            if (size < ((UInt32)Marshal.OffsetOf(typeof(DRIVE_LAYOUT_INFORMATION_EX), "PartitionEntry") +
+                layout.PartitionCount * (UInt32)Marshal.SizeOf(typeof(PARTITION_INFORMATION_EX))))
+                throw new ArgumentException("Insufficient buffer size to marshal layout.", "buffer");
+            Marshal.WriteInt32(buffer, (int)layout.PartitionStyle);
+            Marshal.WriteInt32(ComputeFieldOffset(buffer, typeof(DRIVE_LAYOUT_INFORMATION_EX), "PartitionCount"),
+                (int)layout.PartitionCount);
+            if (layout.PartitionStyle == PARTITION_STYLE.PARTITION_STYLE_GPT)
+                Marshal.StructureToPtr(layout.Gpt, ComputeFieldOffset(buffer, typeof(PARTITION_INFORMATION_EX),
+                    "Gpt"), false);
+            else if (layout.PartitionStyle == PARTITION_STYLE.PARTITION_STYLE_MBR)
+                Marshal.StructureToPtr(layout.Mbr, ComputeFieldOffset(buffer, typeof(PARTITION_INFORMATION_EX),
+                    "Mbr"), false);
+            size -= (UInt32)Marshal.OffsetOf(typeof(DRIVE_LAYOUT_INFORMATION_EX), "PartitionEntry");
+            for (UInt32 partNumber = 0; partNumber < layout.PartitionCount; partNumber++)
+            {
+                PARTITION_INFORMATION_EX newPart = layout.PartitionEntry[partNumber];
+                newPart.RewritePartition = true;
+                Marshal_PARTITION_INFORMATION_EX(newPart, ComputeFieldOffsetAtIndex(buffer,
+                    typeof(DRIVE_LAYOUT_INFORMATION_EX), "PartitionEntry", partNumber), size);
+                size -= (UInt32)Marshal.SizeOf(typeof(PARTITION_INFORMATION_EX));
+            }
+        }
+
+        private static void Marshal_PARTITION_INFORMATION_EX(PARTITION_INFORMATION_EX info, IntPtr buffer, UInt32 size)
+        {
+            if (size < (UInt32)Marshal.SizeOf(typeof(PARTITION_INFORMATION_EX)))
+                throw new ArgumentException("Insufficient buffer to marshal info.", "buffer");
+            Marshal.StructureToPtr(info, buffer, false);
+            if (info.PartitionStyle == PARTITION_STYLE.PARTITION_STYLE_GPT)
+                Marshal.StructureToPtr(info.Gpt, ComputeFieldOffset(buffer,
+                    typeof(PARTITION_INFORMATION_EX), "Gpt"), false);
+            if (info.PartitionStyle == PARTITION_STYLE.PARTITION_STYLE_MBR)
+                Marshal.StructureToPtr(info.Mbr, ComputeFieldOffset(buffer,
+                    typeof(PARTITION_INFORMATION_EX), "Mbr"), false);
+        }
+
+        static public DRIVE_LAYOUT_INFORMATION_EX GetDriveLayout(string devicePath)
+        {
+            bool boolResult = false;
+            IntPtr hDevice = IntPtr.Zero;
+            uint status = 0;
+
+            DRIVE_LAYOUT_INFORMATION_EX layout = new DRIVE_LAYOUT_INFORMATION_EX();
+            uint bufferSize = 0;
+            IntPtr buffer = IntPtr.Zero;
+
+            try
+            {
+                hDevice = OpenDevice(devicePath);
+                bool done = false;
+                uint bytesReturned = 0;
+                uint partitionCount = 0;
+
+                while (!done)
+                {
+                    bufferSize = (UInt32)Marshal.OffsetOf(typeof(DRIVE_LAYOUT_INFORMATION_EX), "PartitionEntry") +
+                                 partitionCount * (uint)Marshal.SizeOf(typeof(PARTITION_INFORMATION_EX));
+                    buffer = Marshal.AllocHGlobal((int) bufferSize);
+
+                    boolResult = DeviceIoControl(hDevice,
+                                                IOCTL_DISK_GET_DRIVE_LAYOUT_EX,
+                                                IntPtr.Zero,
+                                                0,
+                                                buffer,
+                                                (UInt32)bufferSize,
+                                                ref bytesReturned,
+                                                IntPtr.Zero);
+                    if (!boolResult)
+                    {
+                        status = (uint)Marshal.GetLastWin32Error();
+                        Console.WriteLine("IOCTL_DISK_GET_DRIVE_LAYOUT_EX failed, status = " + status + " bytes returned = " + bytesReturned);
+                        if (status == ERROR_MORE_DATA || status == ERROR_INSUFFICIENT_BUFFER)
+                        {
+                            partitionCount = (UInt32)Marshal.ReadInt32(ComputeFieldOffset(buffer, typeof(DRIVE_LAYOUT_INFORMATION_EX), "PartitionCount"));
+                        }
+                        else
+                        {
+                            throw new Win32Exception("Device '" + devicePath + "' failed IOCTL_DISK_GET_DRIVE_LAYOUT_EX, status " + status.ToString());
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("IOCTL_DISK_GET_DRIVE_LAYOUT_EX passed");
+                        layout = Unmarshal_DRIVE_LAYOUT_INFORMATION_EX(buffer, bufferSize);
+                        done = true;
+                    }
+
+                    Marshal.FreeHGlobal(buffer);
+                    buffer = IntPtr.Zero;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (buffer != IntPtr.Zero)
+                    Marshal.FreeHGlobal(buffer);
+
+                if (hDevice != IntPtr.Zero)
+                    CloseDevice(hDevice);
+            }
+
+            return layout;
+        }
+
+        static public void SetDriveLayout(string devicePath, DRIVE_LAYOUT_INFORMATION_EX layout)
+        {
+            bool boolResult = false;
+            IntPtr hDevice = IntPtr.Zero;
+            IntPtr buffer = IntPtr.Zero;
+
+            try
+            {
+                hDevice = OpenDevice(devicePath);
+                uint bytesReturned = 0;
+
+                uint bufferSize = (uint)Marshal.OffsetOf(typeof(DRIVE_LAYOUT_INFORMATION_EX), "PartitionEntry") +
+                                  (uint)Marshal.SizeOf(typeof(PARTITION_INFORMATION_EX)) * (uint)layout.PartitionEntry.Length;
+                buffer = Marshal.AllocHGlobal((int) bufferSize);
+
+                Marshal_DRIVE_LAYOUT_INFORMATION_EX(layout, buffer, bufferSize);
+
+                boolResult = DeviceIoControl(hDevice,
+                                            IOCTL_DISK_SET_DRIVE_LAYOUT_EX,
+                                            buffer,
+                                            (UInt32)bufferSize,
+                                            IntPtr.Zero,
+                                            0,
+                                            ref bytesReturned,
+                                            IntPtr.Zero);
+                if (!boolResult)
+                {
+                    throw new Win32Exception("Device '" + devicePath + "' failed IOCTL_DISK_SET_DRIVE_LAYOUT_EX, status " + Marshal.GetLastWin32Error().ToString());
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (buffer != IntPtr.Zero)
+                    Marshal.FreeHGlobal(buffer);
+
+                if (hDevice != IntPtr.Zero)
+                    CloseDevice(hDevice);
+            }
+        }
+
+        static public void CleanupSblCachePartitions(string devicePath)
+        {
+            // First, get drive layout
+            DRIVE_LAYOUT_INFORMATION_EX layout = GetDriveLayout(devicePath);
+
+            // Update layout by skipping SBL cache partitions
+            uint partitionCount = layout.PartitionCount;
+            uint partitionIndex = 0;
+
+            for (uint idx = 0; idx < layout.PartitionCount; ++idx)
+            {
+                if ((layout.PartitionEntry[idx].Gpt.PartitionType == PARTITION_SBL_CACHE_SSD_GUID) ||
+                    (layout.PartitionEntry[idx].Gpt.PartitionType == PARTITION_SBL_CACHE_HDD_GUID) ||
+                    (layout.PartitionEntry[idx].Gpt.PartitionType == PARTITION_SBL_CACHE_SSD_RESERVED_GUID))
+                {
+                    --partitionCount;
+                }
+                else if (partitionIndex != idx)
+                {
+                    layout.PartitionEntry[partitionIndex] = layout.PartitionEntry[idx];
+                    ++partitionIndex;
+                }
+            }
+
+            // If layout has changed, set the new layout
+            if (partitionCount < layout.PartitionCount)
+            {
+                layout.PartitionCount = partitionCount;
+                SetDriveLayout(devicePath, layout);
+            }
+        }
+
         #endregion
     }
 }
@@ -595,8 +933,8 @@ function IsS2DEnabled
     $clusRegKeyPath = "HKLM:\Cluster"
     if (Test-Path $clusRegKeyPath)
     {
-        $S2DEnabled = Get-ItemPropertyValue $clusRegKeyPath -Name S2DEnabled -ErrorAction SilentlyContinue
-        if ($S2DEnabled -eq 1)
+        $clusRegKey = Get-ItemProperty $clusRegKeyPath -Name S2DEnabled -ErrorAction SilentlyContinue
+        if ($clusRegKey.S2DEnabled -eq 1)
         {
             return $true
         }
@@ -609,17 +947,15 @@ function GetAllDisks()
     Param ()
 
     $deviceTable = @{}
-    $pnpDrives = Get-PnpDevice -Class DiskDrive
+    # Get disk drives visible to PnP, skipping storage spaces virtual disks, if any
+    $pnpDrives = Get-PnpDevice -Class DiskDrive | ? FriendlyName -ne "Microsoft Storage Space Device"
     $systemDisks = Get-Disk | ? { $_.IsSystem -eq $true -or $_.IsBoot -eq $true }
     $systemDisks = $systemDisks | Get-PhysicalDisk
-
-    # Enumerate (mounted) spaces if there are any
-    $spacesDisks = Get-Disk | ? BusType -eq "Spaces"
 
     foreach ($drive in $pnpDrives)
     {
         # Obtain device guid
-        $devicePathPrefix = "\\?\" + $($drive.DeviceID -replace "\\",'#') 
+        $devicePathPrefix = "\\?\" + $($drive.DeviceID -replace "\\",'#')
 
         $devicePath = $devicePathPrefix + "#{" + [Microsoft.SFS.StorageBusCache.DeviceMgmt]::GUID_DEVINTERFACE_DISK + "}"
         $disk = [Microsoft.SFS.StorageBusCache.DeviceMgmt]::GetStorageBusDisk($devicePath)
@@ -641,13 +977,6 @@ function GetAllDisks()
             continue
         }
 
-        # Check if this disk is a space
-        if ($spacesDisks -and ($spacesDisks | ? SerialNumber -match $disk.Guid))
-        {
-            # Skipping
-            continue
-        }
-
         # Add to device table
         if ($disk.Guid -notin $deviceTable.Keys)
         {
@@ -662,7 +991,7 @@ function GetAllDisks()
 function Set-StorageBusProfile
 {
     [CmdletBinding(ConfirmImpact="High")]
-    Param 
+    Param
     (
         [System.Boolean]
         [Parameter(
@@ -684,7 +1013,7 @@ function Set-StorageBusProfile
     # Disable before setting profile
     Disable-StorageBusCache -Force $true
 
-    # Wait for reauction after disable 
+    # Wait for reauction after disable
     Start-Sleep -Seconds 10
 
     # Set Profile
@@ -693,7 +1022,7 @@ function Set-StorageBusProfile
         $systemFlags = 0;
         if ($ClaimFlash)
         {
-            $systemFlags = [Microsoft.SFS.StorageBusCache.DeviceMgmt]::Standalone_Profile_Claim_Flash            
+            $systemFlags = [Microsoft.SFS.StorageBusCache.DeviceMgmt]::Standalone_Profile_Claim_Flash
         }
         else
         {
@@ -774,7 +1103,6 @@ function Enable-StorageBusCache
 
     # Enumerate all eligible disks
     $devices = Get-StorageBusDisk
-    $physicalDisks = Get-PhysicalDisk
 
     # Claim disks
     try
@@ -788,13 +1116,6 @@ function Enable-StorageBusCache
             {
                 continue
             }
-
-            # Ensure disk is not RAW before claiming
-            # $disk = $physicalDisks | ? ObjectId -match $device.Guid | Get-Disk
-            # if ($disk -and $disk.PartitionStyle -eq "RAW")
-            # {
-            #     Initialize-Disk -Number $disk.Number
-            # }
 
             # Reauction the disk
             [Microsoft.SFS.StorageBusCache.DeviceMgmt]::ReauctionDevice($devicePath) | Out-Null
@@ -881,7 +1202,7 @@ function Disable-StorageBusCache
         return
     }
 
-    # Now release all devices. 
+    # Now release all devices.
     try
     {
         foreach ($device in $devices)
@@ -947,20 +1268,50 @@ function Get-StorageBusDisk
     # Get all disks on this system
     $devices = GetAllDisks
     $physicalDisks = Get-PhysicalDisk
-    
+
     # If device is claimed, update its properties based on path properties
     foreach ($deviceGuid in $devices.Keys)
     {
-        $path = $paths | ? DeviceGuid -Match $deviceGuid | Select-Object -First 1
-        if ($path)
+        $phyDisk = $physicalDisks | ? ObjectId -Match $deviceGuid
+        if ($phyDisk)
         {
-            $devices[$deviceGuid].BusType = $path.BusType
-            $devices[$deviceGuid].IsClaimed = $true
+            # Set properties based on physical disk information
+            $devices[$deviceGuid].BusType = $phyDisk.BusType
+            $devices[$deviceGuid].Number = $phyDisk.DeviceId
+        }
 
-            $phyDisk = $physicalDisks | ? ObjectId -match $deviceGuid
+        $path = $paths | ? DeviceGuid -Match $deviceGuid | Select-Object -First 1
+        if (-not $path)
+        {
+            # Device is not claimed, but check if there is a claimed cache partition
             if ($phyDisk)
             {
-                $devices[$deviceGuid].Number = $phyDisk.DeviceId
+                # If the partition is claimed, the device guid on the path
+                # will be the cache partition guid
+                $cachePartTypeGuid = [Microsoft.SFS.StorageBusCache.DeviceMgmt]::PARTITION_SBL_CACHE_SSD_GUID.Guid
+                $partGuid = (Get-Disk -Number $phyDisk.DeviceId | Get-Partition | ? GptType -match $cachePartTypeGuid).Guid
+                if ($partGuid)
+                {
+                    $path = $paths | ? DeviceGuid -Match $partGuid | Select-Object -First 1
+                }
+            }
+        }
+
+        if ($path)
+        {
+            if (-not $phyDisk)
+            {
+                # Set properties based on SBL path information since
+                # device is claimed but not exposed above SBL
+                $devices[$deviceGuid].BusType = $path.BusType
+                $devices[$deviceGuid].Number = $path.DeviceNumber
+            }
+
+            # The following properties are SBL specific
+            if (($path.Attributes -band [Microsoft.SFS.StorageBusCache.ClusBflt.PathInfoAttribute]::Partition) -eq 0)
+            {
+                # Path does not correspond to cache partition from an unclaimed device
+                $devices[$deviceGuid].IsClaimed = $true
             }
 
             if (($path.Attributes -band [Microsoft.SFS.StorageBusCache.ClusBflt.PathInfoAttribute]::Solid) -ne 0)
@@ -1040,11 +1391,9 @@ function Get-StorageBusBinding
         "ByPhysicalDisk" { $devices = Get-StorageBusDisk -Number $PhysicalDisk.DeviceId; break; }
     }
 
-    # Filter out unclaimed devices
-    $devices = $devices | ? IsClaimed -eq $true
-
     $pm = gwmi -namespace "root\wmi" ClusBfltPathMethods
     $paths = $(gwmi -namespace "root\wmi" ClusBfltDeviceInformation).PathInfo
+    $cs = gwmi -namespace "root\wmi" ClusBfltCacheStoresInformation
 
     [Microsoft.SFS.StorageBusCache.StorageBusBinding[]]$boundDevices = @()
 
@@ -1055,14 +1404,19 @@ function Get-StorageBusBinding
             if ($device.IsCache)
             {
                 $pathid = $pm.GetPathIdByDeviceGuid($device.Guid, [Microsoft.SFS.StorageBusCache.ClusBflt.PathType]::Read_Write, 0, 0, 0)
+
+                if ($pathid.PathId -eq 0)
+                {
+                    # This could be unclaimed cache device with claimed cache partition
+                    $pathid.PathId = ($paths | ? DeviceNumber -eq $device.Number).Id
+                }
+
                 if ($pathid.PathId -ne 0)
                 {
-                    $cs = $pm.QueryCacheStores($pathid.PathId)
-                    $cache = $cs.CacheStores.CacheStoreInfo | Select-Object -First 1
+                    $cache = $cs.CacheStoreInfo | ? PathId -eq $pathid.PathId
 
                     if ($cache)
                     {
-                        $cache = $cs.CacheStores.CacheStoreInfo[0]
                         $bindingRecords = $pm.QuerySsdBindingRecords($pathid.PathId, $cache.Id)
 
                         foreach ($bindingRecord in $bindingRecords.BindingRecords.BindingRecords)
@@ -1088,7 +1442,14 @@ function Get-StorageBusBinding
                 if ($egPath.PathId -ne 0)
                 {
                     $hddBinding = $pm.QueryHddBinding($egPath.PathId)
-                    $boundDevice = Get-StorageBusDisk -Guid $hddBinding.BindingInfo.CacheStoreDeviceId
+                    $cache = $cs.CacheStoreInfo | ? Id -eq $hddBinding.BindingInfo.CacheStoreId
+                    $cachePath = $paths | ? Id -eq $cache.PathId
+                    $boundDevice = Get-StorageBusDisk -Guid $cachePath.DeviceGuid
+                    if (-not $boundDevice)
+                    {
+                        # This could be unclaimed cache device with claimed cache partition
+                        $boundDevice = Get-StorageBusDisk -Number $cachePath.DeviceNumber
+                    }
 
                     [Microsoft.SFS.StorageBusCache.StorageBusBinding]$storageBusBinding = [Microsoft.SFS.StorageBusCache.StorageBusBinding]::new()
                     $storageBusBinding.Guid = $boundDevice.Guid
@@ -1344,9 +1705,6 @@ function Resume-StorageBusDisk
         "ByPhysicalDisk" { $devices = Get-StorageBusDisk -Number $PhysicalDisk.DeviceId; break; }
     }
 
-    # Filter out unclaimed devices
-    $devices = $devices | ? IsClaimed -eq $true
-
     $pm = gwmi -namespace "root\wmi" ClusBfltPathMethods
     $paths = $(gwmi -namespace "root\wmi" ClusBfltDeviceInformation).PathInfo
 
@@ -1373,7 +1731,7 @@ function Resume-StorageBusDisk
 
                     # Obtain the cache store
                     $cs = gwmi -namespace "root\wmi" ClusBfltCacheStoresInformation
-                    $cache = $cs.CacheStoreInfo | ? DeviceGuid -Match $binding.CacheStoreDeviceId
+                    $cache = $cs.CacheStoreInfo | ? Id -Match $binding.CacheStoreId
 
                     # Obtain binding record that matches binding Id
                     $bindingRecord = $pm.QuerySsdBindingRecords($cache.PathId, $cache.Id).BindingRecords.BindingRecords | ? BindingId -Match $binding.BindingId
@@ -1449,9 +1807,6 @@ function Suspend-StorageBusDisk
         "ByPhysicalDisk" { $devices = Get-StorageBusDisk -Number $PhysicalDisk.DeviceId; break; }
     }
 
-    # Filter out unclaimed devices
-    $devices = $devices | ? IsClaimed -eq $true
-
     $dm = gwmi -namespace "root\wmi" ClusBfltDeviceMethods
     $pm = gwmi -namespace "root\wmi" ClusBfltPathMethods
 
@@ -1478,7 +1833,7 @@ function Suspend-StorageBusDisk
 
                     # Obtain the cache store
                     $cs = gwmi -namespace "root\wmi" ClusBfltCacheStoresInformation
-                    $cache = $cs.CacheStoreInfo | ? DeviceGuid -Match $binding.CacheStoreDeviceId
+                    $cache = $cs.CacheStoreInfo | ? Id -Match $binding.CacheStoreId
 
                     # Obtain binding record that matches binding Id
                     $bindingRecord = $pm.QuerySsdBindingRecords($cache.PathId, $cache.Id).BindingRecords.BindingRecords | ? BindingId -Match $binding.BindingId
@@ -1496,10 +1851,8 @@ function Suspend-StorageBusDisk
                                 break
                             }
                             Start-Sleep -Seconds 10
+                            $bindingRecord = $pm.QuerySsdBindingRecords($cache.PathId, $cache.Id).BindingRecords.BindingRecords | ? BindingId -Match $binding.BindingId
                         }
-
-                        # Unbind capacity device
-                        $dm.PauseDeviceIOs($device.Guid, 60000)
                     }
                 }
             }
@@ -1618,17 +1971,17 @@ function New-StorageBusCacheStore
         return
     }
 
+    $deviceAttributes = $dm.GetDeviceAttributes($cacheDevice.Guid)
+
     try
     {
         # Create cache store
-        $dm.PauseDeviceIOs($cacheDevice.Guid, 60000)
         $dm.SetDeviceAttributes($cacheDevice.Guid, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::Maintenance, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::All)
 
         $mmPath = $pm.GetPathIdByDeviceGuid($cacheDevice.Guid, [Microsoft.SFS.StorageBusCache.ClusBflt.PathType]::Maintenance, 0, 0, 0)
         if ($mmPath)
         {
             $pm.CreateSsdCacheStore($mmPath.PathId, 0, $ReserveCapacity, $PageSize)
-            $dm.SetDeviceAttributes($cacheDevice.Guid, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::Default, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::All)
         }
         else
         {
@@ -1650,6 +2003,10 @@ function New-StorageBusCacheStore
                                             -TargetObject $_.TargetObject
         $psCmdlet.WriteError($errorObject)
         return
+    }
+    finally
+    {
+        $dm.SetDeviceAttributes($cacheDevice.Guid, $deviceAttributes.Attributes, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::All)
     }
 }
 
@@ -1709,7 +2066,6 @@ function New-StorageBusBinding
     }
 
     # Filter out unclaimed devices
-    $cacheDevice = $cacheDevice | ? IsClaimed -eq $true
     $capacityDevice = $capacityDevice | ? IsClaimed -eq $true
 
     # Ensure exactly one cache device is obtained
@@ -1784,16 +2140,29 @@ function New-StorageBusBinding
 
     $dm = gwmi -namespace "root\wmi" ClusBfltDeviceMethods
     $pm = gwmi -namespace "root\wmi" ClusBfltPathMethods
-
-    # Obtain the cache store
     $cs = gwmi -namespace "root\wmi" ClusBfltCacheStoresInformation
-    $cache = $cs.CacheStoreInfo | ? DeviceGuid -Match $cacheDevice.Guid
+    $paths = $(gwmi -namespace "root\wmi" ClusBfltDeviceInformation).PathInfo
+
+    $deviceAttributes = $dm.GetDeviceAttributes($capacityDevice.Guid)
 
     try
     {
+        # Obtain the cache store
+        $cache = $cs.CacheStoreInfo | ? DeviceGuid -Match $cacheDevice.Guid
+
         if ($cache -eq $null)
         {
-            # Create cache store
+            # This could be unclaimed cache device with claimed cache partition
+            $cachePath = $paths | ? DeviceNumber -eq $cacheDevice.Number
+            if ($cachePath)
+            {
+                $cache = $cs.CacheStoreInfo | ? DeviceGuid -Match $cachePath.DeviceGuid
+            }
+        }
+
+        if ($cache -eq $null)
+        {
+            # No cache store found so create cache store
             New-StorageBusCacheStore -Guid $cacheDevice.Guid -PageSize 8KB -ReserveCapacity 32GB
 
             # Obtain the cache store
@@ -1823,8 +2192,7 @@ function New-StorageBusBinding
             if ($mmPath.PathId -ne 0)
             {
                 $pm.PrepareHddForCache($mmPath.PathId, 0)
-                $pm.BindHddToCacheStore($mmPath.PathId, 0, $cache.Id)
-                $dm.SetDeviceAttributes($capacityDevice.Guid, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::Default, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::All)
+                $pm.BindHddToCacheStore($mmPath.PathId, [Microsoft.SFS.StorageBusCache.DeviceMgmt]::Standalone_Cache_Binding_Attributes, $cache.Id)
             }
             else
             {
@@ -1857,6 +2225,10 @@ function New-StorageBusBinding
                                          -TargetObject $_.TargetObject
         $psCmdlet.WriteError($errorObject)
         return
+    }
+    finally
+    {
+        $dm.SetDeviceAttributes($capacityDevice.Guid, $deviceAttributes.Attributes, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::All)
     }
 }
 
@@ -1933,6 +2305,8 @@ function Remove-StorageBusBinding
         {
             try
             {
+                $deviceAttributes = $dm.GetDeviceAttributes($device.Guid)
+
                 $egPath = $pm.GetPathIdByDeviceGuid($device.Guid, [Microsoft.SFS.StorageBusCache.ClusBflt.PathType]::Engaged, 0, 0, 0)
                 if ($egPath.PathId -ne 0)
                 {
@@ -1945,7 +2319,6 @@ function Remove-StorageBusBinding
                     if ($mmPath.PathId -ne 0)
                     {
                         $pm.UnBindHdd($mmPath.PathId, 0)
-                        $dm.SetDeviceAttributes($device.Guid, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::Default, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::All)
                     }
                     else
                     {
@@ -1968,6 +2341,10 @@ function Remove-StorageBusBinding
                                                  -TargetObject $_.TargetObject
                 $psCmdlet.WriteError($errorObject)
                 return
+            }
+            finally
+            {
+                $dm.SetDeviceAttributes($device.Guid, $deviceAttributes.Attributes, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::All)
             }
         }
     }
@@ -2033,6 +2410,8 @@ function Clear-StorageBusDisk
 
     foreach ($device in $devices)
     {
+        $deviceAttributes = $dm.GetDeviceAttributes($device.Guid)
+
         try
         {
             $dm.SetDeviceAttributes($device.Guid, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::Maintenance, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::All)
@@ -2040,17 +2419,9 @@ function Clear-StorageBusDisk
 
             if ($mmPath.PathId -ne 0)
             {
-                # Perform StorageBusCache cleanup on the disk
-                $pm.ReInitializeDisk($mmPath.PathId, 0)
-
-                if (-not $device.IsCache)
-                {
-                    if ($(Get-StorageBusBinding -Guid $device.Guid))
-                    {
-                        $pm.UnBindHdd($mmPath.PathId, 0)
-                        $pm.ReInitializeDisk($mmPath.PathId, 0)
-                    }
-                }
+                # Remove all cache partitions on the disk
+                $devicePath = "\\?\Disk" + $device.Guid
+                [Microsoft.SFS.StorageBusCache.DeviceMgmt]::CleanupSblCachePartitions($devicePath) | Out-Null
             }
             else
             {
@@ -2062,12 +2433,6 @@ function Clear-StorageBusDisk
                 $psCmdlet.WriteError($errorObject)
                 return
             }
-
-            $dm.SetDeviceAttributes($device.Guid, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::Default, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::All)
-
-            # Reauction the disk
-            $devicePath = "\\?\Disk" + $device.Guid
-            [Microsoft.SFS.StorageBusCache.DeviceMgmt]::ReauctionDevice($devicePath) | Out-Null
         }
         catch
         {
@@ -2078,6 +2443,10 @@ function Clear-StorageBusDisk
                                              -TargetObject $_.TargetObject
             $psCmdlet.WriteError($errorObject)
             return
+        }
+        finally
+        {
+            $dm.SetDeviceAttributes($device.Guid, $deviceAttributes.Attributes, [Microsoft.SFS.StorageBusCache.ClusBflt.DiskAttribute]::All)
         }
     }
 }

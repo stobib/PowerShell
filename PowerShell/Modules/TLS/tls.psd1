@@ -4,7 +4,7 @@ Author="Microsoft Corporation"
 CompanyName="Microsoft Corporation"
 Copyright="© Microsoft Corporation. All rights reserved."
 ModuleVersion="2.0.0.0"
-PowerShellVersion="3.0"
+PowerShellVersion="5.1"
 CLRVersion="4.0"
 ModuleToProcess="Microsoft.WindowsAuthenticationProtocols.Commands"
 HelpInfoUri="https://go.microsoft.com/fwlink/?linkid=287167"
@@ -19,4 +19,7 @@ CmdletsToExport=
         "Get-TlsEccCurve",
         "Enable-TlsEccCurve",
         "Disable-TlsEccCurve"
+CompatiblePSEditions=
+        "Core",
+        "Desktop"
 }

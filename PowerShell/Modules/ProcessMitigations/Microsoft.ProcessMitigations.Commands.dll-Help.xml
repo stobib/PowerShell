@@ -720,13 +720,13 @@
 </dev:remarks>
 </command:example>
 <command:example><maml:title>Example 2</maml:title>
-<dev:code>PS C:\&gt; set-ProcessMitigation -file settings.xml</dev:code>
+<dev:code>PS C:\&gt; set-ProcessMitigation -PolicyFilePath settings.xml</dev:code>
 <dev:remarks><maml:para>Applies all settings inside settings.xml
 </maml:para>
 </dev:remarks>
 </command:example>
 <command:example><maml:title>Example 3</maml:title>
-<dev:code>PS C:\&gt; set-ProcessMitigation -file settings.xml -IsValid</dev:code>
+<dev:code>PS C:\&gt; set-ProcessMitigation -PolicyFilePath settings.xml -IsValid</dev:code>
 <dev:remarks><maml:para>Checks if the given file is a valid settings.xml, requires local .xsd
 </maml:para>
 </dev:remarks>

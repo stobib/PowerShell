@@ -1,22 +1,4 @@
-﻿function Validate-UriParameter
-{
-    param(
-        [Parameter(Mandatory=$true)]
-        [AllowEmptyString()]
-        [String]
-        $Name
-    )
-
-    # Failing due to a disallowed null URI should happen separately
-    if (-not [string]::IsNullOrEmpty($Name))
-    {
-        New-Object System.Uri $Name
-    }
-
-    return $true
-}
-
-function New-HgsGuardian
+﻿function New-HgsGuardian
 {
     [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact='Medium')]
     [OutputType([Microsoft.Management.Infrastructure.CimInstance])]
@@ -26,49 +8,49 @@ function New-HgsGuardian
         [String]
         $Name,
 
-        [Parameter(Mandatory=$true, ParameterSetName="AcceptCertificates")]
+        [Parameter(Mandatory=$true, Position=2, ParameterSetName="AcceptCertificates")]
         [ValidateNotNullOrEmpty()]
         [String]
         $SigningCertificate,
 
-        [Parameter(ParameterSetName="AcceptCertificates")]
+        [Parameter(Mandatory=$true, Position=3, ParameterSetName="AcceptCertificates")]
         [ValidateNotNullOrEmpty()]
         [SecureString]
         $SigningCertificatePassword,
 
-        [Parameter(Mandatory=$true, ParameterSetName="AcceptCertificates")]
+        [Parameter(Mandatory=$true, Position=4, ParameterSetName="AcceptCertificates")]
         [ValidateNotNullOrEmpty()]
         [String]
         $EncryptionCertificate,
 
-        [Parameter(ParameterSetName="AcceptCertificates")]
+        [Parameter(Mandatory=$true, Position=5, ParameterSetName="AcceptCertificates")]
         [ValidateNotNullOrEmpty()]
         [SecureString]
         $EncryptionCertificatePassword,
 
-        [Parameter(ParameterSetName="AcceptCertificates")]
-        [Parameter(ParameterSetName="ByThumbprints")]
+        [Parameter(Position=6, ParameterSetName="AcceptCertificates")]
+        [Parameter(Position=4, ParameterSetName="ByThumbprints")]
         [ValidateNotNullOrEmpty()]
         [Switch]
         $AllowExpired,
 
-        [Parameter(ParameterSetName="AcceptCertificates")]
-        [Parameter(ParameterSetName="ByThumbprints")]
+        [Parameter(Position=7, ParameterSetName="AcceptCertificates")]
+        [Parameter(Position=5, ParameterSetName="ByThumbprints")]
         [ValidateNotNullOrEmpty()]
         [Switch]
         $AllowUntrustedRoot,
 
-        [Parameter(Mandatory=$true, ParameterSetName="GenerateCertificates")]
+        [Parameter(Mandatory=$true, Position=2, ParameterSetName="GenerateCertificates")]
         [ValidateNotNullOrEmpty()]
         [Switch]
         $GenerateCertificates,
 
-        [Parameter(Mandatory=$true, ParameterSetName="ByThumbprints")]
+        [Parameter(Mandatory=$true, Position=2, ParameterSetName="ByThumbprints")]
         [ValidateNotNullOrEmpty()]
         [String]
         $SigningCertificateThumbprint,
 
-        [Parameter(Mandatory=$true, ParameterSetName="ByThumbprints")]
+        [Parameter(Mandatory=$true, Position=3, ParameterSetName="ByThumbprints")]
         [ValidateNotNullOrEmpty()]
         [String]
         $EncryptionCertificateThumbprint
@@ -141,7 +123,6 @@ function Export-HgsGuardian
         [PSTypeName("Microsoft.Management.Infrastructure.CimInstance#ROOT/Microsoft/Windows/Hgs/MSFT_HgsGuardian")]
         [Parameter(ValueFromPipeline=$true, Position=1, Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
-        [Alias("Guardian")]
         [Microsoft.Management.Infrastructure.CimInstance]
         $InputObject,
 
@@ -205,29 +186,17 @@ function Import-HgsGuardian
 
 function Remove-HgsGuardian
 {
-    [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact='Medium', DefaultParameterSetName='NameViaString')]
+    [CmdletBinding(SupportsShouldProcess=$true, ConfirmImpact='Medium')]
     [OutputType([System.Int32])]
     param(
-        [Parameter(ValueFromPipeline=$true, Position=1, Mandatory=$true, ValueFromPipelineByPropertyName=$true, ParameterSetName = "NameViaString")]
+        [Parameter(ValueFromPipeline=$true, Position=1, Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
         [ValidateNotNullOrEmpty()]
         [System.String]
-        $Name,
-
-        [PSTypeName("Microsoft.Management.Infrastructure.CimInstance#ROOT/Microsoft/Windows/Hgs/MSFT_HgsGuardian")]
-        [Parameter(ValueFromPipeline=$true, Position=1, Mandatory=$true, ParameterSetName = "NameViaGuardian")]
-        [ValidateNotNullOrEmpty()]
-        [Alias("Guardian")]
-        [Microsoft.Management.Infrastructure.CimInstance]
-        $InputObject
+        $Name
     )
 
     Process
     {
-        if ($PSCmdlet.ParameterSetName -eq "NameViaGuardian")
-        {
-            $Name = $InputObject.Name
-        }
-
         if($PSCmdlet.ShouldProcess($Name))
         {
             $args = @{Name = $Name}
@@ -340,12 +309,12 @@ function New-HgsKeyProtector
         [Microsoft.Management.Infrastructure.CimInstance[]]
         $Guardian,
 
-        [Parameter()]
+        [Parameter(Position=3)]
         [ValidateNotNullOrEmpty()]
         [Switch]
         $AllowExpired,
 
-        [Parameter()]
+        [Parameter(Position=4)]
         [ValidateNotNullOrEmpty()]
         [Switch]
         $AllowUntrustedRoot
@@ -375,30 +344,12 @@ function Set-HgsClientConfiguration
         $EnableLocalMode,
 
         [Parameter(ParameterSetName="SecureHostingServiceMode", Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
-        [Parameter(ParameterSetName="FullSecureHostingServiceMode", Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
-        [ValidateNotNullOrEmpty()]
-        [ValidateScript({Validate-UriParameter -Name $_})]
         [System.String]
         $KeyProtectionServerUrl,
 
         [Parameter(ParameterSetName="SecureHostingServiceMode", Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
-        [Parameter(ParameterSetName="FullSecureHostingServiceMode", Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
-        [ValidateNotNullOrEmpty()]
-        [ValidateScript({Validate-UriParameter -Name $_})]
         [System.String]
-        $AttestationServerUrl,
-
-        [Parameter(ParameterSetName="FullSecureHostingServiceMode", Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
-        [AllowEmptyString()]
-        [ValidateScript({Validate-UriParameter -Name $_})]
-        [System.String]
-        $FallbackKeyProtectionServerUrl,
-
-        [Parameter(ParameterSetName="FullSecureHostingServiceMode", Mandatory=$true, ValueFromPipelineByPropertyName=$true)]
-        [AllowEmptyString()]
-        [ValidateScript({Validate-UriParameter -Name $_})]
-        [System.String]
-        $FallbackAttestationServerUrl
+        $AttestationServerUrl
     )
 
     Process
@@ -409,87 +360,15 @@ function Set-HgsClientConfiguration
             {
                 (Invoke-CimMethod -Namespace Root\Microsoft\Windows\Hgs -Class MSFT_HgsClientConfiguration -MethodName SetByChangeToLocalMode -Confirm:$false).CmdletOutput
             }
-            elseif($PSCmdlet.ParameterSetName -eq "SecureHostingServiceMode" -or $PSCmdlet.ParameterSetName -eq "FullSecureHostingServiceMode")
+            elseif($PSCmdlet.ParameterSetName -eq "SecureHostingServiceMode")
             {
-                if (-not $FallbackKeyProtectionServerUrl)
-                {
-                    $FallbackKeyProtectionServerUrl = ""
-                }
-
-                if (-not $FallbackAttestationServerUrl)
-                {
-                    $FallbackAttestationServerUrl = ""
-                }
-
                 $args = @{
                     KeyProtectionServerUrl         = $KeyProtectionServerUrl;
                     AttestationServerUrl           = $AttestationServerUrl;
-                    FallbackKeyProtectionServerUrl = @($FallbackKeyProtectionServerUrl);
-                    FallbackAttestationServerUrl   = @($FallbackAttestationServerUrl);
                 }
-
 
                 (Invoke-CimMethod -Namespace Root\Microsoft\Windows\Hgs -Class MSFT_HgsClientConfiguration -MethodName SetBySecureHostingServiceMode -Arguments $args -Confirm:$false).CmdletOutput
             }
-        }
-    }
-}
-
-function Test-HgsClientConfiguration
-{
-    [CmdletBinding(SupportsShouldProcess=$false)]
-    [OutputType([Microsoft.Management.Infrastructure.CimInstance])]
-    param(
-        [Parameter(ParameterSetName="Primary")]
-        [Switch]
-        $UsePrimary,
-
-        [Parameter(ParameterSetName="Fallback", Mandatory=$true)]
-        [Switch]
-        $UseFallback
-    )
-
-    Process
-    {
-        $clientConfiguration = Get-HgsClientConfiguration -ErrorAction Stop
-
-        if (-not $UseFallback -or $UsePrimary)
-        {
-            $args = @{
-                AttestationServerUrl    = $clientConfiguration.AttestationServerUrl;
-            }
-        }
-        else
-        {
-            $args = @{
-                AttestationServerUrl    = $clientConfiguration.FallbackAttestationServerUrl | Select -First 1;
-            }
-        }
-
-        if ($args.AttestationServerUrl)
-        {
-            $results = Invoke-CimMethod -Namespace Root\Microsoft\Windows\Hgs -Class MSFT_HgsClientConfiguration -MethodName IsHostTrusted -Arguments $args -Confirm:$false -ErrorAction Stop
-
-            if ($results)
-            {
-                [pscustomobject][ordered]@{
-                    'AttestationServerUrl'      = $args.AttestationServerUrl;
-                    'IsHostGuarded'             = $results.IsHostGuarded;
-                    'AttestationOperationMode'  = [Microsoft.PowerShell.Cmdletization.GeneratedTypes.HgsClientConfiguration.AttestationOperationMode]$results.AttestationOperationMode;
-                    'AttestationStatus'         = [Microsoft.PowerShell.Cmdletization.GeneratedTypes.HgsClientConfiguration.AttestationStatus]$results.AttestationStatus;
-                    'AttestationSubstatus'      = [Microsoft.PowerShell.Cmdletization.GeneratedTypes.HgsClientConfiguration.AttestationSubStatus]$results.AttestationSubstatus
-                }
-            }
-        }
-        else
-        {
-            [pscustomobject][ordered]@{
-                    'AttestationServerUrl'      = $args.AttestationServerUrl;
-                    'IsHostGuarded'             = $false;
-                    'AttestationOperationMode'  = [Microsoft.PowerShell.Cmdletization.GeneratedTypes.HgsClientConfiguration.AttestationOperationMode]::Unknown;
-                    'AttestationStatus'         = [Microsoft.PowerShell.Cmdletization.GeneratedTypes.HgsClientConfiguration.AttestationStatus]::NotConfigured;
-                    'AttestationSubstatus'      = [Microsoft.PowerShell.Cmdletization.GeneratedTypes.HgsClientConfiguration.AttestationSubStatus]::NoInformation;
-                }
         }
     }
 }

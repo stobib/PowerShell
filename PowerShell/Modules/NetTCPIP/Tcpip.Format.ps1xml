@@ -1778,6 +1778,9 @@ Copyright (c) Microsoft Corporation.  All rights reserved.
                   foreach($Address in $_.ResolvedAddresses) {
                       $output += $Address.IPAddressToString + "`n";
                   };
+                  foreach($PTRRecord in $($_.BasicNameResolution | where-object {$_.QueryType -eq "PTR"})) {
+                      $output += $PTRRecord.NameHost + "`n";
+                  };
                   $output.Trim("`n");
                 </ScriptBlock>
               </ListItem>

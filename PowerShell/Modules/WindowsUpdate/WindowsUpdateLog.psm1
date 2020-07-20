@@ -1,4 +1,4 @@
-﻿#
+#
 # Copyright (c) Microsoft Corporation.  All rights reserved.
 #
 # Version: 1.0.0.0
@@ -14,10 +14,6 @@ $WORKDIR = "$env:TEMP\WindowsUpdateLog"
 $SYM_CACHE = "$WORKDIR\SymCache"
 $SYSTEM32 = "$env:windir\System32"
 $DEBUG_LOG_PATH = "$WORKDIR\debug.log"
-
-# Dependencies
-$TRACERPT_EXE_PATH = "$SYSTEM32\tracerpt.exe"
-$DBGHELP_DLL_PATH = "$SYSTEM32\DbgHelp.dll"
 
 $BINLIST = @(
     "wuaueng.dll",
@@ -38,41 +34,6 @@ $CSV_HEADER= "EventName, Type, Event ID, Version, Channel, Level, Opcode, Task, 
 # --------------------------------------------------------------------------------------------------------------------------
 # FUNCTIONS
 # --------------------------------------------------------------------------------------------------------------------------
-
-#
-# Verify that required tool and its dependencies are in our working directory, and copy them over if they're not.
-#
-function CopyDependencies
-{
-    Write-Verbose "Initializing ..."
-
-    New-Item -Path $WORKDIR -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
-
-    Copy-Item -Path $TRACERPT_EXE_PATH -Destination $WORKDIR -Force -ErrorAction Stop
-
-    Copy-Item -Path $DBGHELP_DLL_PATH -Destination $WORKDIR -Force -ErrorAction Stop
-
-    #
-    # Find TraceRpt.exe's MUI files which could be in many different folders like en-US, zh-CN, etc. Look for all of them and copy to our work dir.
-    #
-    $test = Get-ChildItem -Directory "$env:SystemRoot\System32"
-
-    Get-ChildItem -Directory "$env:SystemRoot\System32" | ForEach-Object {
-
-        $sourceMUI = "$($_.FullName)\tracerpt.exe.mui"
-
-        if (Test-Path $sourceMUI)
-        {
-            $destFolder = "$WORKDIR\$($_.Name)"
-            $destMUI = "$destFolder\tracerpt.exe.mui"
-
-            New-Item -Path $destFolder -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
-            Copy-Item -Path $sourceMUI -Destination $destMUI -Force -ErrorAction Stop
-        }
-    }
-
-    Write-Verbose "Done."
-}
 
 #
 # Given a path to single ETL file or a directory containing multiple ETL files, return a list containing the fullpaths of the ETLs.
@@ -190,7 +151,7 @@ function DecodeETL
     #
     $start = Get-Date
 
-    & "$WORKDIR\tracerpt.exe" $args | Out-Default
+    & "tracerpt.exe" $args | Out-Default
 
     Write-Verbose "Done. Elapsed: $((Get-Date).Subtract($start).TotalMilliseconds) ms."
 
@@ -380,6 +341,8 @@ function ConvertETLsToLog
     $start = Get-Date
 
     [System.Collections.Generic.List[System.String]] $etlList = GetListOfETLs -path $ETLPaths
+    # Create Working Directory
+    New-Item -Path $WORKDIR -ItemType Directory -ErrorAction SilentlyContinue | Out-Null
 
     $tempFilePath = "$WORKDIR\wuetl.$Type.tmp"
     $tempLogPath = "$WORKDIR\wuetl.log.tmp"
@@ -544,7 +507,6 @@ function Get-WindowsUpdateLog
         #
         # Do work now.
         #
-        CopyDependencies
 
         ConvertETLsToLog -ETLPaths $etls -LogPath $LogPath -Type $ProcessingType
     }

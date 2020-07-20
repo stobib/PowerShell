@@ -704,25 +704,42 @@
         </ListEntries>
       </ListControl>
     </View>
-      <View>
-          <Name>WimBootEntryObjectList</Name>
-          <ViewSelectedBy>
-              <TypeName>Microsoft.Dism.Commands.WimBootEntryObject</TypeName>
-          </ViewSelectedBy>
-          <ListControl>
-              <ListEntries>
-                  <ListEntry>
-                      <ListItems>
-                          <ListItem>
-                              <PropertyName>DataSourceID</PropertyName>
-                          </ListItem>
-                          <ListItem>
-                              <PropertyName>ImageFile</PropertyName>
-                          </ListItem>
-                      </ListItems>
-                  </ListEntry>
-              </ListEntries>
-          </ListControl>
-      </View>
+    <View>
+        <Name>WimBootEntryObjectList</Name>
+        <ViewSelectedBy>
+            <TypeName>Microsoft.Dism.Commands.WimBootEntryObject</TypeName>
+        </ViewSelectedBy>
+        <ListControl>
+            <ListEntries>
+                <ListEntry>
+                    <ListItems>
+                        <ListItem>
+                            <PropertyName>DataSourceID</PropertyName>
+                        </ListItem>
+                        <ListItem>
+                            <PropertyName>ImageFile</PropertyName>
+                        </ListItem>
+                    </ListItems>
+                </ListEntry>
+            </ListEntries>
+        </ListControl>
+    </View>
+    <View>
+      <Name>ReservedStorageStateObjectList</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Dism.Commands.ReservedStorageStateObject</TypeName>
+      </ViewSelectedBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <ListItem>
+                <PropertyName>ReservedStorageState</PropertyName>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
   </ViewDefinitions>
 </Configuration>

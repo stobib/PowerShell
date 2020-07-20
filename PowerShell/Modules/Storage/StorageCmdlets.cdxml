@@ -928,6 +928,11 @@
               <Type PSType="System.String" />
               <CmdletParameterMetadata />
             </Parameter>
+            <!-- IsHidden -->
+            <Parameter ParameterName="IsHidden">
+              <Type PSType="System.Boolean" />
+              <CmdletParameterMetadata />
+            </Parameter>
             <!-- SourceCaller -->
             <Parameter ParameterName="cim:operationOption:SourceCaller" DefaultValue="Microsoft.PowerShell">
               <Type PSType="System.String" />
@@ -971,6 +976,11 @@
               <Type PSType="System.String" />
               <CmdletParameterMetadata />
             </Parameter>
+            <!-- IsHidden -->
+            <Parameter ParameterName="IsHidden">
+              <Type PSType="System.Boolean" />
+              <CmdletParameterMetadata />
+            </Parameter>
             <!-- SourceCaller -->
             <Parameter ParameterName="cim:operationOption:SourceCaller" DefaultValue="Microsoft.PowerShell">
               <Type PSType="System.String" />
@@ -1012,6 +1022,11 @@
             <!-- StorageScaleUnitId -->
             <Parameter ParameterName="StorageScaleUnitId">
               <Type PSType="System.String" />
+              <CmdletParameterMetadata />
+            </Parameter>
+            <!-- IsHidden -->
+            <Parameter ParameterName="IsHidden">
+              <Type PSType="System.Boolean" />
               <CmdletParameterMetadata />
             </Parameter>
             <!-- SourceCaller -->

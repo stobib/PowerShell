@@ -823,6 +823,7 @@
                 9 { $_status += "Reserved by Subsystem" }
                 10 { $_status += "Starting" }
                 11 { $_status += "Partial SCM" }
+                12 { $_status += "Discovery Disabled" }
                 32768 { $_status += "Verification in progress" }
                 32769 { $_status += "Verification failed" }
                 32770 { $_status += "Firmware not compliant" }

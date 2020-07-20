@@ -55,7 +55,7 @@
                             </ListItem>
                             <ListItem>
                                 <PropertyName>TransferType</PropertyName>
-                            </ListItem>                           
+                            </ListItem>
                             <ListItem>
                                 <PropertyName>JobState</PropertyName>
                             </ListItem>
@@ -106,6 +106,39 @@
                             </ListItem>
                             <ListItem>
                                 <PropertyName>HttpMethod</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>ACLFlags</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>SecurityFlags</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>Dynamic</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>CustomHeaders</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>MaximumDownloadTime</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>NotifyFlags</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>NotifyCmdLine</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>CertificateStoreLocation</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>CertificateStoreName</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>CertificateHash</PropertyName>
+                            </ListItem>
+                            <ListItem>
+                                <PropertyName>CertificateSubjectName</PropertyName>
                             </ListItem>
                         </ListItems>
                     </ListEntry>

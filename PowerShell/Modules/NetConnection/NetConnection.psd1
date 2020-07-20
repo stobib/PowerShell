@@ -10,6 +10,6 @@
     CompanyName = 'Microsoft Corporation'
     PowerShellVersion = '5.1'
     Copyright = '© Microsoft Corporation. All rights reserved.'
-    FunctionsToExport = @("Get-NetConnectionProfile", "Set-NetConnectionProfile")    
+    FunctionsToExport = @("Get-NetConnectionProfile", "Set-NetConnectionProfile")
     CompatiblePSEditions = @('Desktop', 'Core')
 }

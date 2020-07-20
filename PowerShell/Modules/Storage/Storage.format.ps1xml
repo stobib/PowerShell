@@ -7,37 +7,47 @@
         <CustomEntries>
           <CustomEntry>
             <CustomItem>
-              <Text>DeviceNumber  : </Text>
+              <Text>DeviceNumber         : </Text>
               <ExpressionBinding>
                 <PropertyName>DeviceNumber</PropertyName>
               </ExpressionBinding>
               <NewLine/>
-              <Text>DeviceId      : </Text>
+              <Text>DeviceGuid           : </Text>
               <ExpressionBinding>
-                <PropertyName>DeviceId</PropertyName>
+                <PropertyName>DeviceGuid</PropertyName>
               </ExpressionBinding>
               <NewLine/>
-              <Text>FriendlyName  : </Text>
+              <Text>FriendlyName         : </Text>
               <ExpressionBinding>
                 <PropertyName>FriendlyName</PropertyName>
               </ExpressionBinding>
               <NewLine/>
-              <Text>SerialNumber  : </Text>
+              <Text>SerialNumber         : </Text>
               <ExpressionBinding>
                 <PropertyName>SerialNumber</PropertyName>
               </ExpressionBinding>
               <NewLine/>
-              <Text>BusType       : </Text>
+              <Text>AdapterSerialNumber  : </Text>
+              <ExpressionBinding>
+                <PropertyName>AdapterSerialNumber</PropertyName>
+              </ExpressionBinding>
+              <NewLine/>
+              <Text>FirmwareRevision     : </Text>
+              <ExpressionBinding>
+                <PropertyName>FirmwareRevision</PropertyName>
+              </ExpressionBinding>
+              <NewLine/>
+              <Text>BusType              : </Text>
               <ExpressionBinding>
                 <PropertyName>BusType</PropertyName>
               </ExpressionBinding>
               <NewLine/>
-              <Text>MediaType     : </Text>
+              <Text>MediaType            : </Text>
               <ExpressionBinding>
                 <PropertyName>MediaType</PropertyName>
               </ExpressionBinding>
               <NewLine/>
-              <Text>IoTimeout     : </Text>
+              <Text>IoTimeout            : </Text>
               <ExpressionBinding>
                 <ScriptBlock>
                   if ($_.IoTimeout -gt 0)
@@ -718,6 +728,125 @@
     <!--
 
     //
+    // StorageError
+    //
+
+    -->
+    <View>
+      <Name>StorageError_v1TableView</Name>
+      <ViewSelectedBy>
+        <TypeName>Microsoft.Windows.StorageManagement.StorageError_v1</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <PropertyName>DeviceGuid</PropertyName>
+        <CustomControlName>DeviceInformation</CustomControlName>
+      </GroupBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Date</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Hour</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Command</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SrbStatus</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ScsiStatus</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SenseKey</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SenseCode</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SenseCodeQualifier</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>IoSize</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>LBA</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <Alignment>Right</Alignment>
+                <ScriptBlock>
+                  [DateTime]$datetime = $_.EventTime.ToString('yyyy/MM/dd HH:MM:00')
+                  return $datetime.ToShortDateString()
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <Alignment>Right</Alignment>
+                <ScriptBlock>
+                  [DateTime]$datetime = $_.EventTime.ToString('yyyy/MM/dd HH:MM:00')
+                  return $datetime.ToShortTimeString()
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <Alignment>Right</Alignment>
+                <ScriptBlock>
+                  return "0x" + [String]::Format('{0:x2}',$_.Command)
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <Alignment>Right</Alignment>
+                <ScriptBlock>
+                  return "0x" + [String]::Format('{0:x2}',$_.SrbStatus)
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <Alignment>Right</Alignment>
+                <ScriptBlock>
+                  return "0x" + [String]::Format('{0:x2}',$_.ScsiStatus)
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <Alignment>Right</Alignment>
+                <ScriptBlock>
+                  return "0x" + [String]::Format('{0:x2}',$_.SenseKey)
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <Alignment>Right</Alignment>
+                <ScriptBlock>
+                  return "0x" + [String]::Format('{0:x2}',$_.SenseCode)
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <Alignment>Right</Alignment>
+                <ScriptBlock>
+                  return "0x" + [String]::Format('{0:x2}',$_.SenseCodeQualifier)
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <Alignment>Right</Alignment>
+                <ScriptBlock>
+                  return [String]::Format('{0:N0}',$_.IoSize)
+                </ScriptBlock>
+              </TableColumnItem>
+              <TableColumnItem>
+                <Alignment>Right</Alignment>
+                <ScriptBlock>
+                  return [String]::Format('{0:N0}',$_.LBA)
+                </ScriptBlock>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <!--
+
+    //
     // StorageHistory
     //
 
@@ -728,7 +857,7 @@
         <TypeName>Microsoft.Windows.StorageManagement.StorageHistory_v5</TypeName>
       </ViewSelectedBy>
       <GroupBy>
-        <PropertyName>DeviceId</PropertyName>
+        <PropertyName>DeviceGuid</PropertyName>
         <CustomControlName>DeviceInformation</CustomControlName>
       </GroupBy>
       <TableControl>
@@ -802,7 +931,7 @@
         <TypeName>Microsoft.Windows.StorageManagement.StorageHistory_v11</TypeName>
       </ViewSelectedBy>
       <GroupBy>
-        <PropertyName>DeviceId</PropertyName>
+        <PropertyName>DeviceGuid</PropertyName>
         <CustomControlName>DeviceInformation</CustomControlName>
       </GroupBy>
       <TableControl>

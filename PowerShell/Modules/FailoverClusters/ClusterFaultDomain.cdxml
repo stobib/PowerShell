@@ -238,7 +238,6 @@
       <Value Name="Rack" Value="2000" />
       <Value Name="Chassis" Value="3000" />
       <Value Name="Node" Value="4000" />
-      <Value Name="StorageNode" Value="5000" />
   </Enum>
  </Enums>
 </PowerShellMetadata>

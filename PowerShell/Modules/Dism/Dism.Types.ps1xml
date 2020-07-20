@@ -557,4 +557,30 @@
       </MemberSet>
     </Members>
   </Type>
+  <Type>
+    <Name>Microsoft.Dism.Commands.ReservedStorageStateObject</Name>
+    <Members>
+      <MemberSet>
+        <Name>PsStandardMembers</Name>
+        <Members>
+          <NoteProperty>
+            <Name>DefaultDisplayProperty</Name>
+            <Value>ReservedStorageState</Value>
+          </NoteProperty>
+          <PropertySet>
+            <Name>DefaultDisplayPropertySet</Name>
+            <ReferencedProperties>
+              <Name>ReservedStorageState</Name>
+            </ReferencedProperties>
+          </PropertySet>
+          <PropertySet>
+            <Name>DefaultKeyPropertySet</Name>
+            <ReferencedProperties>
+              <Name>ReservedStorageState</Name>
+            </ReferencedProperties>
+          </PropertySet>
+        </Members>
+      </MemberSet>
+    </Members>
+  </Type>
 </Types>

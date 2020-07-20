@@ -428,5 +428,26 @@
             </ScriptProperty>
         </Members>
     </Type>
+    <Type>
+        <Name>Microsoft.Management.Infrastructure.CimInstance#ROOT/Microsoft/Windows/SMB/MSFT_SmbServerCertificateMapping</Name>
+        <Members>
+            <ScriptProperty>
+                <Name>Type</Name>
+                <GetScriptBlock>
+                    [Microsoft.PowerShell.Cmdletization.GeneratedTypes.SmbServerCertificateMapping.Type] ($this.PSBase.CimInstanceProperties['Type'].Value)
+                </GetScriptBlock>
+            </ScriptProperty>
+        </Members>
+    </Type>
+    <Type>
+        <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_SmbServerCertificateMapping</Name>
+        <Members>
+            <ScriptProperty>
+              <Name>Type</Name>
+              <GetScriptBlock>
+                 [Microsoft.PowerShell.Cmdletization.GeneratedTypes.SmbServerCertificateMapping.Type] ($this.PSBase.CimInstanceProperties['Type'].Value)
+              </GetScriptBlock>
+            </ScriptProperty>
+        </Members>
+    </Type>
 </Types>
-

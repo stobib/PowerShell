@@ -343,8 +343,6 @@
 		<Value Name="AES128" Value="2" />  
 		<Value Name="AES192" Value="3" />
 		<Value Name="AES256" Value="4" />
-		<Value Name="GCMAES128" Value="5" />
-		<Value Name="GCMAES256" Value="6" />
     </Enum>  
     <Enum EnumName="VpnServerIPsecConfiguration.IntegrityCheckMethod" UnderlyingType="System.UInt32">  
 		<Value Name="MD5" Value="0" />  

@@ -67,5 +67,6 @@ ConvertFrom-StringData @'
     IDS_PROB_DEVICE_RESET=This device has failed and is undergoing a reset. {0}
     IDS_PROB_CONSOLE_LOCKED=This device is blocked from starting while the user is not logged in. {0}
     IDS_PROB_NEED_CLASS_CONFIG=Windows is still setting up the class configuration for this device. {0}
+    IDS_PROB_GUEST_ASSIGNMENT_FAILED=This device could not be assigned to a guest partition. {0}
 ###PSLOCC
 '@
