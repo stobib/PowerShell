@@ -163,10 +163,14 @@ Function Set-EventLogPath([string]$HostName,[string]$NewLogPath){
     $EventLogSession=New-Object System.Diagnostics.Eventing.Reader.EventLogSession -ArgumentList $HostName
     ForEach($LogName In $Eventlogsession.GetLogNames()){
         $EventLogConfig=New-Object System.Diagnostics.Eventing.Reader.EventLogConfiguration -ArgumentList $LogName,$EventLogSession
-        Write-Host -ForegroundColor Yellow $LogName,$EventLogConfig.LogType
-        $NewLogFilePath=($NewLogPath+"\"+$EventLogConfig.LogType)
-        If(!(Test-Path -Path $NewLogFilePath)){
-            New-Item -Path $NewLogPath -Name $EventLogConfig.LogType -ItemType "Directory"|Out-Null
+        Write-Host -ForegroundColor Yellow $EventLogConfig.LogType
+        If($bDefaultPath-eq$true){
+            $NewLogFilePath=$NewLogPath
+        }Else{
+            $NewLogFilePath=($NewLogPath+"\"+$EventLogConfig.LogType)
+            If(!(Test-Path -Path $NewLogFilePath)){
+                New-Item -Path $NewLogPath -Name $EventLogConfig.LogType -ItemType "Directory"|Out-Null
+            }
         }
         $LogFilePath=$EventLogConfig.LogFilePath
         $LogFile=Split-Path $LogFilePath -Leaf
@@ -180,7 +184,13 @@ Function Set-EventLogPath([string]$HostName,[string]$NewLogPath){
         $EventLogConfig.SaveChanges()
     }
 }
-Set-Variable -Name EventLogPath -Value "F:\Windows\System32\Winevt\Logs"
+Set-Variable -Name EventLogPath -Value ""
+Set-Variable -Name bDefaultPath -Value $false
+If($bDefaultPath-eq$true){
+    $EventLogPath="C:\Windows\System32\Winevt\Logs"
+}Else{
+    $EventLogPath="F:\Windows\System32\Winevt\Logs"
+}
 Set-EventLogPath -HostName $env:COMPUTERNAME -NewLogPath $EventLogPath
 <#
 Set-Variable -Name AllDCs -Value (Get-ADDomainController -filter *|Select-Object Name,IsGlobalCatalog|Sort Name)
