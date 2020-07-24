@@ -158,47 +158,109 @@ ForEach($LogFile In $LogFiles){
 }
 Clear-History;Clear-Host
 # Script Body >>>--->> Unique code for Windows PowerShell scripting
-Function Set-EventLogPath($HostNames,[string]$EventLog,[string]$ImportLog){
+Function ReadCopyEventLogs($HostNames,[string]$EventLog,[string]$ImportLog){
+    $ComboEventLog=(Get-EventLog -LogName $ImportLog -Newest 1|Select-Object *)
+    $TimeWritten=$ComboEventLog.TimeWritten
     ForEach($Server In $HostNames){
-        Get-EventLog -LogName $EventLog -ComputerName $Server -Newest 1|Select-Object *
+        If($TimeWritten){
+            $RemoteEvents=@(Get-EventLog -LogName $EventLog -ComputerName $Server -After $TimeWritten|Select-Object *)
+            ForEach($Event In $RemoteEvents){
+                $EntryType=$Event.EntryType
+                $Category=$Event.CategoryNumber
+                $EventID=$Event.EventID
+                $Message=$Event.Message
+                Write-EventLog -LogName $ImportLog -Source Script -EntryType $EntryType -Category $Category -EventId $EventID -Message $Message
+            }
+        }Else{
+            $RemoteEvents=(Get-EventLog -LogName $EventLog -ComputerName $Server -Newest 1|Select-Object *)
+            $EntryType=$RemoteEvents.EntryType
+            $Category=$RemoteEvents.CategoryNumber
+            $EventID=$RemoteEvents.EventID
+            $Message=$RemoteEvents.Message
+            Write-EventLog -LogName $ImportLog -Source Script -EntryType $EntryType -Category $Category -EventId $EventID -Message $Message
+        }
+    }
+}
+Function Set-EventLogPath([string]$HostName,[string]$NewLogPath,[string]$CurrentLog){
+    [reflection.assembly]::LoadWithPartialName("System.Diagnostics.Eventing.Reader")
+    $EventLogSession=New-Object System.Diagnostics.Eventing.Reader.EventLogSession -ArgumentList $HostName
+    ForEach($LogName In $Eventlogsession.GetLogNames()){
+        If($LogName-eq$CurrentLog){
+            $EventLogConfig=New-Object System.Diagnostics.Eventing.Reader.EventLogConfiguration -ArgumentList $LogName,$EventLogSession
+            If($bDefaultPath){
+                $NewLogFilePath=$NewLogPath
+            }Else{
+                $NewLogFilePath=($NewLogPath+"\"+$EventLogConfig.LogType)
+                If(!(Test-Path -Path $NewLogFilePath)){
+                    New-Item -Path $NewLogPath -Name $EventLogConfig.LogType -ItemType "Directory"|Out-Null
+                }
+            }
+            $LogFilePath=$EventLogConfig.LogFilePath
+            $LogFile=Split-Path $LogFilePath -Leaf
+            $NewLogFilePath=($NewLogFilePath+"\"+$LogFile)
+            If($EventLogConfig.IsEnabled){
+                $EventLogConfig.IsEnabled=$false
+                $EventLogConfig.SaveChanges()
+            }
+            $EventLogConfig.LogFilePath=$NewLogFilePath
+            $EventLogConfig.IsEnabled=$true
+            $EventLogConfig.SaveChanges()
+        }
     }
 }
 Set-Variable -Name ServerList -Value @()
+Set-Variable -Name EventLogPath -Value ""
+Set-Variable -Name bDefaultPath -Value $false
 Set-Variable -Name bExistingLog -Value $false
-Set-Variable -Name LogNames -Value ("DomainController-SecurityLogs")
 Set-Variable -Name WindowsLogs -Value @("Security")
-Set-Variable -Name ComboADSecLogs -Value ("\\"+$Domain+"\cifs\SysAdmins\AD_Logs")
+Set-Variable -Name LogNames -Value ("DomainController-SecurityLogs")
+Set-Variable -Name ComboADSecLogs -Value ("E:\Windows\System32\Winevt\Logs")
 Set-Variable -Name AllDCs -Value (Get-ADDomainController -Filter *|Select-Object HostName,IsGlobalCatalog|Sort HostName)
-ForEach($GC In $AllDCs){
-    If($GC.IsGlobalCatalog-eq$true){
-        $ServerList+=$GC.HostName
-    }
+ForEach($Log In $LogNames){
+    Remove-EventLog -LogName $Log|Out-Null
 }
-If($ServerList-ne$null){
-    $AvailableLogs=Get-EventLog -List
-    $Collection={$WindowsLogs}.Invoke()
-    ForEach($NewLog In $LogNames){
-        $bExistingLog=$false
-        ForEach($EventLog In $AvailableLogs){
-            If($bExistingLog){Break}
-            Switch($EventLog){
-                {($_.Log-eq$NewLog)}{
-                    Limit-EventLog -LogName $NewLog -MaximumSize 18874368 -RetentionDays 14 -OverflowAction OverwriteAsNeeded
-                    $bExistingLog=$true;Break
+Do{
+    $Online={$ServerList}.Invoke()
+    ForEach($GC In $AllDCs){
+        If($GC.IsGlobalCatalog-eq$true){
+            $ServerList+=$GC.HostName
+        }
+    }
+    ForEach($Server In $ServerList){
+        $ConnectResult=Test-NetConnection -ComputerName $Server -Port 135
+        If($ConnectResult.TcpTestSucceeded){
+            $Online.Add($Server)|Out-Null
+        }Else{
+            $Online.Remove($Server)|Out-Null
+        }
+    }
+    If($ServerList-ne$null){
+        $AvailableLogs=Get-WinEvent -ListLog *
+        $Collection={$WindowsLogs}.Invoke()
+        ForEach($NewLog In $LogNames){
+            $bExistingLog=$false
+            ForEach($EventLog In $AvailableLogs){
+                If($bExistingLog){Break}
+                Switch($EventLog){
+                    {($_.LogName-eq$NewLog)}{$bExistingLog=$true;Break}
                 }
             }
-        }
-        ForEach($LogName In $Collection){
-            If($bExistingLog-eq$false){
-                New-EventLog -LogName $NewLog -Source $LogName
-                Limit-EventLog -LogName $NewLog -MaximumSize 18874368 -RetentionDays 14 -OverflowAction OverwriteAsNeeded
-                Get-EventLog -List
+            ForEach($LogName In $Collection){
+                If(!($bExistingLog)){
+                    New-EventLog -LogName $NewLog -Source Script
+                    If($bDefaultPath){
+                        $EventLogPath=($env:SystemRoot+"\System32\Winevt\Logs")
+                    }Else{
+                        $EventLogPath=$ComboADSecLogs
+                    }
+                    Set-EventLogPath -HostName $env:COMPUTERNAME -NewLogPath $EventLogPath -CurrentLog $NewLog
+                }
+                ReadCopyEventLogs -HostNames $ServerList -EventLog $LogName -ImportLog $NewLog;Break
             }
-            Set-EventLogPath -HostNames $ServerList -EventLog $LogName -ImportLog $NewLog;Break
+            $Collection.Remove($LogName)|Out-Null
         }
-        $Collection.Remove($LogName)
     }
-}
+}While($Online)
 # Script Body <<---<<< Unique code for Windows PowerShell scripting
 If($EndTime-eq0){
     [datetime]$EndTime=Get-Date -Format o
