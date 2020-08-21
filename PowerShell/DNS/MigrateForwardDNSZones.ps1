@@ -158,38 +158,35 @@ ForEach($LogFile In $LogFiles){
 }
 Clear-History;Clear-Host
 # Script Body >>>--->> Unique code for Windows PowerShell scripting
-Set-Variable -Name bGCOnline -Value $false
 Set-Variable -Name DnsServers -Value @("w19dnsasy01","w19dnsasy02","w19dnsasz01","w19dnsasz02")
-<#
-#Set-Variable -Name AllDCs -Value @(Get-ADDomainController -Filter *|Select-Object HostName,IsGlobalCatalog|Sort HostName|Where-Object{$_.IsGlobalCatalog-eq$true}).HostName
+Set-Variable -Name AllDCs -Value @(Get-ADDomainController -Filter *|Select-Object HostName,IsGlobalCatalog|Sort HostName|Where-Object{$_.IsGlobalCatalog-eq$true}).HostName
 ForEach($GC In $AllDCs){
-    If((Test-NetConnection -ComputerName $GC).PingSucceeded){
-        $bGCOnline=$true
-    }
-    If($bGCOnline){
-#>
-ForEach($NewServer In $DnsServers){
-    If($NewServer.Contains("y0")){
-        $Masters='10.126.0.10'
-    }Else{
-        $Masters='10.118.0.10'
-    }
-    $NewServer+="."+$Domain
-    Get-DnsServerZone -ComputerName $NewServer|Where-Object{$_.zonetype -eq "primary" -and $_.zonename -like "*.com"}|
-    ForEach-Object{
-        try{
-            $ZoneFile=($_.zonename+".dns")
-            ConvertTo-DnsServerSecondaryZone -ComputerName $NewServer -ZoneFile $ZoneFile -MasterServers $Masters -Name $_.zonename -PassThru
-        }catch{
-            "$_"
+    $DnsServer=@(Get-DnsServer -ComputerName $GC).ServerSetting.ComputerName
+    Set-Variable -Name ForwardZones -Value @(Get-DnsServerZone -ComputerName $DnsServer|Where-Object{$_.ZoneName -like ("*"+$Domain)})
+    ForEach($ZoneData In $ForwardZones){
+        If($ZoneData.ZoneName-notlike"_*"){
+            $ZoneName=$ZoneData.ZoneName
+            $ZoneFile=($ZoneName+".dns")
+            $FullPath=("\\"+$DnsServer+"\Admin$\System32\DNS\"+$ZoneFile)
+            If(Test-Path -Path $FullPath){
+                Remove-Item $FullPath -Force
+            }
+            DNSCMD $DnsServer /ZoneExport $ZoneName $ZoneFile
+            If(!(Test-Path -Path ($ZoneFile+"\"+$ZoneFile))){
+                ForEach($NewServer In $DnsServers){
+                    $PrimaryDNS=($NewServer+"."+$Domain)
+                    $Destination=("\\"+$PrimaryDNS+"\DNS$")
+                    If(!(Test-Path -Path ($Destination+"\"+$ZoneFile))){
+                        XCopy $FullPath $Destination
+                        If(Test-Path -Path ($Destination+"\"+$ZoneFile)){
+                            DNSCMD $PrimaryDNS /ZoneAdd $ZoneName /Primary /File $ZoneFile /Load
+                        }
+                    }
+                }
+            }
         }
     }
 }
-<#
-        Break
-    }
-}
-#>
 # Script Body <<---<<< Unique code for Windows PowerShell scripting
 If($EndTime-eq0){
     [datetime]$EndTime=Get-Date -Format o
