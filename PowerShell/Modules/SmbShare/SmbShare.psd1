@@ -1,4 +1,4 @@
-﻿
+
 @{
     GUID = '3af1699d-cc54-4e54-81cf-28d2df5cce0a'
     Author="Microsoft Corporation"
@@ -19,6 +19,7 @@
                       'SmbMultichannelConstraint.cdxml',
                       'SmbBandwidthLimit.cdxml',
                       'SmbServerCertificateMapping.cdxml',
+                      'SmbComponent.cdxml',
                       'SmbScriptModule.psm1')
     FormatsToProcess = @('Smb.format.ps1xml')
     TypesToProcess = @('Smb.types.ps1xml')
@@ -63,7 +64,8 @@
                         'rsmbgm',
                         'gsmbscm',
                         'rsmbscm',
-                        'nsmbscm')
+                        'nsmbscm',
+                        'rsmbc')
     CmdletsToExport = @()
     FunctionsToExport = @('Get-SmbShare',
                           'Remove-SmbShare',
@@ -105,7 +107,8 @@
                           'New-SmbGlobalMapping',
                           'Get-SmbServerCertificateMapping',
                           'New-SmbServerCertificateMapping',
-                          'Remove-SmbServerCertificateMapping')
+                          'Remove-SmbServerCertificateMapping',
+                          'Remove-SMBComponent')
     PowerShellVersion = '5.1'
     CompatiblePSEditions = @('Desktop','Core')
 }

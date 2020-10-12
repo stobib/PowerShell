@@ -18,7 +18,7 @@ Function UninstallSmb1 ($FeatureNames)
 {
   try
     {
-       Disable-WindowsOptionalFeature -Online -FeatureName $FeatureNames -NoRestart
+       Remove-SMBComponent -Name $FeatureNames
     }
     catch {}
 }
