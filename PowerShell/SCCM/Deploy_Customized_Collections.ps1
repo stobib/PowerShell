@@ -78,9 +78,9 @@ Set-Variable -Name OutputFile -Value "$env:USERPROFILE\Desktop\$($(Split-Path $P
 
 Function Get-FolderPath{[CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact="Low")]
     Param(
-        [Parameter(Mandatory=$true,HelpMessage=”System Center Configuration Manager 2016 Site Server - Server Name”,ValueFromPipelineByPropertyName=$true)]$SiteServer="",
-        [Parameter(Mandatory=$true,HelpMessage=”System Center Configuration Manager 2016 Site Server - Site Code”,ValueFromPipelineByPropertyName=$true)][ValidatePattern("\w{3}")][String]$SiteCode="",
-        [Parameter(Mandatory=$true,HelpMessage=”System Center Configuration Manager 2016 Site Server - Folder Name”,ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][String[]]$FolderName=""
+        [Parameter(Mandatory=$true,HelpMessage=”Microsoft Endpoint Configuration Manager - Server Name”,ValueFromPipelineByPropertyName=$true)]$SiteServer="",
+        [Parameter(Mandatory=$true,HelpMessage=”Microsoft Endpoint Configuration Manager - Site Code”,ValueFromPipelineByPropertyName=$true)][ValidatePattern("\w{3}")][String]$SiteCode="",
+        [Parameter(Mandatory=$true,HelpMessage=”Microsoft Endpoint Configuration Manager - Folder Name”,ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][String[]]$FolderName=""
     )
     Process{
         $Folder=Get-Wmiobject -ComputerName $SiteServer -Namespace root\sms\site_$SiteCode -Class SMS_ObjectContainernode -Filter "ObjectType = 5000 AND NAme = '$FolderName'"
@@ -111,9 +111,9 @@ Function Get-FolderPath{[CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact
 }
 Function Get-CollectionsInFolder{[CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact="Low")]
     Param(
-        [Parameter(Mandatory=$true,HelpMessage=”System Center Configuration Manager 2016 Site Server - Server Name”,ValueFromPipelineByPropertyName=$true)]$SiteServer="",
-        [Parameter(Mandatory=$true,HelpMessage=”System Center Configuration Manager 2016 Site Server - Site Code”,ValueFromPipelineByPropertyName=$true)][ValidatePattern("\w{3}")][String]$SiteCode="",
-        [Parameter(Mandatory=$true,HelpMessage=”System Center Configuration Manager 2016 Site Server - Folder Name”,ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][String[]]$FolderName="",
+        [Parameter(Mandatory=$true,HelpMessage=”Microsoft Endpoint Configuration Manager - Server Name”,ValueFromPipelineByPropertyName=$true)]$SiteServer="",
+        [Parameter(Mandatory=$true,HelpMessage=”Microsoft Endpoint Configuration Manager - Site Code”,ValueFromPipelineByPropertyName=$true)][ValidatePattern("\w{3}")][String]$SiteCode="",
+        [Parameter(Mandatory=$true,HelpMessage=”Microsoft Endpoint Configuration Manager - Folder Name”,ValueFromPipeline=$true,ValueFromPipelineByPropertyName=$true)][String[]]$FolderName="",
 	    [Parameter(Mandatory=$false)][String][ValidateRange("Device","User")]$FolderType="Device"
     )
     Begin{
@@ -167,15 +167,18 @@ Function Get-ObjectLocation{Param([String]$InstanceKey)
 #Get SiteServer and SiteCode
 $SiteServer=$($(Get-PSDrive -PSProvider CMSite).Root).Split(".")[0]
 $SiteCode=$(Get-PSDrive -PSProvider CMSite).Name
+$SiteCount=$null
 Set-Variable -Name SiteName -Value $null
 Switch($SiteCode){
-    "A01"{$SiteName="ARDC";Break}
-    "B01"{$SiteName="UDCC";Break}
+    "DFW"{$SiteName="ARDC";$SiteCount=1;Break}
+    "AUS"{$SiteName="UDCC";$SiteCount=0;Break}
     Default{$SiteName=$null;Break}
 }
+$CAS=($SiteCode[2])
+$CAS=("root\sms\site_"+$CAS)
 
 #Set location within the SCCM environment
-Set-location $SiteCode":"
+Set-location ($SiteCode[$SiteCount]+":")
 
 #Get user domain
 $LDomain=($env:USERDNSDOMAIN).ToLower()
@@ -202,7 +205,7 @@ ForEach($Folder In $FolderStructure){
     }
     $NewFolder=@{Name="$($Folder[1])";ObjectType=5000;ParentContainerNodeId=$ContainerNodeID}
     Try{
-        $ContainerData=Set-WmiInstance -Namespace "root\sms\site_$($SiteCode)" -Class "SMS_ObjectContainerNode" -Arguments $NewFolder -ComputerName $SiteServer
+        $ContainerData=Set-WmiInstance -Namespace $($CAS) -Class "SMS_ObjectContainerNode" -Arguments $NewFolder -ComputerName $SiteServer
         If($ContainerData-ne$null){
             Write-Host -ForegroundColor Green ("Sucessfully created folder: """+$ContainerData.Name+""" on Site Server "+$SiteServer+".")
         }Else{
