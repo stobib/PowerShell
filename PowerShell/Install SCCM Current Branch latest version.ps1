@@ -6,7 +6,7 @@ If(-NOT([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity
     Break
 }
 $folderpath="E:\Sources\Scripts"
-$SCCMSource="E:\Sources\SCCM_2016"
+$SCCMSource="E:\Sources\SCCM_CD\2006"
 Try{
     If(Test-Path -Path $SCCMSource){
         Write-Host "found the media for SCCM Current Branch (cd.latest version)"
@@ -18,10 +18,10 @@ Try{
     Write-Host "Something went wrong with the installation of SCCM Current Branch (latest version), aborting."
     Break
 }
-Set-Variable -Name SCCM_ARDC_Server -Value "w16asccmdb01.inf.utshare.local"
-Set-Variable -Name SCCM_UDCC_Server -Value "w16bsccmdb01.inf.utshare.local"
-Set-Variable -Name SCCM_ARDC_Share -Value "DFW"
-Set-Variable -Name SCCM_UDCC_Share -Value "AUS"
+Set-Variable -Name SCCM_ARDC_Server -Value "w19sccmmpa01.inf.utshare.local"
+Set-Variable -Name SCCM_UDCC_Server -Value "w19sccmmpb01.inf.utshare.local"
+Set-Variable -Name SCCM_ARDC_Share -Value "A01"
+Set-Variable -Name SCCM_UDCC_Share -Value "B01"
 Set-Variable -Name IP_Address -Value $null
 Set-Variable -Name Octet_1 -Value $null
 Set-Variable -Name Octet_2 -Value $null
